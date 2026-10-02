@@ -1,0 +1,12 @@
+--- before/JSP539.UniformBits
++++ after/JSP539.UniformBits
+@@ -142,7 +142,8 @@
+   let e : Sample V ≃ ((S → Bool) × ({v : V // v ∉ S} → Bool)) :=
+     Equiv.piEquivPiSubtypeProd (fun v : V => v ∈ S) (fun _ => Bool)
+   have hbit : fraction (fun b : Bool => b = false) = (1 / 2 : ℝ) := by
+-    norm_num [fraction]
++    rw [fraction_eq_card_filter (fun b : Bool => b = false)]
++    norm_num [Fintype.univ_bool, Finset.filter_insert, Finset.filter_singleton]
+   have hform (f : Sample V) : avoids S f ↔ ∀ v : S, (e f).1 v = false := by
+     simp [avoids, e]
+   calc

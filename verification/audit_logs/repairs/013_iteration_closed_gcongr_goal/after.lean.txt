@@ -1,0 +1,171 @@
+/-
+Copyright 2026 The JSP539 Formalization Authors.
+Licensed under the Apache License, Version 2.0; see LICENSE.
+
+Original finite tree iteration of the construction in ArcContainerStep.
+Mathematical source: Jiaxi Nie, arXiv:2609.07736. Terminal nodes have one
+self-child; the count is over the full family, never one representative.
+Status: UNCOMPILED. No Lean, Lake, or compiler was run for this source.
+-/
+import JSP539.ArcContainerStep
+
+open scoped BigOperators
+
+namespace JSP539.Affine
+
+/-- A slightly relaxed depth, avoiding a fractional coefficient in the ceiling. -/
+noncomputable def arcDepth (k q : ℕ) : ℕ :=
+  ⌈40 * (k : ℝ) * Real.log (q : ℝ)⌉₊ + 1
+
+variable {q : ℕ} [Fact q.Prime]
+
+/-- Stop at the desired size, padding by a self-child to a common depth. -/
+noncomputable def arcChildren (k : ℕ) (hk : 2 ≤ k) (hlarge : ArcStepLarge k q)
+    (X : Finset (Point q)) : Finset (Finset (Point q)) :=
+  if hX : X.card ≤ 2 * k * q then {X}
+  else Classical.choose (arc_shrinking_family k hk hlarge X (Nat.lt_of_not_ge hX))
+
+theorem arcChildren_spec (k : ℕ) (hk : 2 ≤ k) (hlarge : ArcStepLarge k q)
+    (X : Finset (Point q)) :
+    (arcChildren k hk hlarge X).card ≤ arcBranchBound k q ∧
+    (∀ Y : Finset (Point q), Y ⊆ X → IsArc k Y →
+      ∃ C ∈ arcChildren k hk hlarge X, Y ⊆ C) ∧
+    (∀ C ∈ arcChildren k hk hlarge X, C ⊆ X ∧
+      (C.card ≤ 2 * k * q ∨
+        (C.card : ℝ) ≤ (1 - 3 / (40 * (k : ℝ))) * X.card)) := by
+  classical
+  by_cases hX : X.card ≤ 2 * k * q
+  · simp only [arcChildren, dif_pos hX]
+    refine ⟨?_, ?_, ?_⟩
+    · have hpos : 0 < arcBranchBound k q := by
+        unfold arcBranchBound
+        positivity
+      simpa only [Finset.card_singleton] using (show 1 ≤ arcBranchBound k q by omega)
+    · intro Y hYX _
+      exact ⟨X, Finset.mem_singleton_self X, hYX⟩
+    · intro C hC
+      have hCX := Finset.mem_singleton.mp hC
+      subst C
+      exact ⟨Finset.Subset.rfl, Or.inl hX⟩
+  · simp only [arcChildren, dif_neg hX]
+    obtain ⟨hc, hcover, hsize⟩ := Classical.choose_spec
+      (arc_shrinking_family k hk hlarge X (Nat.lt_of_not_ge hX))
+    exact ⟨hc, hcover, fun C hC => ⟨(hsize C hC).1, Or.inr (hsize C hC).2⟩⟩
+
+/-- Every level is an actual finite union of the explicitly obtained children. -/
+noncomputable def arcLevel (k : ℕ) (hk : 2 ≤ k) (hlarge : ArcStepLarge k q) :
+    ℕ → Finset (Finset (Point q))
+  | 0 => {Finset.univ}
+  | n + 1 => (arcLevel k hk hlarge n).biUnion (arcChildren k hk hlarge)
+
+lemma arc_contraction_nonneg {k : ℕ} (hk : 2 ≤ k) :
+    0 ≤ 1 - 3 / (40 * (k : ℝ)) := by
+  have hkr : (2 : ℝ) ≤ k := by exact_mod_cast hk
+  have hden : (0 : ℝ) < 40 * (k : ℝ) := by positivity
+  have hfrac : (3 : ℝ) / (40 * (k : ℝ)) ≤ 1 :=
+    (div_le_iff₀ hden).mpr (by nlinarith)
+  linarith
+
+theorem arcLevel_spec (k : ℕ) (hk : 2 ≤ k) (hlarge : ArcStepLarge k q) (n : ℕ) :
+    (arcLevel k hk hlarge n).card ≤ arcBranchBound k q ^ n ∧
+    (∀ Y : Finset (Point q), IsArc k Y → ∃ C ∈ arcLevel k hk hlarge n, Y ⊆ C) ∧
+    (∀ C ∈ arcLevel k hk hlarge n,
+      C.card ≤ 2 * k * q ∨
+        (C.card : ℝ) ≤ (1 - 3 / (40 * (k : ℝ))) ^ n * (q : ℝ) ^ 2) := by
+  classical
+  induction n with
+  | zero =>
+    refine ⟨by simp [arcLevel], ?_, ?_⟩
+    · intro Y _
+      exact ⟨Finset.univ, by simp [arcLevel], Finset.subset_univ Y⟩
+    · intro C hC
+      have hC' : C = Finset.univ := by simpa [arcLevel] using hC
+      subst C
+      right
+      simp [point_card, pow_two]
+  | succ n ih =>
+    refine ⟨?_, ?_, ?_⟩
+    · calc
+        (arcLevel k hk hlarge (n + 1)).card ≤
+            ∑ X ∈ arcLevel k hk hlarge n, (arcChildren k hk hlarge X).card :=
+          Finset.card_biUnion_le
+        _ ≤ ∑ _X ∈ arcLevel k hk hlarge n, arcBranchBound k q :=
+          Finset.sum_le_sum (fun X _ => (arcChildren_spec k hk hlarge X).1)
+        _ = (arcLevel k hk hlarge n).card * arcBranchBound k q := by simp
+        _ ≤ arcBranchBound k q ^ n * arcBranchBound k q :=
+          Nat.mul_le_mul_right _ ih.1
+        _ = arcBranchBound k q ^ (n + 1) := (pow_succ _ _).symm
+    · intro Y hY
+      obtain ⟨X, hX, hYX⟩ := ih.2.1 Y hY
+      obtain ⟨C, hC, hYC⟩ := (arcChildren_spec k hk hlarge X).2.1 Y hYX hY
+      exact ⟨C, Finset.mem_biUnion.mpr ⟨X, hX, hC⟩, hYC⟩
+    · intro C hC
+      obtain ⟨X, hX, hC⟩ := Finset.mem_biUnion.mp hC
+      obtain ⟨hCX, hchild⟩ := (arcChildren_spec k hk hlarge X).2.2 C hC
+      rcases ih.2.2 X hX with hsmall | hdecay
+      · exact Or.inl ((Finset.card_le_card hCX).trans hsmall)
+      · rcases hchild with hsmall | hshrink
+        · exact Or.inl hsmall
+        · right
+          calc
+            (C.card : ℝ) ≤ (1 - 3 / (40 * (k : ℝ))) * X.card := hshrink
+            _ ≤ (1 - 3 / (40 * (k : ℝ))) *
+                ((1 - 3 / (40 * (k : ℝ))) ^ n * (q : ℝ) ^ 2) :=
+              mul_le_mul_of_nonneg_left hdecay (arc_contraction_nonneg hk)
+            _ = (1 - 3 / (40 * (k : ℝ))) ^ (n + 1) * (q : ℝ) ^ 2 := by
+              rw [pow_succ]; ring
+
+lemma arcDepth_decay (k : ℕ) (hk : 2 ≤ k) (hlog : 1 ≤ Real.log (q : ℝ)) :
+    (1 - 3 / (40 * (k : ℝ))) ^ arcDepth k q * (q : ℝ) ^ 2 ≤ (q : ℝ) := by
+  let d : ℝ := 3 / (40 * (k : ℝ))
+  have hkp : (0 : ℝ) < k := by exact_mod_cast (show 0 < k by omega)
+  have hqp : (0 : ℝ) < q := by exact_mod_cast (Fact.out : q.Prime).pos
+  have hd : 0 < d := by dsimp [d]; positivity
+  have hD : 40 * (k : ℝ) * Real.log (q : ℝ) ≤ (arcDepth k q : ℝ) := by
+    have hceil := Nat.le_ceil (40 * (k : ℝ) * Real.log (q : ℝ))
+    dsimp [arcDepth]
+    push_cast
+    linarith
+  have hdecay : Real.log (q : ℝ) ≤ d * (arcDepth k q : ℝ) := by
+    have hmul := mul_le_mul_of_nonneg_left hD hd.le
+    have heq : d * (40 * (k : ℝ) * Real.log (q : ℝ)) = 3 * Real.log (q : ℝ) := by
+      dsimp [d]
+      field_simp [hkp.ne'] <;> ring
+    rw [heq] at hmul
+    linarith
+  have hbase : 1 - d ≤ Real.exp (-d) := by
+    have h := Real.add_one_le_exp (-d)
+    linarith
+  calc
+    (1 - d) ^ arcDepth k q * (q : ℝ) ^ 2 ≤
+        Real.exp (-d) ^ arcDepth k q * (q : ℝ) ^ 2 := by
+      apply mul_le_mul_of_nonneg_right _ (sq_nonneg _)
+      exact pow_le_pow_left₀ (arc_contraction_nonneg hk) hbase _
+    _ = Real.exp (-(d * (arcDepth k q : ℝ))) * (q : ℝ) ^ 2 := by
+      rw [← Real.exp_nat_mul]
+      congr 2 <;> ring
+    _ ≤ Real.exp (-Real.log (q : ℝ)) * (q : ℝ) ^ 2 := by
+      gcongr <;> linarith
+    _ = (q : ℝ) := by
+      rw [Real.exp_neg, Real.exp_log hqp]
+      field_simp <;> ring
+
+/-- The full deterministic finite arc-container theorem with an explicit count.
+There is no input family, hypergraph, partition, or container oracle. -/
+theorem arc_container_family (k : ℕ) (hk : 2 ≤ k) (hlarge : ArcStepLarge k q) :
+    ∃ Cs : Finset (Finset (Point q)),
+      (∀ Y : Finset (Point q), IsArc k Y → ∃ C ∈ Cs, Y ⊆ C) ∧
+      (∀ C ∈ Cs, C.card ≤ 2 * k * q) ∧
+      Cs.card ≤ arcBranchBound k q ^ arcDepth k q := by
+  obtain ⟨hcount, hcover, hsize⟩ := arcLevel_spec k hk hlarge (arcDepth k q)
+  refine ⟨arcLevel k hk hlarge (arcDepth k q), hcover, ?_, hcount⟩
+  intro C hC
+  rcases hsize C hC with hsmall | hdecay
+  · exact hsmall
+  · have hCq : C.card ≤ q := by
+      exact_mod_cast hdecay.trans (arcDepth_decay k hk hlarge.1)
+    have hq : q ≤ 2 * k * q := by
+      simpa only [one_mul] using Nat.mul_le_mul_right q (show 1 ≤ 2 * k by omega)
+    exact hCq.trans hq
+
+end JSP539.Affine

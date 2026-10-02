@@ -1,0 +1,79 @@
+{
+  "status": "PASSED",
+  "recorded_utc": "2026-10-02T08:50:53.061172+00:00",
+  "ownership_released_to": "build539",
+  "modules": [
+    {
+      "module": "LicensedContainers.ContainerInvariants",
+      "accepted_run": "licensed_invariants_02",
+      "natural_exit_code": 0,
+      "metadata": "verification/build/licensed_invariants_02-meta.json",
+      "original_sha256": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+      "candidate_sha256": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+      "changed": false,
+      "only_imports_changed": true,
+      "output_sha256": "aa9a9a5807947a10855b30373505986e37016be831f6744ce6ff19efdef8f1a5",
+      "active_dependency_sources_current_and_unchanged": true
+    },
+    {
+      "module": "LicensedContainers.ContainerWeight",
+      "accepted_run": "licensed_weight_03",
+      "natural_exit_code": 0,
+      "metadata": "verification/build/licensed_weight_03-meta.json",
+      "original_sha256": "e281197a67f0dbae3cd484c2f03a474c1e10412242a0d3ddc150b66917454a32",
+      "candidate_sha256": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+      "changed": true,
+      "only_imports_changed": true,
+      "output_sha256": "2c9c2d439351c6f46baab00fb699f9c69895e9876c152e568dd8a7a0f5ca72ac",
+      "active_dependency_sources_current_and_unchanged": true
+    },
+    {
+      "module": "LicensedContainers.ContainerSelector",
+      "accepted_run": "licensed_selector_02",
+      "natural_exit_code": 0,
+      "metadata": "verification/build/licensed_selector_02-meta.json",
+      "original_sha256": "e115359961aa28988b332fd63e88c93d54992814368475865a65ec459929eafc",
+      "candidate_sha256": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+      "changed": true,
+      "only_imports_changed": true,
+      "output_sha256": "a57b6d2652f06a04c480d0e1c83c92e39fbe54a9d8a0fa7092e87d80f163a12f",
+      "active_dependency_sources_current_and_unchanged": true
+    },
+    {
+      "module": "LicensedContainers.ContainerFuel",
+      "accepted_run": "licensed_fuel_02",
+      "natural_exit_code": 0,
+      "metadata": "verification/build/licensed_fuel_02-meta.json",
+      "original_sha256": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+      "candidate_sha256": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+      "changed": false,
+      "only_imports_changed": true,
+      "output_sha256": "c1e8b95a20764fabbb8c3dea7dff857603bca2af4243cb35770c1ba498b98f46",
+      "active_dependency_sources_current_and_unchanged": true
+    },
+    {
+      "module": "LicensedContainers",
+      "accepted_run": "licensed_root_01",
+      "natural_exit_code": 0,
+      "metadata": "verification/build/licensed_root_01-meta.json",
+      "original_sha256": "442c8da78a081a2fb718a8a3cea578a6c6363412d070089484438b4c935ff781",
+      "candidate_sha256": "442c8da78a081a2fb718a8a3cea578a6c6363412d070089484438b4c935ff781",
+      "changed": false,
+      "only_imports_changed": true,
+      "output_sha256": "5c08f8115538330ec687cea279c1883c973a752a7a6e320df01521c4478356a9",
+      "active_dependency_sources_current_and_unchanged": true
+    }
+  ],
+  "modules_natural_exit_zero": 5,
+  "modified_files": 2,
+  "added_lines": 7,
+  "removed_lines": 1,
+  "proof_bodies_and_statements_unchanged": true,
+  "version_adjustments": [],
+  "active_compiler_sessions": [],
+  "repair_records": [
+    "verification/repairs/licensed_selector_interval_import_01/record.json",
+    "verification/repairs/licensed_weight_resource_imports_01/record.json",
+    "verification/repairs/licensed_weight_resource_imports_02/record.json"
+  ]
+}

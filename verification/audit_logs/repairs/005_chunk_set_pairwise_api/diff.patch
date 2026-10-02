@@ -1,0 +1,29 @@
+--- before/JSP539.ChunkPartition
++++ after/JSP539.ChunkPartition
+@@ -23,7 +23,7 @@
+   remainder : Finset V
+   chunk_card : ∀ C ∈ chunks, C.card = gamma
+   chunk_subset : ∀ C ∈ chunks, C ⊆ X
+-  pairwise_disjoint : chunks.Pairwise Disjoint
++  pairwise_disjoint : (chunks : Set (Finset V)).Pairwise Disjoint
+   remainder_subset : remainder ⊆ X
+   remainder_disjoint : ∀ C ∈ chunks, Disjoint C remainder
+   cover : chunks.biUnion id ∪ remainder = X
+@@ -120,7 +120,7 @@
+ 
+ private theorem uniform_disjoint_union_card
+     (S : Finset (Finset V)) (gamma : ℕ) :
+-    (∀ C ∈ S, C.card = gamma) → S.Pairwise Disjoint →
++    (∀ C ∈ S, C.card = gamma) → (S : Set (Finset V)).Pairwise Disjoint →
+       (S.biUnion id).card = gamma * S.card := by
+   classical
+   induction S using Finset.induction_on with
+@@ -130,7 +130,7 @@
+       have hcardS : ∀ D ∈ S, D.card = gamma := by
+         intro D hD
+         exact hcard D (Finset.mem_insert_of_mem hD)
+-      have hdisjS : S.Pairwise Disjoint := by
++      have hdisjS : (S : Set (Finset V)).Pairwise Disjoint := by
+         intro A hA B hB hAB
+         exact hdisj (Finset.mem_insert_of_mem hA)
+           (Finset.mem_insert_of_mem hB) hAB

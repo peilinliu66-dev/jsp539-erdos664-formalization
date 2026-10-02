@@ -1,0 +1,32 @@
+JSP539/ArcContainerStep.lean:40:35: error(lean.invalidField): Invalid field `mp`: The environment does not contain `Function.mp`, so it is not possible to project the field `mp` from an expression
+  mul_le_mul_right ?m.215
+of type
+  ∀ (a : ?m.209), a * ?m.210 ≤ a * ?m.211
+JSP539/ArcContainerStep.lean:40:28: error: Application type mismatch: The argument
+  htpos
+has type
+  0 < ↑t + 1
+but is expected to have type
+  ?m.210 ≤ ?m.211
+in the application
+  mul_le_mul_right htpos
+JSP539/ArcContainerStep.lean:66:31: error(lean.invalidField): Invalid field `mp`: The environment does not contain `Function.mp`, so it is not possible to project the field `mp` from an expression
+  mul_le_mul_left ?m.76
+of type
+  ∀ (a : ?m.70), ?m.71 * a ≤ ?m.72 * a
+JSP539/ArcContainerStep.lean:66:25: error: Application type mismatch: The argument
+  hpos
+has type
+  0 < ↑(g.choose t)
+but is expected to have type
+  ?m.71 ≤ ?m.72
+in the application
+  mul_le_mul_left hpos
+JSP539/ArcContainerStep.lean:111:45: error: mod_cast has type
+  q ^ 2 * (chunkSize X).choose k ≤ Finset.card B.H
+but is expected to have type
+  ↑(q ^ 2) * c ≤ ↑(Finset.card B.H)
+JSP539/ArcContainerStep.lean:154:45: error: mod_cast has type
+  q ^ 2 * (chunkSize X).choose k ≤ Finset.card B.H
+but is expected to have type
+  ↑(q ^ 2) * c ≤ ↑(Finset.card B.H)

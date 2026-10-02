@@ -1,0 +1,549 @@
+--- original/JSP539/AffinePlane.lean
++++ candidate/JSP539/AffinePlane.lean
+@@ -5,7 +5,10 @@
+ Original finite-field proofs. The random-restriction application is motivated
+ by Jiaxi Nie, arXiv:2609.07736. No third-party Erdős 664 source is imported.
+ -/
+-import Mathlib
++import Mathlib.Algebra.Field.ZMod
++import Mathlib.Data.Fintype.Option
++import Mathlib.Data.Fintype.Prod
++import Mathlib.Tactic
+ import LicensedContainers.Hypergraph
+ 
+ open scoped BigOperators
+@@ -112,9 +115,10 @@
+       linear_combination hb
+     · intro h
+       refine ⟨some m, ?_⟩
+-      apply Prod.ext rfl
+-      dsimp [lineThrough]
+-      linear_combination h
++      apply Prod.ext
++      · rfl
++      · dsimp [lineThrough]
++        linear_combination h
+ 
+ @[simp] theorem linesThrough_card (p : Point q) :
+     (linesThrough p).card = q + 1 := by
+@@ -256,11 +260,12 @@
+     (hR : ∀ l : Line q, 2 ≤ (points l ∩ R).card) :
+     Function.Injective (fun l : Line q => points l ∩ R) := by
+   intro l m hlm
++  change points l ∩ R = points m ∩ R at hlm
+   by_contra hne
+   have hsub : points l ∩ R ⊆ points l ∩ points m := by
+     intro p hp
+     refine Finset.mem_inter.mpr ⟨(Finset.mem_inter.mp hp).1, ?_⟩
+-    have hp' : p ∈ points m ∩ R := hlm ▸ hp
++    have hp' : p ∈ points m ∩ R := by rw [← hlm]; exact hp
+     exact (Finset.mem_inter.mp hp').1
+   have hle := (Finset.card_le_card hsub).trans (intersection_card_le_one hne)
+   have := hR l
+@@ -270,7 +275,7 @@
+     (hR : ∀ l : Line q, 2 ≤ (points l ∩ R).card) :
+     (traces R).card = q * (q + 1) := by
+   rw [traces, Finset.card_image_of_injective _ (trace_injective R hR)]
+-  simp
++  simp [Nat.mul_comm]
+ 
+ /-- The retained construction is exact, including uniqueness among actual
+ blocks, with no multiset multiplicities or duplicate trace blocks. -/
+--- original/JSP539/ArcContainerGrowth.lean
++++ candidate/JSP539/ArcContainerGrowth.lean
+@@ -30,6 +30,8 @@
+ lemma arcFingerprintBound_upper (k q : ℕ) (hlog : 1 ≤ Real.log (q : ℝ)) :
+     (arcFingerprintBound k q : ℝ) ≤
+       24 * (k : ℝ) ^ 2 * q / (Real.log (q : ℝ)) ^ 3 := by
++  have hlp : 0 < Real.log (q : ℝ) := lt_of_lt_of_le zero_lt_one hlog
++  dsimp [arcFingerprintBound, arcSlack]
+   exact Nat.floor_le (by positivity)
+ 
+ lemma log_point_count_upper (q : ℕ) (hq : 2 ≤ q) :
+@@ -69,7 +71,9 @@
+     _ ≤ ((40 * (k : ℝ) + 2) * l) *
+           (24 * (k : ℝ) ^ 2 * q / l ^ 3 + 1) * (3 * l) := by
+       apply mul_le_mul
+-      · apply mul_le_mul hD (add_le_add_right hM 1) (by positivity) (by positivity)
++      · apply mul_le_mul hD ?_ (by positivity) (by positivity)
++        dsimp [l]
++        linarith
+       · exact hb
+       · exact hlogbase
+       · positivity
+@@ -118,7 +122,8 @@
+     tendsto_const_nhds.div_atTop hlog
+   have hsquare : Tendsto (fun q : ℕ => (Real.log (q : ℝ)) ^ 2 / (q : ℝ))
+       atTop (𝓝 0) := by
+-    simpa using (Real.tendsto_pow_log_div_mul_add_atTop 1 0 2 one_ne_zero).comp
++    simpa only [Function.comp_def, one_mul, add_zero] using
++      (Real.tendsto_pow_log_div_mul_add_atTop 1 0 2 one_ne_zero).comp
+       (tendsto_natCast_atTop_atTop : Tendsto (fun q : ℕ => (q : ℝ)) atTop atTop)
+   have hsum := ((hinv.const_mul (24 * (k : ℝ) ^ 2)).add hsquare).const_mul
+     (3 * (40 * (k : ℝ) + 2))
+--- original/JSP539/ArcContainerIteration.lean
++++ candidate/JSP539/ArcContainerIteration.lean
+@@ -82,7 +82,7 @@
+       have hC' : C = Finset.univ := by simpa [arcLevel] using hC
+       subst C
+       right
+-      simp [point_card]
++      simp [point_card, pow_two]
+   | succ n ih =>
+     refine ⟨?_, ?_, ?_⟩
+     · calc
+@@ -143,11 +143,9 @@
+       exact pow_le_pow_left₀ (arc_contraction_nonneg hk) hbase _
+     _ = Real.exp (-(d * (arcDepth k q : ℝ))) * (q : ℝ) ^ 2 := by
+       rw [← Real.exp_nat_mul]
+-      congr 2
+-      ring
++      congr 2 <;> ring
+     _ ≤ Real.exp (-Real.log (q : ℝ)) * (q : ℝ) ^ 2 := by
+-      gcongr
+-      linarith
++      gcongr <;> linarith
+     _ = (q : ℝ) := by
+       rw [Real.exp_neg, Real.exp_log hqp]
+       field_simp <;> ring
+--- original/JSP539/ArcContainerStep.lean
++++ candidate/JSP539/ArcContainerStep.lean
+@@ -37,7 +37,7 @@
+       nlinarith [mul_nonneg (show (0 : ℝ) ≤ t by positivity)
+         (sub_nonneg.mpr hkg')]
+     have htpos : (0 : ℝ) < (t : ℝ) + 1 := by positivity
+-    apply (mul_le_mul_right htpos).mp
++    apply (mul_le_mul_iff_left₀ htpos).mp
+     calc
+       (k.choose (t + 1) : ℝ) * (g : ℝ) ^ (t + 1) * ((t : ℝ) + 1) =
+           ((k.choose (t + 1) : ℝ) * ((t : ℝ) + 1)) * (g : ℝ) ^ t * g := by
+@@ -63,7 +63,7 @@
+   have hidentity : (g.choose k : ℝ) * (k.choose t : ℝ) =
+       (g.choose t : ℝ) * ((g - t).choose (k - t) : ℝ) := by
+     exact_mod_cast (Nat.choose_mul (n := g) htk)
+-  apply (mul_le_mul_left hpos).mp
++  apply (mul_le_mul_iff_right₀ hpos).mp
+   calc
+     (g.choose t : ℝ) * (((g - t).choose (k - t) : ℝ) * (g : ℝ) ^ t) =
+         ((g.choose k : ℝ) * (k.choose t : ℝ)) * (g : ℝ) ^ t := by
+@@ -108,7 +108,9 @@
+   have hNp : (0 : ℝ) < X.card := by exact_mod_cast (show 0 < X.card by omega)
+   have hN : (X.card : ℝ) ≤ 3 * g * q := by
+     exact_mod_cast card_le_three_chunkSize hk hX
+-  have he : (q : ℝ) ^ 2 * c ≤ B.H.card := by exact_mod_cast B.edge_lower
++  have he : (q : ℝ) ^ 2 * c ≤ B.H.card := by
++    dsimp [c, g]
++    exact_mod_cast B.edge_lower
+   have hchoose : ((g - 1).choose (k - 1) : ℝ) * g ≤ (k : ℝ) * c := by
+     simpa [c] using shifted_choose_scaled_le hkg (show 1 ≤ k by omega)
+   have hd : (B.H.degree {v} : ℝ) ≤ ((q : ℝ) + 1) * ((g - 1).choose (k - 1) : ℝ) := by
+@@ -151,7 +153,9 @@
+   have hLp : 0 < L := lt_of_lt_of_le zero_lt_one hL1
+   have hN : (X.card : ℝ) ≤ 3 * g * q := by
+     exact_mod_cast card_le_three_chunkSize hk hX
+-  have he : (q : ℝ) ^ 2 * c ≤ B.H.card := by exact_mod_cast B.edge_lower
++  have he : (q : ℝ) ^ 2 * c ≤ B.H.card := by
++    dsimp [c, g]
++    exact_mod_cast B.edge_lower
+   have hd : (B.H.degree E : ℝ) * (g : ℝ) ^ t ≤ (k : ℝ) ^ t * c := by
+     calc
+       (B.H.degree E : ℝ) * (g : ℝ) ^ t ≤
+--- original/JSP539/ChunkPartition.lean
++++ candidate/JSP539/ChunkPartition.lean
+@@ -6,7 +6,10 @@
+ compiler-checked; the source package deliberately leaves compilation to its
+ recipient.
+ -/
+-import Mathlib
++import Mathlib.Data.Finset.Card
++import Mathlib.Data.Finset.Pairwise
++import Mathlib.Data.Finset.Union
++import Mathlib.Tactic
+ 
+ namespace JSP539
+ 
+@@ -20,7 +23,7 @@
+   remainder : Finset V
+   chunk_card : ∀ C ∈ chunks, C.card = gamma
+   chunk_subset : ∀ C ∈ chunks, C ⊆ X
+-  pairwise_disjoint : chunks.Pairwise Disjoint
++  pairwise_disjoint : (chunks : Set (Finset V)).Pairwise Disjoint
+   remainder_subset : remainder ⊆ X
+   remainder_disjoint : ∀ C ∈ chunks, Disjoint C remainder
+   cover : chunks.biUnion id ∪ remainder = X
+@@ -117,7 +120,7 @@
+ 
+ private theorem uniform_disjoint_union_card
+     (S : Finset (Finset V)) (gamma : ℕ) :
+-    (∀ C ∈ S, C.card = gamma) → S.Pairwise Disjoint →
++    (∀ C ∈ S, C.card = gamma) → (S : Set (Finset V)).Pairwise Disjoint →
+       (S.biUnion id).card = gamma * S.card := by
+   classical
+   induction S using Finset.induction_on with
+@@ -127,7 +130,7 @@
+       have hcardS : ∀ D ∈ S, D.card = gamma := by
+         intro D hD
+         exact hcard D (Finset.mem_insert_of_mem hD)
+-      have hdisjS : S.Pairwise Disjoint := by
++      have hdisjS : (S : Set (Finset V)).Pairwise Disjoint := by
+         intro A hA B hB hAB
+         exact hdisj (Finset.mem_insert_of_mem hA)
+           (Finset.mem_insert_of_mem hB) hAB
+--- original/JSP539/ContainerAlgorithm.lean
++++ candidate/JSP539/ContainerAlgorithm.lean
+@@ -8,6 +8,7 @@
+ CONDITIONS OF ANY KIND, either express or implied.
+ -/
+ import JSP539.ContainerPotential
++import Mathlib.Tactic.FieldSimp
+ 
+ /-!
+ # A finite, deterministic Campos--Samotij machine
+--- original/JSP539/ContainerCounting.lean
++++ candidate/JSP539/ContainerCounting.lean
+@@ -8,6 +8,7 @@
+ CONDITIONS OF ANY KIND, either express or implied.
+ -/
+ import JSP539.ContainerCore
++import Mathlib.Data.Real.Archimedean
+ 
+ /-!
+ # Counting fingerprints by finite insertion
+--- original/JSP539/ContainerPotential.lean
++++ candidate/JSP539/ContainerPotential.lean
+@@ -130,7 +130,8 @@
+     ring
+   have hh := mul_le_mul_of_nonneg_left c.heavy (by norm_num : (0 : ℝ) ≤ 1 / 2)
+   rw [hhalf] at hh
+-  exact (add_le_add_left hh _).trans hgain
++  dsimp [linkWeight] at hh
++  linarith
+ 
+ lemma reject_potential_mono {H : Hypergraph V} {p : ℝ} {r : ℕ}
+     (hr : 0 < r) (hp : 0 ≤ p) (hanti : H.IsAntichain)
+--- original/JSP539/ContainerProbability.lean
++++ candidate/JSP539/ContainerProbability.lean
+@@ -6,6 +6,7 @@
+ exponential bound is obtained from actual disjoint traces, not an independence
+ assumption about arbitrary lines. UNCOMPILED source.
+ -/
++import Mathlib.Algebra.Order.BigOperators.GroupWithZero.Finset
+ import JSP539.ShortTraces
+ import JSP539.UniformBits
+ 
+@@ -93,7 +94,7 @@
+       _ = ∏ l ∈ I, (1 - (1 / 2 : ℝ) ^ (shortTrace C l).card) :=
+         fraction_hits_all (shortTrace C) I hsep
+       _ ≤ ∏ _l ∈ I, Real.exp (-a) :=
+-        Finset.prod_le_prod hfactor_nonneg hfactor
++        Finset.prod_le_prod₀ hfactor_nonneg hfactor
+       _ = Real.exp (-(a * I.card)) := by
+         simp only [Finset.prod_const]
+         rw [← Real.exp_nat_mul]
+--- original/JSP539/ContainerShrink.lean
++++ candidate/JSP539/ContainerShrink.lean
+@@ -119,7 +119,7 @@
+       _ = p * ((H.card : ℝ) / 4) := by
+         dsimp [a]
+         field_simp [hNr.ne'] <;> ring
+-  exact (mul_le_mul_left hp).mp hfinal
++  exact le_of_mul_le_mul_left hfinal hp
+ 
+ /-- Translate the edge loss into the required vertex loss. -/
+ lemma container_card_shrink {H : Hypergraph V} {C : Finset V} {r : ℕ}
+@@ -157,7 +157,7 @@
+   have hcharge : (H.card : ℝ) * (3 * Fintype.card V) ≤
+       (H.card : ℝ) * (40 * (r : ℝ) * D.card) := by nlinarith
+   have hdeleted : 3 * (Fintype.card V : ℝ) ≤ 40 * (r : ℝ) * D.card :=
+-    (mul_le_mul_left he).mp hcharge
++    le_of_mul_le_mul_left hcharge he
+   have hfrac : (3 / (40 * (r : ℝ))) * Fintype.card V ≤ (D.card : ℝ) := by
+     rw [div_mul_eq_mul_div]
+     apply (div_le_iff₀ (by positivity : (0 : ℝ) < 40 * (r : ℝ))).2
+--- original/JSP539/DisjointPacking.lean
++++ candidate/JSP539/DisjointPacking.lean
+@@ -5,7 +5,10 @@
+ A finite maximal-packing argument. This is the elementary replacement for
+ Janson's inequality in the fixed-K specialization. No compilation has run.
+ -/
+-import Mathlib
++import Mathlib.Algebra.Order.BigOperators.Group.Finset
++import Mathlib.Data.Finset.Max
++import Mathlib.Data.Fintype.Powerset
++import Mathlib.Tactic
+ 
+ open scoped BigOperators Classical
+ 
+@@ -77,12 +80,12 @@
+       · exact hIT hz
+     have hinsertSep : PairwiseDisjoint A (insert j I) := by
+       intro i hi z hz hiz
+-      rcases Finset.mem_insert.mp hi with rfl | hi
++      rcases Finset.mem_insert.mp hi with rfl | hiI
+       · have hzI : z ∈ I := (Finset.mem_insert.mp hz).resolve_left (Ne.symm hiz)
+         exact (hjdis z hzI).symm
+-      · rcases Finset.mem_insert.mp hz with rfl | hz
+-        · exact hjdis i hi
+-        · exact hIsep i hi z hz hiz
++      · rcases Finset.mem_insert.mp hz with rfl | hzI
++        · exact hjdis i hiI
++        · exact hIsep i hiI z hzI hiz
+     have hinsert : insert j I ∈ choices :=
+       Finset.mem_filter.mpr ⟨Finset.mem_powerset.mpr hinsertT, hinsertSep⟩
+     have hcard := hmax (insert j I) hinsert
+--- original/JSP539/FiniteProbability.lean
++++ candidate/JSP539/FiniteProbability.lean
+@@ -6,7 +6,10 @@
+ adapted from the independently authored JSP502 source, with no graph-specific
+ dependencies. This module has not been compiled.
+ -/
+-import Mathlib
++import Mathlib.Basic.Real.Basic
++import Mathlib.Algebra.BigOperators.Ring.Finset
++import Mathlib.Data.Fintype.BigOperators
++import Mathlib.Tactic
+ 
+ open scoped BigOperators Classical
+ 
+@@ -136,7 +139,8 @@
+ 
+ theorem average_mul_const (f : A → ℝ) (t : ℝ) :
+     average (fun a => f a * t) = average f * t := by
+-  simp only [average, Finset.sum_mul]
++  unfold average
++  rw [← Finset.sum_mul]
+   ring
+ 
+ theorem average_const [Nonempty A] (t : ℝ) :
+@@ -162,14 +166,14 @@
+ theorem fraction_product {B : Type*} [Fintype B] [DecidableEq B]
+     (P : A → Prop) (Q : B → Prop) :
+     fraction (fun ab : A × B => P ab.1 ∧ Q ab.2) = fraction P * fraction Q := by
+-  simp only [fraction_eq_average_indicator, average, Fintype.sum_prod_type]
+-  have hi (a : A) (b : B) :
+-      (if P a ∧ Q b then (1 : ℝ) else 0) =
+-        (if P a then 1 else 0) * (if Q b then 1 else 0) := by
+-    by_cases hp : P a <;> by_cases hq : Q b <;> simp [hp, hq]
+-  simp_rw [hi]
+-  rw [← Finset.mul_sum, ← Finset.sum_mul]
+-  simp [Fintype.card_prod, Nat.cast_mul, div_eq_mul_inv]
++  have hfilter : (Finset.univ.filter (fun ab : A × B => P ab.1 ∧ Q ab.2)) =
++      (Finset.univ.filter P) ×ˢ (Finset.univ.filter Q) := by
++    ext ab
++    simp
++  rw [fraction_eq_card_filter (fun ab : A × B => P ab.1 ∧ Q ab.2),
++    fraction_eq_card_filter P, fraction_eq_card_filter Q]
++  rw [hfilter, Finset.card_product, Fintype.card_prod]
++  push_cast
+   ring
+ 
+ theorem fraction_fst {B : Type*} [Fintype B] [DecidableEq B] [Nonempty B]
+@@ -184,15 +188,15 @@
+ 
+ theorem fraction_not [Nonempty A] (P : A → Prop) :
+     fraction (fun a => ¬ P a) = 1 - fraction P := by
+-  have hind (a : A) :
+-      (if P a then (1 : ℝ) else 0) + (if ¬ P a then 1 else 0) = 1 := by
+-    by_cases ha : P a <;> simp [ha]
+-  have h := average_add (fun a => if P a then (1 : ℝ) else 0)
+-    (fun a => if ¬ P a then 1 else 0)
+-  simp_rw [hind] at h
+-  rw [average_const, ← fraction_eq_average_indicator,
+-    ← fraction_eq_average_indicator] at h
+-  linarith
++  rw [fraction_eq_card_filter (fun a => ¬ P a), fraction_eq_card_filter P]
++  have hcard : ((Finset.univ.filter P).card : ℝ) +
++      ((Finset.univ.filter (fun a => ¬ P a)).card : ℝ) = Fintype.card A := by
++    exact_mod_cast (Finset.card_filter_add_card_filter_not
++      (s := (Finset.univ : Finset A)) P)
++  have hA : (Fintype.card A : ℝ) ≠ 0 := by
++    exact_mod_cast Fintype.card_ne_zero
++  apply (eq_sub_iff_add_eq).mpr
++  rw [add_comm, ← add_div, hcard, div_self hA]
+ 
+ /-- Finite Markov inequality, without any independence assumption. -/
+ theorem fraction_ge_le_average_div (f : A → ℝ) (hf : ∀ a, 0 ≤ f a)
+--- original/JSP539/GroundHypergraph.lean
++++ candidate/JSP539/GroundHypergraph.lean
+@@ -5,7 +5,8 @@
+ Finite ground-set transport. All cardinalities and degrees are preserved;
+ the new ambient type has exactly the prescribed ground-set cardinality.
+ -/
+-import Mathlib
++import Mathlib.Data.Fintype.Powerset
++import Mathlib.Tactic
+ import LicensedContainers.Hypergraph
+ 
+ open Erdos565
+--- original/JSP539/LineChunks.lean
++++ candidate/JSP539/LineChunks.lean
+@@ -27,6 +27,7 @@
+   let D := (C.powersetCard k).filter (fun e => S ⊆ e)
+   have hinj : Set.InjOn (fun e : Finset V => e \ S) (↑D : Set (Finset V)) := by
+     intro e he f hf hef
++    change e \ S = f \ S at hef
+     have hSe := (Finset.mem_filter.mp he).2
+     have hSf := (Finset.mem_filter.mp hf).2
+     calc
+@@ -53,7 +54,7 @@
+ theorem powersetCard_degree_eq_zero (C S : Finset V) (k : ℕ) (hSC : ¬ S ⊆ C) :
+     ((C.powersetCard k).filter (fun e => S ⊆ e)).card = 0 := by
+   apply Finset.card_eq_zero.mpr
+-  apply Finset.eq_empty_iff_forall_not_mem.mpr
++  apply Finset.eq_empty_iff_forall_notMem.mpr
+   intro e he
+   obtain ⟨heC, hSe⟩ := Finset.mem_filter.mp he
+   exact hSC (hSe.trans (Finset.mem_powersetCard.mp heC).1)
+@@ -251,7 +252,7 @@
+   have hbase : gamma * (q * (q + 1)) ≤ gamma * (allChunks P).card := by
+     nlinarith
+   have hmany : q * (q + 1) ≤ (allChunks P).card :=
+-    (mul_le_mul_left hgamma).mp hbase
++    Nat.le_of_mul_le_mul_left hbase hgamma
+   nlinarith
+ 
+ /-- At most one chunk through a point can occur in each direction. -/
+--- original/JSP539/ProbabilityBudget.lean
++++ candidate/JSP539/ProbabilityBudget.lean
+@@ -47,7 +47,9 @@
+       atTop (𝓝 0) := by
+     simpa only [Function.comp_def, neg_mul] using
+       Real.tendsto_exp_neg_atTop_nhds_zero.comp ht
+-  simpa only [totalFailureBudget, zero_add] using
++  change Tendsto (fun q : ℕ =>
++    Real.exp (-(hittingRate k / 2) * q) + lineFailureBudget q) atTop (𝓝 0)
++  simpa only [zero_add] using
+     he.add tendsto_lineFailureBudget_zero
+ 
+ theorem eventually_totalFailureBudget_lt_one (k : ℕ) (hk : 2 ≤ k) :
+--- original/JSP539/RandomRestriction.lean
++++ candidate/JSP539/RandomRestriction.lean
+@@ -39,7 +39,7 @@
+       simpa only [points_inter_retained, points_card] using
+         FairBitTail.fraction_retainedCount_le_two_fifths (points l)
+     _ = lineFailureBudget q := by
+-      simp [lineFailureBudget, line_card, Nat.cast_mul, Nat.cast_add]
++      simp [lineFailureBudget, line_card, Nat.cast_mul, Nat.cast_add, mul_comm]
+ 
+ /-- For an actual deterministic container family, both obstructions can be
+ avoided at once. No conditioning or inter-family independence is required. -/
+--- original/JSP539/ShortTraces.lean
++++ candidate/JSP539/ShortTraces.lean
+@@ -61,7 +61,7 @@
+     nlinarith
+   have hpositive : 0 < 2 * k := by omega
+   have hlongcount : 2 * U.card ≤ q * (q + 1) :=
+-    (mul_le_mul_left hpositive).mp hscaled
++    Nat.le_of_mul_le_mul_left hscaled hpositive
+   have hpartition : U.card + T.card = q * (q + 1) := by
+     dsimp [U]
+     rw [Finset.card_sdiff_of_subset (Finset.subset_univ T)]
+@@ -120,6 +120,6 @@
+           Nat.mul_le_mul_left 2 (Nat.mul_le_mul_left I.card
+             (Nat.mul_le_mul_left (4 * k) hqbound))
+         _ = q * (16 * k * I.card) := by ring
+-    exact (mul_le_mul_left hq).mp hscaled
++    exact Nat.le_of_mul_le_mul_left hscaled hq
+ 
+ end JSP539.Affine
+--- original/JSP539/UniformBits.lean
++++ candidate/JSP539/UniformBits.lean
+@@ -34,7 +34,8 @@
+     (S T : Finset V) (hP : DependsOn P S) (hQ : DependsOn Q T)
+     (hST : Disjoint S T) :
+     fraction (fun f => P f ∧ Q f) = fraction P * fraction Q := by
+-  let e := Equiv.piEquivPiSubtypeProd (fun v : V => v ∈ S) (fun _ => Bool)
++  let e : Sample V ≃ ((S → Bool) × ({v : V // v ∉ S} → Bool)) :=
++    Equiv.piEquivPiSubtypeProd (fun v : V => v ∈ S) (fun _ => Bool)
+   let P' : (S → Bool) → Prop := fun f => P (insideExtension S f)
+   let Q' : ({v : V // v ∉ S} → Bool) → Prop := fun f => Q (outsideExtension S f)
+   have hPf (f : Sample V) : P f ↔ P' (e f).1 := by
+@@ -52,7 +53,8 @@
+         congr 1
+         funext f
+         exact propext (hPf f)
+-      _ = fraction (fun ab => P' ab.1) := fraction_equiv e _
++      _ = fraction (fun ab : (S → Bool) × ({v : V // v ∉ S} → Bool) => P' ab.1) :=
++        fraction_equiv e (fun ab => P' ab.1)
+       _ = fraction P' := fraction_fst _
+   have hQmarg : fraction Q = fraction Q' := by
+     calc
+@@ -60,7 +62,8 @@
+         congr 1
+         funext f
+         exact propext (hQf f)
+-      _ = fraction (fun ab => Q' ab.2) := fraction_equiv e _
++      _ = fraction (fun ab : (S → Bool) × ({v : V // v ∉ S} → Bool) => Q' ab.2) :=
++        fraction_equiv e (fun ab => Q' ab.2)
+       _ = fraction Q' := fraction_snd _
+   calc
+     fraction (fun f => P f ∧ Q f) =
+@@ -68,7 +71,8 @@
+       congr 1
+       funext f
+       exact propext (and_congr (hPf f) (hQf f))
+-    _ = fraction (fun ab => P' ab.1 ∧ Q' ab.2) := fraction_equiv e _
++    _ = fraction (fun ab : (S → Bool) × ({v : V // v ∉ S} → Bool) => P' ab.1 ∧ Q' ab.2) :=
++      fraction_equiv e (fun ab => P' ab.1 ∧ Q' ab.2)
+     _ = fraction P' * fraction Q' := fraction_product _ _
+     _ = fraction P * fraction Q := by rw [hPmarg, hQmarg]
+ 
+@@ -135,7 +139,11 @@
+ 
+ theorem fraction_avoids (S : Finset V) :
+     fraction (avoids S) = (1 / 2 : ℝ) ^ S.card := by
+-  let e := Equiv.piEquivPiSubtypeProd (fun v : V => v ∈ S) (fun _ => Bool)
++  let e : Sample V ≃ ((S → Bool) × ({v : V // v ∉ S} → Bool)) :=
++    Equiv.piEquivPiSubtypeProd (fun v : V => v ∈ S) (fun _ => Bool)
++  have hbit : fraction (fun b : Bool => b = false) = (1 / 2 : ℝ) := by
++    rw [fraction_eq_card_filter (fun b : Bool => b = false)]
++    norm_num [Fintype.univ_bool, Finset.filter_insert, Finset.filter_singleton]
+   have hform (f : Sample V) : avoids S f ↔ ∀ v : S, (e f).1 v = false := by
+     simp [avoids, e]
+   calc
+@@ -143,11 +151,16 @@
+       congr 1
+       funext f
+       exact propext (hform f)
+-    _ = fraction (fun ab => ∀ v : S, ab.1 v = false) := fraction_equiv e _
+-    _ = fraction (fun f : S → Bool => ∀ v, f v = false) := fraction_fst _
++    _ = fraction (fun ab : (S → Bool) × ({v : V // v ∉ S} → Bool) =>
++      ∀ v : S, ab.1 v = false) :=
++      fraction_equiv e (fun ab => ∀ v : S, ab.1 v = false)
++    _ = fraction (fun f : S → Bool => ∀ v, f v = false) :=
++      fraction_fst (fun f : S → Bool => ∀ v, f v = false)
+     _ = ∏ _v : S, fraction (fun b : Bool => b = false) :=
+       fraction_forall_eq_prod (fun _v : S => fun b : Bool => b = false)
+-    _ = (1 / 2 : ℝ) ^ S.card := by norm_num [fraction]
++    _ = (1 / 2 : ℝ) ^ S.card := by
++      simp_rw [hbit]
++      simp
+ 
+ theorem hits_iff_not_avoids (S : Finset V) (f : Sample V) :
+     hits S f ↔ ¬ avoids S f := by
+--- original/LicensedContainers/ContainerSelector.lean
++++ candidate/LicensedContainers/ContainerSelector.lean
+@@ -13,6 +13,7 @@
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -/
++import Mathlib.Order.Interval.Finset.Nat
+ import LicensedContainers.ContainerInvariants
+ import LicensedContainers.ContainerWeight
+ 
+--- original/LicensedContainers/ContainerWeight.lean
++++ candidate/LicensedContainers/ContainerWeight.lean
+@@ -13,7 +13,12 @@
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -/
+-import Mathlib
++import Mathlib.Algebra.BigOperators.Ring.Finset
++import Mathlib.Data.Fintype.Powerset
++import Mathlib.Tactic.NormNum
++import Mathlib.Tactic.Ring
++import Mathlib.Tactic.Linarith
++import Mathlib.Tactic.Positivity
+ import LicensedContainers.Hypergraph
+ 
+ /-!

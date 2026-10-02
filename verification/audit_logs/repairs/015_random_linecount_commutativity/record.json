@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.RandomRestriction",
+  "label": "015_random_linecount_commutativity",
+  "recorded_utc": "2026-10-02T09:08:01.440476+00:00",
+  "reason": "Actual final construction leaves only real multiplication orientation for the same q(q+1) line count. Normalize multiplication; no failure budget, construction, scope, or statement changed.",
+  "diagnostic_log": "verification/build/final_first_1_JSP539_RandomRestriction.log",
+  "before_sha256": "b2ff2a9ee1141adb45b9d7f225c75f45bee531557df049f1a71ee6cf1170b0c2",
+  "after_sha256": "b26411d46664404714bbbfe34b01ca729e091caaba6d6f8ce0d75ef40b20cc1b",
+  "statement_changed": false
+}

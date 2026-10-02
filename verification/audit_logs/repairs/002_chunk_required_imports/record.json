@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.ChunkPartition",
+  "label": "002_chunk_required_imports",
+  "recorded_utc": "2026-10-02T08:45:11.916758+00:00",
+  "reason": "Resource compatibility: simultaneous broad Mathlib imports naturally failed at a readable artifact; isolated broad import committed 8 GB. Root authorized replacing remaining same broad imports with needed exact-pinned modules so the full/public rebuild remains reproducible. No mathematical declaration or proof body changes.",
+  "diagnostic_log": "verification/build/initial_02_affineplane.log; verification/build/isolated_02_affineplane.log; verification/build/narrow_pell_read_probe_01.log",
+  "before_sha256": "f7984b1d6f04191eb6d44a9016f90f1f012c10e26d179548d01df807938c0cef",
+  "after_sha256": "7c437bd835c7eb552d4e1537398a1ba413547c7766bba30b91eab5c840ca9cfc",
+  "statement_changed": false
+}

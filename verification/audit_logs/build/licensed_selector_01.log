@@ -1,0 +1,5 @@
+LicensedContainers/ContainerSelector.lean:43:39: error(lean.unknownIdentifier): Unknown constant `Finset.Icc`
+LicensedContainers/ContainerSelector.lean:144:42: error: unsolved goals
+s a : ℕ
+⊢ a ∈ sorry () ↔ 2 ≤ a ∧ a ≤ s
+LicensedContainers/ContainerSelector.lean:145:8: warning: declaration uses `sorry`

@@ -1,0 +1,12 @@
+--- before/JSP539.ArcContainerIteration
++++ after/JSP539.ArcContainerIteration
+@@ -145,8 +145,7 @@
+       rw [← Real.exp_nat_mul]
+       congr 2 <;> ring
+     _ ≤ Real.exp (-Real.log (q : ℝ)) * (q : ℝ) ^ 2 := by
+-      gcongr
+-      linarith
++      gcongr <;> linarith
+     _ = (q : ℝ) := by
+       rw [Real.exp_neg, Real.exp_log hqp]
+       field_simp <;> ring

@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.ChunkPartition",
+  "label": "004_chunk_pairwise_import",
+  "recorded_utc": "2026-10-02T08:45:59.068765+00:00",
+  "reason": "Actual narrow compile reports missing Finset.Pairwise; add its defining module, eliminating dependent error placeholders without changing proof statements.",
+  "diagnostic_log": "verification/build/first_03_chunkpartition.log",
+  "before_sha256": "7c437bd835c7eb552d4e1537398a1ba413547c7766bba30b91eab5c840ca9cfc",
+  "after_sha256": "b2189020f3bb3f0490ae0214c301da127a60984ce3bc257e24cb6ddc47bce651",
+  "statement_changed": false
+}

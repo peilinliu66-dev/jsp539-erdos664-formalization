@@ -1,0 +1,28 @@
+JSP539/AffinePlane.lean:115:6: error: Tactic `apply` failed: could not unify the conclusion of `Prod.ext rfl`
+  ?m.174 = ?m.174
+with the goal
+  lineThrough p (some m) = (some m, b)
+
+Note: The full type of `Prod.ext rfl` is
+  ?m.174.2 = ?m.174.2 → ?m.174 = ?m.174
+
+case some.mpr
+q : ℕ
+inst✝ : Fact (Nat.Prime q)
+p : Point q
+b m : ZMod q
+h : p.2 = m * p.1 + b
+⊢ lineThrough p (some m) = (some m, b)
+JSP539/AffinePlane.lean:263:35: error: invalid `▸` notation, expected result type of cast is 
+  p ∈ points m ∩ R
+however, the equality 
+  hlm
+of type 
+  (fun l => points l ∩ R) l = (fun l => points l ∩ R) m
+does not contain the expected result type on either the left or the right hand side
+JSP539/AffinePlane.lean:271:37: error: unsolved goals
+q : ℕ
+inst✝ : Fact (Nat.Prime q)
+R : Finset (Point q)
+hR : ∀ (l : Line q), 2 ≤ (points l ∩ R).card
+⊢ (q + 1) * q = q * (q + 1)

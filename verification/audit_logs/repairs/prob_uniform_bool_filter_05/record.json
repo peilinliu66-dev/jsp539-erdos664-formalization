@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.UniformBits",
+  "label": "prob_uniform_bool_filter_05",
+  "recorded_utc": "2026-10-02T09:01:05.011576+00:00",
+  "reason": "Actual remaining goal is the filter cardinality of Bool false over {true,false}. Bridge Decidable instances through fraction_eq_card_filter and explicitly simplify insert/singleton filters.",
+  "diagnostic_log": "verification/build/prob_uniform_04.log",
+  "before_sha256": "e0ec5e4d46b84b6276c580ca3a56757d64e42e0f43f5b1f3f3ef14139b02deb3",
+  "after_sha256": "c9784bd277437cce86e745d31344c9de49f1a22f8dca17cd71a1d1b4b550e4fd",
+  "statement_changed": false
+}

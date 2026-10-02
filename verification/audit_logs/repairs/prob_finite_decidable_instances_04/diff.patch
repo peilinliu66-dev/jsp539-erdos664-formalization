@@ -1,0 +1,37 @@
+--- before/JSP539.FiniteProbability
++++ after/JSP539.FiniteProbability
+@@ -170,7 +170,8 @@
+       (Finset.univ.filter P) ×ˢ (Finset.univ.filter Q) := by
+     ext ab
+     simp
+-  unfold fraction
++  rw [fraction_eq_card_filter (fun ab : A × B => P ab.1 ∧ Q ab.2),
++    fraction_eq_card_filter P, fraction_eq_card_filter Q]
+   rw [hfilter, Finset.card_product, Fintype.card_prod]
+   push_cast
+   ring
+@@ -187,15 +188,15 @@
+ 
+ theorem fraction_not [Nonempty A] (P : A → Prop) :
+     fraction (fun a => ¬ P a) = 1 - fraction P := by
+-  have hind (a : A) :
+-      (if P a then (1 : ℝ) else 0) + (if ¬ P a then 1 else 0) = 1 := by
+-    by_cases ha : P a <;> simp [ha]
+-  have h := average_add (fun a => if P a then (1 : ℝ) else 0)
+-    (fun a => if ¬ P a then 1 else 0)
+-  simp_rw [hind] at h
+-  rw [average_const, ← fraction_eq_average_indicator P,
+-    ← fraction_eq_average_indicator (fun a => ¬ P a)] at h
+-  linarith
++  rw [fraction_eq_card_filter (fun a => ¬ P a), fraction_eq_card_filter P]
++  have hcard : ((Finset.univ.filter P).card : ℝ) +
++      ((Finset.univ.filter (fun a => ¬ P a)).card : ℝ) = Fintype.card A := by
++    exact_mod_cast (Finset.card_filter_add_card_filter_not
++      (s := (Finset.univ : Finset A)) P)
++  have hA : (Fintype.card A : ℝ) ≠ 0 := by
++    exact_mod_cast Fintype.card_ne_zero
++  apply (eq_sub_iff_add_eq).mpr
++  rw [add_comm, ← add_div, hcard, div_self hA]
+ 
+ /-- Finite Markov inequality, without any independence assumption. -/
+ theorem fraction_ge_le_average_div (f : A → ℝ) (hf : ∀ a, 0 ≤ f a)

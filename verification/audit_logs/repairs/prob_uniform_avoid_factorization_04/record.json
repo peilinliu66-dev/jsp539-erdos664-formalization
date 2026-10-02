@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.UniformBits",
+  "label": "prob_uniform_avoid_factorization_04",
+  "recorded_utc": "2026-10-02T08:59:58.149362+00:00",
+  "reason": "After explicit equivalence events solved independence at default heartbeats, the avoids theorem still timed out. Make its marginal event explicit and compute the one-bit probability separately before simplifying the finite constant product.",
+  "diagnostic_log": "verification/build/prob_uniform_03.log",
+  "before_sha256": "4f4c61ba02b0369c7756927797fc30a983ea9d1b66692461479e4d22bd280c95",
+  "after_sha256": "e0ec5e4d46b84b6276c580ca3a56757d64e42e0f43f5b1f3f3ef14139b02deb3",
+  "statement_changed": false
+}

@@ -1,0 +1,8 @@
+JSP539/DisjointPacking.lean:87:24: error: Application type mismatch: The argument
+  hi
+has type
+  i ∈ insert z I
+but is expected to have type
+  i ∈ I
+in the application
+  hjdis i hi

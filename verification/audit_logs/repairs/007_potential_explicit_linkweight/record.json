@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.ContainerPotential",
+  "label": "007_potential_explicit_linkweight",
+  "recorded_utc": "2026-10-02T08:51:17.939106+00:00",
+  "reason": "Actual elaborator cannot infer the common additive summand through linkWeight wrapper. Explicitly unfold this exact definition and combine the same gain and heaviness inequalities by linear arithmetic.",
+  "diagnostic_log": "verification/build/second_main_2_JSP539_ContainerPotential.log",
+  "before_sha256": "35db27cf0ffdd7e3576db1958bc32fb6140f86f6298d90004cb6052a867b4957",
+  "after_sha256": "04d384299d5ea8c366ea68c044039b6ef185d36cf37c853849a46deeb456041c",
+  "statement_changed": false
+}

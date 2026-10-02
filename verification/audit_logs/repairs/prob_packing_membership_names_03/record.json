@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.DisjointPacking",
+  "label": "prob_packing_membership_names_03",
+  "recorded_utc": "2026-10-02T08:51:09.669112+00:00",
+  "reason": "Actual Lean diagnostic: membership hypothesis shadowing after rcases/rfl selected insert-membership rather than original-family membership. Give retained membership hypotheses distinct names; proof and statement unchanged.",
+  "diagnostic_log": "verification/build/prob_packing_02.log",
+  "before_sha256": "b9cca27c94ca115aab05c787afbcf82fac175c26bdcf70f6becb057ba4575566",
+  "after_sha256": "26440ab4e46f87e54498ce742f80bd410e41afbc2e0772d9dc6b17927ba6d3d1",
+  "statement_changed": false
+}

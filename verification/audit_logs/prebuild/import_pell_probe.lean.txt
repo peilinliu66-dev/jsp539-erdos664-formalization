@@ -1,0 +1,2 @@
+import Mathlib.NumberTheory.PellMatiyasevic
+#check Pell.eq_pow_of_pell

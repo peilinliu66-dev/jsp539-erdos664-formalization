@@ -1,0 +1,11 @@
+{
+  "check_type": "STATIC_SOURCE_ONLY_NOT_COMPILATION",
+  "lean_file_count_including_lakefile_and_verify": 32,
+  "lean_lines_including_lakefile_and_verify": 6600,
+  "missing_local_imports": [],
+  "banned_code_tokens": [],
+  "local_import_cycles": false,
+  "third_party_local_hash_mismatches": [],
+  "kernel_verification_performed": false,
+  "compiler_or_lake_invoked": false
+}

@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.ProbabilityBudget",
+  "label": "licensed_budget_function_eta_01",
+  "recorded_utc": "2026-10-02T09:06:00.031282+00:00",
+  "reason": "The compiler could not simplify the partially applied totalFailureBudget function in the Tendsto target. Expose its definition by a definitional change before the same addition of the two already-proved limits. No constant, event, hypothesis, or statement changes.",
+  "diagnostic_log": "verification/build/licensed_budget_01.log",
+  "before_sha256": "6a181f53a2837cee67bc91820f032c38bc311c844931240369e6bd8977ab1386",
+  "after_sha256": "6bc07e4165d39074e7170408b2de101995951f1031f1eff95cb4ebfdfd8d9759",
+  "statement_changed": false
+}

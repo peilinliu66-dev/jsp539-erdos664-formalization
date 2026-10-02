@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.ContainerCounting",
+  "label": "009_counting_real_floor_import",
+  "recorded_utc": "2026-10-02T08:53:55.738596+00:00",
+  "reason": "Actual parser rejects natural-floor notation in existing real fingerprint bound. Import the exact Real Archimedean/floor instance and notation module; formulas and proof bodies unchanged.",
+  "diagnostic_log": "verification/build/fourth_main_3_JSP539_ContainerCounting.log",
+  "before_sha256": "9d5f2f8bf6ad5152b85fbf7603177418b8a3af26b926b5974161e4d6cdfe01a6",
+  "after_sha256": "ed574ca842cb139298955c2b174c0e44dd44393403ffb5829d50a0fe4680b093",
+  "statement_changed": false
+}

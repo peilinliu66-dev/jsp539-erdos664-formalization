@@ -1,0 +1,13 @@
+--- before/JSP539.ProbabilityBudget
++++ after/JSP539.ProbabilityBudget
+@@ -47,7 +47,9 @@
+       atTop (𝓝 0) := by
+     simpa only [Function.comp_def, neg_mul] using
+       Real.tendsto_exp_neg_atTop_nhds_zero.comp ht
+-  simpa only [totalFailureBudget, zero_add] using
++  change Tendsto (fun q : ℕ =>
++    Real.exp (-(hittingRate k / 2) * q) + lineFailureBudget q) atTop (𝓝 0)
++  simpa only [zero_add] using
+     he.add tendsto_lineFailureBudget_zero
+ 
+ theorem eventually_totalFailureBudget_lt_one (k : ℕ) (hk : 2 ≤ k) :

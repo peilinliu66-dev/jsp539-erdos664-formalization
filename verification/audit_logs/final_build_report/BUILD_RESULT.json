@@ -1,0 +1,2130 @@
+{
+  "status": "PASSED",
+  "recorded_utc": "2026-10-02T09:17:46.430623+00:00",
+  "gate_scope": "Actual whole-library build, 31 direct local module compiles, eight actual axiom checks, exact original scope and versions, source binding and dependency cleanliness. Additional independent kernel replay is outside this report and handled by the main audit.",
+  "selected_revision": "REAL_BOUNDS_0730",
+  "input_package_sha256": "168c87fc14b7c0511e12cf79f35163190c0e342a875d006117e62478daadaaf9",
+  "input_package_saved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\inputs\\FULL_SOURCE_JSP539_REAL_BOUNDS_AUDITED_UNCOMPILED_20261002T0730.zip",
+  "toolchain": "leanprover/lean4:v4.35.0-rc3",
+  "version_adjustments": [],
+  "input_snapshot": {
+    "files": {
+      "JSP539.lean": "b2e28e1e6cd80d436d6b9314452b9058b87ac91eae2735d84ce238545c41e84b",
+      "JSP539/AffinePlane.lean": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+      "JSP539/ArcContainerGrowth.lean": "31d637bf644b155162268873cf303c480b4ddef3b4412220b8ee893a40ffcc23",
+      "JSP539/ArcContainerIteration.lean": "223e950020e181a2633d1ac2b77a7c115826e5f19bd8f931723bea722c389c41",
+      "JSP539/ArcContainerStep.lean": "fda4b73f890dded9314e00e8e67773f560756c19d2617c9c47a747d28d96862e",
+      "JSP539/ChunkPartition.lean": "d77ded01e7fabeb277dbacaf69b69dde76b30b1bd564858576789ae271c2b605",
+      "JSP539/ContainerAlgorithm.lean": "2f9ee3f58e0c4677e3d51cdcd2496e64a3810c50b713f2c2830fb2ba0740dc3b",
+      "JSP539/ContainerCore.lean": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+      "JSP539/ContainerCounting.lean": "ed574ca842cb139298955c2b174c0e44dd44393403ffb5829d50a0fe4680b093",
+      "JSP539/ContainerPotential.lean": "04d384299d5ea8c366ea68c044039b6ef185d36cf37c853849a46deeb456041c",
+      "JSP539/ContainerProbability.lean": "17d6e05c1ea28c80db26b08827c3164413dd94dcdf446f715f76acdfa9ae7458",
+      "JSP539/ContainerShrink.lean": "e06dd4153c04d43a2fadc8aa24a0dc4ce3606910647f74e3be31a0a1ce64756f",
+      "JSP539/DisjointPacking.lean": "26440ab4e46f87e54498ce742f80bd410e41afbc2e0772d9dc6b17927ba6d3d1",
+      "JSP539/FairBitTail.lean": "9e3278122e4df09afe5fccf56b82c7fd1e076d602840e41ca3c2a208320098c4",
+      "JSP539/FiniteDesignTransport.lean": "c8708b5efa3c3a4f3768ddc52584e2437d445dbeb3935284810ef2e44a063b11",
+      "JSP539/FiniteProbability.lean": "3fed40e1cbae40de50e6e095e3b62df90f5e49254db40fdf92052e6e6f26240c",
+      "JSP539/GroundHypergraph.lean": "c63aa2be77559855df77b6c0963c369d8a6e346adcd76184c50fb93ec6a5d4df",
+      "JSP539/LineChunks.lean": "19826d814a9f9ef06ebcfa7d48d2fce8729ac04d0f3d4cefeba062e0187cea3f",
+      "JSP539/OriginalScope.lean": "cd9ff576d37811413d9741956fc7f67b665cf13eea5a088ec4b32b6e93cee923",
+      "JSP539/ProbabilityBudget.lean": "6bc07e4165d39074e7170408b2de101995951f1031f1eff95cb4ebfdfd8d9759",
+      "JSP539/RandomRestriction.lean": "b26411d46664404714bbbfe34b01ca729e091caaba6d6f8ce0d75ef40b20cc1b",
+      "JSP539/RealScope.lean": "190c2a915a8743a5c88e3e23e8fe43988ce5c4a325506c6f2ede8e9f57151ce9",
+      "JSP539/ShortTraces.lean": "a23ca9c50c62241cbc0caeacea44ce8dd0f75b49cbf04556a1bb42b78312de3c",
+      "JSP539/UniformBits.lean": "c9784bd277437cce86e745d31344c9de49f1a22f8dca17cd71a1d1b4b550e4fd",
+      "LicensedContainers.lean": "442c8da78a081a2fb718a8a3cea578a6c6363412d070089484438b4c935ff781",
+      "LicensedContainers/ContainerFuel.lean": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+      "LicensedContainers/ContainerInvariants.lean": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+      "LicensedContainers/ContainerSelector.lean": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+      "LicensedContainers/ContainerWeight.lean": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+      "LicensedContainers/Hypergraph.lean": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb",
+      "Verify.lean": "836916ec58479bf9e164049bf800d9b41eb3719bafa22dcd6eace4a18eb7f503",
+      "lake-manifest.json": "f3ca6cf3ffe758f39fe05aaf2afe093e5c716ca951fa471eb778350fa1459be5",
+      "lakefile.lean": "98abf0f3418cbbf54cbe58acf66077db61724aafa98f106e2710054786f0f8c1",
+      "lean-toolchain": "bc84812c94489d1e3e191baa1dc10d5eb684382d7fe9d2a5ab085e72c1c67e47"
+    },
+    "snapshot_sha256": "24571c3194e580c0e88d8fb936310a47ed6eae30414cf2e8d34201ce46a61661"
+  },
+  "source_stats": {
+    "original_members": 46,
+    "lean_files_including_lakefile": 32,
+    "proof_and_build_inputs": 34,
+    "changed_lean_file_count": 20,
+    "added_lean_lines": 114,
+    "removed_lean_lines": 65,
+    "nonlean_original_files_changed": []
+  },
+  "source_gate": {
+    "forbidden_lean_tokens": [],
+    "comment_and_string_literals_excluded": true,
+    "all_original_members_hash_verified": true,
+    "pin_files_byte_identical": [
+      "lean-toolchain",
+      "lakefile.lean",
+      "lake-manifest.json"
+    ],
+    "final_scope_and_entrypoints_byte_identical": [
+      "JSP539/OriginalScope.lean",
+      "JSP539/RealScope.lean",
+      "JSP539.lean",
+      "Verify.lean"
+    ]
+  },
+  "original_to_final_members": [
+    {
+      "path": "JSP539.lean",
+      "original_sha256": "b2e28e1e6cd80d436d6b9314452b9058b87ac91eae2735d84ce238545c41e84b",
+      "final_sha256": "b2e28e1e6cd80d436d6b9314452b9058b87ac91eae2735d84ce238545c41e84b",
+      "changed": false,
+      "is_lean": true,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "JSP539/AffinePlane.lean",
+      "original_sha256": "b767d1de66f92f1c714aeb396e4e742696c7a9ac5bf1239edca9e06a1a6c7e38",
+      "final_sha256": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 11,
+      "removed_lines": 6
+    },
+    {
+      "path": "JSP539/ArcContainerGrowth.lean",
+      "original_sha256": "d5582449587334c875c50d3c59b4ec5c9276b05021c6686f6488f498a17551f1",
+      "final_sha256": "31d637bf644b155162268873cf303c480b4ddef3b4412220b8ee893a40ffcc23",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 7,
+      "removed_lines": 2
+    },
+    {
+      "path": "JSP539/ArcContainerIteration.lean",
+      "original_sha256": "51ef44b381027a02e2561f292690ccbc3628dad8467efb8657724d43089b170a",
+      "final_sha256": "223e950020e181a2633d1ac2b77a7c115826e5f19bd8f931723bea722c389c41",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 3,
+      "removed_lines": 5
+    },
+    {
+      "path": "JSP539/ArcContainerStep.lean",
+      "original_sha256": "951b175593c4ac83ac46ce8f11df8e97f2b09cb610f0d8595a306d8eb354bf22",
+      "final_sha256": "fda4b73f890dded9314e00e8e67773f560756c19d2617c9c47a747d28d96862e",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 8,
+      "removed_lines": 4
+    },
+    {
+      "path": "JSP539/ChunkPartition.lean",
+      "original_sha256": "f7984b1d6f04191eb6d44a9016f90f1f012c10e26d179548d01df807938c0cef",
+      "final_sha256": "d77ded01e7fabeb277dbacaf69b69dde76b30b1bd564858576789ae271c2b605",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 7,
+      "removed_lines": 4
+    },
+    {
+      "path": "JSP539/ContainerAlgorithm.lean",
+      "original_sha256": "aa4789f0e8efbb724f918dd243b38937d4e3031190e78ba7812d69e19cfb180f",
+      "final_sha256": "2f9ee3f58e0c4677e3d51cdcd2496e64a3810c50b713f2c2830fb2ba0740dc3b",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 1,
+      "removed_lines": 0
+    },
+    {
+      "path": "JSP539/ContainerCore.lean",
+      "original_sha256": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+      "final_sha256": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+      "changed": false,
+      "is_lean": true,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "JSP539/ContainerCounting.lean",
+      "original_sha256": "9d5f2f8bf6ad5152b85fbf7603177418b8a3af26b926b5974161e4d6cdfe01a6",
+      "final_sha256": "ed574ca842cb139298955c2b174c0e44dd44393403ffb5829d50a0fe4680b093",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 1,
+      "removed_lines": 0
+    },
+    {
+      "path": "JSP539/ContainerPotential.lean",
+      "original_sha256": "35db27cf0ffdd7e3576db1958bc32fb6140f86f6298d90004cb6052a867b4957",
+      "final_sha256": "04d384299d5ea8c366ea68c044039b6ef185d36cf37c853849a46deeb456041c",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 2,
+      "removed_lines": 1
+    },
+    {
+      "path": "JSP539/ContainerProbability.lean",
+      "original_sha256": "6061bae9dc3f1597c25f2f632ae4cf19befe37a5234f1a2bc5b17e8a0b458a91",
+      "final_sha256": "17d6e05c1ea28c80db26b08827c3164413dd94dcdf446f715f76acdfa9ae7458",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 2,
+      "removed_lines": 1
+    },
+    {
+      "path": "JSP539/ContainerShrink.lean",
+      "original_sha256": "773cffd0b5884e79b900230575bc30a8ffe4e97728ab36df37c9350835e21ed7",
+      "final_sha256": "e06dd4153c04d43a2fadc8aa24a0dc4ce3606910647f74e3be31a0a1ce64756f",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 2,
+      "removed_lines": 2
+    },
+    {
+      "path": "JSP539/DisjointPacking.lean",
+      "original_sha256": "23a582dea5ce601312c2a343042b69cb889fe0c7697f0c0ce50f6a61e9ecfaef",
+      "final_sha256": "26440ab4e46f87e54498ce742f80bd410e41afbc2e0772d9dc6b17927ba6d3d1",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 8,
+      "removed_lines": 5
+    },
+    {
+      "path": "JSP539/FairBitTail.lean",
+      "original_sha256": "9e3278122e4df09afe5fccf56b82c7fd1e076d602840e41ca3c2a208320098c4",
+      "final_sha256": "9e3278122e4df09afe5fccf56b82c7fd1e076d602840e41ca3c2a208320098c4",
+      "changed": false,
+      "is_lean": true,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "JSP539/FiniteDesignTransport.lean",
+      "original_sha256": "c8708b5efa3c3a4f3768ddc52584e2437d445dbeb3935284810ef2e44a063b11",
+      "final_sha256": "c8708b5efa3c3a4f3768ddc52584e2437d445dbeb3935284810ef2e44a063b11",
+      "changed": false,
+      "is_lean": true,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "JSP539/FiniteProbability.lean",
+      "original_sha256": "16207cc761497895b500a6f48fa4257e6ad514f221007c6c85a273de2a68a9f7",
+      "final_sha256": "3fed40e1cbae40de50e6e095e3b62df90f5e49254db40fdf92052e6e6f26240c",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 23,
+      "removed_lines": 19
+    },
+    {
+      "path": "JSP539/GroundHypergraph.lean",
+      "original_sha256": "553a853185ffef65239024ccba2d89b3c812ab67520cc27eac2152d45be40a1a",
+      "final_sha256": "c63aa2be77559855df77b6c0963c369d8a6e346adcd76184c50fb93ec6a5d4df",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 2,
+      "removed_lines": 1
+    },
+    {
+      "path": "JSP539/LineChunks.lean",
+      "original_sha256": "7b578d29e5e11ec08386ce20b239271576a20a2735daaea6fddd65582d769960",
+      "final_sha256": "19826d814a9f9ef06ebcfa7d48d2fce8729ac04d0f3d4cefeba062e0187cea3f",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 3,
+      "removed_lines": 2
+    },
+    {
+      "path": "JSP539/OriginalScope.lean",
+      "original_sha256": "cd9ff576d37811413d9741956fc7f67b665cf13eea5a088ec4b32b6e93cee923",
+      "final_sha256": "cd9ff576d37811413d9741956fc7f67b665cf13eea5a088ec4b32b6e93cee923",
+      "changed": false,
+      "is_lean": true,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "JSP539/ProbabilityBudget.lean",
+      "original_sha256": "6a181f53a2837cee67bc91820f032c38bc311c844931240369e6bd8977ab1386",
+      "final_sha256": "6bc07e4165d39074e7170408b2de101995951f1031f1eff95cb4ebfdfd8d9759",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 3,
+      "removed_lines": 1
+    },
+    {
+      "path": "JSP539/RandomRestriction.lean",
+      "original_sha256": "b2ff2a9ee1141adb45b9d7f225c75f45bee531557df049f1a71ee6cf1170b0c2",
+      "final_sha256": "b26411d46664404714bbbfe34b01ca729e091caaba6d6f8ce0d75ef40b20cc1b",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 1,
+      "removed_lines": 1
+    },
+    {
+      "path": "JSP539/RealScope.lean",
+      "original_sha256": "190c2a915a8743a5c88e3e23e8fe43988ce5c4a325506c6f2ede8e9f57151ce9",
+      "final_sha256": "190c2a915a8743a5c88e3e23e8fe43988ce5c4a325506c6f2ede8e9f57151ce9",
+      "changed": false,
+      "is_lean": true,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "JSP539/ShortTraces.lean",
+      "original_sha256": "867cc04761ece172de91ef721a250326c0e1858dc02799cd8c5b9565d644df5f",
+      "final_sha256": "a23ca9c50c62241cbc0caeacea44ce8dd0f75b49cbf04556a1bb42b78312de3c",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 2,
+      "removed_lines": 2
+    },
+    {
+      "path": "JSP539/UniformBits.lean",
+      "original_sha256": "bc12630ad953b00251befcf84d3df043d29770f2c8e6f2326daa150f8ba2922e",
+      "final_sha256": "c9784bd277437cce86e745d31344c9de49f1a22f8dca17cd71a1d1b4b550e4fd",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 21,
+      "removed_lines": 8
+    },
+    {
+      "path": "LICENSE",
+      "original_sha256": "c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+      "final_sha256": "c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+      "changed": false,
+      "is_lean": false,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "LicensedContainers.lean",
+      "original_sha256": "442c8da78a081a2fb718a8a3cea578a6c6363412d070089484438b4c935ff781",
+      "final_sha256": "442c8da78a081a2fb718a8a3cea578a6c6363412d070089484438b4c935ff781",
+      "changed": false,
+      "is_lean": true,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "LicensedContainers/ContainerFuel.lean",
+      "original_sha256": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+      "final_sha256": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+      "changed": false,
+      "is_lean": true,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "LicensedContainers/ContainerInvariants.lean",
+      "original_sha256": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+      "final_sha256": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+      "changed": false,
+      "is_lean": true,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "LicensedContainers/ContainerSelector.lean",
+      "original_sha256": "e115359961aa28988b332fd63e88c93d54992814368475865a65ec459929eafc",
+      "final_sha256": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 1,
+      "removed_lines": 0
+    },
+    {
+      "path": "LicensedContainers/ContainerWeight.lean",
+      "original_sha256": "e281197a67f0dbae3cd484c2f03a474c1e10412242a0d3ddc150b66917454a32",
+      "final_sha256": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+      "changed": true,
+      "is_lean": true,
+      "added_lines": 6,
+      "removed_lines": 1
+    },
+    {
+      "path": "LicensedContainers/Hypergraph.lean",
+      "original_sha256": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb",
+      "final_sha256": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb",
+      "changed": false,
+      "is_lean": true,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "MANIFEST.json",
+      "original_sha256": "975abb0451034b96971a0fd0272da485c058efa13e953f3b9cab359c967a101e",
+      "final_sha256": "975abb0451034b96971a0fd0272da485c058efa13e953f3b9cab359c967a101e",
+      "changed": false,
+      "is_lean": false,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "PROBABILITY_BUDGET.txt",
+      "original_sha256": "e84800a9deca8acbfc8b3a2257747f96216e423cf6498ff652e2922263108810",
+      "final_sha256": "e84800a9deca8acbfc8b3a2257747f96216e423cf6498ff652e2922263108810",
+      "changed": false,
+      "is_lean": false,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "README.md",
+      "original_sha256": "91f38810e4e51b09dddaebea94c8813e444444f562ddfe092ad3cd46c5aa0874",
+      "final_sha256": "91f38810e4e51b09dddaebea94c8813e444444f562ddfe092ad3cd46c5aa0874",
+      "changed": false,
+      "is_lean": false,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "SCOPE_MAP.md",
+      "original_sha256": "c6bc2596052b7322170985c012a6399ea463a88a60d74fb0716bdddf4fb4de01",
+      "final_sha256": "c6bc2596052b7322170985c012a6399ea463a88a60d74fb0716bdddf4fb4de01",
+      "changed": false,
+      "is_lean": false,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "SOURCES.md",
+      "original_sha256": "2c46b860d23e3f391cf4bd32fc43460e8de8fd7f9c750888a31b5dc5c37ab911",
+      "final_sha256": "2c46b860d23e3f391cf4bd32fc43460e8de8fd7f9c750888a31b5dc5c37ab911",
+      "changed": false,
+      "is_lean": false,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "SOURCE_STATUS.json",
+      "original_sha256": "6d9e07250888a7ea662c700c87d0649856d0b4fd63db10acbf37ad029a452970",
+      "final_sha256": "6d9e07250888a7ea662c700c87d0649856d0b4fd63db10acbf37ad029a452970",
+      "changed": false,
+      "is_lean": false,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "STATIC_SOURCE_CHECK.json",
+      "original_sha256": "4112769ffb59a217a64b9c1fefe10f7ec0d50c187b21302b2beb56c25e63ba91",
+      "final_sha256": "4112769ffb59a217a64b9c1fefe10f7ec0d50c187b21302b2beb56c25e63ba91",
+      "changed": false,
+      "is_lean": false,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "THIRD_PARTY_PROVENANCE.json",
+      "original_sha256": "6dfd5ffae16f384d4a45eba40b235af7b23fcedcf8abbfa7b843404cafb89d8d",
+      "final_sha256": "6dfd5ffae16f384d4a45eba40b235af7b23fcedcf8abbfa7b843404cafb89d8d",
+      "changed": false,
+      "is_lean": false,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "Verify.lean",
+      "original_sha256": "836916ec58479bf9e164049bf800d9b41eb3719bafa22dcd6eace4a18eb7f503",
+      "final_sha256": "836916ec58479bf9e164049bf800d9b41eb3719bafa22dcd6eace4a18eb7f503",
+      "changed": false,
+      "is_lean": true,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "audit/INDEPENDENT_REVIEW.md",
+      "original_sha256": "896e976d4a29d339f4aa78a24407f89a523b3561eaad979477fb650a2e6be3fc",
+      "final_sha256": "896e976d4a29d339f4aa78a24407f89a523b3561eaad979477fb650a2e6be3fc",
+      "changed": false,
+      "is_lean": false,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "audit/check_finite_mathematics.py",
+      "original_sha256": "c0430743925d8bc73bae28c8ad1f743aa3ced45c9c913be69484ded55a981cf2",
+      "final_sha256": "c0430743925d8bc73bae28c8ad1f743aa3ced45c9c913be69484ded55a981cf2",
+      "changed": false,
+      "is_lean": false,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "audit/finite-mathematics-results.json",
+      "original_sha256": "675a1652626920f7ea74219dedcc4a1440ba2a46be1f1c89e208ecf3e9d8b482",
+      "final_sha256": "675a1652626920f7ea74219dedcc4a1440ba2a46be1f1c89e208ecf3e9d8b482",
+      "changed": false,
+      "is_lean": false,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "lake-manifest.json",
+      "original_sha256": "f3ca6cf3ffe758f39fe05aaf2afe093e5c716ca951fa471eb778350fa1459be5",
+      "final_sha256": "f3ca6cf3ffe758f39fe05aaf2afe093e5c716ca951fa471eb778350fa1459be5",
+      "changed": false,
+      "is_lean": false,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "lakefile.lean",
+      "original_sha256": "98abf0f3418cbbf54cbe58acf66077db61724aafa98f106e2710054786f0f8c1",
+      "final_sha256": "98abf0f3418cbbf54cbe58acf66077db61724aafa98f106e2710054786f0f8c1",
+      "changed": false,
+      "is_lean": true,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    {
+      "path": "lean-toolchain",
+      "original_sha256": "bc84812c94489d1e3e191baa1dc10d5eb684382d7fe9d2a5ab085e72c1c67e47",
+      "final_sha256": "bc84812c94489d1e3e191baa1dc10d5eb684382d7fe9d2a5ab085e72c1c67e47",
+      "changed": false,
+      "is_lean": false,
+      "added_lines": 0,
+      "removed_lines": 0
+    }
+  ],
+  "accepted_direct_compiles": [
+    {
+      "metadata": "verification/build/initial_01_hypergraph-meta.json",
+      "metadata_sha256": "7fd357efa7f4fc68969436849b42f8a084155d30a95e82b62dfbf49caf1672eb",
+      "log": "verification/build/initial_01_hypergraph.log",
+      "log_sha256": "780b74cd655ee96d84a6ebcd63305ea8e421b5f377bae374676849a196ec9c1e",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:26:44.578901+00:00",
+      "end_utc": "2026-10-02T08:26:54.339559+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/LicensedContainers/Hypergraph.olean",
+        "LicensedContainers/Hypergraph.lean"
+      ],
+      "module": "LicensedContainers.Hypergraph",
+      "source_sha256": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "7970525cc2265b164268c3eabc5912e42ec2314e8415518baa7119307facdade"
+    },
+    {
+      "metadata": "verification/build/repaired_02_affineplane-meta.json",
+      "metadata_sha256": "bd289633dccef07c2e39ea1622578c4bffaf6f802b21376486d8fa79e0a58bdd",
+      "log": "verification/build/repaired_02_affineplane.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:41:06.980469+00:00",
+      "end_utc": "2026-10-02T08:41:22.627156+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/AffinePlane.olean",
+        "JSP539/AffinePlane.lean"
+      ],
+      "module": "JSP539.AffinePlane",
+      "source_sha256": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.AffinePlane": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "ed3e102cda197edb1c2f7650e906085ee35a1e63e798b3c39c29c2ccea90caaf"
+    },
+    {
+      "metadata": "verification/build/third_03_chunkpartition-meta.json",
+      "metadata_sha256": "fcca767fc2bac7a6d0452e3e76af4d4e72210974d73967e71a5879029e583957",
+      "log": "verification/build/third_03_chunkpartition.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:46:58.930166+00:00",
+      "end_utc": "2026-10-02T08:47:14.282980+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/ChunkPartition.olean",
+        "JSP539/ChunkPartition.lean"
+      ],
+      "module": "JSP539.ChunkPartition",
+      "source_sha256": "d77ded01e7fabeb277dbacaf69b69dde76b30b1bd564858576789ae271c2b605",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.ChunkPartition": "d77ded01e7fabeb277dbacaf69b69dde76b30b1bd564858576789ae271c2b605"
+      },
+      "historical_output_olean_sha256": "b032b452890dcc47d9ba7d735a6205f66cfed8a1a153ccf169872d507b3db456"
+    },
+    {
+      "metadata": "verification/build/first_main_1_JSP539_GroundHypergraph-meta.json",
+      "metadata_sha256": "9fda8dcfd2a07d0f06297a23c0457643318d008735d76c5419a94beb1f9d0fb1",
+      "log": "verification/build/first_main_1_JSP539_GroundHypergraph.log",
+      "log_sha256": "1d10b66a1d932ad85c74054077f8a4fdeb5229504834d3aee76cc124855d1313",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:47:55.059316+00:00",
+      "end_utc": "2026-10-02T08:48:13.538541+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/GroundHypergraph.olean",
+        "JSP539/GroundHypergraph.lean"
+      ],
+      "module": "JSP539.GroundHypergraph",
+      "source_sha256": "c63aa2be77559855df77b6c0963c369d8a6e346adcd76184c50fb93ec6a5d4df",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.GroundHypergraph": "c63aa2be77559855df77b6c0963c369d8a6e346adcd76184c50fb93ec6a5d4df",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "840ba903fce64488ad1b19c379fc60ed145ad0220279b77cdb0e42ac83c9280a"
+    },
+    {
+      "metadata": "verification/build/second_main_1_JSP539_LineChunks-meta.json",
+      "metadata_sha256": "cbbd5c88ee19a9b3a72675131fd6cc2961d134fc091878dba0f0377e2cae3455",
+      "log": "verification/build/second_main_1_JSP539_LineChunks.log",
+      "log_sha256": "07aa9a92d94a4f8e5a94f21ac5288b640b1eae9078feea07c4199820b0673b22",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:49:24.682784+00:00",
+      "end_utc": "2026-10-02T08:49:41.987494+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/LineChunks.olean",
+        "JSP539/LineChunks.lean"
+      ],
+      "module": "JSP539.LineChunks",
+      "source_sha256": "19826d814a9f9ef06ebcfa7d48d2fce8729ac04d0f3d4cefeba062e0187cea3f",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.AffinePlane": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+        "JSP539.ChunkPartition": "d77ded01e7fabeb277dbacaf69b69dde76b30b1bd564858576789ae271c2b605",
+        "JSP539.GroundHypergraph": "c63aa2be77559855df77b6c0963c369d8a6e346adcd76184c50fb93ec6a5d4df",
+        "JSP539.LineChunks": "19826d814a9f9ef06ebcfa7d48d2fce8729ac04d0f3d4cefeba062e0187cea3f",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "b643bd53f6d017de9831ddf6d858f2024f460676bf709afe3fb6af2b2f9bab73"
+    },
+    {
+      "metadata": "verification/build/licensed_invariants_02-meta.json",
+      "metadata_sha256": "67a0fd11c6f84b0c11eb27eb3efb848162270808f72270357ec7aaf32e46e7bf",
+      "log": "verification/build/licensed_invariants_02.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:48:00.308312+00:00",
+      "end_utc": "2026-10-02T08:48:11.385541+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/LicensedContainers/ContainerInvariants.olean",
+        "LicensedContainers/ContainerInvariants.lean"
+      ],
+      "module": "LicensedContainers.ContainerInvariants",
+      "source_sha256": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "LicensedContainers.ContainerInvariants": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "aa9a9a5807947a10855b30373505986e37016be831f6744ce6ff19efdef8f1a5"
+    },
+    {
+      "metadata": "verification/build/licensed_weight_03-meta.json",
+      "metadata_sha256": "5fb2ad7cd1857977520d363fe2d99412c4262662ab3a6c2744905bb04c63cae2",
+      "log": "verification/build/licensed_weight_03.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:46:03.996396+00:00",
+      "end_utc": "2026-10-02T08:46:18.315589+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/LicensedContainers/ContainerWeight.olean",
+        "LicensedContainers/ContainerWeight.lean"
+      ],
+      "module": "LicensedContainers.ContainerWeight",
+      "source_sha256": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "LicensedContainers.ContainerWeight": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "2c9c2d439351c6f46baab00fb699f9c69895e9876c152e568dd8a7a0f5ca72ac"
+    },
+    {
+      "metadata": "verification/build/licensed_selector_02-meta.json",
+      "metadata_sha256": "26b4eced0c908df6d9b01aff70f8311576fa4b56a8cbd127ccf212d63a46b5bd",
+      "log": "verification/build/licensed_selector_02.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:47:26.804503+00:00",
+      "end_utc": "2026-10-02T08:47:39.031930+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/LicensedContainers/ContainerSelector.olean",
+        "LicensedContainers/ContainerSelector.lean"
+      ],
+      "module": "LicensedContainers.ContainerSelector",
+      "source_sha256": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "LicensedContainers.ContainerInvariants": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+        "LicensedContainers.ContainerSelector": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+        "LicensedContainers.ContainerWeight": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "a57b6d2652f06a04c480d0e1c83c92e39fbe54a9d8a0fa7092e87d80f163a12f"
+    },
+    {
+      "metadata": "verification/build/licensed_fuel_02-meta.json",
+      "metadata_sha256": "16d02328e8846ea9baf039f6caea42bfc7289f1b7d9d03074e6f6f2b6a908953",
+      "log": "verification/build/licensed_fuel_02.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:48:33.124726+00:00",
+      "end_utc": "2026-10-02T08:48:41.864104+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/LicensedContainers/ContainerFuel.olean",
+        "LicensedContainers/ContainerFuel.lean"
+      ],
+      "module": "LicensedContainers.ContainerFuel",
+      "source_sha256": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "LicensedContainers.ContainerFuel": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "c1e8b95a20764fabbb8c3dea7dff857603bca2af4243cb35770c1ba498b98f46"
+    },
+    {
+      "metadata": "verification/build/third_main_1_JSP539_ContainerPotential-meta.json",
+      "metadata_sha256": "9d74f87a39d052713b68ba37c80d868cd3ab0a1093803783121dcca26446bdb4",
+      "log": "verification/build/third_main_1_JSP539_ContainerPotential.log",
+      "log_sha256": "157473576c5992de0ee273f41498d71611f0fde33da728213bd94d1a88313e47",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:51:18.875532+00:00",
+      "end_utc": "2026-10-02T08:51:30.454882+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/ContainerPotential.olean",
+        "JSP539/ContainerPotential.lean"
+      ],
+      "module": "JSP539.ContainerPotential",
+      "source_sha256": "04d384299d5ea8c366ea68c044039b6ef185d36cf37c853849a46deeb456041c",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.ContainerPotential": "04d384299d5ea8c366ea68c044039b6ef185d36cf37c853849a46deeb456041c",
+        "LicensedContainers.ContainerFuel": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+        "LicensedContainers.ContainerInvariants": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+        "LicensedContainers.ContainerSelector": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+        "LicensedContainers.ContainerWeight": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "4e4d885b7c4c1c3d0629938f53da7d5c6be00ed5948309d08b200ca7c98285b4"
+    },
+    {
+      "metadata": "verification/build/fourth_main_1_JSP539_ContainerAlgorithm-meta.json",
+      "metadata_sha256": "c2516a1b9dcfd9727fc6b8c3688d874bd4a3c1fddab4ef37c13036a0dc229b4e",
+      "log": "verification/build/fourth_main_1_JSP539_ContainerAlgorithm.log",
+      "log_sha256": "5b08e67c2b75c3439c856f3b03fa3b91a20220ae29a50b6a5514df2387db9089",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:52:36.413812+00:00",
+      "end_utc": "2026-10-02T08:52:48.334623+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/ContainerAlgorithm.olean",
+        "JSP539/ContainerAlgorithm.lean"
+      ],
+      "module": "JSP539.ContainerAlgorithm",
+      "source_sha256": "2f9ee3f58e0c4677e3d51cdcd2496e64a3810c50b713f2c2830fb2ba0740dc3b",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.ContainerAlgorithm": "2f9ee3f58e0c4677e3d51cdcd2496e64a3810c50b713f2c2830fb2ba0740dc3b",
+        "JSP539.ContainerPotential": "04d384299d5ea8c366ea68c044039b6ef185d36cf37c853849a46deeb456041c",
+        "LicensedContainers.ContainerFuel": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+        "LicensedContainers.ContainerInvariants": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+        "LicensedContainers.ContainerSelector": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+        "LicensedContainers.ContainerWeight": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "e73b30fda1fc6f266b54213a4e9dee658ea399e1771083da0660550081e459b2"
+    },
+    {
+      "metadata": "verification/build/fourth_main_2_JSP539_ContainerCore-meta.json",
+      "metadata_sha256": "d79d0d62752e9489f9b9c517d48d1cccd00508349214857bba2ae51b25d7ae6d",
+      "log": "verification/build/fourth_main_2_JSP539_ContainerCore.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:52:48.354935+00:00",
+      "end_utc": "2026-10-02T08:52:58.400548+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/ContainerCore.olean",
+        "JSP539/ContainerCore.lean"
+      ],
+      "module": "JSP539.ContainerCore",
+      "source_sha256": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.ContainerAlgorithm": "2f9ee3f58e0c4677e3d51cdcd2496e64a3810c50b713f2c2830fb2ba0740dc3b",
+        "JSP539.ContainerCore": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+        "JSP539.ContainerPotential": "04d384299d5ea8c366ea68c044039b6ef185d36cf37c853849a46deeb456041c",
+        "LicensedContainers.ContainerFuel": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+        "LicensedContainers.ContainerInvariants": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+        "LicensedContainers.ContainerSelector": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+        "LicensedContainers.ContainerWeight": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "c0c75d707c13216e7b65407083e6119f3e96df978fc830933614568b2a51b8fa"
+    },
+    {
+      "metadata": "verification/build/fifth_main_1_JSP539_ContainerCounting-meta.json",
+      "metadata_sha256": "f3e41a4d47b92507f1560ea77e21be1ae9f704add4f8ffafa27ca4156dfe3466",
+      "log": "verification/build/fifth_main_1_JSP539_ContainerCounting.log",
+      "log_sha256": "612f02a54cdbc713adc15219d63643c1480179b042c4cfc990e03b2a55a02a38",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:53:56.647384+00:00",
+      "end_utc": "2026-10-02T08:54:07.991281+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/ContainerCounting.olean",
+        "JSP539/ContainerCounting.lean"
+      ],
+      "module": "JSP539.ContainerCounting",
+      "source_sha256": "ed574ca842cb139298955c2b174c0e44dd44393403ffb5829d50a0fe4680b093",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.ContainerAlgorithm": "2f9ee3f58e0c4677e3d51cdcd2496e64a3810c50b713f2c2830fb2ba0740dc3b",
+        "JSP539.ContainerCore": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+        "JSP539.ContainerCounting": "ed574ca842cb139298955c2b174c0e44dd44393403ffb5829d50a0fe4680b093",
+        "JSP539.ContainerPotential": "04d384299d5ea8c366ea68c044039b6ef185d36cf37c853849a46deeb456041c",
+        "LicensedContainers.ContainerFuel": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+        "LicensedContainers.ContainerInvariants": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+        "LicensedContainers.ContainerSelector": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+        "LicensedContainers.ContainerWeight": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "7d4cf5de39d251a2e32897fbb45f0cc9319ab7bbf0e98a85abf972fd7f920a46"
+    },
+    {
+      "metadata": "verification/build/sixth_main_1_JSP539_ContainerShrink-meta.json",
+      "metadata_sha256": "34007a86aff85e27815992fce64ad1e338b6818947f0dbd6e72562e73dacff82",
+      "log": "verification/build/sixth_main_1_JSP539_ContainerShrink.log",
+      "log_sha256": "ab4f11f654f710f19811d5cb5089532887352ba7bfb48d577225475fb1c6bd8d",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:55:00.852682+00:00",
+      "end_utc": "2026-10-02T08:55:14.942668+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/ContainerShrink.olean",
+        "JSP539/ContainerShrink.lean"
+      ],
+      "module": "JSP539.ContainerShrink",
+      "source_sha256": "e06dd4153c04d43a2fadc8aa24a0dc4ce3606910647f74e3be31a0a1ce64756f",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.ContainerAlgorithm": "2f9ee3f58e0c4677e3d51cdcd2496e64a3810c50b713f2c2830fb2ba0740dc3b",
+        "JSP539.ContainerCore": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+        "JSP539.ContainerCounting": "ed574ca842cb139298955c2b174c0e44dd44393403ffb5829d50a0fe4680b093",
+        "JSP539.ContainerPotential": "04d384299d5ea8c366ea68c044039b6ef185d36cf37c853849a46deeb456041c",
+        "JSP539.ContainerShrink": "e06dd4153c04d43a2fadc8aa24a0dc4ce3606910647f74e3be31a0a1ce64756f",
+        "LicensedContainers.ContainerFuel": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+        "LicensedContainers.ContainerInvariants": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+        "LicensedContainers.ContainerSelector": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+        "LicensedContainers.ContainerWeight": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "58a2786206a3eb45059e251b5f3c24fe53865d7c31afc0b723e1c57a010ec2b0"
+    },
+    {
+      "metadata": "verification/build/seventh_main_1_JSP539_ArcContainerStep-meta.json",
+      "metadata_sha256": "963e21928860949e5424304e778e42bb263eeff33bd3e93f7163d483e61c9964",
+      "log": "verification/build/seventh_main_1_JSP539_ArcContainerStep.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:57:10.592071+00:00",
+      "end_utc": "2026-10-02T08:57:27.107362+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/ArcContainerStep.olean",
+        "JSP539/ArcContainerStep.lean"
+      ],
+      "module": "JSP539.ArcContainerStep",
+      "source_sha256": "fda4b73f890dded9314e00e8e67773f560756c19d2617c9c47a747d28d96862e",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.AffinePlane": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+        "JSP539.ArcContainerStep": "fda4b73f890dded9314e00e8e67773f560756c19d2617c9c47a747d28d96862e",
+        "JSP539.ChunkPartition": "d77ded01e7fabeb277dbacaf69b69dde76b30b1bd564858576789ae271c2b605",
+        "JSP539.ContainerAlgorithm": "2f9ee3f58e0c4677e3d51cdcd2496e64a3810c50b713f2c2830fb2ba0740dc3b",
+        "JSP539.ContainerCore": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+        "JSP539.ContainerCounting": "ed574ca842cb139298955c2b174c0e44dd44393403ffb5829d50a0fe4680b093",
+        "JSP539.ContainerPotential": "04d384299d5ea8c366ea68c044039b6ef185d36cf37c853849a46deeb456041c",
+        "JSP539.ContainerShrink": "e06dd4153c04d43a2fadc8aa24a0dc4ce3606910647f74e3be31a0a1ce64756f",
+        "JSP539.GroundHypergraph": "c63aa2be77559855df77b6c0963c369d8a6e346adcd76184c50fb93ec6a5d4df",
+        "JSP539.LineChunks": "19826d814a9f9ef06ebcfa7d48d2fce8729ac04d0f3d4cefeba062e0187cea3f",
+        "LicensedContainers.ContainerFuel": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+        "LicensedContainers.ContainerInvariants": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+        "LicensedContainers.ContainerSelector": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+        "LicensedContainers.ContainerWeight": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "6bbb3a7b9ef0699624dfab7cbd91596c260faf8aacf173c4ae9fe00ac074e2c0"
+    },
+    {
+      "metadata": "verification/build/ninth_main_1_JSP539_ArcContainerIteration-meta.json",
+      "metadata_sha256": "3219eb92e475c157466daee84e5338942e86de857935c77b61a945a0e99773ad",
+      "log": "verification/build/ninth_main_1_JSP539_ArcContainerIteration.log",
+      "log_sha256": "3b2941714f1a454ae6c433a1cabbb487bb0db46c1cbc30f3c29461d67baa43e1",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T09:00:13.964021+00:00",
+      "end_utc": "2026-10-02T09:00:29.330438+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/ArcContainerIteration.olean",
+        "JSP539/ArcContainerIteration.lean"
+      ],
+      "module": "JSP539.ArcContainerIteration",
+      "source_sha256": "223e950020e181a2633d1ac2b77a7c115826e5f19bd8f931723bea722c389c41",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.AffinePlane": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+        "JSP539.ArcContainerIteration": "223e950020e181a2633d1ac2b77a7c115826e5f19bd8f931723bea722c389c41",
+        "JSP539.ArcContainerStep": "fda4b73f890dded9314e00e8e67773f560756c19d2617c9c47a747d28d96862e",
+        "JSP539.ChunkPartition": "d77ded01e7fabeb277dbacaf69b69dde76b30b1bd564858576789ae271c2b605",
+        "JSP539.ContainerAlgorithm": "2f9ee3f58e0c4677e3d51cdcd2496e64a3810c50b713f2c2830fb2ba0740dc3b",
+        "JSP539.ContainerCore": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+        "JSP539.ContainerCounting": "ed574ca842cb139298955c2b174c0e44dd44393403ffb5829d50a0fe4680b093",
+        "JSP539.ContainerPotential": "04d384299d5ea8c366ea68c044039b6ef185d36cf37c853849a46deeb456041c",
+        "JSP539.ContainerShrink": "e06dd4153c04d43a2fadc8aa24a0dc4ce3606910647f74e3be31a0a1ce64756f",
+        "JSP539.GroundHypergraph": "c63aa2be77559855df77b6c0963c369d8a6e346adcd76184c50fb93ec6a5d4df",
+        "JSP539.LineChunks": "19826d814a9f9ef06ebcfa7d48d2fce8729ac04d0f3d4cefeba062e0187cea3f",
+        "LicensedContainers.ContainerFuel": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+        "LicensedContainers.ContainerInvariants": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+        "LicensedContainers.ContainerSelector": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+        "LicensedContainers.ContainerWeight": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "738d01c3bd77ee31dc99f185d755797733e5bc8ff451bc3f2681a96603b19f7f"
+    },
+    {
+      "metadata": "verification/build/repaired_growth_01-meta.json",
+      "metadata_sha256": "9ecbe4ee150268d2f0892ac96d62076ce055bd3657a4240cdc9d2fd3e836f9b1",
+      "log": "verification/build/repaired_growth_01.log",
+      "log_sha256": "e843d2efc5178add08b1cdc980268d3a935c82c6fed00b2f7d901ed7bc95a1b3",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T09:02:08.176079+00:00",
+      "end_utc": "2026-10-02T09:02:24.630235+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/ArcContainerGrowth.olean",
+        "JSP539/ArcContainerGrowth.lean"
+      ],
+      "module": "JSP539.ArcContainerGrowth",
+      "source_sha256": "31d637bf644b155162268873cf303c480b4ddef3b4412220b8ee893a40ffcc23",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.AffinePlane": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+        "JSP539.ArcContainerGrowth": "31d637bf644b155162268873cf303c480b4ddef3b4412220b8ee893a40ffcc23",
+        "JSP539.ArcContainerIteration": "223e950020e181a2633d1ac2b77a7c115826e5f19bd8f931723bea722c389c41",
+        "JSP539.ArcContainerStep": "fda4b73f890dded9314e00e8e67773f560756c19d2617c9c47a747d28d96862e",
+        "JSP539.ChunkPartition": "d77ded01e7fabeb277dbacaf69b69dde76b30b1bd564858576789ae271c2b605",
+        "JSP539.ContainerAlgorithm": "2f9ee3f58e0c4677e3d51cdcd2496e64a3810c50b713f2c2830fb2ba0740dc3b",
+        "JSP539.ContainerCore": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+        "JSP539.ContainerCounting": "ed574ca842cb139298955c2b174c0e44dd44393403ffb5829d50a0fe4680b093",
+        "JSP539.ContainerPotential": "04d384299d5ea8c366ea68c044039b6ef185d36cf37c853849a46deeb456041c",
+        "JSP539.ContainerShrink": "e06dd4153c04d43a2fadc8aa24a0dc4ce3606910647f74e3be31a0a1ce64756f",
+        "JSP539.GroundHypergraph": "c63aa2be77559855df77b6c0963c369d8a6e346adcd76184c50fb93ec6a5d4df",
+        "JSP539.LineChunks": "19826d814a9f9ef06ebcfa7d48d2fce8729ac04d0f3d4cefeba062e0187cea3f",
+        "LicensedContainers.ContainerFuel": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+        "LicensedContainers.ContainerInvariants": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+        "LicensedContainers.ContainerSelector": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+        "LicensedContainers.ContainerWeight": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "f89cfc3bae2039f13d178dbf2cb53218064b0643a5f4c9420d2e482076fea0f7"
+    },
+    {
+      "metadata": "verification/build/prob_finite_04-meta.json",
+      "metadata_sha256": "c2a01b633913bc9771163d6186a4b6bf82d3da4c198277972fbe8ea4efd42704",
+      "log": "verification/build/prob_finite_04.log",
+      "log_sha256": "f0a4f65c5ccb3f4155b3bdb5cfc8e184d2e329c5e6223d023f6201c76ae6de4b",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:49:32.406786+00:00",
+      "end_utc": "2026-10-02T08:49:49.984277+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/FiniteProbability.olean",
+        "JSP539/FiniteProbability.lean"
+      ],
+      "module": "JSP539.FiniteProbability",
+      "source_sha256": "3fed40e1cbae40de50e6e095e3b62df90f5e49254db40fdf92052e6e6f26240c",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.FiniteProbability": "3fed40e1cbae40de50e6e095e3b62df90f5e49254db40fdf92052e6e6f26240c"
+      },
+      "historical_output_olean_sha256": "6cc9388433ea12173db5ce3e139e887bb1c74fafc3e941566bc3d2a9c1bc2fa7"
+    },
+    {
+      "metadata": "verification/build/prob_packing_03-meta.json",
+      "metadata_sha256": "db732c285bef6c6d511843b70d3e670cb5d787a0d5552240a34861a48ca683f8",
+      "log": "verification/build/prob_packing_03.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:51:10.175247+00:00",
+      "end_utc": "2026-10-02T08:51:25.693903+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/DisjointPacking.olean",
+        "JSP539/DisjointPacking.lean"
+      ],
+      "module": "JSP539.DisjointPacking",
+      "source_sha256": "26440ab4e46f87e54498ce742f80bd410e41afbc2e0772d9dc6b17927ba6d3d1",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.DisjointPacking": "26440ab4e46f87e54498ce742f80bd410e41afbc2e0772d9dc6b17927ba6d3d1"
+      },
+      "historical_output_olean_sha256": "e19605783e096de01352828d7c2f90defc54d90b0e50943acfe535db7d927601"
+    },
+    {
+      "metadata": "verification/build/prob_uniform_05-meta.json",
+      "metadata_sha256": "d19d6de356496a372ce15f289edc2639d59645202928120de58e70d02236c6ef",
+      "log": "verification/build/prob_uniform_05.log",
+      "log_sha256": "1efef31bb6dbc17d050ef6e9fa39efb18ee701c2981c8b6648d227e0322565f2",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T09:01:05.534315+00:00",
+      "end_utc": "2026-10-02T09:01:21.591636+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/UniformBits.olean",
+        "JSP539/UniformBits.lean"
+      ],
+      "module": "JSP539.UniformBits",
+      "source_sha256": "c9784bd277437cce86e745d31344c9de49f1a22f8dca17cd71a1d1b4b550e4fd",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.DisjointPacking": "26440ab4e46f87e54498ce742f80bd410e41afbc2e0772d9dc6b17927ba6d3d1",
+        "JSP539.FiniteProbability": "3fed40e1cbae40de50e6e095e3b62df90f5e49254db40fdf92052e6e6f26240c",
+        "JSP539.UniformBits": "c9784bd277437cce86e745d31344c9de49f1a22f8dca17cd71a1d1b4b550e4fd"
+      },
+      "historical_output_olean_sha256": "61d26b0546763b6509a2cc0e07dd0ecf40c1ea904712ccb9ed7ae7d4df71be70"
+    },
+    {
+      "metadata": "verification/build/prob_tail_01-meta.json",
+      "metadata_sha256": "b1b3922bd7c68a4adf6167fc6e505688c4b37488e0919220d2bf05805467f5a3",
+      "log": "verification/build/prob_tail_01.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T09:01:44.610178+00:00",
+      "end_utc": "2026-10-02T09:02:01.184164+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/FairBitTail.olean",
+        "JSP539/FairBitTail.lean"
+      ],
+      "module": "JSP539.FairBitTail",
+      "source_sha256": "9e3278122e4df09afe5fccf56b82c7fd1e076d602840e41ca3c2a208320098c4",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.DisjointPacking": "26440ab4e46f87e54498ce742f80bd410e41afbc2e0772d9dc6b17927ba6d3d1",
+        "JSP539.FairBitTail": "9e3278122e4df09afe5fccf56b82c7fd1e076d602840e41ca3c2a208320098c4",
+        "JSP539.FiniteProbability": "3fed40e1cbae40de50e6e095e3b62df90f5e49254db40fdf92052e6e6f26240c",
+        "JSP539.UniformBits": "c9784bd277437cce86e745d31344c9de49f1a22f8dca17cd71a1d1b4b550e4fd"
+      },
+      "historical_output_olean_sha256": "56f1974fa5d1a9c52cbe8713ab0d176fe78eff1d9a311497e81a551baa91f52d"
+    },
+    {
+      "metadata": "verification/build/licensed_shorttraces_02-meta.json",
+      "metadata_sha256": "16e895a3e2be69de3eeecf3c3d5c13a1c299a7e468e5b1b0bdc530354b4986ce",
+      "log": "verification/build/licensed_shorttraces_02.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:54:30.048853+00:00",
+      "end_utc": "2026-10-02T08:54:46.253880+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/ShortTraces.olean",
+        "JSP539/ShortTraces.lean"
+      ],
+      "module": "JSP539.ShortTraces",
+      "source_sha256": "a23ca9c50c62241cbc0caeacea44ce8dd0f75b49cbf04556a1bb42b78312de3c",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.AffinePlane": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+        "JSP539.DisjointPacking": "26440ab4e46f87e54498ce742f80bd410e41afbc2e0772d9dc6b17927ba6d3d1",
+        "JSP539.ShortTraces": "a23ca9c50c62241cbc0caeacea44ce8dd0f75b49cbf04556a1bb42b78312de3c",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "4c037611b8d0161b17d3bc8a3842592482ebc7da01f168f5d2603f6e726b462f"
+    },
+    {
+      "metadata": "verification/build/licensed_probability_02-meta.json",
+      "metadata_sha256": "c1ef204f2acec8050f93d1fd4fe732182f33a5b393702deb6321f31524a816c5",
+      "log": "verification/build/licensed_probability_02.log",
+      "log_sha256": "ed784ef13f61f546a0afeb04ed07e92a3477019bfe72d1389ec9472e186c5a7a",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T09:03:23.749138+00:00",
+      "end_utc": "2026-10-02T09:03:38.730758+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/ContainerProbability.olean",
+        "JSP539/ContainerProbability.lean"
+      ],
+      "module": "JSP539.ContainerProbability",
+      "source_sha256": "17d6e05c1ea28c80db26b08827c3164413dd94dcdf446f715f76acdfa9ae7458",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.AffinePlane": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+        "JSP539.ContainerProbability": "17d6e05c1ea28c80db26b08827c3164413dd94dcdf446f715f76acdfa9ae7458",
+        "JSP539.DisjointPacking": "26440ab4e46f87e54498ce742f80bd410e41afbc2e0772d9dc6b17927ba6d3d1",
+        "JSP539.FiniteProbability": "3fed40e1cbae40de50e6e095e3b62df90f5e49254db40fdf92052e6e6f26240c",
+        "JSP539.ShortTraces": "a23ca9c50c62241cbc0caeacea44ce8dd0f75b49cbf04556a1bb42b78312de3c",
+        "JSP539.UniformBits": "c9784bd277437cce86e745d31344c9de49f1a22f8dca17cd71a1d1b4b550e4fd",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "c727d0d210ec7295540542e748b09dc32e101a3d6e88d8d7cc935e06894deb5b"
+    },
+    {
+      "metadata": "verification/build/licensed_budget_02-meta.json",
+      "metadata_sha256": "54b382b22db6041c4fd2905a16911eda95365d58b83ef4b2c2f4e04350353a25",
+      "log": "verification/build/licensed_budget_02.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T09:06:02.015637+00:00",
+      "end_utc": "2026-10-02T09:06:16.301646+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/ProbabilityBudget.olean",
+        "JSP539/ProbabilityBudget.lean"
+      ],
+      "module": "JSP539.ProbabilityBudget",
+      "source_sha256": "6bc07e4165d39074e7170408b2de101995951f1031f1eff95cb4ebfdfd8d9759",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.AffinePlane": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+        "JSP539.ContainerProbability": "17d6e05c1ea28c80db26b08827c3164413dd94dcdf446f715f76acdfa9ae7458",
+        "JSP539.DisjointPacking": "26440ab4e46f87e54498ce742f80bd410e41afbc2e0772d9dc6b17927ba6d3d1",
+        "JSP539.FiniteProbability": "3fed40e1cbae40de50e6e095e3b62df90f5e49254db40fdf92052e6e6f26240c",
+        "JSP539.ProbabilityBudget": "6bc07e4165d39074e7170408b2de101995951f1031f1eff95cb4ebfdfd8d9759",
+        "JSP539.ShortTraces": "a23ca9c50c62241cbc0caeacea44ce8dd0f75b49cbf04556a1bb42b78312de3c",
+        "JSP539.UniformBits": "c9784bd277437cce86e745d31344c9de49f1a22f8dca17cd71a1d1b4b550e4fd",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "c24e8d972a40061c158e47741037fb817ea370d140aee309162d08f810926791"
+    },
+    {
+      "metadata": "verification/build/final_second_1_JSP539_RandomRestriction-meta.json",
+      "metadata_sha256": "5c8000c95989ff0659dce56b35bf3e7f60f04644a641875c8d34e8624be592c6",
+      "log": "verification/build/final_second_1_JSP539_RandomRestriction.log",
+      "log_sha256": "c23186d4148671d1852ea425ddec149867eb867b21fa311db23b1bafa1b0266c",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T09:08:02.367770+00:00",
+      "end_utc": "2026-10-02T09:08:18.151780+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/RandomRestriction.olean",
+        "JSP539/RandomRestriction.lean"
+      ],
+      "module": "JSP539.RandomRestriction",
+      "source_sha256": "b26411d46664404714bbbfe34b01ca729e091caaba6d6f8ce0d75ef40b20cc1b",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.AffinePlane": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+        "JSP539.ArcContainerGrowth": "31d637bf644b155162268873cf303c480b4ddef3b4412220b8ee893a40ffcc23",
+        "JSP539.ArcContainerIteration": "223e950020e181a2633d1ac2b77a7c115826e5f19bd8f931723bea722c389c41",
+        "JSP539.ArcContainerStep": "fda4b73f890dded9314e00e8e67773f560756c19d2617c9c47a747d28d96862e",
+        "JSP539.ChunkPartition": "d77ded01e7fabeb277dbacaf69b69dde76b30b1bd564858576789ae271c2b605",
+        "JSP539.ContainerAlgorithm": "2f9ee3f58e0c4677e3d51cdcd2496e64a3810c50b713f2c2830fb2ba0740dc3b",
+        "JSP539.ContainerCore": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+        "JSP539.ContainerCounting": "ed574ca842cb139298955c2b174c0e44dd44393403ffb5829d50a0fe4680b093",
+        "JSP539.ContainerPotential": "04d384299d5ea8c366ea68c044039b6ef185d36cf37c853849a46deeb456041c",
+        "JSP539.ContainerProbability": "17d6e05c1ea28c80db26b08827c3164413dd94dcdf446f715f76acdfa9ae7458",
+        "JSP539.ContainerShrink": "e06dd4153c04d43a2fadc8aa24a0dc4ce3606910647f74e3be31a0a1ce64756f",
+        "JSP539.DisjointPacking": "26440ab4e46f87e54498ce742f80bd410e41afbc2e0772d9dc6b17927ba6d3d1",
+        "JSP539.FairBitTail": "9e3278122e4df09afe5fccf56b82c7fd1e076d602840e41ca3c2a208320098c4",
+        "JSP539.FiniteProbability": "3fed40e1cbae40de50e6e095e3b62df90f5e49254db40fdf92052e6e6f26240c",
+        "JSP539.GroundHypergraph": "c63aa2be77559855df77b6c0963c369d8a6e346adcd76184c50fb93ec6a5d4df",
+        "JSP539.LineChunks": "19826d814a9f9ef06ebcfa7d48d2fce8729ac04d0f3d4cefeba062e0187cea3f",
+        "JSP539.ProbabilityBudget": "6bc07e4165d39074e7170408b2de101995951f1031f1eff95cb4ebfdfd8d9759",
+        "JSP539.RandomRestriction": "b26411d46664404714bbbfe34b01ca729e091caaba6d6f8ce0d75ef40b20cc1b",
+        "JSP539.ShortTraces": "a23ca9c50c62241cbc0caeacea44ce8dd0f75b49cbf04556a1bb42b78312de3c",
+        "JSP539.UniformBits": "c9784bd277437cce86e745d31344c9de49f1a22f8dca17cd71a1d1b4b550e4fd",
+        "LicensedContainers.ContainerFuel": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+        "LicensedContainers.ContainerInvariants": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+        "LicensedContainers.ContainerSelector": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+        "LicensedContainers.ContainerWeight": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "674a7cbc4ad5f1495d0a07d825244d3fbf8b0cbbdc90a9684a0b1eab43771fc2"
+    },
+    {
+      "metadata": "verification/build/licensed_transport_01-meta.json",
+      "metadata_sha256": "04c93a47ce76cc53b2f1a6262b6dd5eecd6072a960d4f52e080364869e0bb6c7",
+      "log": "verification/build/licensed_transport_01.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:50:53.989920+00:00",
+      "end_utc": "2026-10-02T08:51:09.135823+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/FiniteDesignTransport.olean",
+        "JSP539/FiniteDesignTransport.lean"
+      ],
+      "module": "JSP539.FiniteDesignTransport",
+      "source_sha256": "c8708b5efa3c3a4f3768ddc52584e2437d445dbeb3935284810ef2e44a063b11",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.AffinePlane": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+        "JSP539.FiniteDesignTransport": "c8708b5efa3c3a4f3768ddc52584e2437d445dbeb3935284810ef2e44a063b11",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "c9973304b27be6a2d31ff233a8ccb87080787ca42413059a2759f180c30f3e15"
+    },
+    {
+      "metadata": "verification/build/final_second_2_JSP539_OriginalScope-meta.json",
+      "metadata_sha256": "bc3958aad0f6a21cd78a6b8aae58cc376fbaf8864604515b9adf1261a31aaf50",
+      "log": "verification/build/final_second_2_JSP539_OriginalScope.log",
+      "log_sha256": "9537485318b26a06bbd0bae6c9c533a2b372d6ddbe51fa55df155b579c5d3ce2",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T09:08:18.170901+00:00",
+      "end_utc": "2026-10-02T09:08:33.552111+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/OriginalScope.olean",
+        "JSP539/OriginalScope.lean"
+      ],
+      "module": "JSP539.OriginalScope",
+      "source_sha256": "cd9ff576d37811413d9741956fc7f67b665cf13eea5a088ec4b32b6e93cee923",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.AffinePlane": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+        "JSP539.ArcContainerGrowth": "31d637bf644b155162268873cf303c480b4ddef3b4412220b8ee893a40ffcc23",
+        "JSP539.ArcContainerIteration": "223e950020e181a2633d1ac2b77a7c115826e5f19bd8f931723bea722c389c41",
+        "JSP539.ArcContainerStep": "fda4b73f890dded9314e00e8e67773f560756c19d2617c9c47a747d28d96862e",
+        "JSP539.ChunkPartition": "d77ded01e7fabeb277dbacaf69b69dde76b30b1bd564858576789ae271c2b605",
+        "JSP539.ContainerAlgorithm": "2f9ee3f58e0c4677e3d51cdcd2496e64a3810c50b713f2c2830fb2ba0740dc3b",
+        "JSP539.ContainerCore": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+        "JSP539.ContainerCounting": "ed574ca842cb139298955c2b174c0e44dd44393403ffb5829d50a0fe4680b093",
+        "JSP539.ContainerPotential": "04d384299d5ea8c366ea68c044039b6ef185d36cf37c853849a46deeb456041c",
+        "JSP539.ContainerProbability": "17d6e05c1ea28c80db26b08827c3164413dd94dcdf446f715f76acdfa9ae7458",
+        "JSP539.ContainerShrink": "e06dd4153c04d43a2fadc8aa24a0dc4ce3606910647f74e3be31a0a1ce64756f",
+        "JSP539.DisjointPacking": "26440ab4e46f87e54498ce742f80bd410e41afbc2e0772d9dc6b17927ba6d3d1",
+        "JSP539.FairBitTail": "9e3278122e4df09afe5fccf56b82c7fd1e076d602840e41ca3c2a208320098c4",
+        "JSP539.FiniteDesignTransport": "c8708b5efa3c3a4f3768ddc52584e2437d445dbeb3935284810ef2e44a063b11",
+        "JSP539.FiniteProbability": "3fed40e1cbae40de50e6e095e3b62df90f5e49254db40fdf92052e6e6f26240c",
+        "JSP539.GroundHypergraph": "c63aa2be77559855df77b6c0963c369d8a6e346adcd76184c50fb93ec6a5d4df",
+        "JSP539.LineChunks": "19826d814a9f9ef06ebcfa7d48d2fce8729ac04d0f3d4cefeba062e0187cea3f",
+        "JSP539.OriginalScope": "cd9ff576d37811413d9741956fc7f67b665cf13eea5a088ec4b32b6e93cee923",
+        "JSP539.ProbabilityBudget": "6bc07e4165d39074e7170408b2de101995951f1031f1eff95cb4ebfdfd8d9759",
+        "JSP539.RandomRestriction": "b26411d46664404714bbbfe34b01ca729e091caaba6d6f8ce0d75ef40b20cc1b",
+        "JSP539.ShortTraces": "a23ca9c50c62241cbc0caeacea44ce8dd0f75b49cbf04556a1bb42b78312de3c",
+        "JSP539.UniformBits": "c9784bd277437cce86e745d31344c9de49f1a22f8dca17cd71a1d1b4b550e4fd",
+        "LicensedContainers.ContainerFuel": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+        "LicensedContainers.ContainerInvariants": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+        "LicensedContainers.ContainerSelector": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+        "LicensedContainers.ContainerWeight": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "c5baed10cca5b36eb6765558a21d76f5b81ebb1c9e882e9636aba6fda83c7d80"
+    },
+    {
+      "metadata": "verification/build/final_second_3_JSP539_RealScope-meta.json",
+      "metadata_sha256": "8900e42a36b2958950c3be61f69f59de77ca36b05410c5363f4c9a125f8643fa",
+      "log": "verification/build/final_second_3_JSP539_RealScope.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T09:08:33.573623+00:00",
+      "end_utc": "2026-10-02T09:08:48.328909+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539/RealScope.olean",
+        "JSP539/RealScope.lean"
+      ],
+      "module": "JSP539.RealScope",
+      "source_sha256": "190c2a915a8743a5c88e3e23e8fe43988ce5c4a325506c6f2ede8e9f57151ce9",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539.AffinePlane": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+        "JSP539.ArcContainerGrowth": "31d637bf644b155162268873cf303c480b4ddef3b4412220b8ee893a40ffcc23",
+        "JSP539.ArcContainerIteration": "223e950020e181a2633d1ac2b77a7c115826e5f19bd8f931723bea722c389c41",
+        "JSP539.ArcContainerStep": "fda4b73f890dded9314e00e8e67773f560756c19d2617c9c47a747d28d96862e",
+        "JSP539.ChunkPartition": "d77ded01e7fabeb277dbacaf69b69dde76b30b1bd564858576789ae271c2b605",
+        "JSP539.ContainerAlgorithm": "2f9ee3f58e0c4677e3d51cdcd2496e64a3810c50b713f2c2830fb2ba0740dc3b",
+        "JSP539.ContainerCore": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+        "JSP539.ContainerCounting": "ed574ca842cb139298955c2b174c0e44dd44393403ffb5829d50a0fe4680b093",
+        "JSP539.ContainerPotential": "04d384299d5ea8c366ea68c044039b6ef185d36cf37c853849a46deeb456041c",
+        "JSP539.ContainerProbability": "17d6e05c1ea28c80db26b08827c3164413dd94dcdf446f715f76acdfa9ae7458",
+        "JSP539.ContainerShrink": "e06dd4153c04d43a2fadc8aa24a0dc4ce3606910647f74e3be31a0a1ce64756f",
+        "JSP539.DisjointPacking": "26440ab4e46f87e54498ce742f80bd410e41afbc2e0772d9dc6b17927ba6d3d1",
+        "JSP539.FairBitTail": "9e3278122e4df09afe5fccf56b82c7fd1e076d602840e41ca3c2a208320098c4",
+        "JSP539.FiniteDesignTransport": "c8708b5efa3c3a4f3768ddc52584e2437d445dbeb3935284810ef2e44a063b11",
+        "JSP539.FiniteProbability": "3fed40e1cbae40de50e6e095e3b62df90f5e49254db40fdf92052e6e6f26240c",
+        "JSP539.GroundHypergraph": "c63aa2be77559855df77b6c0963c369d8a6e346adcd76184c50fb93ec6a5d4df",
+        "JSP539.LineChunks": "19826d814a9f9ef06ebcfa7d48d2fce8729ac04d0f3d4cefeba062e0187cea3f",
+        "JSP539.OriginalScope": "cd9ff576d37811413d9741956fc7f67b665cf13eea5a088ec4b32b6e93cee923",
+        "JSP539.ProbabilityBudget": "6bc07e4165d39074e7170408b2de101995951f1031f1eff95cb4ebfdfd8d9759",
+        "JSP539.RandomRestriction": "b26411d46664404714bbbfe34b01ca729e091caaba6d6f8ce0d75ef40b20cc1b",
+        "JSP539.RealScope": "190c2a915a8743a5c88e3e23e8fe43988ce5c4a325506c6f2ede8e9f57151ce9",
+        "JSP539.ShortTraces": "a23ca9c50c62241cbc0caeacea44ce8dd0f75b49cbf04556a1bb42b78312de3c",
+        "JSP539.UniformBits": "c9784bd277437cce86e745d31344c9de49f1a22f8dca17cd71a1d1b4b550e4fd",
+        "LicensedContainers.ContainerFuel": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+        "LicensedContainers.ContainerInvariants": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+        "LicensedContainers.ContainerSelector": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+        "LicensedContainers.ContainerWeight": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "68eae348f0fc61f54cf6ba87c69776805b969a7770e2b9aafc806cd1138b88e4"
+    },
+    {
+      "metadata": "verification/build/final_second_4_JSP539-meta.json",
+      "metadata_sha256": "72ceea7b5e9bddc3231a3724e5988d86dd32b91344f107f534f82014d60497e1",
+      "log": "verification/build/final_second_4_JSP539.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T09:08:48.342330+00:00",
+      "end_utc": "2026-10-02T09:09:02.699446+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/JSP539.olean",
+        "JSP539.lean"
+      ],
+      "module": "JSP539",
+      "source_sha256": "b2e28e1e6cd80d436d6b9314452b9058b87ac91eae2735d84ce238545c41e84b",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539": "b2e28e1e6cd80d436d6b9314452b9058b87ac91eae2735d84ce238545c41e84b",
+        "JSP539.AffinePlane": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+        "JSP539.ArcContainerGrowth": "31d637bf644b155162268873cf303c480b4ddef3b4412220b8ee893a40ffcc23",
+        "JSP539.ArcContainerIteration": "223e950020e181a2633d1ac2b77a7c115826e5f19bd8f931723bea722c389c41",
+        "JSP539.ArcContainerStep": "fda4b73f890dded9314e00e8e67773f560756c19d2617c9c47a747d28d96862e",
+        "JSP539.ChunkPartition": "d77ded01e7fabeb277dbacaf69b69dde76b30b1bd564858576789ae271c2b605",
+        "JSP539.ContainerAlgorithm": "2f9ee3f58e0c4677e3d51cdcd2496e64a3810c50b713f2c2830fb2ba0740dc3b",
+        "JSP539.ContainerCore": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+        "JSP539.ContainerCounting": "ed574ca842cb139298955c2b174c0e44dd44393403ffb5829d50a0fe4680b093",
+        "JSP539.ContainerPotential": "04d384299d5ea8c366ea68c044039b6ef185d36cf37c853849a46deeb456041c",
+        "JSP539.ContainerProbability": "17d6e05c1ea28c80db26b08827c3164413dd94dcdf446f715f76acdfa9ae7458",
+        "JSP539.ContainerShrink": "e06dd4153c04d43a2fadc8aa24a0dc4ce3606910647f74e3be31a0a1ce64756f",
+        "JSP539.DisjointPacking": "26440ab4e46f87e54498ce742f80bd410e41afbc2e0772d9dc6b17927ba6d3d1",
+        "JSP539.FairBitTail": "9e3278122e4df09afe5fccf56b82c7fd1e076d602840e41ca3c2a208320098c4",
+        "JSP539.FiniteDesignTransport": "c8708b5efa3c3a4f3768ddc52584e2437d445dbeb3935284810ef2e44a063b11",
+        "JSP539.FiniteProbability": "3fed40e1cbae40de50e6e095e3b62df90f5e49254db40fdf92052e6e6f26240c",
+        "JSP539.GroundHypergraph": "c63aa2be77559855df77b6c0963c369d8a6e346adcd76184c50fb93ec6a5d4df",
+        "JSP539.LineChunks": "19826d814a9f9ef06ebcfa7d48d2fce8729ac04d0f3d4cefeba062e0187cea3f",
+        "JSP539.OriginalScope": "cd9ff576d37811413d9741956fc7f67b665cf13eea5a088ec4b32b6e93cee923",
+        "JSP539.ProbabilityBudget": "6bc07e4165d39074e7170408b2de101995951f1031f1eff95cb4ebfdfd8d9759",
+        "JSP539.RandomRestriction": "b26411d46664404714bbbfe34b01ca729e091caaba6d6f8ce0d75ef40b20cc1b",
+        "JSP539.RealScope": "190c2a915a8743a5c88e3e23e8fe43988ce5c4a325506c6f2ede8e9f57151ce9",
+        "JSP539.ShortTraces": "a23ca9c50c62241cbc0caeacea44ce8dd0f75b49cbf04556a1bb42b78312de3c",
+        "JSP539.UniformBits": "c9784bd277437cce86e745d31344c9de49f1a22f8dca17cd71a1d1b4b550e4fd",
+        "LicensedContainers.ContainerFuel": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+        "LicensedContainers.ContainerInvariants": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+        "LicensedContainers.ContainerSelector": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+        "LicensedContainers.ContainerWeight": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "b98c888d784d4a43a8a40a96e00e682b22bc68731045c65ac434f02c2c4bed0e"
+    },
+    {
+      "metadata": "verification/build/licensed_root_01-meta.json",
+      "metadata_sha256": "b9548af551d30398110e9130fa231ddf5dfe4948efb30e7a2db2f24c3ad7ddc4",
+      "log": "verification/build/licensed_root_01.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:48:48.818856+00:00",
+      "end_utc": "2026-10-02T08:48:58.744588+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/LicensedContainers.olean",
+        "LicensedContainers.lean"
+      ],
+      "module": "LicensedContainers",
+      "source_sha256": "442c8da78a081a2fb718a8a3cea578a6c6363412d070089484438b4c935ff781",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "LicensedContainers": "442c8da78a081a2fb718a8a3cea578a6c6363412d070089484438b4c935ff781",
+        "LicensedContainers.ContainerFuel": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+        "LicensedContainers.ContainerInvariants": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+        "LicensedContainers.ContainerSelector": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+        "LicensedContainers.ContainerWeight": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb"
+      },
+      "historical_output_olean_sha256": "5c08f8115538330ec687cea279c1883c973a752a7a6e320df01521c4478356a9"
+    },
+    {
+      "metadata": "verification/build/final_second_5_Verify-meta.json",
+      "metadata_sha256": "df67c74916bebf33c3b7f4e5ea120223dc71d747d6548087f041c2b2790551ba",
+      "log": "verification/build/final_second_5_Verify.log",
+      "log_sha256": "efc4e5ac6f7695f518372af385a45730f2534818d4f6d98df8267ab24615ad4c",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T09:09:02.715020+00:00",
+      "end_utc": "2026-10-02T09:09:17.847793+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "-o",
+        ".lake/build/lib/lean/Verify.olean",
+        "Verify.lean"
+      ],
+      "module": "Verify",
+      "source_sha256": "836916ec58479bf9e164049bf800d9b41eb3719bafa22dcd6eace4a18eb7f503",
+      "active_import_closure_unchanged": true,
+      "active_import_closure_sources": {
+        "JSP539": "b2e28e1e6cd80d436d6b9314452b9058b87ac91eae2735d84ce238545c41e84b",
+        "JSP539.AffinePlane": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+        "JSP539.ArcContainerGrowth": "31d637bf644b155162268873cf303c480b4ddef3b4412220b8ee893a40ffcc23",
+        "JSP539.ArcContainerIteration": "223e950020e181a2633d1ac2b77a7c115826e5f19bd8f931723bea722c389c41",
+        "JSP539.ArcContainerStep": "fda4b73f890dded9314e00e8e67773f560756c19d2617c9c47a747d28d96862e",
+        "JSP539.ChunkPartition": "d77ded01e7fabeb277dbacaf69b69dde76b30b1bd564858576789ae271c2b605",
+        "JSP539.ContainerAlgorithm": "2f9ee3f58e0c4677e3d51cdcd2496e64a3810c50b713f2c2830fb2ba0740dc3b",
+        "JSP539.ContainerCore": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+        "JSP539.ContainerCounting": "ed574ca842cb139298955c2b174c0e44dd44393403ffb5829d50a0fe4680b093",
+        "JSP539.ContainerPotential": "04d384299d5ea8c366ea68c044039b6ef185d36cf37c853849a46deeb456041c",
+        "JSP539.ContainerProbability": "17d6e05c1ea28c80db26b08827c3164413dd94dcdf446f715f76acdfa9ae7458",
+        "JSP539.ContainerShrink": "e06dd4153c04d43a2fadc8aa24a0dc4ce3606910647f74e3be31a0a1ce64756f",
+        "JSP539.DisjointPacking": "26440ab4e46f87e54498ce742f80bd410e41afbc2e0772d9dc6b17927ba6d3d1",
+        "JSP539.FairBitTail": "9e3278122e4df09afe5fccf56b82c7fd1e076d602840e41ca3c2a208320098c4",
+        "JSP539.FiniteDesignTransport": "c8708b5efa3c3a4f3768ddc52584e2437d445dbeb3935284810ef2e44a063b11",
+        "JSP539.FiniteProbability": "3fed40e1cbae40de50e6e095e3b62df90f5e49254db40fdf92052e6e6f26240c",
+        "JSP539.GroundHypergraph": "c63aa2be77559855df77b6c0963c369d8a6e346adcd76184c50fb93ec6a5d4df",
+        "JSP539.LineChunks": "19826d814a9f9ef06ebcfa7d48d2fce8729ac04d0f3d4cefeba062e0187cea3f",
+        "JSP539.OriginalScope": "cd9ff576d37811413d9741956fc7f67b665cf13eea5a088ec4b32b6e93cee923",
+        "JSP539.ProbabilityBudget": "6bc07e4165d39074e7170408b2de101995951f1031f1eff95cb4ebfdfd8d9759",
+        "JSP539.RandomRestriction": "b26411d46664404714bbbfe34b01ca729e091caaba6d6f8ce0d75ef40b20cc1b",
+        "JSP539.RealScope": "190c2a915a8743a5c88e3e23e8fe43988ce5c4a325506c6f2ede8e9f57151ce9",
+        "JSP539.ShortTraces": "a23ca9c50c62241cbc0caeacea44ce8dd0f75b49cbf04556a1bb42b78312de3c",
+        "JSP539.UniformBits": "c9784bd277437cce86e745d31344c9de49f1a22f8dca17cd71a1d1b4b550e4fd",
+        "LicensedContainers.ContainerFuel": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+        "LicensedContainers.ContainerInvariants": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+        "LicensedContainers.ContainerSelector": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+        "LicensedContainers.ContainerWeight": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+        "LicensedContainers.Hypergraph": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb",
+        "Verify": "836916ec58479bf9e164049bf800d9b41eb3719bafa22dcd6eace4a18eb7f503"
+      },
+      "historical_output_olean_sha256": "63b2906ebca1dbc1483577069157c13348112ffb0562ac1dcd471e8ff121dda0"
+    }
+  ],
+  "full_build": {
+    "metadata": "verification/build/full_build_01-meta.json",
+    "metadata_sha256": "b745479a3ceb93ced56f52420fc3a2e5c1ea57a7b1623dc4c174998e182a88a2",
+    "log": "verification/build/full_build_01.log",
+    "log_sha256": "20d2b052e41c9cceab615ad596ef927f3c2aaeb12cee4e3084ada3a5798fd27c",
+    "natural_exit_code": 0,
+    "start_utc": "2026-10-02T09:09:49.840887+00:00",
+    "end_utc": "2026-10-02T09:14:39.347989+00:00",
+    "command": [
+      "elan",
+      "run",
+      "leanprover/lean4:v4.35.0-rc3",
+      "lake",
+      "build",
+      "JSP539",
+      "LicensedContainers"
+    ],
+    "actual_lake_success_job_count": 3172,
+    "local_library_module_count": 30,
+    "local_modules_actually_built_count": 30,
+    "local_module_events": [
+      {
+        "action": "Built",
+        "module": "LicensedContainers.Hypergraph",
+        "raw_line": "⚠ [3139/3145] Built LicensedContainers.Hypergraph (5.8s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.ChunkPartition",
+        "raw_line": "⚠ [3140/3147] Built JSP539.ChunkPartition (10s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.GroundHypergraph",
+        "raw_line": "⚠ [3141/3147] Built JSP539.GroundHypergraph (10s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.AffinePlane",
+        "raw_line": "⚠ [3142/3147] Built JSP539.AffinePlane (10s)"
+      },
+      {
+        "action": "Built",
+        "module": "LicensedContainers.ContainerInvariants",
+        "raw_line": "✔ [3143/3151] Built LicensedContainers.ContainerInvariants (5.4s)"
+      },
+      {
+        "action": "Built",
+        "module": "LicensedContainers.ContainerWeight",
+        "raw_line": "⚠ [3144/3151] Built LicensedContainers.ContainerWeight (7.3s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.LineChunks",
+        "raw_line": "⚠ [3145/3170] Built JSP539.LineChunks (11s)"
+      },
+      {
+        "action": "Built",
+        "module": "LicensedContainers.ContainerFuel",
+        "raw_line": "✔ [3146/3170] Built LicensedContainers.ContainerFuel (5.3s)"
+      },
+      {
+        "action": "Built",
+        "module": "LicensedContainers.ContainerSelector",
+        "raw_line": "⚠ [3148/3172] Built LicensedContainers.ContainerSelector (7.4s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.FiniteProbability",
+        "raw_line": "⚠ [3150/3172] Built JSP539.FiniteProbability (10s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.DisjointPacking",
+        "raw_line": "⚠ [3151/3172] Built JSP539.DisjointPacking (9.0s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.FiniteDesignTransport",
+        "raw_line": "✔ [3152/3172] Built JSP539.FiniteDesignTransport (9.0s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.ContainerPotential",
+        "raw_line": "⚠ [3153/3172] Built JSP539.ContainerPotential (7.1s)"
+      },
+      {
+        "action": "Built",
+        "module": "LicensedContainers",
+        "raw_line": "✔ [3154/3172] Built LicensedContainers (6.2s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.UniformBits",
+        "raw_line": "⚠ [3156/3172] Built JSP539.UniformBits (10s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.ShortTraces",
+        "raw_line": "✔ [3157/3172] Built JSP539.ShortTraces (10s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.ContainerAlgorithm",
+        "raw_line": "⚠ [3158/3172] Built JSP539.ContainerAlgorithm (7.2s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.FairBitTail",
+        "raw_line": "✔ [3159/3172] Built JSP539.FairBitTail (11s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.ContainerProbability",
+        "raw_line": "⚠ [3160/3172] Built JSP539.ContainerProbability (11s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.ContainerCore",
+        "raw_line": "✔ [3161/3172] Built JSP539.ContainerCore (7.3s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.ProbabilityBudget",
+        "raw_line": "✔ [3162/3172] Built JSP539.ProbabilityBudget (10s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.ContainerCounting",
+        "raw_line": "⚠ [3163/3172] Built JSP539.ContainerCounting (6.0s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.ContainerShrink",
+        "raw_line": "⚠ [3164/3172] Built JSP539.ContainerShrink (8.4s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.ArcContainerStep",
+        "raw_line": "✔ [3165/3172] Built JSP539.ArcContainerStep (12s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.ArcContainerIteration",
+        "raw_line": "⚠ [3166/3172] Built JSP539.ArcContainerIteration (11s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.ArcContainerGrowth",
+        "raw_line": "⚠ [3167/3172] Built JSP539.ArcContainerGrowth (11s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.RandomRestriction",
+        "raw_line": "⚠ [3168/3172] Built JSP539.RandomRestriction (11s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.OriginalScope",
+        "raw_line": "⚠ [3169/3172] Built JSP539.OriginalScope (11s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539.RealScope",
+        "raw_line": "✔ [3170/3172] Built JSP539.RealScope (10s)"
+      },
+      {
+        "action": "Built",
+        "module": "JSP539",
+        "raw_line": "✔ [3171/3172] Built JSP539 (10s)"
+      }
+    ],
+    "dependency_or_other_module_events_count": 0,
+    "Verify_is_independent_compile_not_library_target": true
+  },
+  "final_verification": {
+    "metadata": "verification/build/verify_final_01-meta.json",
+    "metadata_sha256": "3487a653f25946d9b64031c824930151420de55bcacdc509d220511eddab31b2",
+    "log": "verification/build/verify_final_01.log",
+    "log_sha256": "efc4e5ac6f7695f518372af385a45730f2534818d4f6d98df8267ab24615ad4c",
+    "natural_exit_code": 0,
+    "start_utc": "2026-10-02T09:15:12.678253+00:00",
+    "end_utc": "2026-10-02T09:15:26.614476+00:00",
+    "command": [
+      "elan",
+      "run",
+      "leanprover/lean4:v4.35.0-rc3",
+      "lake",
+      "env",
+      "lean",
+      "Verify.lean"
+    ],
+    "actual_axiom_report_count": 8,
+    "axiom_reports": [
+      {
+        "theorem": "JSP539.exists_bad_fin_design",
+        "raw_axioms": "propext, Classical.choice.{u}, Quot.sound.{u}",
+        "axioms_universes_normalized": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "only_standard_three_axioms": true
+      },
+      {
+        "theorem": "JSP539.OriginalScope.erdos_664",
+        "raw_axioms": "propext, Classical.choice.{u}, Quot.sound.{u}",
+        "axioms_universes_normalized": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "only_standard_three_axioms": true
+      },
+      {
+        "theorem": "JSP539.OriginalScope.two_fifths",
+        "raw_axioms": "propext, Classical.choice.{u}, Quot.sound.{u}",
+        "axioms_universes_normalized": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "only_standard_three_axioms": true
+      },
+      {
+        "theorem": "JSP539.OriginalScope.two_fifths_exact_pairs",
+        "raw_axioms": "propext, Classical.choice.{u}, Quot.sound.{u}",
+        "axioms_universes_normalized": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "only_standard_three_axioms": true
+      },
+      {
+        "theorem": "JSP539.OriginalScope.block_design",
+        "raw_axioms": "propext, Classical.choice.{u}, Quot.sound.{u}",
+        "axioms_universes_normalized": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "only_standard_three_axioms": true
+      },
+      {
+        "theorem": "JSP539.exists_bad_fin_design_real",
+        "raw_axioms": "propext, Classical.choice.{u}, Quot.sound.{u}",
+        "axioms_universes_normalized": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "only_standard_three_axioms": true
+      },
+      {
+        "theorem": "JSP539.OriginalScope.erdos_664_real",
+        "raw_axioms": "propext, Classical.choice.{u}, Quot.sound.{u}",
+        "axioms_universes_normalized": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "only_standard_three_axioms": true
+      },
+      {
+        "theorem": "JSP539.OriginalScope.block_design_real",
+        "raw_axioms": "propext, Classical.choice.{u}, Quot.sound.{u}",
+        "axioms_universes_normalized": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "only_standard_three_axioms": true
+      }
+    ],
+    "all_axiom_sets_exactly_standard_three": true
+  },
+  "dependency_receipt": {
+    "checked_utc": "2026-10-02T09:17:46.420049+00:00",
+    "dependencies": [
+      {
+        "name": "plausible",
+        "expected_revision": "b7fb2b866d25bd937a2069931f9733197521cb27",
+        "actual_head": "b7fb2b866d25bd937a2069931f9733197521cb27",
+        "git_porcelain": "",
+        "head_natural_exit_code": 0,
+        "status_natural_exit_code": 0,
+        "checked_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\packages\\plausible",
+        "resolved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\JSP000828_audit_20261001\\candidate\\.lake\\packages\\plausible"
+      },
+      {
+        "name": "LeanSearchClient",
+        "expected_revision": "c35806f43135ab3f254429d0c00bd13fc0123f77",
+        "actual_head": "c35806f43135ab3f254429d0c00bd13fc0123f77",
+        "git_porcelain": "",
+        "head_natural_exit_code": 0,
+        "status_natural_exit_code": 0,
+        "checked_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\packages\\LeanSearchClient",
+        "resolved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\JSP000828_audit_20261001\\candidate\\.lake\\packages\\LeanSearchClient"
+      },
+      {
+        "name": "importGraph",
+        "expected_revision": "103cd9a46972ee39d9defb2f54ae49823b1228eb",
+        "actual_head": "103cd9a46972ee39d9defb2f54ae49823b1228eb",
+        "git_porcelain": "",
+        "head_natural_exit_code": 0,
+        "status_natural_exit_code": 0,
+        "checked_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\packages\\importGraph",
+        "resolved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\JSP000828_audit_20261001\\candidate\\.lake\\packages\\importGraph"
+      },
+      {
+        "name": "proofwidgets",
+        "expected_revision": "87dfe779d5dfd03142ee4fe158911b8eb553ec98",
+        "actual_head": "87dfe779d5dfd03142ee4fe158911b8eb553ec98",
+        "git_porcelain": "",
+        "head_natural_exit_code": 0,
+        "status_natural_exit_code": 0,
+        "checked_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\packages\\proofwidgets",
+        "resolved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\JSP000828_audit_20261001\\candidate\\.lake\\packages\\proofwidgets"
+      },
+      {
+        "name": "aesop",
+        "expected_revision": "a92ed98e694702934d40d12f24a1a449144db43e",
+        "actual_head": "a92ed98e694702934d40d12f24a1a449144db43e",
+        "git_porcelain": "",
+        "head_natural_exit_code": 0,
+        "status_natural_exit_code": 0,
+        "checked_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\packages\\aesop",
+        "resolved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\JSP000828_audit_20261001\\candidate\\.lake\\packages\\aesop"
+      },
+      {
+        "name": "Qq",
+        "expected_revision": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+        "actual_head": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+        "git_porcelain": "",
+        "head_natural_exit_code": 0,
+        "status_natural_exit_code": 0,
+        "checked_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\packages\\Qq",
+        "resolved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\JSP000828_audit_20261001\\candidate\\.lake\\packages\\Qq"
+      },
+      {
+        "name": "batteries",
+        "expected_revision": "950339ce0fd0cc0673a22d87036075737586aed2",
+        "actual_head": "950339ce0fd0cc0673a22d87036075737586aed2",
+        "git_porcelain": "",
+        "head_natural_exit_code": 0,
+        "status_natural_exit_code": 0,
+        "checked_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\packages\\batteries",
+        "resolved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\JSP000828_audit_20261001\\candidate\\.lake\\packages\\batteries"
+      },
+      {
+        "name": "Cli",
+        "expected_revision": "843844fa601dd56767b1eb22b7ada5b64d5e567a",
+        "actual_head": "843844fa601dd56767b1eb22b7ada5b64d5e567a",
+        "git_porcelain": "",
+        "head_natural_exit_code": 0,
+        "status_natural_exit_code": 0,
+        "checked_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\packages\\Cli",
+        "resolved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\JSP000828_audit_20261001\\candidate\\.lake\\packages\\Cli"
+      },
+      {
+        "name": "mathlib",
+        "expected_revision": "2a885768dae569d938bb9ff3474da6a8753bb90a",
+        "actual_head": "2a885768dae569d938bb9ff3474da6a8753bb90a",
+        "git_porcelain": "",
+        "head_natural_exit_code": 0,
+        "status_natural_exit_code": 0,
+        "checked_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\packages\\mathlib",
+        "resolved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\JSP000828_audit_20261001\\candidate\\.lake\\packages\\mathlib"
+      }
+    ],
+    "toolchain_version_receipt": {
+      "checked_utc": "2026-10-02T08:26:33.353980+00:00",
+      "toolchain": "leanprover/lean4:v4.35.0-rc3",
+      "version_stdout": "Lean (version 4.35.0-rc3, x86_64-w64-windows-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)\n",
+      "version_stderr": "",
+      "natural_version_exit": 0,
+      "version_changes": [],
+      "dependencies": [
+        {
+          "name": "plausible",
+          "expected": "b7fb2b866d25bd937a2069931f9733197521cb27",
+          "actual_head": "b7fb2b866d25bd937a2069931f9733197521cb27",
+          "git_porcelain": ""
+        },
+        {
+          "name": "LeanSearchClient",
+          "expected": "c35806f43135ab3f254429d0c00bd13fc0123f77",
+          "actual_head": "c35806f43135ab3f254429d0c00bd13fc0123f77",
+          "git_porcelain": ""
+        },
+        {
+          "name": "importGraph",
+          "expected": "103cd9a46972ee39d9defb2f54ae49823b1228eb",
+          "actual_head": "103cd9a46972ee39d9defb2f54ae49823b1228eb",
+          "git_porcelain": ""
+        },
+        {
+          "name": "proofwidgets",
+          "expected": "87dfe779d5dfd03142ee4fe158911b8eb553ec98",
+          "actual_head": "87dfe779d5dfd03142ee4fe158911b8eb553ec98",
+          "git_porcelain": ""
+        },
+        {
+          "name": "aesop",
+          "expected": "a92ed98e694702934d40d12f24a1a449144db43e",
+          "actual_head": "a92ed98e694702934d40d12f24a1a449144db43e",
+          "git_porcelain": ""
+        },
+        {
+          "name": "Qq",
+          "expected": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+          "actual_head": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+          "git_porcelain": ""
+        },
+        {
+          "name": "batteries",
+          "expected": "950339ce0fd0cc0673a22d87036075737586aed2",
+          "actual_head": "950339ce0fd0cc0673a22d87036075737586aed2",
+          "git_porcelain": ""
+        },
+        {
+          "name": "Cli",
+          "expected": "843844fa601dd56767b1eb22b7ada5b64d5e567a",
+          "actual_head": "843844fa601dd56767b1eb22b7ada5b64d5e567a",
+          "git_porcelain": ""
+        },
+        {
+          "name": "mathlib",
+          "expected": "2a885768dae569d938bb9ff3474da6a8753bb90a",
+          "actual_head": "2a885768dae569d938bb9ff3474da6a8753bb90a",
+          "git_porcelain": ""
+        }
+      ],
+      "dependency_reuse_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000865\\candidate\\.lake\\packages",
+      "project_build_unique": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\build",
+      "initial_all_original_hashes_match": true
+    },
+    "fresh_dependency_worktrees_clean": true
+  },
+  "initial_resource_failure_and_resolution": {
+    "initial_full_import_failures": [
+      {
+        "label": "initial_02_affineplane",
+        "metadata": "verification/build/initial_02_affineplane-meta.json",
+        "natural_exit_code": 1,
+        "log": "verification/build/initial_02_affineplane.log",
+        "log_sha256": "816b9b98ec42ffe17f27ab0a569a2edf05d61894aa8af3baad341bdfab5d2439",
+        "actual_failure": "Full Mathlib import failed to read PellMatiyasevic.olean.private"
+      },
+      {
+        "label": "prob_finite_01",
+        "metadata": "verification/build/prob_finite_01-meta.json",
+        "natural_exit_code": 1,
+        "log": "verification/build/prob_finite_01.log",
+        "log_sha256": "26b73bc11af9c3c88055108b05cac1177861fc8c1d09db15ea36384eb3554c20",
+        "actual_failure": "Full Mathlib import failed to read PellMatiyasevic.olean.private"
+      },
+      {
+        "label": "prob_packing_01",
+        "metadata": "verification/build/prob_packing_01-meta.json",
+        "natural_exit_code": 1,
+        "log": "verification/build/prob_packing_01.log",
+        "log_sha256": "8fb760c622792c9709c4a995de28d38a279981b4c2da7aeacd3d875ee0f6c6ba",
+        "actual_failure": "Full Mathlib import failed to read PellMatiyasevic.olean.private"
+      },
+      {
+        "label": "licensed_weight_01",
+        "metadata": "verification/build/licensed_weight_01-meta.json",
+        "natural_exit_code": 1,
+        "log": "verification/build/licensed_weight_01.log",
+        "log_sha256": "7f805a8641e5e5bbc2624df99cd832f9921aa7acd23b40d8f9ae249cf96bb9d9",
+        "actual_failure": "Full Mathlib import failed to read PellMatiyasevic.olean.private"
+      }
+    ],
+    "isolated_pell_import_passed": {
+      "metadata": "verification/build/narrow_pell_read_probe_01-meta.json",
+      "metadata_sha256": "93bcd35986474a714bc243105afd62fb2d40a10bc8f85fc5de7955ba31f9ee85",
+      "log": "verification/build/narrow_pell_read_probe_01.log",
+      "log_sha256": "2456e4090ee5fffd0a58af792ffcda8f7d69321850dc094af49368db57fb643a",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:35:50.309061+00:00",
+      "end_utc": "2026-10-02T08:36:02.427709+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "env",
+        "lean",
+        "../verification/prebuild/import_pell_probe.lean"
+      ]
+    },
+    "official_exact_pin_cache_passed": {
+      "metadata": "verification/build/official_mathlib_cache_01-meta.json",
+      "metadata_sha256": "f6a48f3c2e34cd8c174f9f6f3e14eab4d35a8d386bd8fcd1d3a7e087d49690da",
+      "log": "verification/build/official_mathlib_cache_01.log",
+      "log_sha256": "ef8d3e634341fb8ddbb20d951f4f2b7397097935c4d297ffe95f3fa2ee668d7c",
+      "natural_exit_code": 0,
+      "start_utc": "2026-10-02T08:32:13.249624+00:00",
+      "end_utc": "2026-10-02T08:34:26.104041+00:00",
+      "command": [
+        "elan",
+        "run",
+        "leanprover/lean4:v4.35.0-rc3",
+        "lake",
+        "exe",
+        "cache",
+        "get",
+        "Mathlib"
+      ]
+    },
+    "cache_already_decompressed_file_count": 8961,
+    "classification": "Full-import resource/read compatibility failure; not evidence that the Pell source or exact-pin proof is unavailable. Isolated Pell import passed; narrower required imports passed on unchanged pins.",
+    "source_repair_records": [
+      "verification/repairs/001_affine_import_and_api/record.json",
+      "verification/repairs/002_chunk_required_imports/record.json",
+      "verification/repairs/003_ground_required_imports/record.json",
+      "verification/repairs/004_chunk_pairwise_import/record.json",
+      "verification/repairs/005_chunk_set_pairwise_api/record.json",
+      "verification/repairs/006_linechunk_equality_and_api/record.json",
+      "verification/repairs/007_potential_explicit_linkweight/record.json",
+      "verification/repairs/008_algorithm_fieldsimp_import/record.json",
+      "verification/repairs/009_counting_real_floor_import/record.json",
+      "verification/repairs/010_shrink_positive_cancel_api/record.json",
+      "verification/repairs/011_arc_positive_cancel_and_cast/record.json",
+      "verification/repairs/012_iteration_pow_normalization/record.json",
+      "verification/repairs/013_iteration_closed_gcongr_goal/record.json",
+      "verification/repairs/014_growth_log_and_composition/record.json",
+      "verification/repairs/015_random_linecount_commutativity/record.json",
+      "verification/repairs/licensed_budget_function_eta_01/record.json",
+      "verification/repairs/licensed_probability_product_api_01/record.json",
+      "verification/repairs/licensed_selector_interval_import_01/record.json",
+      "verification/repairs/licensed_shorttraces_nat_cancel_01/record.json",
+      "verification/repairs/licensed_weight_resource_imports_01/record.json",
+      "verification/repairs/licensed_weight_resource_imports_02/record.json",
+      "verification/repairs/prob_finite_decidable_instances_04/record.json",
+      "verification/repairs/prob_finite_normalization_03/record.json",
+      "verification/repairs/prob_finite_precise_imports/record.json",
+      "verification/repairs/prob_packing_membership_names_03/record.json",
+      "verification/repairs/prob_packing_precise_imports/record.json",
+      "verification/repairs/prob_uniform_avoid_factorization_04/record.json",
+      "verification/repairs/prob_uniform_bool_filter_05/record.json",
+      "verification/repairs/prob_uniform_equivalence_types_02/record.json",
+      "verification/repairs/prob_uniform_explicit_events_03/record.json"
+    ]
+  }
+}

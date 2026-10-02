@@ -1,0 +1,10 @@
+{
+  "module": "LicensedContainers.ContainerSelector",
+  "label": "licensed_selector_interval_import_01",
+  "recorded_utc": "2026-10-02T08:47:24.813619+00:00",
+  "reason": "Add the direct natural-number finite interval module: the compiler reported Finset.Icc unknown after the dependency umbrella import was replaced by precise imports. No theorem, proof, or version changes.",
+  "diagnostic_log": "verification/build/licensed_selector_01.log",
+  "before_sha256": "e115359961aa28988b332fd63e88c93d54992814368475865a65ec459929eafc",
+  "after_sha256": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+  "statement_changed": false
+}

@@ -1,0 +1,163 @@
+{
+  "checked_utc": "2026-10-02T09:17:46.420049+00:00",
+  "dependencies": [
+    {
+      "name": "plausible",
+      "expected_revision": "b7fb2b866d25bd937a2069931f9733197521cb27",
+      "actual_head": "b7fb2b866d25bd937a2069931f9733197521cb27",
+      "git_porcelain": "",
+      "head_natural_exit_code": 0,
+      "status_natural_exit_code": 0,
+      "checked_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\packages\\plausible",
+      "resolved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\JSP000828_audit_20261001\\candidate\\.lake\\packages\\plausible"
+    },
+    {
+      "name": "LeanSearchClient",
+      "expected_revision": "c35806f43135ab3f254429d0c00bd13fc0123f77",
+      "actual_head": "c35806f43135ab3f254429d0c00bd13fc0123f77",
+      "git_porcelain": "",
+      "head_natural_exit_code": 0,
+      "status_natural_exit_code": 0,
+      "checked_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\packages\\LeanSearchClient",
+      "resolved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\JSP000828_audit_20261001\\candidate\\.lake\\packages\\LeanSearchClient"
+    },
+    {
+      "name": "importGraph",
+      "expected_revision": "103cd9a46972ee39d9defb2f54ae49823b1228eb",
+      "actual_head": "103cd9a46972ee39d9defb2f54ae49823b1228eb",
+      "git_porcelain": "",
+      "head_natural_exit_code": 0,
+      "status_natural_exit_code": 0,
+      "checked_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\packages\\importGraph",
+      "resolved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\JSP000828_audit_20261001\\candidate\\.lake\\packages\\importGraph"
+    },
+    {
+      "name": "proofwidgets",
+      "expected_revision": "87dfe779d5dfd03142ee4fe158911b8eb553ec98",
+      "actual_head": "87dfe779d5dfd03142ee4fe158911b8eb553ec98",
+      "git_porcelain": "",
+      "head_natural_exit_code": 0,
+      "status_natural_exit_code": 0,
+      "checked_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\packages\\proofwidgets",
+      "resolved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\JSP000828_audit_20261001\\candidate\\.lake\\packages\\proofwidgets"
+    },
+    {
+      "name": "aesop",
+      "expected_revision": "a92ed98e694702934d40d12f24a1a449144db43e",
+      "actual_head": "a92ed98e694702934d40d12f24a1a449144db43e",
+      "git_porcelain": "",
+      "head_natural_exit_code": 0,
+      "status_natural_exit_code": 0,
+      "checked_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\packages\\aesop",
+      "resolved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\JSP000828_audit_20261001\\candidate\\.lake\\packages\\aesop"
+    },
+    {
+      "name": "Qq",
+      "expected_revision": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+      "actual_head": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+      "git_porcelain": "",
+      "head_natural_exit_code": 0,
+      "status_natural_exit_code": 0,
+      "checked_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\packages\\Qq",
+      "resolved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\JSP000828_audit_20261001\\candidate\\.lake\\packages\\Qq"
+    },
+    {
+      "name": "batteries",
+      "expected_revision": "950339ce0fd0cc0673a22d87036075737586aed2",
+      "actual_head": "950339ce0fd0cc0673a22d87036075737586aed2",
+      "git_porcelain": "",
+      "head_natural_exit_code": 0,
+      "status_natural_exit_code": 0,
+      "checked_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\packages\\batteries",
+      "resolved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\JSP000828_audit_20261001\\candidate\\.lake\\packages\\batteries"
+    },
+    {
+      "name": "Cli",
+      "expected_revision": "843844fa601dd56767b1eb22b7ada5b64d5e567a",
+      "actual_head": "843844fa601dd56767b1eb22b7ada5b64d5e567a",
+      "git_porcelain": "",
+      "head_natural_exit_code": 0,
+      "status_natural_exit_code": 0,
+      "checked_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\packages\\Cli",
+      "resolved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\JSP000828_audit_20261001\\candidate\\.lake\\packages\\Cli"
+    },
+    {
+      "name": "mathlib",
+      "expected_revision": "2a885768dae569d938bb9ff3474da6a8753bb90a",
+      "actual_head": "2a885768dae569d938bb9ff3474da6a8753bb90a",
+      "git_porcelain": "",
+      "head_natural_exit_code": 0,
+      "status_natural_exit_code": 0,
+      "checked_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\packages\\mathlib",
+      "resolved_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\JSP000828_audit_20261001\\candidate\\.lake\\packages\\mathlib"
+    }
+  ],
+  "toolchain_version_receipt": {
+    "checked_utc": "2026-10-02T08:26:33.353980+00:00",
+    "toolchain": "leanprover/lean4:v4.35.0-rc3",
+    "version_stdout": "Lean (version 4.35.0-rc3, x86_64-w64-windows-gnu, commit 470d5ce1400764999581fd26d5d72b00d990b0f4, Release)\n",
+    "version_stderr": "",
+    "natural_version_exit": 0,
+    "version_changes": [],
+    "dependencies": [
+      {
+        "name": "plausible",
+        "expected": "b7fb2b866d25bd937a2069931f9733197521cb27",
+        "actual_head": "b7fb2b866d25bd937a2069931f9733197521cb27",
+        "git_porcelain": ""
+      },
+      {
+        "name": "LeanSearchClient",
+        "expected": "c35806f43135ab3f254429d0c00bd13fc0123f77",
+        "actual_head": "c35806f43135ab3f254429d0c00bd13fc0123f77",
+        "git_porcelain": ""
+      },
+      {
+        "name": "importGraph",
+        "expected": "103cd9a46972ee39d9defb2f54ae49823b1228eb",
+        "actual_head": "103cd9a46972ee39d9defb2f54ae49823b1228eb",
+        "git_porcelain": ""
+      },
+      {
+        "name": "proofwidgets",
+        "expected": "87dfe779d5dfd03142ee4fe158911b8eb553ec98",
+        "actual_head": "87dfe779d5dfd03142ee4fe158911b8eb553ec98",
+        "git_porcelain": ""
+      },
+      {
+        "name": "aesop",
+        "expected": "a92ed98e694702934d40d12f24a1a449144db43e",
+        "actual_head": "a92ed98e694702934d40d12f24a1a449144db43e",
+        "git_porcelain": ""
+      },
+      {
+        "name": "Qq",
+        "expected": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+        "actual_head": "37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9",
+        "git_porcelain": ""
+      },
+      {
+        "name": "batteries",
+        "expected": "950339ce0fd0cc0673a22d87036075737586aed2",
+        "actual_head": "950339ce0fd0cc0673a22d87036075737586aed2",
+        "git_porcelain": ""
+      },
+      {
+        "name": "Cli",
+        "expected": "843844fa601dd56767b1eb22b7ada5b64d5e567a",
+        "actual_head": "843844fa601dd56767b1eb22b7ada5b64d5e567a",
+        "git_porcelain": ""
+      },
+      {
+        "name": "mathlib",
+        "expected": "2a885768dae569d938bb9ff3474da6a8753bb90a",
+        "actual_head": "2a885768dae569d938bb9ff3474da6a8753bb90a",
+        "git_porcelain": ""
+      }
+    ],
+    "dependency_reuse_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000865\\candidate\\.lake\\packages",
+    "project_build_unique": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate\\.lake\\build",
+    "initial_all_original_hashes_match": true
+  },
+  "fresh_dependency_worktrees_clean": true
+}

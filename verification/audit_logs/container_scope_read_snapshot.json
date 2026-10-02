@@ -1,0 +1,178 @@
+{
+  "status": "SOURCE_MATHEMATICAL_REVIEW_PASSED_COMPILATION_PENDING",
+  "created_utc": "2026-10-02T07:49:37.736403+00:00",
+  "reviewer": "/root/math539/containers539",
+  "input_variant": "FULL_SOURCE_JSP539_REAL_BOUNDS_AUDITED_UNCOMPILED_20261002T0730.zip",
+  "candidate": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate",
+  "lean_invoked_by_this_review": false,
+  "kernel_replay_invoked_by_this_review": false,
+  "candidate_edited_by_this_review": false,
+  "file_count": 18,
+  "line_count": 4547,
+  "files": [
+    {
+      "path": "LicensedContainers/Hypergraph.lean",
+      "sha256": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb",
+      "bytes": 19451,
+      "lines": 595,
+      "full_source_read": true,
+      "candidate_unchanged_by_this_reviewer": true
+    },
+    {
+      "path": "LicensedContainers/ContainerFuel.lean",
+      "sha256": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+      "bytes": 5999,
+      "lines": 138,
+      "full_source_read": true,
+      "candidate_unchanged_by_this_reviewer": true
+    },
+    {
+      "path": "LicensedContainers/ContainerSelector.lean",
+      "sha256": "e115359961aa28988b332fd63e88c93d54992814368475865a65ec459929eafc",
+      "bytes": 27048,
+      "lines": 635,
+      "full_source_read": true,
+      "candidate_unchanged_by_this_reviewer": true
+    },
+    {
+      "path": "LicensedContainers/ContainerInvariants.lean",
+      "sha256": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+      "bytes": 14360,
+      "lines": 380,
+      "full_source_read": true,
+      "candidate_unchanged_by_this_reviewer": true
+    },
+    {
+      "path": "LicensedContainers/ContainerWeight.lean",
+      "sha256": "e281197a67f0dbae3cd484c2f03a474c1e10412242a0d3ddc150b66917454a32",
+      "bytes": 27149,
+      "lines": 678,
+      "full_source_read": true,
+      "candidate_unchanged_by_this_reviewer": true
+    },
+    {
+      "path": "JSP539/ContainerCore.lean",
+      "sha256": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+      "bytes": 8124,
+      "lines": 177,
+      "full_source_read": true,
+      "candidate_unchanged_by_this_reviewer": true
+    },
+    {
+      "path": "JSP539/ContainerAlgorithm.lean",
+      "sha256": "aa4789f0e8efbb724f918dd243b38937d4e3031190e78ba7812d69e19cfb180f",
+      "bytes": 12392,
+      "lines": 301,
+      "full_source_read": true,
+      "candidate_unchanged_by_this_reviewer": true
+    },
+    {
+      "path": "JSP539/ContainerPotential.lean",
+      "sha256": "35db27cf0ffdd7e3576db1958bc32fb6140f86f6298d90004cb6052a867b4957",
+      "bytes": 6968,
+      "lines": 169,
+      "full_source_read": true,
+      "candidate_unchanged_by_this_reviewer": true
+    },
+    {
+      "path": "JSP539/ContainerShrink.lean",
+      "sha256": "773cffd0b5884e79b900230575bc30a8ffe4e97728ab36df37c9350835e21ed7",
+      "bytes": 9850,
+      "lines": 204,
+      "full_source_read": true,
+      "candidate_unchanged_by_this_reviewer": true
+    },
+    {
+      "path": "JSP539/ContainerCounting.lean",
+      "sha256": "9d5f2f8bf6ad5152b85fbf7603177418b8a3af26b926b5974161e4d6cdfe01a6",
+      "bytes": 4610,
+      "lines": 111,
+      "full_source_read": true,
+      "candidate_unchanged_by_this_reviewer": true
+    },
+    {
+      "path": "JSP539/DisjointPacking.lean",
+      "sha256": "23a582dea5ce601312c2a343042b69cb889fe0c7697f0c0ce50f6a61e9ecfaef",
+      "bytes": 4893,
+      "lines": 113,
+      "full_source_read": true,
+      "candidate_unchanged_by_this_reviewer": true
+    },
+    {
+      "path": "JSP539/ArcContainerStep.lean",
+      "sha256": "951b175593c4ac83ac46ce8f11df8e97f2b09cb610f0d8595a306d8eb354bf22",
+      "bytes": 12950,
+      "lines": 266,
+      "full_source_read": true,
+      "candidate_unchanged_by_this_reviewer": true
+    },
+    {
+      "path": "JSP539/ArcContainerGrowth.lean",
+      "sha256": "d5582449587334c875c50d3c59b4ec5c9276b05021c6686f6488f498a17551f1",
+      "bytes": 8179,
+      "lines": 170,
+      "full_source_read": true,
+      "candidate_unchanged_by_this_reviewer": true
+    },
+    {
+      "path": "JSP539/ArcContainerIteration.lean",
+      "sha256": "51ef44b381027a02e2561f292690ccbc3628dad8467efb8657724d43089b170a",
+      "bytes": 7586,
+      "lines": 173,
+      "full_source_read": true,
+      "candidate_unchanged_by_this_reviewer": true
+    },
+    {
+      "path": "JSP539/ContainerProbability.lean",
+      "sha256": "6061bae9dc3f1597c25f2f632ae4cf19befe37a5234f1a2bc5b17e8a0b458a91",
+      "bytes": 5609,
+      "lines": 135,
+      "full_source_read": true,
+      "candidate_unchanged_by_this_reviewer": true
+    },
+    {
+      "path": "JSP539/GroundHypergraph.lean",
+      "sha256": "553a853185ffef65239024ccba2d89b3c812ab67520cc27eac2152d45be40a1a",
+      "bytes": 4478,
+      "lines": 119,
+      "full_source_read": true,
+      "candidate_unchanged_by_this_reviewer": true
+    },
+    {
+      "path": "JSP539/ShortTraces.lean",
+      "sha256": "867cc04761ece172de91ef721a250326c0e1858dc02799cd8c5b9565d644df5f",
+      "bytes": 5489,
+      "lines": 125,
+      "full_source_read": true,
+      "candidate_unchanged_by_this_reviewer": true
+    },
+    {
+      "path": "JSP539/ProbabilityBudget.lean",
+      "sha256": "6a181f53a2837cee67bc91820f032c38bc311c844931240369e6bd8977ab1386",
+      "bytes": 2278,
+      "lines": 58,
+      "full_source_read": true,
+      "candidate_unchanged_by_this_reviewer": true
+    }
+  ],
+  "mathematical_gaps_found": [],
+  "confirmed_parse_errors_found": [],
+  "withdrawn_false_positive": "ArcContainerGrowth hratio right-parenthesis suspicion withdrawn after counting the outer quotient-expression group. Delimiters match.",
+  "reviewed_invariants": [
+    "antichain",
+    "rank bound and nonempty edges",
+    "lower-rank low links",
+    "strict generated-upset growth",
+    "fingerprint subset",
+    "input independence",
+    "charging budget",
+    "terminal weight",
+    "fingerprint-only reconstruction",
+    "all-container family counting",
+    "actual affine codegree normalization",
+    "actual full tree iteration",
+    "all asymptotic largeness conditions",
+    "actual disjoint-trace sampling and full-family union bound"
+  ],
+  "report": "CONTAINER_SCOPE_REVIEW.md"
+}

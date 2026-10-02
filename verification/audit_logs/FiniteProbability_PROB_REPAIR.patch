@@ -1,0 +1,72 @@
+--- original/JSP539/FiniteProbability.lean
++++ candidate/JSP539/FiniteProbability.lean
+@@ -6,7 +6,10 @@
+ adapted from the independently authored JSP502 source, with no graph-specific
+ dependencies. This module has not been compiled.
+ -/
+-import Mathlib
++import Mathlib.Basic.Real.Basic
++import Mathlib.Algebra.BigOperators.Ring.Finset
++import Mathlib.Data.Fintype.BigOperators
++import Mathlib.Tactic
+ 
+ open scoped BigOperators Classical
+ 
+@@ -136,7 +139,8 @@
+ 
+ theorem average_mul_const (f : A → ℝ) (t : ℝ) :
+     average (fun a => f a * t) = average f * t := by
+-  simp only [average, Finset.sum_mul]
++  unfold average
++  rw [← Finset.sum_mul]
+   ring
+ 
+ theorem average_const [Nonempty A] (t : ℝ) :
+@@ -162,14 +166,14 @@
+ theorem fraction_product {B : Type*} [Fintype B] [DecidableEq B]
+     (P : A → Prop) (Q : B → Prop) :
+     fraction (fun ab : A × B => P ab.1 ∧ Q ab.2) = fraction P * fraction Q := by
+-  simp only [fraction_eq_average_indicator, average, Fintype.sum_prod_type]
+-  have hi (a : A) (b : B) :
+-      (if P a ∧ Q b then (1 : ℝ) else 0) =
+-        (if P a then 1 else 0) * (if Q b then 1 else 0) := by
+-    by_cases hp : P a <;> by_cases hq : Q b <;> simp [hp, hq]
+-  simp_rw [hi]
+-  rw [← Finset.mul_sum, ← Finset.sum_mul]
+-  simp [Fintype.card_prod, Nat.cast_mul, div_eq_mul_inv]
++  have hfilter : (Finset.univ.filter (fun ab : A × B => P ab.1 ∧ Q ab.2)) =
++      (Finset.univ.filter P) ×ˢ (Finset.univ.filter Q) := by
++    ext ab
++    simp
++  rw [fraction_eq_card_filter (fun ab : A × B => P ab.1 ∧ Q ab.2),
++    fraction_eq_card_filter P, fraction_eq_card_filter Q]
++  rw [hfilter, Finset.card_product, Fintype.card_prod]
++  push_cast
+   ring
+ 
+ theorem fraction_fst {B : Type*} [Fintype B] [DecidableEq B] [Nonempty B]
+@@ -184,15 +188,15 @@
+ 
+ theorem fraction_not [Nonempty A] (P : A → Prop) :
+     fraction (fun a => ¬ P a) = 1 - fraction P := by
+-  have hind (a : A) :
+-      (if P a then (1 : ℝ) else 0) + (if ¬ P a then 1 else 0) = 1 := by
+-    by_cases ha : P a <;> simp [ha]
+-  have h := average_add (fun a => if P a then (1 : ℝ) else 0)
+-    (fun a => if ¬ P a then 1 else 0)
+-  simp_rw [hind] at h
+-  rw [average_const, ← fraction_eq_average_indicator,
+-    ← fraction_eq_average_indicator] at h
+-  linarith
++  rw [fraction_eq_card_filter (fun a => ¬ P a), fraction_eq_card_filter P]
++  have hcard : ((Finset.univ.filter P).card : ℝ) +
++      ((Finset.univ.filter (fun a => ¬ P a)).card : ℝ) = Fintype.card A := by
++    exact_mod_cast (Finset.card_filter_add_card_filter_not
++      (s := (Finset.univ : Finset A)) P)
++  have hA : (Fintype.card A : ℝ) ≠ 0 := by
++    exact_mod_cast Fintype.card_ne_zero
++  apply (eq_sub_iff_add_eq).mpr
++  rw [add_comm, ← add_div, hcard, div_self hA]
+ 
+ /-- Finite Markov inequality, without any independence assumption. -/
+ theorem fraction_ge_le_average_div (f : A → ℝ) (hf : ∀ a, 0 ≤ f a)

@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.FiniteProbability",
+  "label": "prob_finite_precise_imports",
+  "recorded_utc": "2026-10-02T08:46:06.260525+00:00",
+  "reason": "Replace full Mathlib import by required real, finite sums, distributivity, and tactic modules after actual shared full-import private-read failure; statements unchanged.",
+  "diagnostic_log": "verification/build/prob_finite_01.log",
+  "before_sha256": "16207cc761497895b500a6f48fa4257e6ad514f221007c6c85a273de2a68a9f7",
+  "after_sha256": "01d6f1525cd3c1a3caf60f78d901d48c72174b8eb1338f2e196b115d80c90d3f",
+  "statement_changed": false
+}

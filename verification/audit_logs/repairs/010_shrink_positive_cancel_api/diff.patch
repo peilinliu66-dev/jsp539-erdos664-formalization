@@ -1,0 +1,20 @@
+--- before/JSP539.ContainerShrink
++++ after/JSP539.ContainerShrink
+@@ -119,7 +119,7 @@
+       _ = p * ((H.card : ℝ) / 4) := by
+         dsimp [a]
+         field_simp [hNr.ne'] <;> ring
+-  exact (mul_le_mul_left hp).mp hfinal
++  exact le_of_mul_le_mul_left hfinal hp
+ 
+ /-- Translate the edge loss into the required vertex loss. -/
+ lemma container_card_shrink {H : Hypergraph V} {C : Finset V} {r : ℕ}
+@@ -157,7 +157,7 @@
+   have hcharge : (H.card : ℝ) * (3 * Fintype.card V) ≤
+       (H.card : ℝ) * (40 * (r : ℝ) * D.card) := by nlinarith
+   have hdeleted : 3 * (Fintype.card V : ℝ) ≤ 40 * (r : ℝ) * D.card :=
+-    (mul_le_mul_left he).mp hcharge
++    le_of_mul_le_mul_left hcharge he
+   have hfrac : (3 / (40 * (r : ℝ))) * Fintype.card V ≤ (D.card : ℝ) := by
+     rw [div_mul_eq_mul_div]
+     apply (div_le_iff₀ (by positivity : (0 : ℝ) < 40 * (r : ℝ))).2

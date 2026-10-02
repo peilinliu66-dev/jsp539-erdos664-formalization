@@ -1,0 +1,33 @@
+JSP539/ArcContainerGrowth.lean:33:25: error: failed to prove positivity/nonnegativity/nonzeroness
+JSP539/ArcContainerGrowth.lean:72:8: error: Tactic `apply` failed: could not unify the type of `mul_le_mul hD (add_le_add_right hM 1) ?m.258 ?m.259`
+  ↑(arcDepth k q) * (1 + ↑(arcFingerprintBound k q)) ≤
+    (40 * ↑k + 2) * Real.log ↑q * (1 + 24 * ↑k ^ 2 * ↑q / Real.log ↑q ^ 3)
+with the goal
+  ↑(arcDepth k q) * (↑(arcFingerprintBound k q) + 1) ≤ (40 * ↑k + 2) * l * (24 * ↑k ^ 2 * ↑q / l ^ 3 + 1)
+
+case h₁
+k q : ℕ
+hq : 2 ≤ q
+hlog : 1 ≤ Real.log ↑q
+l : ℝ := ⋯
+hlp : 0 < l
+hD : ↑(arcDepth k q) ≤ (40 * ↑k + 2) * Real.log ↑q
+hM : ↑(arcFingerprintBound k q) ≤ 24 * ↑k ^ 2 * ↑q / Real.log ↑q ^ 3
+hb : Real.log (↑q ^ 2 + 1) ≤ 3 * Real.log ↑q
+hlogbase : 0 ≤ Real.log (↑q ^ 2 + 1)
+hpowpos : 0 < ↑(arcBranchBound k q ^ arcDepth k q)
+⊢ ↑(arcDepth k q) * (↑(arcFingerprintBound k q) + 1) ≤ (40 * ↑k + 2) * l * (24 * ↑k ^ 2 * ↑q / l ^ 3 + 1)
+JSP539/ArcContainerGrowth.lean:121:4: error: Type mismatch: After simplification, term
+  Tendsto.comp (Real.tendsto_pow_log_div_mul_add_atTop 1 0 2 one_ne_zero) tendsto_natCast_atTop_atTop
+ has type
+  @Tendsto ℕ ℝ ((fun x => Real.log x ^ 2 / x) ∘ Nat.cast) atTop (𝓝 0)
+but is expected to have type
+  @Tendsto ℕ ℝ (fun q => Real.log ↑q ^ 2 / ↑q) atTop (𝓝 0)
+JSP539/ArcContainerGrowth.lean:147:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`

@@ -1,0 +1,170 @@
+/-
+Copyright 2026 JSP539 formalization contributors.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy at http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software distributed
+under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+CONDITIONS OF ANY KIND, either express or implied.
+-/
+import LicensedContainers.ContainerSelector
+import LicensedContainers.ContainerFuel
+
+/-!
+# The potential of the finite container algorithm
+
+An independent implementation of the charging argument in Campos--Samotij,
+“Towards an optimal hypergraph container lemma”, Section 3, Lemmas 3.7--3.10,
+https://arxiv.org/abs/2408.06617 . The existing Apache-2.0 elementary helpers
+are reused with their original attribution. Status: UNCOMPILED.
+-/
+
+open scoped BigOperators
+
+namespace JSP539.ContainerCore
+
+open Erdos565 Erdos565.Hypergraph Erdos565.ContainerSelector
+
+variable {V : Type*} [Fintype V] [DecidableEq V]
+
+/-- The weight charged by an accepting query. -/
+noncomputable def potential (H : Hypergraph V) (p : ℝ) (r : ℕ) : ℝ :=
+  (ContainerWeight.belowRank H r).pWeight p
+
+lemma parameter_bounds {r : ℕ} {p : ℝ} (hr : 0 < r)
+    (hp : p ≤ 1 / (8 * (r : ℝ) ^ 2)) : p ≤ 1 ∧ p ≤ threshold r := by
+  have hr1 : (1 : ℝ) ≤ r := by exact_mod_cast hr
+  have hr0 : (0 : ℝ) < r := by exact_mod_cast hr
+  have hden : (0 : ℝ) < 8 * (r : ℝ) ^ 2 := by positivity
+  constructor
+  · exact hp.trans (by
+      apply (div_le_iff₀ hden).2
+      nlinarith [sq_nonneg ((r : ℝ) - 1)])
+  · apply hp.trans
+    rw [threshold]
+    apply one_div_le_one_div_of_le (by positivity)
+    nlinarith
+
+lemma strictLink_layer_empty_of_card_le (H : Hypergraph V) {a : ℕ}
+    {L : Finset V} (hcard : a ≤ L.card) : (H.layer a).strictLink L = ∅ := by
+  ext F
+  simp only [Finset.notMem_empty, iff_false]
+  intro hF
+  obtain ⟨hne, E, hE, hLE, hEF⟩ := mem_strictLink.mp hF
+  have hEc := (mem_layer.mp hE).2
+  have heq : L = E := Finset.eq_of_subset_of_card_le hLE (by omega)
+  subst E
+  simp only [Finset.sdiff_self] at hEF
+  exact hne hEF.symm
+
+lemma lowLinks_strict_below {H : Hypergraph V} {p : ℝ} {r : ℕ}
+    (hr : 0 < r) (hp : 0 ≤ p) (hlow : LowLinks H p r)
+    {L : Finset V} (hL : L.Nonempty) :
+    ((ContainerWeight.belowRank H r).strictLink L).pWeight p ≤ 1 / 2 := by
+  apply ContainerWeight.pWeight_strictLink_belowRank_le_half H L hr hp
+  intro a ha
+  by_cases hLa : L.card < a
+  · rw [ContainerWeight.strictLink_layer_eq_link_of_card_lt hLa]
+    exact hlow a (Finset.mem_range.mp ha) L hL hLa
+  · rw [strictLink_layer_empty_of_card_le H (Nat.le_of_not_gt hLa), pWeight_empty]
+    positivity
+
+/-- At most half the inserted weight is spent deleting old edges. -/
+lemma update_potential_gain {H F : Hypergraph V} {p : ℝ} {r : ℕ}
+    (hr : 0 < r) (hp : 0 ≤ p) (hlow : LowLinks H p r)
+    (hne : F.HasNonemptyEdges)
+    (hout : ∀ E ∈ F, E ∉ H.upClosure)
+    (hrank : ∀ E ∈ F, E.card < r) :
+    potential H p r + (1 / 2 : ℝ) * F.pWeight p ≤
+      potential (H.update F) p r := by
+  let B := ContainerWeight.belowRank H r
+  let D := ContainerWeight.removedBy B F
+  let K := ContainerWeight.belowRank (H.update F) r
+  have hDB : D ⊆ B := by
+    intro E hE
+    exact (ContainerWeight.mem_removedBy.mp hE).1
+  have hkeep : B \ D ⊆ K := by
+    intro E hE
+    obtain ⟨hEB, hED⟩ := Finset.mem_sdiff.mp hE
+    obtain ⟨hEH, hEr⟩ := ContainerWeight.mem_belowRank.mp hEB
+    refine ContainerWeight.mem_belowRank.mpr ⟨mem_update.mpr (Or.inl ⟨hEH, ?_⟩), hEr⟩
+    intro hEF
+    exact hED (ContainerWeight.mem_removedBy.mpr ⟨hEB, mem_upClosure.mp hEF⟩)
+  have hinsert : F ⊆ K := by
+    intro E hE
+    exact ContainerWeight.mem_belowRank.mpr
+      ⟨mem_update.mpr (Or.inr hE), hrank E hE⟩
+  have houtB : ∀ E ∈ F, E ∉ B := by
+    intro E hEF hEB
+    exact hout E hEF (subset_upClosure H (ContainerWeight.mem_belowRank.mp hEB).1)
+  have hdis : Disjoint (B \ D) F := by
+    rw [Finset.disjoint_left]
+    intro E hEB hEF
+    exact houtB E hEF (Finset.mem_sdiff.mp hEB).1
+  have hremoved : D.pWeight p ≤ (1 / 2 : ℝ) * F.pWeight p := by
+    apply ContainerWeight.pWeight_removedBy_le_half_mul hp houtB
+    intro E hEF
+    exact lowLinks_strict_below hr hp hlow (hne hEF)
+  have hbase := ContainerWeight.pWeight_retained_inserted_le
+    hp hDB hkeep hinsert hdis
+  change B.pWeight p + (1 / 2 : ℝ) * F.pWeight p ≤ K.pWeight p
+  linarith
+
+lemma accept_potential_gain {H : Hypergraph V} {p : ℝ} {r : ℕ}
+    (hr : 0 < r) (hp : 0 ≤ p) (hanti : H.IsAntichain)
+    (hlow : LowLinks H p r) (c : Choice H p r) :
+    potential H p r + 1 / (8 * (r : ℝ)) ≤
+      potential (H.update ((H.layer c.layerIndex).link c.seed)) p r := by
+  have hpos : 0 < c.seed.card := Finset.card_pos.mpr c.seed_nonempty
+  have hlt := seed_card_lt_layer c.extension c.seed_not_edge
+  have hgain := update_potential_gain
+    (F := (H.layer c.layerIndex).link c.seed) hr hp hlow
+    (link_layer_hasNonemptyEdges c.seed_not_edge)
+    (fun _ hE => hanti.link_layer_outside_upClosure c.seed_nonempty hE)
+    (fun E hE => by
+      have hc := link_layer_isUniform H c.layerIndex c.seed E hE
+      have hle := c.layer_le_rank
+      omega)
+  have hhalf : (1 / 2 : ℝ) * threshold r = 1 / (8 * (r : ℝ)) := by
+    rw [threshold]
+    ring
+  have hh := mul_le_mul_of_nonneg_left c.heavy (by norm_num : (0 : ℝ) ≤ 1 / 2)
+  rw [hhalf] at hh
+  dsimp [linkWeight] at hh
+  linarith
+
+lemma reject_potential_mono {H : Hypergraph V} {p : ℝ} {r : ℕ}
+    (hr : 0 < r) (hp : 0 ≤ p) (hanti : H.IsAntichain)
+    (hlow : LowLinks H p r) (c : Choice H p r) :
+    potential H p r ≤ potential (H.update {c.seed}) p r := by
+  have hgain := update_potential_gain (F := {c.seed}) hr hp hlow
+    (by
+      intro E hE
+      have he := Finset.mem_singleton.mp hE
+      subst E
+      exact c.seed_nonempty)
+    (by
+      intro E hE
+      have he := Finset.mem_singleton.mp hE
+      subst E
+      exact hanti.seed_outside_upClosure c.seed_not_edge c.extension)
+    (by
+      intro E hE
+      have he := Finset.mem_singleton.mp hE
+      subst E
+      exact (seed_card_lt_layer c.extension c.seed_not_edge).trans_le c.layer_le_rank)
+  have hw := ({c.seed} : Hypergraph V).pWeight_nonneg hp
+  linarith
+
+lemma potential_nonneg (H : Hypergraph V) {p : ℝ} (hp : 0 ≤ p) (r : ℕ) :
+    0 ≤ potential H p r :=
+  (ContainerWeight.belowRank H r).pWeight_nonneg hp
+
+lemma terminal_potential_le {H : Hypergraph V} {p : ℝ} (hp : 0 ≤ p)
+    (hne : H.HasNonemptyEdges) (hstop : Stop p H) (r : ℕ) :
+    potential H p r ≤ p * Fintype.card V := by
+  apply le_trans (pWeight_mono (show ContainerWeight.belowRank H r ⊆ H from
+    fun E hE => (ContainerWeight.mem_belowRank.mp hE).1) hp)
+  exact ContainerWeight.terminal_pWeight_le H hp (fun _ hE => hne hE) hstop
+
+end JSP539.ContainerCore

@@ -1,0 +1,179 @@
+/-
+Copyright 2026 The JSP539 Formalization Authors.
+Licensed under the Apache License, Version 2.0; see LICENSE.
+
+One common fair-bit sample space for every bad event. Independence below is
+derived from an explicit function-space equivalence and finite sums.
+UNCOMPILED source.
+-/
+import JSP539.FiniteProbability
+import JSP539.DisjointPacking
+
+open scoped BigOperators Classical
+
+namespace JSP539.UniformBits
+
+open FiniteProbability
+
+variable {V : Type*} [Fintype V] [DecidableEq V]
+
+abbrev Sample (V : Type*) := V → Bool
+
+def DependsOn (P : Sample V → Prop) (S : Finset V) : Prop :=
+  ∀ f g, (∀ v ∈ S, f v = g v) → (P f ↔ P g)
+
+def insideExtension (S : Finset V) (f : S → Bool) : Sample V :=
+  fun v => if h : v ∈ S then f ⟨v, h⟩ else false
+
+def outsideExtension (S : Finset V) (f : {v : V // v ∉ S} → Bool) : Sample V :=
+  fun v => if h : v ∈ S then false else f ⟨v, h⟩
+
+/-- Disjoint coordinate support implies exact independence on the full fair
+sample space; this is not an assumed property of the experiment. -/
+theorem fraction_and_of_disjoint_support (P Q : Sample V → Prop)
+    (S T : Finset V) (hP : DependsOn P S) (hQ : DependsOn Q T)
+    (hST : Disjoint S T) :
+    fraction (fun f => P f ∧ Q f) = fraction P * fraction Q := by
+  let e : Sample V ≃ ((S → Bool) × ({v : V // v ∉ S} → Bool)) :=
+    Equiv.piEquivPiSubtypeProd (fun v : V => v ∈ S) (fun _ => Bool)
+  let P' : (S → Bool) → Prop := fun f => P (insideExtension S f)
+  let Q' : ({v : V // v ∉ S} → Bool) → Prop := fun f => Q (outsideExtension S f)
+  have hPf (f : Sample V) : P f ↔ P' (e f).1 := by
+    apply hP
+    intro v hv
+    simp [P', insideExtension, e, hv]
+  have hQf (f : Sample V) : Q f ↔ Q' (e f).2 := by
+    apply hQ
+    intro v hv
+    have hvS : v ∉ S := fun hs => (Finset.disjoint_left.mp hST) hs hv
+    simp [Q', outsideExtension, e, hvS]
+  have hPmarg : fraction P = fraction P' := by
+    calc
+      fraction P = fraction (fun f => P' (e f).1) := by
+        congr 1
+        funext f
+        exact propext (hPf f)
+      _ = fraction (fun ab : (S → Bool) × ({v : V // v ∉ S} → Bool) => P' ab.1) :=
+        fraction_equiv e (fun ab => P' ab.1)
+      _ = fraction P' := fraction_fst _
+  have hQmarg : fraction Q = fraction Q' := by
+    calc
+      fraction Q = fraction (fun f => Q' (e f).2) := by
+        congr 1
+        funext f
+        exact propext (hQf f)
+      _ = fraction (fun ab : (S → Bool) × ({v : V // v ∉ S} → Bool) => Q' ab.2) :=
+        fraction_equiv e (fun ab => Q' ab.2)
+      _ = fraction Q' := fraction_snd _
+  calc
+    fraction (fun f => P f ∧ Q f) =
+        fraction (fun f => P' (e f).1 ∧ Q' (e f).2) := by
+      congr 1
+      funext f
+      exact propext (and_congr (hPf f) (hQf f))
+    _ = fraction (fun ab : (S → Bool) × ({v : V // v ∉ S} → Bool) => P' ab.1 ∧ Q' ab.2) :=
+      fraction_equiv e (fun ab => P' ab.1 ∧ Q' ab.2)
+    _ = fraction P' * fraction Q' := fraction_product _ _
+    _ = fraction P * fraction Q := by rw [hPmarg, hQmarg]
+
+theorem dependsOn_forall {J : Type*} [DecidableEq J]
+    (P : J → Sample V → Prop) (A : J → Finset V) (I : Finset J)
+    (hP : ∀ i, DependsOn (P i) (A i)) :
+    DependsOn (fun f => ∀ i ∈ I, P i f) (I.biUnion A) := by
+  intro f g hfg
+  constructor
+  · intro hf i hi
+    apply (hP i f g ?_).mp (hf i hi)
+    intro v hv
+    exact hfg v (Finset.mem_biUnion.mpr ⟨i, hi, hv⟩)
+  · intro hg i hi
+    apply (hP i f g ?_).mpr (hg i hi)
+    intro v hv
+    exact hfg v (Finset.mem_biUnion.mpr ⟨i, hi, hv⟩)
+
+theorem fraction_forall_disjoint {J : Type*} [DecidableEq J]
+    (P : J → Sample V → Prop) (A : J → Finset V) (I : Finset J)
+    (hP : ∀ i, DependsOn (P i) (A i))
+    (hsep : DisjointPacking.PairwiseDisjoint A I) :
+    fraction (fun f => ∀ i ∈ I, P i f) = ∏ i ∈ I, fraction (P i) := by
+  revert hsep
+  induction I using Finset.induction_on with
+  | empty => intro _; simp
+  | @insert i I hi ih =>
+    intro hsep
+    have hsepI : DisjointPacking.PairwiseDisjoint A I := by
+      intro j hj z hz hjz
+      exact hsep j (Finset.mem_insert_of_mem hj) z (Finset.mem_insert_of_mem hz) hjz
+    have hdis : Disjoint (A i) (I.biUnion A) := by
+      apply Finset.disjoint_left.mpr
+      intro v hvi hvI
+      obtain ⟨j, hj, hvj⟩ := Finset.mem_biUnion.mp hvI
+      have hij : i ≠ j := by
+        intro hij
+        subst j
+        exact hi hj
+      exact (Finset.disjoint_left.mp (hsep i (Finset.mem_insert_self _ _)
+        j (Finset.mem_insert_of_mem hj) hij)) hvi hvj
+    calc
+      fraction (fun f => ∀ j ∈ insert i I, P j f) =
+          fraction (fun f => P i f ∧ ∀ j ∈ I, P j f) := by simp
+      _ = fraction (P i) * fraction (fun f => ∀ j ∈ I, P j f) :=
+        fraction_and_of_disjoint_support (P i) _ (A i) (I.biUnion A)
+          (hP i) (dependsOn_forall P A I hP) hdis
+      _ = fraction (P i) * ∏ j ∈ I, fraction (P j) := by rw [ih hsepI]
+      _ = ∏ j ∈ insert i I, fraction (P j) := by rw [Finset.prod_insert hi]
+
+def hits (S : Finset V) (f : Sample V) : Prop :=
+  ∃ v ∈ S, f v = true
+
+def avoids (S : Finset V) (f : Sample V) : Prop :=
+  ∀ v ∈ S, f v = false
+
+theorem hits_dependsOn (S : Finset V) : DependsOn (hits S) S := by
+  intro f g hfg
+  constructor
+  · rintro ⟨v, hv, hf⟩
+    exact ⟨v, hv, (hfg v hv).symm.trans hf⟩
+  · rintro ⟨v, hv, hg⟩
+    exact ⟨v, hv, (hfg v hv).trans hg⟩
+
+theorem fraction_avoids (S : Finset V) :
+    fraction (avoids S) = (1 / 2 : ℝ) ^ S.card := by
+  let e : Sample V ≃ ((S → Bool) × ({v : V // v ∉ S} → Bool)) :=
+    Equiv.piEquivPiSubtypeProd (fun v : V => v ∈ S) (fun _ => Bool)
+  have hform (f : Sample V) : avoids S f ↔ ∀ v : S, (e f).1 v = false := by
+    simp [avoids, e]
+  calc
+    fraction (avoids S) = fraction (fun f => ∀ v : S, (e f).1 v = false) := by
+      congr 1
+      funext f
+      exact propext (hform f)
+    _ = fraction (fun ab : (S → Bool) × ({v : V // v ∉ S} → Bool) =>
+      ∀ v : S, ab.1 v = false) :=
+      fraction_equiv e (fun ab => ∀ v : S, ab.1 v = false)
+    _ = fraction (fun f : S → Bool => ∀ v, f v = false) := fraction_fst _
+    _ = ∏ _v : S, fraction (fun b : Bool => b = false) :=
+      fraction_forall_eq_prod (fun _v : S => fun b : Bool => b = false)
+    _ = (1 / 2 : ℝ) ^ S.card := by norm_num [fraction]
+
+theorem hits_iff_not_avoids (S : Finset V) (f : Sample V) :
+    hits S f ↔ ¬ avoids S f := by
+  simp [hits, avoids]
+
+theorem fraction_hits (S : Finset V) :
+    fraction (hits S) = 1 - (1 / 2 : ℝ) ^ S.card := by
+  have heq : hits S = (fun f => ¬ avoids S f) :=
+    funext fun f => propext (hits_iff_not_avoids S f)
+  rw [heq, fraction_not, fraction_avoids]
+
+/-- Exact probability of hitting every member of a disjoint trace family. -/
+theorem fraction_hits_all {J : Type*} [DecidableEq J]
+    (A : J → Finset V) (I : Finset J)
+    (hsep : DisjointPacking.PairwiseDisjoint A I) :
+    fraction (fun f => ∀ i ∈ I, hits (A i) f) =
+      ∏ i ∈ I, (1 - (1 / 2 : ℝ) ^ (A i).card) := by
+  rw [fraction_forall_disjoint (fun i => hits (A i)) A I
+    (fun i => hits_dependsOn (A i)) hsep]
+  simp_rw [fraction_hits]
+
+end JSP539.UniformBits

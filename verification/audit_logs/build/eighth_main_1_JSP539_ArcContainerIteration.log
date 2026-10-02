@@ -1,0 +1,16 @@
+JSP539/ArcContainerIteration.lean:38:28: warning: `dif_pos` has been deprecated: Use `dite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  d̵i̵f̵_̵p̵o̵s̵d̲i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+JSP539/ArcContainerIteration.lean:50:28: warning: `dif_neg` has been deprecated: Use `dite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  d̵i̵f̵_̵n̵e̵g̵d̲i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+JSP539/ArcContainerIteration.lean:85:12: warning: This simp argument is unused:
+  point_card
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [pow_two]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+JSP539/ArcContainerIteration.lean:149:6: error: No goals to be solved

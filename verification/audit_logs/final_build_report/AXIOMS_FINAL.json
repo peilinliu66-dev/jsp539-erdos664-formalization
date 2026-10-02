@@ -1,0 +1,82 @@
+[
+  {
+    "theorem": "JSP539.exists_bad_fin_design",
+    "raw_axioms": "propext, Classical.choice.{u}, Quot.sound.{u}",
+    "axioms_universes_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "only_standard_three_axioms": true
+  },
+  {
+    "theorem": "JSP539.OriginalScope.erdos_664",
+    "raw_axioms": "propext, Classical.choice.{u}, Quot.sound.{u}",
+    "axioms_universes_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "only_standard_three_axioms": true
+  },
+  {
+    "theorem": "JSP539.OriginalScope.two_fifths",
+    "raw_axioms": "propext, Classical.choice.{u}, Quot.sound.{u}",
+    "axioms_universes_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "only_standard_three_axioms": true
+  },
+  {
+    "theorem": "JSP539.OriginalScope.two_fifths_exact_pairs",
+    "raw_axioms": "propext, Classical.choice.{u}, Quot.sound.{u}",
+    "axioms_universes_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "only_standard_three_axioms": true
+  },
+  {
+    "theorem": "JSP539.OriginalScope.block_design",
+    "raw_axioms": "propext, Classical.choice.{u}, Quot.sound.{u}",
+    "axioms_universes_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "only_standard_three_axioms": true
+  },
+  {
+    "theorem": "JSP539.exists_bad_fin_design_real",
+    "raw_axioms": "propext, Classical.choice.{u}, Quot.sound.{u}",
+    "axioms_universes_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "only_standard_three_axioms": true
+  },
+  {
+    "theorem": "JSP539.OriginalScope.erdos_664_real",
+    "raw_axioms": "propext, Classical.choice.{u}, Quot.sound.{u}",
+    "axioms_universes_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "only_standard_three_axioms": true
+  },
+  {
+    "theorem": "JSP539.OriginalScope.block_design_real",
+    "raw_axioms": "propext, Classical.choice.{u}, Quot.sound.{u}",
+    "axioms_universes_normalized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "only_standard_three_axioms": true
+  }
+]

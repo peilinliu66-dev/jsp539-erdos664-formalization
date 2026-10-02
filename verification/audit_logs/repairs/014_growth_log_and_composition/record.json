@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.ArcContainerGrowth",
+  "label": "014_growth_log_and_composition",
+  "recorded_utc": "2026-10-02T09:02:07.210184+00:00",
+  "reason": "Actual growth diagnostics: expose positivity of log from existing hlog before floor estimate, normalize additive orientation using the same fingerprint inequality, and explicitly unfold function composition in the standard logarithmic limit. Original budget/bounds unchanged.",
+  "diagnostic_log": "verification/build/ninth_main_2_JSP539_ArcContainerGrowth.log",
+  "before_sha256": "d5582449587334c875c50d3c59b4ec5c9276b05021c6686f6488f498a17551f1",
+  "after_sha256": "31d637bf644b155162268873cf303c480b4ddef3b4412220b8ee893a40ffcc23",
+  "statement_changed": false
+}

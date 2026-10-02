@@ -1,0 +1,30 @@
+JSP539/ContainerShrink.lean:30:0: warning: automatically included section variable(s) unused in theorem `JSP539.ContainerCore.degree_eq_zero_of_uniform_card_lt`:
+  [Fintype V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+JSP539/ContainerShrink.lean:41:0: warning: automatically included section variable(s) unused in theorem `JSP539.ContainerCore.card_restrict_le_sum_degrees`:
+  [Fintype V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+JSP539/ContainerShrink.lean:71:0: warning: automatically included section variable(s) unused in theorem `JSP539.ContainerCore.vertex_count_pos_of_uniform_nonempty`:
+  [DecidableEq V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+JSP539/ContainerShrink.lean:121:33: warning: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+JSP539/ContainerShrink.lean:121:33: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+JSP539/ContainerShrink.lean:156:43: warning: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+JSP539/ContainerShrink.lean:156:43: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`

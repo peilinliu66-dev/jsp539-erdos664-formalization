@@ -1,0 +1,137 @@
+{
+  "order": [
+    "LicensedContainers.Hypergraph",
+    "JSP539.AffinePlane",
+    "JSP539.ChunkPartition",
+    "JSP539.GroundHypergraph",
+    "JSP539.LineChunks",
+    "LicensedContainers.ContainerInvariants",
+    "LicensedContainers.ContainerWeight",
+    "LicensedContainers.ContainerSelector",
+    "LicensedContainers.ContainerFuel",
+    "JSP539.ContainerPotential",
+    "JSP539.ContainerAlgorithm",
+    "JSP539.ContainerCore",
+    "JSP539.ContainerCounting",
+    "JSP539.ContainerShrink",
+    "JSP539.ArcContainerStep",
+    "JSP539.ArcContainerIteration",
+    "JSP539.ArcContainerGrowth",
+    "JSP539.FiniteProbability",
+    "JSP539.DisjointPacking",
+    "JSP539.UniformBits",
+    "JSP539.FairBitTail",
+    "JSP539.ShortTraces",
+    "JSP539.ContainerProbability",
+    "JSP539.ProbabilityBudget",
+    "JSP539.RandomRestriction",
+    "JSP539.FiniteDesignTransport",
+    "JSP539.OriginalScope",
+    "JSP539.RealScope",
+    "JSP539",
+    "LicensedContainers",
+    "Verify"
+  ],
+  "imports": {
+    "JSP539": [
+      "JSP539.RealScope"
+    ],
+    "LicensedContainers": [
+      "LicensedContainers.Hypergraph",
+      "LicensedContainers.ContainerFuel",
+      "LicensedContainers.ContainerInvariants",
+      "LicensedContainers.ContainerWeight",
+      "LicensedContainers.ContainerSelector"
+    ],
+    "Verify": [
+      "JSP539"
+    ],
+    "JSP539.AffinePlane": [
+      "LicensedContainers.Hypergraph"
+    ],
+    "JSP539.ArcContainerGrowth": [
+      "JSP539.ArcContainerIteration"
+    ],
+    "JSP539.ArcContainerIteration": [
+      "JSP539.ArcContainerStep"
+    ],
+    "JSP539.ArcContainerStep": [
+      "JSP539.LineChunks",
+      "JSP539.ContainerShrink"
+    ],
+    "JSP539.ChunkPartition": [],
+    "JSP539.ContainerAlgorithm": [
+      "JSP539.ContainerPotential"
+    ],
+    "JSP539.ContainerCore": [
+      "JSP539.ContainerAlgorithm"
+    ],
+    "JSP539.ContainerCounting": [
+      "JSP539.ContainerCore"
+    ],
+    "JSP539.ContainerPotential": [
+      "LicensedContainers.ContainerSelector",
+      "LicensedContainers.ContainerFuel"
+    ],
+    "JSP539.ContainerProbability": [
+      "JSP539.ShortTraces",
+      "JSP539.UniformBits"
+    ],
+    "JSP539.ContainerShrink": [
+      "JSP539.ContainerCounting"
+    ],
+    "JSP539.DisjointPacking": [],
+    "JSP539.FairBitTail": [
+      "JSP539.UniformBits"
+    ],
+    "JSP539.FiniteDesignTransport": [
+      "JSP539.AffinePlane"
+    ],
+    "JSP539.FiniteProbability": [],
+    "JSP539.GroundHypergraph": [
+      "LicensedContainers.Hypergraph"
+    ],
+    "JSP539.LineChunks": [
+      "JSP539.AffinePlane",
+      "JSP539.ChunkPartition",
+      "JSP539.GroundHypergraph"
+    ],
+    "JSP539.OriginalScope": [
+      "JSP539.RandomRestriction",
+      "JSP539.FiniteDesignTransport"
+    ],
+    "JSP539.ProbabilityBudget": [
+      "JSP539.ContainerProbability"
+    ],
+    "JSP539.RandomRestriction": [
+      "JSP539.ArcContainerGrowth",
+      "JSP539.FairBitTail",
+      "JSP539.ProbabilityBudget"
+    ],
+    "JSP539.RealScope": [
+      "JSP539.OriginalScope"
+    ],
+    "JSP539.ShortTraces": [
+      "JSP539.AffinePlane",
+      "JSP539.DisjointPacking"
+    ],
+    "JSP539.UniformBits": [
+      "JSP539.FiniteProbability",
+      "JSP539.DisjointPacking"
+    ],
+    "LicensedContainers.ContainerFuel": [
+      "LicensedContainers.Hypergraph"
+    ],
+    "LicensedContainers.ContainerInvariants": [
+      "LicensedContainers.Hypergraph"
+    ],
+    "LicensedContainers.ContainerSelector": [
+      "LicensedContainers.ContainerInvariants",
+      "LicensedContainers.ContainerWeight"
+    ],
+    "LicensedContainers.ContainerWeight": [
+      "LicensedContainers.Hypergraph"
+    ],
+    "LicensedContainers.Hypergraph": []
+  }
+}

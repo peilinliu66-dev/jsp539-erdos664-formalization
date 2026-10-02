@@ -1,0 +1,11 @@
+--- before/JSP539.RandomRestriction
++++ after/JSP539.RandomRestriction
+@@ -39,7 +39,7 @@
+       simpa only [points_inter_retained, points_card] using
+         FairBitTail.fraction_retainedCount_le_two_fifths (points l)
+     _ = lineFailureBudget q := by
+-      simp [lineFailureBudget, line_card, Nat.cast_mul, Nat.cast_add]
++      simp [lineFailureBudget, line_card, Nat.cast_mul, Nat.cast_add, mul_comm]
+ 
+ /-- For an actual deterministic container family, both obstructions can be
+ avoided at once. No conditioning or inter-family independence is required. -/

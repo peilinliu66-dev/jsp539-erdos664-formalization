@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.LineChunks",
+  "label": "006_linechunk_equality_and_api",
+  "recorded_utc": "2026-10-02T08:49:23.791309+00:00",
+  "reason": "Actual compilation: explicitly reduce lambda subtraction equality for rw, use current camel-case Finset empty API, and Nat positive multiplication cancellation API. Mathematical statements and arguments unchanged.",
+  "diagnostic_log": "verification/build/first_main_2_JSP539_LineChunks.log",
+  "before_sha256": "7b578d29e5e11ec08386ce20b239271576a20a2735daaea6fddd65582d769960",
+  "after_sha256": "19826d814a9f9ef06ebcfa7d48d2fce8729ac04d0f3d4cefeba062e0187cea3f",
+  "statement_changed": false
+}

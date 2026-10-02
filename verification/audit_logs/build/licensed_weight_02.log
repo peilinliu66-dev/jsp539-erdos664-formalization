@@ -1,0 +1,24 @@
+LicensedContainers/ContainerWeight.lean:165:12: error(lean.unknownIdentifier): Unknown constant `Finset.sum_mul`
+LicensedContainers/ContainerWeight.lean:165:6: error: `simp` made no progress
+LicensedContainers/ContainerWeight.lean:235:40: error(lean.unknownIdentifier): Unknown constant `Finset.mul_sum`
+LicensedContainers/ContainerWeight.lean:232:41: error: unsolved goals
+V : Type u_1
+inst✝¹ : DecidableEq V
+inst✝ : Finite V
+H : Hypergraph V
+L : Finset V
+p : ℝ
+this : Fintype V := Fintype.ofFinite V
+⊢ p ^ L.card * ∑ e ∈ H.strictLink L, p ^ e.card = ∑ e ∈ strictSupersets H L, p ^ e.card
+LicensedContainers/ContainerWeight.lean:440:27: error(lean.unknownIdentifier): Unknown constant `Finset.mul_sum`
+LicensedContainers/ContainerWeight.lean:439:37: error: unsolved goals
+V : Type u_1
+inst✝¹ : DecidableEq V
+inst✝ : Finite V
+H C : Hypergraph V
+p : ℝ
+hp : 0 ≤ p
+hout : ∀ F ∈ C, F ∉ H
+hlow : ∀ F ∈ C, (H.strictLink F).pWeight p ≤ 1 / 2
+this : Fintype V := Fintype.ofFinite V
+⊢ ∑ F ∈ C, p ^ F.card * (1 / 2) = 1 / 2 * ∑ e ∈ C, p ^ e.card

@@ -1,0 +1,10 @@
+--- before/LicensedContainers.ContainerWeight
++++ after/LicensedContainers.ContainerWeight
+@@ -13,6 +13,7 @@
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -/
++import Mathlib.Algebra.BigOperators.Ring.Finset
+ import Mathlib.Data.Fintype.Powerset
+ import Mathlib.Tactic.NormNum
+ import Mathlib.Tactic.Ring

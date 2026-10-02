@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.FiniteProbability",
+  "label": "prob_finite_decidable_instances_04",
+  "recorded_utc": "2026-10-02T08:49:31.772761+00:00",
+  "reason": "Actual rewrites failed because definitional equality retained distinct Decidable instances. Normalize through the existing fraction_eq_card_filter bridge and prove complements directly by finite partition cardinality; no statement or assumption change.",
+  "diagnostic_log": "verification/build/prob_finite_03.log",
+  "before_sha256": "c7532f3db4c438f03e1b9901817eb99a5297d9167d82c34108fd00aa461850bb",
+  "after_sha256": "3fed40e1cbae40de50e6e095e3b62df90f5e49254db40fdf92052e6e6f26240c",
+  "statement_changed": false
+}

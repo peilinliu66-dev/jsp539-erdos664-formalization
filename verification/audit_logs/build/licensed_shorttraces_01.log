@@ -1,0 +1,24 @@
+JSP539/ShortTraces.lean:64:32: error(lean.invalidField): Invalid field `mp`: The environment does not contain `Function.mp`, so it is not possible to project the field `mp` from an expression
+  mul_le_mul_left ?m.368
+of type
+  ∀ (a : ?m.362), ?m.363 * a ≤ ?m.364 * a
+JSP539/ShortTraces.lean:64:21: error: Application type mismatch: The argument
+  hpositive
+has type
+  0 < 2 * k
+but is expected to have type
+  ?m.363 ≤ ?m.364
+in the application
+  mul_le_mul_left hpositive
+JSP539/ShortTraces.lean:123:31: error(lean.invalidField): Invalid field `mp`: The environment does not contain `Function.mp`, so it is not possible to project the field `mp` from an expression
+  mul_le_mul_left ?m.394
+of type
+  ∀ (a : ?m.388), ?m.389 * a ≤ ?m.390 * a
+JSP539/ShortTraces.lean:123:27: error: Application type mismatch: The argument
+  hq
+has type
+  0 < q
+but is expected to have type
+  ?m.389 ≤ ?m.390
+in the application
+  mul_le_mul_left hq

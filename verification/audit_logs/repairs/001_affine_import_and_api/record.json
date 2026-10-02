@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.AffinePlane",
+  "label": "001_affine_import_and_api",
+  "recorded_utc": "2026-10-02T08:41:06.091278+00:00",
+  "reason": "Four simultaneous broad Mathlib imports naturally failed reading a independently readable private artifact; isolated unchanged import consumed ~8 GB committed memory and reached actual three elaboration diagnostics. Select required exact-pinned modules to reduce import closure for full-build compatibility. Fix Prod.ext goal inference, unfold lambda before equality transport, and multiplication orientation; theorem statements unchanged.",
+  "diagnostic_log": "verification/build/initial_02_affineplane.log; verification/build/isolated_02_affineplane.log; verification/build/narrow_pell_read_probe_01.log",
+  "before_sha256": "b767d1de66f92f1c714aeb396e4e742696c7a9ac5bf1239edca9e06a1a6c7e38",
+  "after_sha256": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+  "statement_changed": false
+}

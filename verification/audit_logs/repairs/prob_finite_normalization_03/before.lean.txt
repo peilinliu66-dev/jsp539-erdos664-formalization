@@ -1,0 +1,239 @@
+/-
+Copyright 2026 The JSP539 Formalization Authors.
+Licensed under the Apache License, Version 2.0; see LICENSE.
+
+Uniform finite counting and union bounds. The elementary fraction lemmas are
+adapted from the independently authored JSP502 source, with no graph-specific
+dependencies. This module has not been compiled.
+-/
+import Mathlib.Basic.Real.Basic
+import Mathlib.Algebra.BigOperators.Ring.Finset
+import Mathlib.Data.Fintype.BigOperators
+import Mathlib.Tactic
+
+open scoped BigOperators Classical
+
+namespace JSP539.FiniteProbability
+
+variable {A : Type*} [Fintype A] [DecidableEq A]
+
+noncomputable def fraction (P : A → Prop) : ℝ :=
+  ((Finset.univ.filter P).card : ℝ) / Fintype.card A
+
+noncomputable def average (f : A → ℝ) : ℝ :=
+  (∑ a : A, f a) / Fintype.card A
+
+theorem fraction_eq_card_filter (P : A → Prop) [DecidablePred P] :
+    fraction P = ((Finset.univ.filter P).card : ℝ) / Fintype.card A := by
+  unfold fraction
+  apply congrArg (fun S : Finset A => (S.card : ℝ) / Fintype.card A)
+  ext a
+  simp
+
+theorem fraction_eq_sum (P : A → Prop) :
+    fraction P = ∑ a : A, if P a then (1 : ℝ) / Fintype.card A else 0 := by
+  rw [← Finset.sum_filter]
+  simp [fraction, div_eq_mul_inv]
+
+theorem fraction_nonneg (P : A → Prop) : 0 ≤ fraction P := by
+  unfold fraction
+  positivity
+
+theorem fraction_le_one (P : A → Prop) : fraction P ≤ 1 := by
+  by_cases hA : Fintype.card A = 0
+  · simp [fraction, hA]
+  · have hcard : ((Finset.univ.filter P).card : ℝ) ≤ Fintype.card A := by
+      exact_mod_cast Finset.card_filter_le (Finset.univ : Finset A) P
+    exact (div_le_one (by exact_mod_cast Nat.pos_of_ne_zero hA)).mpr hcard
+
+@[simp] theorem fraction_false : fraction (fun _ : A => False) = 0 := by
+  simp [fraction]
+
+@[simp] theorem fraction_true [Nonempty A] :
+    fraction (fun _ : A => True) = 1 := by
+  have hA : (Fintype.card A : ℝ) ≠ 0 := by
+    exact_mod_cast Fintype.card_ne_zero
+  simp [fraction, hA]
+
+theorem fraction_mono (P Q : A → Prop) (hPQ : ∀ a, P a → Q a) :
+    fraction P ≤ fraction Q := by
+  unfold fraction
+  apply div_le_div_of_nonneg_right _ (by positivity)
+  have hsub : Finset.univ.filter P ⊆ Finset.univ.filter Q := by
+    intro a ha
+    exact Finset.mem_filter.mpr ⟨Finset.mem_univ _, hPQ a (Finset.mem_filter.mp ha).2⟩
+  exact_mod_cast Finset.card_le_card hsub
+
+theorem fraction_le_sum_of_cover {B : Type*} [DecidableEq B]
+    (T : Finset B) (P : A → Prop) (Q : B → A → Prop)
+    (hcover : ∀ a, P a → ∃ b ∈ T, Q b a) :
+    fraction P ≤ ∑ b ∈ T, fraction (Q b) := by
+  have hsub : (Finset.univ.filter P) ⊆
+      T.biUnion (fun b => Finset.univ.filter (Q b)) := by
+    intro a ha
+    obtain ⟨b, hb, hba⟩ := hcover a (Finset.mem_filter.mp ha).2
+    exact Finset.mem_biUnion.mpr
+      ⟨b, hb, Finset.mem_filter.mpr ⟨Finset.mem_univ _, hba⟩⟩
+  have hc := (Finset.card_le_card hsub).trans Finset.card_biUnion_le
+  have hcR : ((Finset.univ.filter P).card : ℝ) ≤
+      ∑ b ∈ T, ((Finset.univ.filter (Q b)).card : ℝ) := by
+    exact_mod_cast hc
+  unfold fraction
+  calc
+    _ ≤ (∑ b ∈ T, ((Finset.univ.filter (Q b)).card : ℝ)) /
+        Fintype.card A := div_le_div_of_nonneg_right hcR (by positivity)
+    _ = _ := by simp [div_eq_mul_inv, Finset.sum_mul]
+
+theorem fraction_exists_le_sum {B : Type*} [Fintype B] [DecidableEq B]
+    (Q : B → A → Prop) :
+    fraction (fun a => ∃ b, Q b a) ≤ ∑ b : B, fraction (Q b) := by
+  apply fraction_le_sum_of_cover Finset.univ
+  rintro a ⟨b, hb⟩
+  exact ⟨b, Finset.mem_univ _, hb⟩
+
+theorem fraction_or_le (P Q : A → Prop) :
+    fraction (fun a => P a ∨ Q a) ≤ fraction P + fraction Q := by
+  let E : Bool → A → Prop := fun b => if b then P else Q
+  have h := fraction_le_sum_of_cover (A := A) (Finset.univ : Finset Bool)
+    (fun a => P a ∨ Q a) E (by
+      intro a ha
+      rcases ha with ha | ha
+      · exact ⟨true, Finset.mem_univ _, by simpa [E] using ha⟩
+      · exact ⟨false, Finset.mem_univ _, by simpa [E] using ha⟩)
+  simpa [E, add_comm] using h
+
+theorem exists_not_of_fraction_lt_one [Nonempty A] (P : A → Prop)
+    (hP : fraction P < 1) : ∃ a, ¬ P a := by
+  by_contra hn
+  have hall : ∀ a, P a := by simpa only [not_exists, not_not] using hn
+  have heq : fraction P = 1 := by
+    have hf : P = (fun _ => True) := funext fun a => propext ⟨fun _ => trivial,
+      fun _ => hall a⟩
+    rw [hf, fraction_true]
+  linarith
+
+/-- Two dependent families of bad events can be excluded simultaneously;
+only their separate probability bounds are needed. -/
+theorem exists_neither_of_add_lt_one [Nonempty A] (P Q : A → Prop)
+    (a b : ℝ) (hP : fraction P ≤ a) (hQ : fraction Q ≤ b)
+    (hab : a + b < 1) : ∃ x, ¬ P x ∧ ¬ Q x := by
+  have hbad : fraction (fun x => P x ∨ Q x) < 1 :=
+    lt_of_le_of_lt ((fraction_or_le P Q).trans (add_le_add hP hQ)) hab
+  obtain ⟨x, hx⟩ := exists_not_of_fraction_lt_one _ hbad
+  exact ⟨x, not_or.mp hx⟩
+
+theorem average_nonneg {f : A → ℝ} (hf : ∀ a, 0 ≤ f a) :
+    0 ≤ average f := by
+  unfold average
+  exact div_nonneg (Finset.sum_nonneg fun a _ => hf a) (by positivity)
+
+theorem average_mono {f g : A → ℝ} (hfg : ∀ a, f a ≤ g a) :
+    average f ≤ average g := by
+  exact div_le_div_of_nonneg_right (Finset.sum_le_sum fun a _ => hfg a) (by positivity)
+
+theorem fraction_eq_average_indicator (P : A → Prop) :
+    fraction P = average (fun a => if P a then 1 else 0) := by
+  unfold fraction average
+  congr 1
+  simp only [← Finset.sum_filter, Finset.sum_const, nsmul_eq_mul, mul_one]
+
+theorem average_mul_const (f : A → ℝ) (t : ℝ) :
+    average (fun a => f a * t) = average f * t := by
+  simp only [average, Finset.sum_mul]
+  ring
+
+theorem average_const [Nonempty A] (t : ℝ) :
+    average (fun _ : A => t) = t := by
+  have hA : (Fintype.card A : ℝ) ≠ 0 := by
+    exact_mod_cast Fintype.card_ne_zero
+  simp [average, hA]
+
+theorem average_add (f g : A → ℝ) :
+    average (fun a => f a + g a) = average f + average g := by
+  simp [average, Finset.sum_add_distrib, add_div]
+
+theorem average_equiv {B : Type*} [Fintype B] [DecidableEq B]
+    (e : A ≃ B) (f : B → ℝ) : average (fun a => f (e a)) = average f := by
+  unfold average
+  rw [e.sum_comp, Fintype.card_congr e]
+
+theorem fraction_equiv {B : Type*} [Fintype B] [DecidableEq B]
+    (e : A ≃ B) (P : B → Prop) : fraction (fun a => P (e a)) = fraction P := by
+  simp only [fraction_eq_average_indicator]
+  exact average_equiv e (fun b => if P b then 1 else 0)
+
+theorem fraction_product {B : Type*} [Fintype B] [DecidableEq B]
+    (P : A → Prop) (Q : B → Prop) :
+    fraction (fun ab : A × B => P ab.1 ∧ Q ab.2) = fraction P * fraction Q := by
+  simp only [fraction_eq_average_indicator, average, Fintype.sum_prod_type]
+  have hi (a : A) (b : B) :
+      (if P a ∧ Q b then (1 : ℝ) else 0) =
+        (if P a then 1 else 0) * (if Q b then 1 else 0) := by
+    by_cases hp : P a <;> by_cases hq : Q b <;> simp [hp, hq]
+  simp_rw [hi]
+  rw [← Finset.mul_sum, ← Finset.sum_mul]
+  simp [Fintype.card_prod, Nat.cast_mul, div_eq_mul_inv]
+  ring
+
+theorem fraction_fst {B : Type*} [Fintype B] [DecidableEq B] [Nonempty B]
+    (P : A → Prop) : fraction (fun ab : A × B => P ab.1) = fraction P := by
+  simpa only [and_true, fraction_true, mul_one] using
+    fraction_product P (fun _ : B => True)
+
+theorem fraction_snd [Nonempty A] {B : Type*} [Fintype B] [DecidableEq B]
+    (Q : B → Prop) : fraction (fun ab : A × B => Q ab.2) = fraction Q := by
+  simpa only [true_and, fraction_true, one_mul] using
+    fraction_product (fun _ : A => True) Q
+
+theorem fraction_not [Nonempty A] (P : A → Prop) :
+    fraction (fun a => ¬ P a) = 1 - fraction P := by
+  have hind (a : A) :
+      (if P a then (1 : ℝ) else 0) + (if ¬ P a then 1 else 0) = 1 := by
+    by_cases ha : P a <;> simp [ha]
+  have h := average_add (fun a => if P a then (1 : ℝ) else 0)
+    (fun a => if ¬ P a then 1 else 0)
+  simp_rw [hind] at h
+  rw [average_const, ← fraction_eq_average_indicator,
+    ← fraction_eq_average_indicator] at h
+  linarith
+
+/-- Finite Markov inequality, without any independence assumption. -/
+theorem fraction_ge_le_average_div (f : A → ℝ) (hf : ∀ a, 0 ≤ f a)
+    {t : ℝ} (ht : 0 < t) :
+    fraction (fun a => t ≤ f a) ≤ average f / t := by
+  have hpoint (a : A) : (if t ≤ f a then (1 : ℝ) else 0) * t ≤ f a := by
+    split_ifs with ha
+    · simpa using ha
+    · simpa using hf a
+  have h := average_mono hpoint
+  rw [average_mul_const, ← fraction_eq_average_indicator] at h
+  exact (le_div_iff₀ ht).mpr h
+
+/-- Product rule on the actual finite function space, proved by finite sums. -/
+theorem fraction_forall_eq_prod {J : Type*} [Fintype J] [DecidableEq J]
+    (P : J → A → Prop) :
+    fraction (fun f : J → A => ∀ j, P j (f j)) =
+      ∏ j : J, fraction (P j) := by
+  rw [fraction_eq_sum]
+  calc
+    (∑ f : J → A, @ite ℝ (∀ j, P j (f j)) (Classical.propDecidable _)
+        ((1 : ℝ) / Fintype.card (J → A)) 0) =
+        ∑ f : J → A, ∏ j : J,
+          if P j (f j) then (1 : ℝ) / Fintype.card A else 0 := by
+      apply Finset.sum_congr rfl
+      intro f _
+      by_cases hf : ∀ j, P j (f j)
+      · simp [hf, Fintype.card_fun, div_eq_mul_inv]
+      · obtain ⟨j, hj⟩ : ∃ j, ¬ P j (f j) := by
+          simpa only [not_forall] using hf
+        have hz : (∏ j : J,
+            if P j (f j) then (1 : ℝ) / Fintype.card A else 0) = 0 :=
+          Finset.prod_eq_zero (Finset.mem_univ j) (by simp [hj])
+        rw [if_neg hf, hz]
+    _ = ∏ j : J, ∑ a : A,
+        if P j a then (1 : ℝ) / Fintype.card A else 0 :=
+      (Fintype.prod_sum (fun j a =>
+        if P j a then (1 : ℝ) / Fintype.card A else 0)).symm
+    _ = ∏ j : J, fraction (P j) := by simp_rw [← fraction_eq_sum]
+
+end JSP539.FiniteProbability

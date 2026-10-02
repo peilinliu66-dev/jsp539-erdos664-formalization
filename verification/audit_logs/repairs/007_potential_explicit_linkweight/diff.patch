@@ -1,0 +1,12 @@
+--- before/JSP539.ContainerPotential
++++ after/JSP539.ContainerPotential
+@@ -130,7 +130,8 @@
+     ring
+   have hh := mul_le_mul_of_nonneg_left c.heavy (by norm_num : (0 : ℝ) ≤ 1 / 2)
+   rw [hhalf] at hh
+-  exact (add_le_add_left hh _).trans hgain
++  dsimp [linkWeight] at hh
++  linarith
+ 
+ lemma reject_potential_mono {H : Hypergraph V} {p : ℝ} {r : ℕ}
+     (hr : 0 < r) (hp : 0 ≤ p) (hanti : H.IsAntichain)

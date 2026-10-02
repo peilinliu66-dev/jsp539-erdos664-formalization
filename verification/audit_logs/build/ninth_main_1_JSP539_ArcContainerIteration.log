@@ -1,0 +1,36 @@
+JSP539/ArcContainerIteration.lean:38:28: warning: `dif_pos` has been deprecated: Use `dite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  d̵i̵f̵_̵p̵o̵s̵d̲i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+JSP539/ArcContainerIteration.lean:50:28: warning: `dif_neg` has been deprecated: Use `dite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  d̵i̵f̵_̵n̵e̵g̵d̲i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+JSP539/ArcContainerIteration.lean:85:12: warning: This simp argument is unused:
+  point_card
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [pow_two]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+JSP539/ArcContainerIteration.lean:133:31: warning: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+JSP539/ArcContainerIteration.lean:148:17: warning: Unused tactic linter: `linarith` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+JSP539/ArcContainerIteration.lean:151:21: warning: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+JSP539/ArcContainerIteration.lean:133:31: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+JSP539/ArcContainerIteration.lean:148:17: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+JSP539/ArcContainerIteration.lean:151:21: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+JSP539/ArcContainerIteration.lean:146:14: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`

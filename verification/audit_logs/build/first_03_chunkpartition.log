@@ -1,0 +1,54 @@
+JSP539/ChunkPartition.lean:25:29: error(lean.invalidField): Invalid field `Pairwise`: The environment does not contain `Finset.Pairwise`, so it is not possible to project the field `Pairwise` from an expression
+  chunks
+of type `Finset (Finset V)`
+JSP539/ChunkPartition.lean:49:33: error: unsolved goals
+V : Type u_1
+inst✝ : DecidableEq V
+X : Finset V
+gamma : ℕ
+hgamma : 0 < gamma
+n : ℕ
+ih : ∀ m < n, ∀ (Y : Finset V), Y.card = m → Nonempty (ChunkPartition Y gamma)
+Y : Finset V
+hY : Y.card = n
+hsmall : Y.card < gamma
+⊢ sorry ()
+JSP539/ChunkPartition.lean:80:18: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce
+
+case neg.refine_3
+V : Type u_1
+inst✝ : DecidableEq V
+X : Finset V
+gamma : ℕ
+hgamma : 0 < gamma
+n : ℕ
+ih : ∀ m < n, ∀ (Y : Finset V), Y.card = m → Nonempty (ChunkPartition Y gamma)
+Y : Finset V
+hY : Y.card = n
+hsmall : ¬Y.card < gamma
+hlarge : gamma ≤ Y.card
+C : Finset V
+hCY : C ⊆ Y
+hCcard : C.card = gamma
+hsmaller : (Y \ C).card < n
+P : ChunkPartition (Y \ C) gamma
+⊢ sorry
+JSP539/ChunkPartition.lean:122:34: error(lean.invalidField): Invalid field `Pairwise`: The environment does not contain `Finset.Pairwise`, so it is not possible to project the field `Pairwise` from an expression
+  S
+of type `Finset (Finset V)`
+JSP539/ChunkPartition.lean:132:22: error(lean.invalidField): Invalid field `Pairwise`: The environment does not contain `Finset.Pairwise`, so it is not possible to project the field `Pairwise` from an expression
+  S
+of type `Finset (Finset V)`
+JSP539/ChunkPartition.lean:133:14: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce
+
+V : Type u_1
+inst✝ : DecidableEq V
+gamma : ℕ
+C : Finset V
+S : Finset (Finset V)
+hCS : C ∉ S
+ih : (∀ C ∈ S, C.card = gamma) → ∀ (a : sorry), (S.biUnion id).card = gamma * S.card
+hcard : ∀ C_1 ∈ insert C S, C_1.card = gamma
+hdisj : sorry
+hcardS : ∀ D ∈ S, D.card = gamma
+⊢ sorry

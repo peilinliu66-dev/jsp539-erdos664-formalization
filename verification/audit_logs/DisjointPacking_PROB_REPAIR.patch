@@ -1,0 +1,31 @@
+--- original/JSP539/DisjointPacking.lean
++++ candidate/JSP539/DisjointPacking.lean
+@@ -5,7 +5,10 @@
+ A finite maximal-packing argument. This is the elementary replacement for
+ Janson's inequality in the fixed-K specialization. No compilation has run.
+ -/
+-import Mathlib
++import Mathlib.Algebra.Order.BigOperators.Group.Finset
++import Mathlib.Data.Finset.Max
++import Mathlib.Data.Fintype.Powerset
++import Mathlib.Tactic
+ 
+ open scoped BigOperators Classical
+ 
+@@ -77,12 +80,12 @@
+       · exact hIT hz
+     have hinsertSep : PairwiseDisjoint A (insert j I) := by
+       intro i hi z hz hiz
+-      rcases Finset.mem_insert.mp hi with rfl | hi
++      rcases Finset.mem_insert.mp hi with rfl | hiI
+       · have hzI : z ∈ I := (Finset.mem_insert.mp hz).resolve_left (Ne.symm hiz)
+         exact (hjdis z hzI).symm
+-      · rcases Finset.mem_insert.mp hz with rfl | hz
+-        · exact hjdis i hi
+-        · exact hIsep i hi z hz hiz
++      · rcases Finset.mem_insert.mp hz with rfl | hzI
++        · exact hjdis i hiI
++        · exact hIsep i hiI z hzI hiz
+     have hinsert : insert j I ∈ choices :=
+       Finset.mem_filter.mpr ⟨Finset.mem_powerset.mpr hinsertT, hinsertSep⟩
+     have hcard := hmax (insert j I) hinsert

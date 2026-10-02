@@ -1,0 +1,11 @@
+Pell.eq_pow_of_pell {m n k : ℕ} :
+  n ^ k = m ↔
+    k = 0 ∧ m = 1 ∨
+      0 < k ∧
+        (n = 0 ∧ m = 0 ∨
+          0 < n ∧
+            ∃ w a t z,
+              ∃ (a1 : 1 < a),
+                Pell.xn a1 k ≡ Pell.yn a1 k * (a - n) + m [MOD t] ∧
+                  2 * a * n = t + (n * n + 1) ∧
+                    m < t ∧ n ≤ w ∧ k ≤ w ∧ a * a - ((w + 1) * (w + 1) - 1) * (w * z) * (w * z) = 1)

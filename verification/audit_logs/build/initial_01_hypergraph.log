@@ -1,0 +1,4 @@
+LicensedContainers/Hypergraph.lean:20:0: warning: 
+'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic

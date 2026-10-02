@@ -1,0 +1,58 @@
+--- before/JSP539.UniformBits
++++ after/JSP539.UniformBits
+@@ -30,7 +30,6 @@
+ 
+ /-- Disjoint coordinate support implies exact independence on the full fair
+ sample space; this is not an assumed property of the experiment. -/
+-set_option maxHeartbeats 2000000 in
+ theorem fraction_and_of_disjoint_support (P Q : Sample V → Prop)
+     (S T : Finset V) (hP : DependsOn P S) (hQ : DependsOn Q T)
+     (hST : Disjoint S T) :
+@@ -54,7 +53,8 @@
+         congr 1
+         funext f
+         exact propext (hPf f)
+-      _ = fraction (fun ab : (S → Bool) × ({v : V // v ∉ S} → Bool) => P' ab.1) := fraction_equiv e _
++      _ = fraction (fun ab : (S → Bool) × ({v : V // v ∉ S} → Bool) => P' ab.1) :=
++        fraction_equiv e (fun ab => P' ab.1)
+       _ = fraction P' := fraction_fst _
+   have hQmarg : fraction Q = fraction Q' := by
+     calc
+@@ -62,7 +62,8 @@
+         congr 1
+         funext f
+         exact propext (hQf f)
+-      _ = fraction (fun ab : (S → Bool) × ({v : V // v ∉ S} → Bool) => Q' ab.2) := fraction_equiv e _
++      _ = fraction (fun ab : (S → Bool) × ({v : V // v ∉ S} → Bool) => Q' ab.2) :=
++        fraction_equiv e (fun ab => Q' ab.2)
+       _ = fraction Q' := fraction_snd _
+   calc
+     fraction (fun f => P f ∧ Q f) =
+@@ -70,7 +71,8 @@
+       congr 1
+       funext f
+       exact propext (and_congr (hPf f) (hQf f))
+-    _ = fraction (fun ab : (S → Bool) × ({v : V // v ∉ S} → Bool) => P' ab.1 ∧ Q' ab.2) := fraction_equiv e _
++    _ = fraction (fun ab : (S → Bool) × ({v : V // v ∉ S} → Bool) => P' ab.1 ∧ Q' ab.2) :=
++      fraction_equiv e (fun ab => P' ab.1 ∧ Q' ab.2)
+     _ = fraction P' * fraction Q' := fraction_product _ _
+     _ = fraction P * fraction Q := by rw [hPmarg, hQmarg]
+ 
+@@ -135,7 +137,6 @@
+   · rintro ⟨v, hv, hg⟩
+     exact ⟨v, hv, (hfg v hv).trans hg⟩
+ 
+-set_option maxHeartbeats 2000000 in
+ theorem fraction_avoids (S : Finset V) :
+     fraction (avoids S) = (1 / 2 : ℝ) ^ S.card := by
+   let e : Sample V ≃ ((S → Bool) × ({v : V // v ∉ S} → Bool)) :=
+@@ -148,7 +149,8 @@
+       funext f
+       exact propext (hform f)
+     _ = fraction (fun ab : (S → Bool) × ({v : V // v ∉ S} → Bool) =>
+-      ∀ v : S, ab.1 v = false) := fraction_equiv e _
++      ∀ v : S, ab.1 v = false) :=
++      fraction_equiv e (fun ab => ∀ v : S, ab.1 v = false)
+     _ = fraction (fun f : S → Bool => ∀ v, f v = false) := fraction_fst _
+     _ = ∏ _v : S, fraction (fun b : Bool => b = false) :=
+       fraction_forall_eq_prod (fun _v : S => fun b : Bool => b = false)

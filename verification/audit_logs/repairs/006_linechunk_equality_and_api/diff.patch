@@ -1,0 +1,28 @@
+--- before/JSP539.LineChunks
++++ after/JSP539.LineChunks
+@@ -27,6 +27,7 @@
+   let D := (C.powersetCard k).filter (fun e => S ⊆ e)
+   have hinj : Set.InjOn (fun e : Finset V => e \ S) (↑D : Set (Finset V)) := by
+     intro e he f hf hef
++    change e \ S = f \ S at hef
+     have hSe := (Finset.mem_filter.mp he).2
+     have hSf := (Finset.mem_filter.mp hf).2
+     calc
+@@ -53,7 +54,7 @@
+ theorem powersetCard_degree_eq_zero (C S : Finset V) (k : ℕ) (hSC : ¬ S ⊆ C) :
+     ((C.powersetCard k).filter (fun e => S ⊆ e)).card = 0 := by
+   apply Finset.card_eq_zero.mpr
+-  apply Finset.eq_empty_iff_forall_not_mem.mpr
++  apply Finset.eq_empty_iff_forall_notMem.mpr
+   intro e he
+   obtain ⟨heC, hSe⟩ := Finset.mem_filter.mp he
+   exact hSC (hSe.trans (Finset.mem_powersetCard.mp heC).1)
+@@ -251,7 +252,7 @@
+   have hbase : gamma * (q * (q + 1)) ≤ gamma * (allChunks P).card := by
+     nlinarith
+   have hmany : q * (q + 1) ≤ (allChunks P).card :=
+-    (mul_le_mul_left hgamma).mp hbase
++    Nat.le_of_mul_le_mul_left hbase hgamma
+   nlinarith
+ 
+ /-- At most one chunk through a point can occur in each direction. -/

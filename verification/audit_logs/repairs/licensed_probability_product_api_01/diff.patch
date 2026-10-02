@@ -1,0 +1,19 @@
+--- before/JSP539.ContainerProbability
++++ after/JSP539.ContainerProbability
+@@ -6,6 +6,7 @@
+ exponential bound is obtained from actual disjoint traces, not an independence
+ assumption about arbitrary lines. UNCOMPILED source.
+ -/
++import Mathlib.Algebra.Order.BigOperators.GroupWithZero.Finset
+ import JSP539.ShortTraces
+ import JSP539.UniformBits
+ 
+@@ -93,7 +94,7 @@
+       _ = ∏ l ∈ I, (1 - (1 / 2 : ℝ) ^ (shortTrace C l).card) :=
+         fraction_hits_all (shortTrace C) I hsep
+       _ ≤ ∏ _l ∈ I, Real.exp (-a) :=
+-        Finset.prod_le_prod hfactor_nonneg hfactor
++        Finset.prod_le_prod₀ hfactor_nonneg hfactor
+       _ = Real.exp (-(a * I.card)) := by
+         simp only [Finset.prod_const]
+         rw [← Real.exp_nat_mul]

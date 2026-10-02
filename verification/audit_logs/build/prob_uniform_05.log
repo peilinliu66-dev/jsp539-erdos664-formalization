@@ -1,0 +1,34 @@
+JSP539/UniformBits.lean:44:10: warning: This simp argument is unused:
+  P'
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [insideExtension, e, hv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+JSP539/UniformBits.lean:49:10: warning: This simp argument is unused:
+  Q'
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [outsideExtension, e, hvS]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+JSP539/UniformBits.lean:79:0: warning: automatically included section variable(s) unused in theorem `JSP539.UniformBits.dependsOn_forall`:
+  [Fintype V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+JSP539/UniformBits.lean:132:0: warning: automatically included section variable(s) unused in theorem `JSP539.UniformBits.hits_dependsOn`:
+  [Fintype V]
+  [DecidableEq V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] [DecidableEq V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+JSP539/UniformBits.lean:165:0: warning: automatically included section variable(s) unused in theorem `JSP539.UniformBits.hits_iff_not_avoids`:
+  [Fintype V]
+  [DecidableEq V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] [DecidableEq V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`

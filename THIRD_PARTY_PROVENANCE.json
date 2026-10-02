@@ -1,0 +1,49 @@
+[
+  {
+    "file": "LicensedContainers/Hypergraph.lean",
+    "upstream_url": "https://github.com/plby/lean-proofs/blob/8822f7ddef30fadbd92e1c6ab4ed897af356af5e/src/latest/ErdosProblems/Erdos565/Hypergraph.lean",
+    "git_blob_sha": "87aa8f4ef12fcc6b9192470474352f7238eb7a2a",
+    "upstream_sha256": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb",
+    "local_sha256": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb",
+    "license": "Explicit upstream Apache-2.0 header",
+    "modifications": "Only ErdosProblems.Erdos565 import-path prefix changed to LicensedContainers; mathematical bodies and namespaces preserved"
+  },
+  {
+    "file": "LicensedContainers/ContainerFuel.lean",
+    "upstream_url": "https://github.com/plby/lean-proofs/blob/8822f7ddef30fadbd92e1c6ab4ed897af356af5e/src/latest/ErdosProblems/Erdos565/ContainerFuel.lean",
+    "git_blob_sha": "31af944e4a5d05c5e6cbf5ab66896f44b67ed5bc",
+    "upstream_sha256": "1844a5feb5fc5544e422cc1e3ae0bc4f01ba04741e90a603d5a99c5a6edacb5f",
+    "local_sha256": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+    "license": "Explicit upstream Apache-2.0 header",
+    "modifications": "Only ErdosProblems.Erdos565 import-path prefix changed to LicensedContainers; mathematical bodies and namespaces preserved"
+  },
+  {
+    "file": "LicensedContainers/ContainerInvariants.lean",
+    "upstream_url": "https://github.com/plby/lean-proofs/blob/8822f7ddef30fadbd92e1c6ab4ed897af356af5e/src/latest/ErdosProblems/Erdos565/ContainerInvariants.lean",
+    "git_blob_sha": "85d221b7590e996245e284c98221ef2927ec121d",
+    "upstream_sha256": "3ac7b6a48718735a7a99262f026afd3d635d1d65a106cf20e6ae66019e0d382b",
+    "local_sha256": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+    "license": "Explicit upstream Apache-2.0 header",
+    "modifications": "Only ErdosProblems.Erdos565 import-path prefix changed to LicensedContainers; mathematical bodies and namespaces preserved"
+  },
+  {
+    "file": "LicensedContainers/ContainerWeight.lean",
+    "upstream_url": "https://github.com/plby/lean-proofs/blob/8822f7ddef30fadbd92e1c6ab4ed897af356af5e/src/latest/ErdosProblems/Erdos565/ContainerWeight.lean",
+    "git_blob_sha": "c8493745d441d3904fab31095e888a46d10ca86f",
+    "upstream_sha256": "52f5f52ae3dc5dd8442df8dd11b31cc4ada2f2e751012f6236c356db9322f9d9",
+    "local_sha256": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+    "license": "Explicit upstream Apache-2.0 header",
+    "modifications": "Import paths changed to LicensedContainers; unused unlicensed FiniteAnalysis import replaced by Mathlib. No upstream FiniteAnalysis proof is copied or referenced. Mathematical body unchanged.; compiler/API repairs recorded in verification/audit_logs",
+    "supplied_local_sha256": "e281197a67f0dbae3cd484c2f03a474c1e10412242a0d3ddc150b66917454a32"
+  },
+  {
+    "file": "LicensedContainers/ContainerSelector.lean",
+    "upstream_url": "https://github.com/plby/lean-proofs/blob/8822f7ddef30fadbd92e1c6ab4ed897af356af5e/src/latest/ErdosProblems/Erdos565/ContainerSelector.lean",
+    "git_blob_sha": "fa911c3c7dd1c01000031a0984275f3b1e2cfa0a",
+    "upstream_sha256": "c0a549eb2c04f09dd0d924cb5a652706774639ee630bc8fa0b7f5b5f5da20461",
+    "local_sha256": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+    "license": "Explicit upstream Apache-2.0 header",
+    "modifications": "Only ErdosProblems.Erdos565 import-path prefix changed to LicensedContainers; mathematical bodies and namespaces preserved; compiler/API repairs recorded in verification/audit_logs",
+    "supplied_local_sha256": "e115359961aa28988b332fd63e88c93d54992814368475865a65ec459929eafc"
+  }
+]

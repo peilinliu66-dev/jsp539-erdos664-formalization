@@ -1,0 +1,46 @@
+JSP539/LineChunks.lean:34:32: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (fun e => e \ S) e
+in the target expression
+  S ∪ e \ S = S ∪ f \ S
+
+V : Type u_1
+inst✝ : DecidableEq V
+C S : Finset V
+k : ℕ
+hSC : S ⊆ C
+D : Finset (Finset V) := {e ∈ Finset.powersetCard k C | S ⊆ e}
+e : Finset V
+he : e ∈ ↑D
+f : Finset V
+hf : f ∈ ↑D
+hef : (fun e => e \ S) e = (fun e => e \ S) f
+hSe : S ⊆ e
+hSf : S ⊆ f
+⊢ S ∪ e \ S = S ∪ f \ S
+JSP539/LineChunks.lean:56:8: error(lean.unknownIdentifier): Unknown constant `Finset.eq_empty_iff_forall_not_mem.mpr`
+JSP539/LineChunks.lean:57:8: error: No goals to be solved
+JSP539/LineChunks.lean:254:29: error(lean.invalidField): Invalid field `mp`: The environment does not contain `Function.mp`, so it is not possible to project the field `mp` from an expression
+  mul_le_mul_left ?m.304
+of type
+  ∀ (a : ?m.298), ?m.299 * a ≤ ?m.300 * a
+JSP539/LineChunks.lean:254:21: error: Application type mismatch: The argument
+  hgamma
+has type
+  0 < gamma
+but is expected to have type
+  ?m.299 ≤ ?m.300
+in the application
+  mul_le_mul_left hgamma
+JSP539/LineChunks.lean:246:29: warning: This simp argument is unused:
+  Nat.mul_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Finset.mul_sum, Finset.sum_add_distrib, Nat.mul_add, Nat.mul_comm, Nat.mul_left_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+JSP539/LineChunks.lean:360:0: warning: automatically included section variable(s) unused in theorem `JSP539.Affine.chunkSize_mul_le`:
+  [Fact (Nat.Prime q)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (Nat.Prime q)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`

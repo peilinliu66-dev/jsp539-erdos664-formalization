@@ -1,0 +1,42 @@
+--- before/JSP539.ArcContainerStep
++++ after/JSP539.ArcContainerStep
+@@ -37,7 +37,7 @@
+       nlinarith [mul_nonneg (show (0 : ℝ) ≤ t by positivity)
+         (sub_nonneg.mpr hkg')]
+     have htpos : (0 : ℝ) < (t : ℝ) + 1 := by positivity
+-    apply (mul_le_mul_right htpos).mp
++    apply (mul_le_mul_iff_left₀ htpos).mp
+     calc
+       (k.choose (t + 1) : ℝ) * (g : ℝ) ^ (t + 1) * ((t : ℝ) + 1) =
+           ((k.choose (t + 1) : ℝ) * ((t : ℝ) + 1)) * (g : ℝ) ^ t * g := by
+@@ -63,7 +63,7 @@
+   have hidentity : (g.choose k : ℝ) * (k.choose t : ℝ) =
+       (g.choose t : ℝ) * ((g - t).choose (k - t) : ℝ) := by
+     exact_mod_cast (Nat.choose_mul (n := g) htk)
+-  apply (mul_le_mul_left hpos).mp
++  apply (mul_le_mul_iff_right₀ hpos).mp
+   calc
+     (g.choose t : ℝ) * (((g - t).choose (k - t) : ℝ) * (g : ℝ) ^ t) =
+         ((g.choose k : ℝ) * (k.choose t : ℝ)) * (g : ℝ) ^ t := by
+@@ -108,7 +108,9 @@
+   have hNp : (0 : ℝ) < X.card := by exact_mod_cast (show 0 < X.card by omega)
+   have hN : (X.card : ℝ) ≤ 3 * g * q := by
+     exact_mod_cast card_le_three_chunkSize hk hX
+-  have he : (q : ℝ) ^ 2 * c ≤ B.H.card := by exact_mod_cast B.edge_lower
++  have he : (q : ℝ) ^ 2 * c ≤ B.H.card := by
++    dsimp [c, g]
++    exact_mod_cast B.edge_lower
+   have hchoose : ((g - 1).choose (k - 1) : ℝ) * g ≤ (k : ℝ) * c := by
+     simpa [c] using shifted_choose_scaled_le hkg (show 1 ≤ k by omega)
+   have hd : (B.H.degree {v} : ℝ) ≤ ((q : ℝ) + 1) * ((g - 1).choose (k - 1) : ℝ) := by
+@@ -151,7 +153,9 @@
+   have hLp : 0 < L := lt_of_lt_of_le zero_lt_one hL1
+   have hN : (X.card : ℝ) ≤ 3 * g * q := by
+     exact_mod_cast card_le_three_chunkSize hk hX
+-  have he : (q : ℝ) ^ 2 * c ≤ B.H.card := by exact_mod_cast B.edge_lower
++  have he : (q : ℝ) ^ 2 * c ≤ B.H.card := by
++    dsimp [c, g]
++    exact_mod_cast B.edge_lower
+   have hd : (B.H.degree E : ℝ) * (g : ℝ) ^ t ≤ (k : ℝ) ^ t * c := by
+     calc
+       (B.H.degree E : ℝ) * (g : ℝ) ^ t ≤

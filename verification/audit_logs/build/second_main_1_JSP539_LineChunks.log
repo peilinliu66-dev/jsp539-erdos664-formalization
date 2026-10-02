@@ -1,0 +1,13 @@
+JSP539/LineChunks.lean:247:29: warning: This simp argument is unused:
+  Nat.mul_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Finset.mul_sum, Finset.sum_add_distrib, Nat.mul_add, Nat.mul_comm, Nat.mul_left_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+JSP539/LineChunks.lean:361:0: warning: automatically included section variable(s) unused in theorem `JSP539.Affine.chunkSize_mul_le`:
+  [Fact (Nat.Prime q)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (Nat.Prime q)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`

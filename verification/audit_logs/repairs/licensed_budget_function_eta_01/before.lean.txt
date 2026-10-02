@@ -1,0 +1,58 @@
+/-
+Copyright 2026 The JSP539 Formalization Authors.
+Licensed under the Apache License, Version 2.0; see LICENSE.
+
+The entire union budget tends to zero for each fixed intersection bound.
+This is a scalar limit; the preceding and following modules establish the
+actual event bounds to which it is applied. UNCOMPILED source.
+-/
+import JSP539.ContainerProbability
+
+open Filter
+open scoped Topology
+
+namespace JSP539.Affine
+
+noncomputable def lineFailureBudget (q : ℕ) : ℝ :=
+  (q : ℝ) * (q + 1) * Real.exp (-(q : ℝ) / 200)
+
+noncomputable def totalFailureBudget (k q : ℕ) : ℝ :=
+  Real.exp (-(hittingRate k / 2) * q) + lineFailureBudget q
+
+theorem tendsto_lineFailureBudget_zero :
+    Tendsto lineFailureBudget atTop (𝓝 0) := by
+  have hcast : Tendsto (fun q : ℕ => (q : ℝ)) atTop atTop :=
+    tendsto_natCast_atTop_atTop
+  have ht : Tendsto (fun q : ℕ => (1 / 200 : ℝ) * q) atTop atTop :=
+    hcast.const_mul_atTop (by norm_num)
+  have h2 := (Real.tendsto_pow_mul_exp_neg_atTop_nhds_zero 2).comp ht
+  have h1 := (Real.tendsto_pow_mul_exp_neg_atTop_nhds_zero 1).comp ht
+  have h := (h2.const_mul 40000).add (h1.const_mul 200)
+  convert h using 1
+  · funext q
+    dsimp [lineFailureBudget, Function.comp_def]
+    have he : -((1 / 200 : ℝ) * q) = -(q : ℝ) / 200 := by ring
+    rw [he]
+    ring
+  · norm_num
+
+theorem tendsto_totalFailureBudget_zero (k : ℕ) (hk : 2 ≤ k) :
+    Tendsto (totalFailureBudget k) atTop (𝓝 0) := by
+  have hr : 0 < hittingRate k / 2 := by
+    exact div_pos (hittingRate_pos k hk) (by norm_num)
+  have ht : Tendsto (fun q : ℕ => (hittingRate k / 2) * q) atTop atTop :=
+    (tendsto_natCast_atTop_atTop : Tendsto (fun q : ℕ => (q : ℝ))
+      atTop atTop).const_mul_atTop hr
+  have he : Tendsto (fun q : ℕ => Real.exp (-(hittingRate k / 2) * q))
+      atTop (𝓝 0) := by
+    simpa only [Function.comp_def, neg_mul] using
+      Real.tendsto_exp_neg_atTop_nhds_zero.comp ht
+  simpa only [totalFailureBudget, zero_add] using
+    he.add tendsto_lineFailureBudget_zero
+
+theorem eventually_totalFailureBudget_lt_one (k : ℕ) (hk : 2 ≤ k) :
+    ∀ᶠ q : ℕ in atTop, totalFailureBudget k q < 1 :=
+  (tendsto_totalFailureBudget_zero k hk).eventually
+    (gt_mem_nhds (by norm_num : (0 : ℝ) < 1))
+
+end JSP539.Affine

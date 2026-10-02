@@ -1,0 +1,10 @@
+{
+  "module": "LicensedContainers.ContainerWeight",
+  "label": "licensed_weight_resource_imports_01",
+  "recorded_utc": "2026-10-02T08:45:05.315381+00:00",
+  "reason": "Resource compatibility: replace the whole Mathlib umbrella import by the finite powerset and tactics used by this file. The wide import failed reading an existing private olean; the isolated Pell read probe passed. No Lean or dependency version, theorem statement, or proof is changed.",
+  "diagnostic_log": "verification/build/licensed_weight_01.log; verification/build/narrow_pell_read_probe_01.log",
+  "before_sha256": "e281197a67f0dbae3cd484c2f03a474c1e10412242a0d3ddc150b66917454a32",
+  "after_sha256": "96e8974799bf8d93bca33d02f8db1eecf3688e886741ede129aa5f361b673a7f",
+  "statement_changed": false
+}

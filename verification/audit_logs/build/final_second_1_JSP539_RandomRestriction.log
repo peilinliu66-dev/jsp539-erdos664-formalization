@@ -1,0 +1,15 @@
+JSP539/RandomRestriction.lean:42:31: warning: This simp argument is unused:
+  line_card
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [lineFailureBudget, Nat.cast_mul, Nat.cast_add, mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+JSP539/RandomRestriction.lean:111:2: warning: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`

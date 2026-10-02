@@ -1,0 +1,270 @@
+/-
+Copyright 2026 The JSP539 Formalization Authors.
+Licensed under the Apache License, Version 2.0; see LICENSE.
+
+Original finite estimates for the fixed-k specialization of Jiaxi Nie,
+arXiv:2609.07736, using the proved Campos--Samotij shrinking theorem.
+Status: UNCOMPILED. No Lean, Lake, or compiler was run for this source.
+-/
+import JSP539.LineChunks
+import JSP539.ContainerShrink
+
+open scoped BigOperators
+open Erdos565
+
+namespace JSP539
+
+/-- Comparison of falling-factorial ratios, proved without dividing in ℕ. -/
+theorem choose_scaled_le {g k t : ℕ} (hkg : k ≤ g) (htk : t ≤ k) :
+    (k.choose t : ℝ) * (g : ℝ) ^ t ≤ (g.choose t : ℝ) * (k : ℝ) ^ t := by
+  revert htk
+  induction t with
+  | zero => intro _; simp
+  | succ t ih =>
+    intro htk
+    have htk' : t ≤ k := by omega
+    have htg : t ≤ g := htk'.trans hkg
+    have hkrec : (k.choose (t + 1) : ℝ) * ((t : ℝ) + 1) =
+        (k.choose t : ℝ) * ((k : ℝ) - t) := by
+      simpa only [Nat.cast_mul, Nat.cast_add, Nat.cast_one, Nat.cast_sub htk'] using
+        congrArg (fun n : ℕ => (n : ℝ)) (Nat.choose_succ_right_eq k t)
+    have hgrec : (g.choose (t + 1) : ℝ) * ((t : ℝ) + 1) =
+        (g.choose t : ℝ) * ((g : ℝ) - t) := by
+      simpa only [Nat.cast_mul, Nat.cast_add, Nat.cast_one, Nat.cast_sub htg] using
+        congrArg (fun n : ℕ => (n : ℝ)) (Nat.choose_succ_right_eq g t)
+    have hfactor : ((k : ℝ) - t) * g ≤ ((g : ℝ) - t) * k := by
+      have hkg' : (k : ℝ) ≤ g := by exact_mod_cast hkg
+      nlinarith [mul_nonneg (show (0 : ℝ) ≤ t by positivity)
+        (sub_nonneg.mpr hkg')]
+    have htpos : (0 : ℝ) < (t : ℝ) + 1 := by positivity
+    apply (mul_le_mul_iff_left₀ htpos).mp
+    calc
+      (k.choose (t + 1) : ℝ) * (g : ℝ) ^ (t + 1) * ((t : ℝ) + 1) =
+          ((k.choose (t + 1) : ℝ) * ((t : ℝ) + 1)) * (g : ℝ) ^ t * g := by
+        rw [pow_succ]; ring
+      _ = ((k.choose t : ℝ) * (g : ℝ) ^ t) * (((k : ℝ) - t) * g) := by
+        rw [hkrec]; ring
+      _ ≤ ((g.choose t : ℝ) * (k : ℝ) ^ t) * (((k : ℝ) - t) * g) := by
+        apply mul_le_mul_of_nonneg_right (ih htk')
+        exact mul_nonneg (sub_nonneg.mpr (by exact_mod_cast htk')) (by positivity)
+      _ ≤ ((g.choose t : ℝ) * (k : ℝ) ^ t) * (((g : ℝ) - t) * k) :=
+        mul_le_mul_of_nonneg_left hfactor (by positivity)
+      _ = ((g.choose (t + 1) : ℝ) * ((t : ℝ) + 1)) * (k : ℝ) ^ t * k := by
+        rw [hgrec]; ring
+      _ = (g.choose (t + 1) : ℝ) * (k : ℝ) ^ (t + 1) * ((t : ℝ) + 1) := by
+        rw [pow_succ]; ring
+
+/-- The codegree binomial ratio is at most `(k/g)^t`, including the endpoints. -/
+theorem shifted_choose_scaled_le {g k t : ℕ} (hkg : k ≤ g) (htk : t ≤ k) :
+    ((g - t).choose (k - t) : ℝ) * (g : ℝ) ^ t ≤
+      (k : ℝ) ^ t * (g.choose k : ℝ) := by
+  have hpos : (0 : ℝ) < g.choose t := by
+    exact_mod_cast Nat.choose_pos (htk.trans hkg)
+  have hidentity : (g.choose k : ℝ) * (k.choose t : ℝ) =
+      (g.choose t : ℝ) * ((g - t).choose (k - t) : ℝ) := by
+    exact_mod_cast (Nat.choose_mul (n := g) htk)
+  apply (mul_le_mul_iff_right₀ hpos).mp
+  calc
+    (g.choose t : ℝ) * (((g - t).choose (k - t) : ℝ) * (g : ℝ) ^ t) =
+        ((g.choose k : ℝ) * (k.choose t : ℝ)) * (g : ℝ) ^ t := by
+      rw [hidentity]; ring
+    _ ≤ (g.choose k : ℝ) * ((g.choose t : ℝ) * (k : ℝ) ^ t) := by
+      simpa only [mul_assoc] using
+        mul_le_mul_of_nonneg_left (choose_scaled_le hkg htk)
+          (show (0 : ℝ) ≤ g.choose k by positivity)
+    _ = (g.choose t : ℝ) * ((k : ℝ) ^ t * (g.choose k : ℝ)) := by ring
+
+namespace Affine
+
+/-- Logarithmic slack used throughout the deterministic construction. -/
+noncomputable def arcSlack (q : ℕ) : ℝ := (Real.log (q : ℝ)) ^ 3
+
+/-- A uniform, ambient-independent bound for the fingerprint cardinality. -/
+noncomputable def arcFingerprintBound (k q : ℕ) : ℕ :=
+  ⌊24 * (k : ℝ) ^ 2 * q / arcSlack q⌋₊
+
+/-- A bound for the number of children of every nonterminal node. -/
+noncomputable def arcBranchBound (k q : ℕ) : ℕ :=
+  (q ^ 2 + 1) ^ (arcFingerprintBound k q + 1)
+
+/-- The only finite numerical conditions needed for a shrinking step. -/
+def ArcStepLarge (k q : ℕ) : Prop :=
+  1 ≤ Real.log (q : ℝ) ∧
+  8 * (k : ℝ) ≤ arcSlack q ∧
+  12 * (k : ℝ) ^ k * arcSlack q ^ (k - 1) ≤ (q : ℝ)
+
+variable {q : ℕ} [Fact q.Prime]
+
+lemma normalized_degree_one {X : Finset (Point q)} {k : ℕ}
+    (hk : 2 ≤ k) (hX : 2 * k * q < X.card)
+    (B : BalancedGroundHypergraph X k (chunkSize X)) (v : Ground X) :
+    (B.H.degree {v} : ℝ) ≤ 10 * (k : ℝ) * B.H.card / X.card := by
+  let g := chunkSize X
+  let c : ℝ := (g.choose k : ℝ)
+  have hkg : k ≤ g := chunkSize_ge hX
+  have hgp : (0 : ℝ) < g := by exact_mod_cast (lt_of_lt_of_le (by omega : 0 < k) hkg)
+  have hqp : (0 : ℝ) < q := by exact_mod_cast (Fact.out : q.Prime).pos
+  have hq1 : (1 : ℝ) ≤ q := by exact_mod_cast (Fact.out : q.Prime).one_lt.le
+  have hNp : (0 : ℝ) < X.card := by exact_mod_cast (show 0 < X.card by omega)
+  have hN : (X.card : ℝ) ≤ 3 * g * q := by
+    exact_mod_cast card_le_three_chunkSize hk hX
+  have he : (q : ℝ) ^ 2 * c ≤ B.H.card := by
+    dsimp [c, g]
+    exact_mod_cast B.edge_lower
+  have hchoose : ((g - 1).choose (k - 1) : ℝ) * g ≤ (k : ℝ) * c := by
+    simpa [c] using shifted_choose_scaled_le hkg (show 1 ≤ k by omega)
+  have hd : (B.H.degree {v} : ℝ) ≤ ((q : ℝ) + 1) * ((g - 1).choose (k - 1) : ℝ) := by
+    exact_mod_cast B.degree_one v
+  apply (le_div_iff₀ hNp).mpr
+  calc
+    (B.H.degree {v} : ℝ) * X.card ≤ (B.H.degree {v} : ℝ) * (3 * g * q) :=
+      mul_le_mul_of_nonneg_left hN (by positivity)
+    _ = 3 * q * ((B.H.degree {v} : ℝ) * g) := by ring
+    _ ≤ 3 * q * ((((q : ℝ) + 1) * ((g - 1).choose (k - 1) : ℝ)) * g) := by
+      gcongr
+    _ = (3 * q * ((q : ℝ) + 1)) * (((g - 1).choose (k - 1) : ℝ) * g) := by ring
+    _ ≤ (3 * q * ((q : ℝ) + 1)) * ((k : ℝ) * c) := by gcongr
+    _ ≤ (6 * (q : ℝ) ^ 2) * ((k : ℝ) * c) := by
+      apply mul_le_mul_of_nonneg_right _ (by dsimp [c]; positivity)
+      nlinarith [mul_nonneg hqp.le (sub_nonneg.mpr hq1)]
+    _ = 6 * (k : ℝ) * ((q : ℝ) ^ 2 * c) := by ring
+    _ ≤ 6 * (k : ℝ) * B.H.card := by gcongr
+    _ ≤ 10 * (k : ℝ) * B.H.card := by
+      nlinarith [mul_nonneg (show (0 : ℝ) ≤ k by positivity)
+        (show (0 : ℝ) ≤ B.H.card by positivity)]
+
+lemma normalized_higher_degree {X : Finset (Point q)} {k : ℕ}
+    (hk : 2 ≤ k) (hX : 2 * k * q < X.card) (hlarge : ArcStepLarge k q)
+    (B : BalancedGroundHypergraph X k (chunkSize X))
+    (E : Finset (Ground X)) (hE : 2 ≤ E.card) (hEk : E.card ≤ k) :
+    (B.H.degree E : ℝ) ≤ (B.H.card : ℝ) / (4 * X.card) *
+      (1 / ((chunkSize X : ℝ) * arcSlack q)) ^ (E.card - 1) := by
+  let g := chunkSize X
+  let L := arcSlack q
+  let t := E.card
+  let c : ℝ := (g.choose k : ℝ)
+  have hkg : k ≤ g := chunkSize_ge hX
+  have hgp : (0 : ℝ) < g := by exact_mod_cast (lt_of_lt_of_le (by omega : 0 < k) hkg)
+  have hqp : (0 : ℝ) < q := by exact_mod_cast (Fact.out : q.Prime).pos
+  have hNp : (0 : ℝ) < X.card := by exact_mod_cast (show 0 < X.card by omega)
+  have hL1 : 1 ≤ L := by
+    dsimp [L, arcSlack]
+    exact one_le_pow₀ hlarge.1
+  have hLp : 0 < L := lt_of_lt_of_le zero_lt_one hL1
+  have hN : (X.card : ℝ) ≤ 3 * g * q := by
+    exact_mod_cast card_le_three_chunkSize hk hX
+  have he : (q : ℝ) ^ 2 * c ≤ B.H.card := by
+    dsimp [c, g]
+    exact_mod_cast B.edge_lower
+  have hd : (B.H.degree E : ℝ) * (g : ℝ) ^ t ≤ (k : ℝ) ^ t * c := by
+    calc
+      (B.H.degree E : ℝ) * (g : ℝ) ^ t ≤
+          ((g - t).choose (k - t) : ℝ) * (g : ℝ) ^ t := by
+        gcongr
+        exact_mod_cast B.higher_degree E hE hEk
+      _ ≤ (k : ℝ) ^ t * c := shifted_choose_scaled_le hkg hEk
+  have hkt : (k : ℝ) ^ t ≤ (k : ℝ) ^ k := by
+    exact pow_le_pow_right₀ (by exact_mod_cast (show 1 ≤ k by omega)) hEk
+  have hLt : L ^ (t - 1) ≤ L ^ (k - 1) :=
+    pow_le_pow_right₀ hL1 (Nat.sub_le_sub_right hEk 1)
+  have hq : 12 * (k : ℝ) ^ t * L ^ (t - 1) ≤ (q : ℝ) :=
+    (by gcongr : 12 * (k : ℝ) ^ t * L ^ (t - 1) ≤
+      12 * (k : ℝ) ^ k * L ^ (k - 1)).trans hlarge.2.2
+  have ht : t - 1 + 1 = t := by dsimp [t]; omega
+  have hgpow : (g : ℝ) ^ t = (g : ℝ) ^ (t - 1) * g := by
+    rw [← pow_succ, ht]
+  have hcharge : (B.H.degree E : ℝ) * (4 * X.card * ((g : ℝ) * L) ^ (t - 1)) ≤
+      B.H.card := by
+    calc
+      (B.H.degree E : ℝ) * (4 * X.card * ((g : ℝ) * L) ^ (t - 1)) ≤
+          (B.H.degree E : ℝ) * (4 * (3 * g * q) * ((g : ℝ) * L) ^ (t - 1)) := by
+        gcongr
+      _ = (12 * q * L ^ (t - 1)) * ((B.H.degree E : ℝ) * (g : ℝ) ^ t) := by
+        rw [mul_pow, hgpow]
+        ring
+      _ ≤ (12 * q * L ^ (t - 1)) * ((k : ℝ) ^ t * c) := by gcongr
+      _ = (q : ℝ) * (12 * (k : ℝ) ^ t * L ^ (t - 1)) * c := by ring
+      _ ≤ (q : ℝ) * q * c := by gcongr
+      _ = (q : ℝ) ^ 2 * c := by ring
+      _ ≤ B.H.card := he
+  have hden : 0 < 4 * (X.card : ℝ) * ((g : ℝ) * L) ^ (t - 1) := by positivity
+  have heq : (B.H.card : ℝ) / (4 * X.card) * (1 / ((g : ℝ) * L)) ^ (t - 1) =
+      (B.H.card : ℝ) / (4 * X.card * ((g : ℝ) * L) ^ (t - 1)) := by
+    rw [div_pow, one_pow, div_mul_div_comm, mul_one]
+  change (B.H.degree E : ℝ) ≤ (B.H.card : ℝ) / (4 * X.card) *
+    (1 / ((g : ℝ) * L)) ^ (t - 1)
+  rw [heq]
+  exact (le_div_iff₀ hden).mpr hcharge
+
+/-- Actual finite children of X, covering every k-arc contained in X. -/
+theorem arc_shrinking_family (k : ℕ) (hk : 2 ≤ k) (hlarge : ArcStepLarge k q)
+    (X : Finset (Point q)) (hX : 2 * k * q < X.card) :
+    ∃ Cs : Finset (Finset (Point q)),
+      Cs.card ≤ arcBranchBound k q ∧
+      (∀ Y : Finset (Point q), Y ⊆ X → IsArc k Y → ∃ C ∈ Cs, Y ⊆ C) ∧
+      (∀ C ∈ Cs, C ⊆ X ∧
+        (C.card : ℝ) ≤ (1 - 3 / (40 * (k : ℝ))) * X.card) := by
+  classical
+  let g := chunkSize X
+  let p : ℝ := 1 / ((g : ℝ) * arcSlack q)
+  let B := balancedChunkHypergraphOnGround X k hk hX
+  have hkg : k ≤ g := chunkSize_ge hX
+  have hkp : (0 : ℝ) < k := by exact_mod_cast (show 0 < k by omega)
+  have hgp : (0 : ℝ) < g := hkp.trans_le (by exact_mod_cast hkg)
+  have hLp : 0 < arcSlack q := (by positivity : 0 < 8 * (k : ℝ)).trans_le hlarge.2.1
+  have hp : 0 < p := by dsimp [p]; positivity
+  have hsmall : p ≤ 1 / (8 * (k : ℝ) ^ 2) := by
+    apply one_div_le_one_div_of_le (by positivity)
+    have hgk : (k : ℝ) ≤ g := by exact_mod_cast hkg
+    calc
+      8 * (k : ℝ) ^ 2 = (k : ℝ) * (8 * (k : ℝ)) := by ring
+      _ ≤ (g : ℝ) * arcSlack q :=
+        mul_le_mul hgk hlarge.2.1 (by positivity) hgp.le
+  have hepos : 0 < B.H.card := by
+    have hc := Nat.choose_pos hkg
+    have hq := (Fact.out : q.Prime).pos
+    exact lt_of_lt_of_le (Nat.mul_pos (pow_pos hq _) hc) B.edge_lower
+  obtain ⟨Ds, hcount, hcover, hshrink⟩ := ContainerCore.shrinking_family B.H k p
+    (by omega) B.uniform (Finset.card_pos.mp hepos) hp hsmall
+    (by intro v; simpa only [ground_card] using normalized_degree_one hk hX B v)
+    (by intro E hE hEk; simpa only [ground_card] using
+      normalized_higher_degree hk hX hlarge B E hE hEk)
+  let f : Finset (Ground X) → Finset (Point q) := fun C => C.image Subtype.val
+  refine ⟨Ds.image f, ?_, ?_, ?_⟩
+  · have hXq : X.card ≤ q ^ 2 := retained_card_le X
+    have hN : (X.card : ℝ) ≤ 3 * g * q := by
+      exact_mod_cast card_le_three_chunkSize hk hX
+    have hM : 8 * (k : ℝ) ^ 2 * p * X.card ≤
+        24 * (k : ℝ) ^ 2 * q / arcSlack q := by
+      calc
+        8 * (k : ℝ) ^ 2 * p * X.card ≤ 8 * (k : ℝ) ^ 2 * p * (3 * g * q) := by
+          gcongr
+        _ = _ := by dsimp [p]; field_simp [hgp.ne', hLp.ne']; ring
+    calc
+      (Ds.image f).card ≤ Ds.card := Finset.card_image_le
+      _ ≤ (X.card + 1) ^ (⌊8 * (k : ℝ) ^ 2 * p * X.card⌋₊ + 1) := by
+        simpa only [ground_card] using hcount
+      _ ≤ (q ^ 2 + 1) ^ (⌊8 * (k : ℝ) ^ 2 * p * X.card⌋₊ + 1) := by gcongr
+      _ ≤ arcBranchBound k q := by
+        apply pow_le_pow_right₀ (by omega : 1 ≤ q ^ 2 + 1)
+        exact Nat.add_le_add_right (Nat.floor_mono hM) 1
+  · intro Y hYX hY
+    let I := liftEdge X Y
+    have hI : B.H.IsIndependent I := by
+      apply B.arc_independent
+      simpa only [I, image_liftEdge_of_subset X Y hYX] using hY
+    obtain ⟨C, hC, hIC⟩ := hcover I hI
+    refine ⟨f C, Finset.mem_image.mpr ⟨C, hC, rfl⟩, ?_⟩
+    rw [← image_liftEdge_of_subset X Y hYX]
+    exact Finset.image_subset_image hIC
+  · intro C hC
+    obtain ⟨D, hD, rfl⟩ := Finset.mem_image.mp hC
+    refine ⟨?_, ?_⟩
+    · intro x hx
+      obtain ⟨v, _, rfl⟩ := Finset.mem_image.mp hx
+      exact v.2
+    · simpa only [f, Finset.card_image_of_injective _ Subtype.val_injective,
+        ground_card] using hshrink D hD
+
+end Affine
+end JSP539

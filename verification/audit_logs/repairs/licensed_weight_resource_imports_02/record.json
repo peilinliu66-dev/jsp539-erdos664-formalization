@@ -1,0 +1,10 @@
+{
+  "module": "LicensedContainers.ContainerWeight",
+  "label": "licensed_weight_resource_imports_02",
+  "recorded_utc": "2026-10-02T08:46:01.824435+00:00",
+  "reason": "Add the direct declaration module of Finset.sum_mul and Finset.mul_sum, identified by the compiler after replacing the whole Mathlib import. No proof, theorem statement, or version is changed.",
+  "diagnostic_log": "verification/build/licensed_weight_02.log",
+  "before_sha256": "96e8974799bf8d93bca33d02f8db1eecf3688e886741ede129aa5f361b673a7f",
+  "after_sha256": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+  "statement_changed": false
+}

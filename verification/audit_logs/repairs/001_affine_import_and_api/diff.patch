@@ -1,0 +1,51 @@
+--- before/JSP539.AffinePlane
++++ after/JSP539.AffinePlane
+@@ -5,7 +5,10 @@
+ Original finite-field proofs. The random-restriction application is motivated
+ by Jiaxi Nie, arXiv:2609.07736. No third-party Erdős 664 source is imported.
+ -/
+-import Mathlib
++import Mathlib.Algebra.Field.ZMod
++import Mathlib.Data.Fintype.Option
++import Mathlib.Data.Fintype.Prod
++import Mathlib.Tactic
+ import LicensedContainers.Hypergraph
+ 
+ open scoped BigOperators
+@@ -112,9 +115,10 @@
+       linear_combination hb
+     · intro h
+       refine ⟨some m, ?_⟩
+-      apply Prod.ext rfl
+-      dsimp [lineThrough]
+-      linear_combination h
++      apply Prod.ext
++      · rfl
++      · dsimp [lineThrough]
++        linear_combination h
+ 
+ @[simp] theorem linesThrough_card (p : Point q) :
+     (linesThrough p).card = q + 1 := by
+@@ -256,11 +260,12 @@
+     (hR : ∀ l : Line q, 2 ≤ (points l ∩ R).card) :
+     Function.Injective (fun l : Line q => points l ∩ R) := by
+   intro l m hlm
++  change points l ∩ R = points m ∩ R at hlm
+   by_contra hne
+   have hsub : points l ∩ R ⊆ points l ∩ points m := by
+     intro p hp
+     refine Finset.mem_inter.mpr ⟨(Finset.mem_inter.mp hp).1, ?_⟩
+-    have hp' : p ∈ points m ∩ R := hlm ▸ hp
++    have hp' : p ∈ points m ∩ R := by rw [← hlm]; exact hp
+     exact (Finset.mem_inter.mp hp').1
+   have hle := (Finset.card_le_card hsub).trans (intersection_card_le_one hne)
+   have := hR l
+@@ -270,7 +275,7 @@
+     (hR : ∀ l : Line q, 2 ≤ (points l ∩ R).card) :
+     (traces R).card = q * (q + 1) := by
+   rw [traces, Finset.card_image_of_injective _ (trace_injective R hR)]
+-  simp
++  simp [Nat.mul_comm]
+ 
+ /-- The retained construction is exact, including uniqueness among actual
+ blocks, with no multiset multiplicities or duplicate trace blocks. -/

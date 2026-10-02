@@ -1,0 +1,14 @@
+--- before/JSP539.DisjointPacking
++++ after/JSP539.DisjointPacking
+@@ -5,7 +5,10 @@
+ A finite maximal-packing argument. This is the elementary replacement for
+ Janson's inequality in the fixed-K specialization. No compilation has run.
+ -/
+-import Mathlib
++import Mathlib.Algebra.Order.BigOperators.Group.Finset
++import Mathlib.Data.Finset.Max
++import Mathlib.Data.Fintype.Powerset
++import Mathlib.Tactic
+ 
+ open scoped BigOperators Classical
+ 

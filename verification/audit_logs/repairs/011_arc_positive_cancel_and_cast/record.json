@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.ArcContainerStep",
+  "label": "011_arc_positive_cancel_and_cast",
+  "recorded_utc": "2026-10-02T08:57:09.733478+00:00",
+  "reason": "Actual ArcContainerStep diagnostics: current positive multiplication iff names, and explicit zeta reduction of g/c before exact cast of the same natural edge bound. No formula or bound changed.",
+  "diagnostic_log": "verification/build/sixth_main_2_JSP539_ArcContainerStep.log",
+  "before_sha256": "951b175593c4ac83ac46ce8f11df8e97f2b09cb610f0d8595a306d8eb354bf22",
+  "after_sha256": "fda4b73f890dded9314e00e8e67773f560756c19d2617c9c47a747d28d96862e",
+  "statement_changed": false
+}

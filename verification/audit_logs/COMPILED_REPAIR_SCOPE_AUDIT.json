@@ -1,0 +1,292 @@
+{
+  "schema": "jsp539-bounded-compiled-repair-scope-audit-v1",
+  "generated_utc": "2026-10-02T09:11:25.939179+00:00",
+  "status": "PASS_BOUNDED_SCOPE_REPAIR_AUDIT",
+  "auditor": "scope_repair539",
+  "independent_helper_audit": "scope_repair539/scope_helpers and its read-only helper",
+  "original_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\revisions\\FULL_SOURCE_JSP539_REAL_BOUNDS_AUDITED_UNCOMPILED_20261002T0730\\original",
+  "candidate_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate",
+  "source_revision": "REAL_BOUNDS_0730",
+  "source_input_sha256": "168c87fc14b7c0511e12cf79f35163190c0e342a875d006117e62478daadaaf9",
+  "audited_file_count": 22,
+  "files": [
+    {
+      "path": "JSP539/AffinePlane.lean",
+      "original_sha256": "b767d1de66f92f1c714aeb396e4e742696c7a9ac5bf1239edca9e06a1a6c7e38",
+      "candidate_sha256": "2dd66fd8230af982d95a3516102af044d248e747ec940e8958161fcd6b67fdc0",
+      "bytes_original": 12109,
+      "bytes_candidate": 12310,
+      "byte_identical": false,
+      "scope_result": "PASS",
+      "repair_note": "Imports; split Prod.ext proof; explicit equality and rw orientation for trace injectivity; Nat.mul_comm simplification. ExactPairwiseDesign fields and exact construction unchanged.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "JSP539/ChunkPartition.lean",
+      "original_sha256": "f7984b1d6f04191eb6d44a9016f90f1f012c10e26d179548d01df807938c0cef",
+      "candidate_sha256": "d77ded01e7fabeb277dbacaf69b69dde76b30b1bd564858576789ae271c2b605",
+      "bytes_original": 8243,
+      "bytes_candidate": 8408,
+      "byte_identical": false,
+      "scope_result": "PASS",
+      "repair_note": "Finite-set Pairwise spelling repaired to Pairwise on its coerced Set. Same distinct-block disjointness, chunk/remainder fields, and constructed partition.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "JSP539/GroundHypergraph.lean",
+      "original_sha256": "553a853185ffef65239024ccba2d89b3c812ab67520cc27eac2152d45be40a1a",
+      "candidate_sha256": "c63aa2be77559855df77b6c0963c369d8a6e346adcd76184c50fb93ec6a5d4df",
+      "bytes_original": 4478,
+      "bytes_candidate": 4522,
+      "byte_identical": false,
+      "scope_result": "PASS",
+      "repair_note": "Imports only; ground-set transport construction unchanged.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "JSP539/LineChunks.lean",
+      "original_sha256": "7b578d29e5e11ec08386ce20b239271576a20a2735daaea6fddd65582d769960",
+      "candidate_sha256": "19826d814a9f9ef06ebcfa7d48d2fce8729ac04d0f3d4cefeba062e0187cea3f",
+      "bytes_original": 18580,
+      "bytes_candidate": 18616,
+      "byte_identical": false,
+      "scope_result": "PASS",
+      "repair_note": "Explicit equality, library lemma spelling and natural-number positive-factor cancellation. All bounds and balanced hypergraph construction unchanged.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "JSP539/ContainerPotential.lean",
+      "original_sha256": "35db27cf0ffdd7e3576db1958bc32fb6140f86f6298d90004cb6052a867b4957",
+      "candidate_sha256": "04d384299d5ea8c366ea68c044039b6ef185d36cf37c853849a46deeb456041c",
+      "bytes_original": 6968,
+      "bytes_candidate": 6963,
+      "byte_identical": false,
+      "scope_result": "PASS",
+      "repair_note": "Unfold linkWeight in existing local inequality and use linarith. Existing hypotheses and gain 1/(8*r) unchanged.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "JSP539/ContainerAlgorithm.lean",
+      "original_sha256": "aa4789f0e8efbb724f918dd243b38937d4e3031190e78ba7812d69e19cfb180f",
+      "candidate_sha256": "2f9ee3f58e0c4677e3d51cdcd2496e64a3810c50b713f2c2830fb2ba0740dc3b",
+      "bytes_original": 12392,
+      "bytes_candidate": 12424,
+      "byte_identical": false,
+      "scope_result": "PASS",
+      "repair_note": "Added FieldSimp import only.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "JSP539/ContainerCore.lean",
+      "original_sha256": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+      "candidate_sha256": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+      "bytes_original": 8124,
+      "bytes_candidate": 8124,
+      "byte_identical": true,
+      "scope_result": "PASS",
+      "repair_note": "Byte-identical.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "JSP539/ContainerCounting.lean",
+      "original_sha256": "9d5f2f8bf6ad5152b85fbf7603177418b8a3af26b926b5974161e4d6cdfe01a6",
+      "candidate_sha256": "ed574ca842cb139298955c2b174c0e44dd44393403ffb5829d50a0fe4680b093",
+      "bytes_original": 4610,
+      "bytes_candidate": 4647,
+      "byte_identical": false,
+      "scope_result": "PASS",
+      "repair_note": "Added Real.Archimedean import only.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "JSP539/ContainerShrink.lean",
+      "original_sha256": "773cffd0b5884e79b900230575bc30a8ffe4e97728ab36df37c9350835e21ed7",
+      "candidate_sha256": "e06dd4153c04d43a2fadc8aa24a0dc4ce3606910647f74e3be31a0a1ce64756f",
+      "bytes_original": 9850,
+      "bytes_candidate": 9852,
+      "byte_identical": false,
+      "scope_result": "PASS",
+      "repair_note": "Real positive-factor cancellation uses existing hp/he. Edge loss 1/4 and vertex shrink 1-3/(40*r) unchanged.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "JSP539/ArcContainerStep.lean",
+      "original_sha256": "951b175593c4ac83ac46ce8f11df8e97f2b09cb610f0d8595a306d8eb354bf22",
+      "candidate_sha256": "fda4b73f890dded9314e00e8e67773f560756c19d2617c9c47a747d28d96862e",
+      "bytes_original": 12950,
+      "bytes_candidate": 13006,
+      "byte_identical": false,
+      "scope_result": "PASS",
+      "repair_note": "Real positive-factor cancellation API and explicit unfolding of local c/g before casts; statements and numerical assumptions unchanged.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "JSP539/ArcContainerIteration.lean",
+      "original_sha256": "51ef44b381027a02e2561f292690ccbc3628dad8467efb8657724d43089b170a",
+      "candidate_sha256": "223e950020e181a2633d1ac2b77a7c115826e5f19bd8f931723bea722c389c41",
+      "bytes_original": 7586,
+      "bytes_candidate": 7591,
+      "byte_identical": false,
+      "scope_result": "PASS",
+      "repair_note": "Proof simplification uses pow_two and solves all congr/gcongr goals; depth, branch bounds and contraction unchanged.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "JSP539/FiniteProbability.lean",
+      "original_sha256": "16207cc761497895b500a6f48fa4257e6ad514f221007c6c85a273de2a68a9f7",
+      "candidate_sha256": "3fed40e1cbae40de50e6e095e3b62df90f5e49254db40fdf92052e6e6f26240c",
+      "bytes_original": 9744,
+      "bytes_candidate": 9950,
+      "byte_identical": false,
+      "scope_result": "PASS",
+      "repair_note": "Imports and proof rewrites using finite filter cardinality; fraction/average definitions and all assumptions unchanged. Product formula still covers empty finite types.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "JSP539/DisjointPacking.lean",
+      "original_sha256": "23a582dea5ce601312c2a343042b69cb889fe0c7697f0c0ce50f6a61e9ecfaef",
+      "candidate_sha256": "26440ab4e46f87e54498ce742f80bd410e41afbc2e0772d9dc6b17927ba6d3d1",
+      "bytes_original": 4893,
+      "bytes_candidate": 5028,
+      "byte_identical": false,
+      "scope_result": "PASS",
+      "repair_note": "Imports and local binder names only; finite maximal packing construction unchanged.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "JSP539/UniformBits.lean",
+      "original_sha256": "bc12630ad953b00251befcf84d3df043d29770f2c8e6f2326daa150f8ba2922e",
+      "candidate_sha256": "c9784bd277437cce86e745d31344c9de49f1a22f8dca17cd71a1d1b4b550e4fd",
+      "bytes_original": 6729,
+      "bytes_candidate": 7464,
+      "byte_identical": false,
+      "scope_result": "PASS",
+      "repair_note": "Explicit target/sample-space event types; local Bool false event cardinality proof. Sample V=V->Bool, support independence, avoids/hits events unchanged.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "JSP539/FiniteDesignTransport.lean",
+      "original_sha256": "c8708b5efa3c3a4f3768ddc52584e2437d445dbeb3935284810ef2e44a063b11",
+      "candidate_sha256": "c8708b5efa3c3a4f3768ddc52584e2437d445dbeb3935284810ef2e44a063b11",
+      "bytes_original": 7776,
+      "bytes_candidate": 7776,
+      "byte_identical": true,
+      "scope_result": "PASS",
+      "repair_note": "Byte-identical. Actual Fin ground/card and block/card reindexing, indexed pair exists-unique, and universal transversal obstruction unchanged.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "JSP539/ShortTraces.lean",
+      "original_sha256": "867cc04761ece172de91ef721a250326c0e1858dc02799cd8c5b9565d644df5f",
+      "candidate_sha256": "a23ca9c50c62241cbc0caeacea44ce8dd0f75b49cbf04556a1bb42b78312de3c",
+      "bytes_original": 5489,
+      "bytes_candidate": 5499,
+      "byte_identical": false,
+      "scope_result": "PASS",
+      "repair_note": "Natural-number positive-factor cancellation uses existing positive 2*k and q; packing bounds unchanged.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "LicensedContainers/ContainerFuel.lean",
+      "original_sha256": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+      "candidate_sha256": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+      "bytes_original": 5999,
+      "bytes_candidate": 5999,
+      "byte_identical": true,
+      "scope_result": "PASS",
+      "repair_note": "Byte-identical.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "LicensedContainers/ContainerInvariants.lean",
+      "original_sha256": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+      "candidate_sha256": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+      "bytes_original": 14360,
+      "bytes_candidate": 14360,
+      "byte_identical": true,
+      "scope_result": "PASS",
+      "repair_note": "Byte-identical.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "LicensedContainers/ContainerSelector.lean",
+      "original_sha256": "e115359961aa28988b332fd63e88c93d54992814368475865a65ec459929eafc",
+      "candidate_sha256": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+      "bytes_original": 27048,
+      "bytes_candidate": 27089,
+      "byte_identical": false,
+      "scope_result": "PASS",
+      "repair_note": "Added finite Nat interval import only.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "LicensedContainers/ContainerWeight.lean",
+      "original_sha256": "e281197a67f0dbae3cd484c2f03a474c1e10412242a0d3ddc150b66917454a32",
+      "candidate_sha256": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+      "bytes_original": 27149,
+      "bytes_candidate": 27340,
+      "byte_identical": false,
+      "scope_result": "PASS",
+      "repair_note": "Replaced broad Mathlib import with six required modules only.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "LicensedContainers/Hypergraph.lean",
+      "original_sha256": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb",
+      "candidate_sha256": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb",
+      "bytes_original": 19451,
+      "bytes_candidate": 19451,
+      "byte_identical": true,
+      "scope_result": "PASS",
+      "repair_note": "Byte-identical.",
+      "prohibited_tokens": []
+    },
+    {
+      "path": "LicensedContainers.lean",
+      "original_sha256": "442c8da78a081a2fb718a8a3cea578a6c6363412d070089484438b4c935ff781",
+      "candidate_sha256": "442c8da78a081a2fb718a8a3cea578a6c6363412d070089484438b4c935ff781",
+      "bytes_original": 209,
+      "bytes_candidate": 209,
+      "byte_identical": true,
+      "scope_result": "PASS",
+      "repair_note": "Byte-identical.",
+      "prohibited_tokens": []
+    }
+  ],
+  "excluded_pending_freeze": [
+    "JSP539/ArcContainerGrowth.lean",
+    "JSP539/FairBitTail.lean",
+    "JSP539/ContainerProbability.lean",
+    "JSP539/ProbabilityBudget.lean",
+    "JSP539/RandomRestriction.lean",
+    "JSP539/OriginalScope.lean",
+    "JSP539/RealScope.lean",
+    "JSP539.lean",
+    "Verify.lean"
+  ],
+  "claims": {
+    "no_scope_narrowing_in_reviewed_files": true,
+    "no_new_top_level_assumptions_or_declarations": true,
+    "definitions_and_construction_terms_preserved_except_pairwise_api_spelling": true,
+    "pairwise_api_semantics": "forall distinct C,D in chunks, Disjoint C D; membership of coerced Set is Finset membership",
+    "actual_fin_index_pair_exists_unique_preserved": true,
+    "final_arbitrary_real_K_n0_strict_two_fifths_and_all_hitting_Q_status": "NOT_CHECKED_IN_THIS_BATCH: final OriginalScope/RealScope/root/Verify excluded until freeze",
+    "prohibited_source_tokens_absent": true
+  },
+  "method": {
+    "full_bytes_read_and_diff_review": true,
+    "mathematical_review": "manual original-to-candidate diff and affected-context reading; independent bounded helper review",
+    "lean_run": false,
+    "lake_run": false,
+    "compiler_log_audit": false,
+    "candidate_modified_by_auditor": false,
+    "attachment_instructions_treated_as_data": true,
+    "original_hashes_match_state_manifest": true,
+    "candidate_hashes_rechecked_at_report_creation": true
+  },
+  "limitations": [
+    "Scope audit, not independent compilation certification or a re-audit of the complete mathematical manuscript.",
+    "Original Finset.Pairwise spelling is an invalid API in the pinned environment; preservation here means the intended mathematical relation, not equality of two elaborated original terms.",
+    "Report applies only to listed SHA-256 pairs; pending source files are excluded and require a later frozen-source diff audit."
+  ]
+}

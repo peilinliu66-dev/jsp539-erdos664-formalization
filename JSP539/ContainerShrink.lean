@@ -1,0 +1,204 @@
+/-
+Copyright 2026 JSP539 formalization contributors.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy at http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software distributed
+under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+CONDITIONS OF ANY KIND, either express or implied.
+-/
+import JSP539.ContainerCounting
+
+/-!
+# The quantitative shrinking form used for JSP539
+
+Independent finite counting argument adapting Campos--Samotij Theorem A,
+https://arxiv.org/abs/2408.06617 , Section 5, to the constants in the JSP539
+probability budget. Edges in an oversized cover contribute degree zero. All
+counts are over actual finite fibers of the original hypergraph.
+Status: pinned execution records are in VERIFICATION.md.
+-/
+
+open scoped BigOperators
+
+namespace JSP539.ContainerCore
+
+open Erdos565 Erdos565.Hypergraph
+
+variable {V : Type*} [Fintype V] [DecidableEq V]
+
+lemma degree_eq_zero_of_uniform_card_lt {H : Hypergraph V} {r : ℕ}
+    (hH : H.IsUniform r) {E : Finset V} (hE : r < E.card) : H.degree E = 0 := by
+  rw [degree, Finset.card_eq_zero]
+  apply Finset.eq_empty_iff_forall_notMem.mpr
+  intro A hA
+  obtain ⟨hAH, hEA⟩ := Finset.mem_filter.mp hA
+  have hc := Finset.card_le_card hEA
+  rw [hH A hAH] at hc
+  omega
+
+/-- Count covered edges by the union of their degree fibers. -/
+lemma card_restrict_le_sum_degrees {H F : Hypergraph V} {C : Finset V}
+    (hcover : F.Covers (H.restrict C)) :
+    (H.restrict C).card ≤ ∑ E ∈ F, H.degree E := by
+  have hsub : H.restrict C ⊆ F.biUnion (fun E => H.filter (fun A => E ⊆ A)) := by
+    intro A hA
+    obtain ⟨E, hEF, hEA⟩ := hcover A hA
+    exact Finset.mem_biUnion.mpr
+      ⟨E, hEF, Finset.mem_filter.mpr ⟨(mem_restrict.mp hA).1, hEA⟩⟩
+  exact (Finset.card_le_card hsub).trans (card_biUnion_le_sum _ _)
+
+/-- Every edge lost by restriction contains at least one deleted vertex. -/
+lemma card_le_restrict_add_deleted_degrees (H : Hypergraph V) (C : Finset V) :
+    H.card ≤ (H.restrict C).card +
+      ∑ v ∈ (Finset.univ \ C), H.degree {v} := by
+  classical
+  let D := H.filter (fun E => ¬ E ⊆ C)
+  have hpartition : (H.restrict C).card + D.card = H.card := by
+    exact Finset.card_filter_add_card_filter_not (s := H) (p := fun E => E ⊆ C)
+  have hsub : D ⊆ (Finset.univ \ C).biUnion
+      (fun v => H.filter (fun E => ({v} : Finset V) ⊆ E)) := by
+    intro E hE
+    obtain ⟨hEH, hEC⟩ := Finset.mem_filter.mp hE
+    obtain ⟨v, hvE, hvC⟩ := Finset.not_subset.mp hEC
+    exact Finset.mem_biUnion.mpr
+      ⟨v, Finset.mem_sdiff.mpr ⟨Finset.mem_univ v, hvC⟩,
+        Finset.mem_filter.mpr ⟨hEH, by simpa using hvE⟩⟩
+  have hD : D.card ≤ ∑ v ∈ (Finset.univ \ C), H.degree {v} :=
+    (Finset.card_le_card hsub).trans (card_biUnion_le_sum _ _)
+  omega
+
+lemma vertex_count_pos_of_uniform_nonempty {H : Hypergraph V} {r : ℕ}
+    (hr : 0 < r) (hH : H.IsUniform r) (hne : H.Nonempty) :
+    0 < Fintype.card V := by
+  obtain ⟨E, hE⟩ := hne
+  have hcard := Finset.card_le_card (Finset.subset_univ E)
+  rw [hH E hE, Finset.card_univ] at hcard
+  omega
+
+/-- A light cover removes at least three quarters of the original edges
+under the stipulated codegree bounds. -/
+lemma restrict_card_le_quarter {H F : Hypergraph V} {C : Finset V}
+    {r : ℕ} {p : ℝ} (hH : H.IsUniform r) (hp : 0 < p)
+    (hN : 0 < Fintype.card V)
+    (hcodeg : ∀ E : Finset V, 2 ≤ E.card → E.card ≤ r →
+      (H.degree E : ℝ) ≤ (H.card : ℝ) / (4 * Fintype.card V) * p ^ (E.card - 1))
+    (hF : ∀ E ∈ F, 2 ≤ E.card)
+    (hcover : F.Covers (H.restrict C))
+    (hweight : F.pWeight p ≤ p * C.card) :
+    ((H.restrict C).card : ℝ) ≤ (H.card : ℝ) / 4 := by
+  have hNr : (0 : ℝ) < Fintype.card V := by exact_mod_cast hN
+  let a : ℝ := (H.card : ℝ) / (4 * Fintype.card V)
+  have ha : 0 ≤ a := by dsimp [a]; positivity
+  have hdeg : ∀ E ∈ F, p * (H.degree E : ℝ) ≤ a * p ^ E.card := by
+    intro E hEF
+    by_cases hEr : E.card ≤ r
+    · have h := mul_le_mul_of_nonneg_left (hcodeg E (hF E hEF) hEr) hp.le
+      have hcard : E.card - 1 + 1 = E.card := by have := hF E hEF; omega
+      calc
+        p * (H.degree E : ℝ) ≤ p * (a * p ^ (E.card - 1)) := h
+        _ = a * (p ^ (E.card - 1) * p) := by ring
+        _ = a * p ^ E.card := by rw [← pow_succ, hcard]
+    · rw [degree_eq_zero_of_uniform_card_lt hH (Nat.lt_of_not_ge hEr)]
+      simp only [Nat.cast_zero, mul_zero]
+      exact mul_nonneg ha (pow_nonneg hp.le _)
+  have hcount : ((H.restrict C).card : ℝ) ≤ ∑ E ∈ F, (H.degree E : ℝ) := by
+    exact_mod_cast card_restrict_le_sum_degrees hcover
+  have hC : (C.card : ℝ) ≤ Fintype.card V := by
+    exact_mod_cast (Finset.card_le_card (Finset.subset_univ C))
+  have hfinal : p * ((H.restrict C).card : ℝ) ≤ p * ((H.card : ℝ) / 4) := by
+    calc
+      p * ((H.restrict C).card : ℝ) ≤ p * ∑ E ∈ F, (H.degree E : ℝ) :=
+        mul_le_mul_of_nonneg_left hcount hp.le
+      _ = ∑ E ∈ F, p * (H.degree E : ℝ) := by rw [Finset.mul_sum]
+      _ ≤ ∑ E ∈ F, a * p ^ E.card := Finset.sum_le_sum hdeg
+      _ = a * F.pWeight p := by rw [pWeight, weight, Finset.mul_sum]
+      _ ≤ a * (p * C.card) := mul_le_mul_of_nonneg_left hweight ha
+      _ ≤ a * (p * Fintype.card V) :=
+        mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left hC hp.le) ha
+      _ = p * ((H.card : ℝ) / 4) := by
+        dsimp [a]
+        field_simp [hNr.ne'] <;> ring
+  exact le_of_mul_le_mul_left hfinal hp
+
+/-- Translate the edge loss into the required vertex loss. -/
+lemma container_card_shrink {H : Hypergraph V} {C : Finset V} {r : ℕ}
+    (hr : 0 < r) (hN : 0 < Fintype.card V) (hne : H.Nonempty)
+    (hdegree : ∀ v : V, (H.degree {v} : ℝ) ≤
+      10 * (r : ℝ) * (H.card : ℝ) / Fintype.card V)
+    (hedges : ((H.restrict C).card : ℝ) ≤ (H.card : ℝ) / 4) :
+    (C.card : ℝ) ≤ (1 - 3 / (40 * (r : ℝ))) * Fintype.card V := by
+  let D : Finset V := Finset.univ \ C
+  have hNr : (0 : ℝ) < Fintype.card V := by exact_mod_cast hN
+  have hrr : (0 : ℝ) < r := by exact_mod_cast hr
+  have he : (0 : ℝ) < H.card := by exact_mod_cast Finset.card_pos.mpr hne
+  have hraw : (H.card : ℝ) ≤ ((H.restrict C).card : ℝ) +
+      ∑ v ∈ D, (H.degree {v} : ℝ) := by
+    exact_mod_cast card_le_restrict_add_deleted_degrees H C
+  have hsum : (∑ v ∈ D, (H.degree {v} : ℝ)) ≤
+      (D.card : ℝ) * (10 * (r : ℝ) * (H.card : ℝ) / Fintype.card V) := by
+    calc
+      (∑ v ∈ D, (H.degree {v} : ℝ)) ≤
+          ∑ _v ∈ D, (10 * (r : ℝ) * (H.card : ℝ) / Fintype.card V) :=
+        Finset.sum_le_sum (fun v _ => hdegree v)
+      _ = _ := by simp
+  have hloss : (H.card : ℝ) ≤ (H.card : ℝ) / 4 +
+      (D.card : ℝ) * (10 * (r : ℝ) * (H.card : ℝ) / Fintype.card V) := by
+    linarith
+  have hmul : (H.card : ℝ) * Fintype.card V ≤
+      (H.card : ℝ) * Fintype.card V / 4 +
+        (D.card : ℝ) * 10 * (r : ℝ) * H.card := by
+    calc
+      (H.card : ℝ) * Fintype.card V ≤
+          ((H.card : ℝ) / 4 + (D.card : ℝ) *
+            (10 * (r : ℝ) * (H.card : ℝ) / Fintype.card V)) * Fintype.card V :=
+        mul_le_mul_of_nonneg_right hloss hNr.le
+      _ = _ := by field_simp [hNr.ne'] <;> ring
+  have hcharge : (H.card : ℝ) * (3 * Fintype.card V) ≤
+      (H.card : ℝ) * (40 * (r : ℝ) * D.card) := by nlinarith
+  have hdeleted : 3 * (Fintype.card V : ℝ) ≤ 40 * (r : ℝ) * D.card :=
+    le_of_mul_le_mul_left hcharge he
+  have hfrac : (3 / (40 * (r : ℝ))) * Fintype.card V ≤ (D.card : ℝ) := by
+    rw [div_mul_eq_mul_div]
+    apply (div_le_iff₀ (by positivity : (0 : ℝ) < 40 * (r : ℝ))).2
+    nlinarith
+  have hpartition : (D.card : ℝ) + C.card = Fintype.card V := by
+    have hnat : D.card + C.card = Fintype.card V := by
+      simpa only [D, Finset.card_univ] using
+        Finset.card_sdiff_add_card_eq_card (Finset.subset_univ C)
+    exact_mod_cast hnat
+  calc
+    (C.card : ℝ) = (Fintype.card V : ℝ) - D.card := by linarith
+    _ ≤ (Fintype.card V : ℝ) - (3 / (40 * (r : ℝ))) * Fintype.card V :=
+      sub_le_sub_left hfrac _
+    _ = (1 - 3 / (40 * (r : ℝ))) * Fintype.card V := by ring
+
+/-- The exact finite shrinking family used at a node of the container tree.
+The family is the image of the actual fingerprints furnished by `theoremA`. -/
+theorem shrinking_family (H : Hypergraph V) (r : ℕ) (p : ℝ)
+    (hr : 0 < r) (hH : H.IsUniform r) (hne : H.Nonempty)
+    (hp : 0 < p) (hsmall : p ≤ 1 / (8 * (r : ℝ) ^ 2))
+    (hdegree : ∀ v : V, (H.degree {v} : ℝ) ≤
+      10 * (r : ℝ) * (H.card : ℝ) / Fintype.card V)
+    (hcodeg : ∀ E : Finset V, 2 ≤ E.card → E.card ≤ r →
+      (H.degree E : ℝ) ≤ (H.card : ℝ) / (4 * Fintype.card V) * p ^ (E.card - 1)) :
+    ∃ Cs : Finset (Finset V),
+      Cs.card ≤ (Fintype.card V + 1) ^
+        (⌊8 * (r : ℝ) ^ 2 * p * Fintype.card V⌋₊ + 1) ∧
+      (∀ I : Finset V, H.IsIndependent I → ∃ C ∈ Cs, I ⊆ C) ∧
+      (∀ C ∈ Cs,
+        (C.card : ℝ) ≤ (1 - 3 / (40 * (r : ℝ))) * Fintype.card V) := by
+  classical
+  obtain ⟨S, C, hcover, hsize, hlight⟩ := theoremA H r p hr hH hp hsmall
+  refine ⟨S.image C, image_family_card_le_of_fingerprint_bound S C _ hsize, ?_, ?_⟩
+  · intro I hI
+    obtain ⟨s, hs, hsI, hIC⟩ := hcover I hI
+    exact ⟨C s, Finset.mem_image.mpr ⟨s, hs, rfl⟩, hIC⟩
+  · intro A hA
+    obtain ⟨s, hs, rfl⟩ := Finset.mem_image.mp hA
+    obtain ⟨F, hF, hFC, hweight⟩ := hlight s hs
+    have hN := vertex_count_pos_of_uniform_nonempty hr hH hne
+    exact container_card_shrink hr hN hne hdegree
+      (restrict_card_le_quarter hH hp hN hcodeg (fun E hE => (hF E hE).2) hFC hweight)
+
+end JSP539.ContainerCore

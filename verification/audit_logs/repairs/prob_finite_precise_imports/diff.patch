@@ -1,0 +1,14 @@
+--- before/JSP539.FiniteProbability
++++ after/JSP539.FiniteProbability
+@@ -6,7 +6,10 @@
+ adapted from the independently authored JSP502 source, with no graph-specific
+ dependencies. This module has not been compiled.
+ -/
+-import Mathlib
++import Mathlib.Basic.Real.Basic
++import Mathlib.Algebra.BigOperators.Ring.Finset
++import Mathlib.Data.Fintype.BigOperators
++import Mathlib.Tactic
+ 
+ open scoped BigOperators Classical
+ 

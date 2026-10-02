@@ -1,0 +1,123 @@
+JSP539/FiniteProbability.lean:26:0: warning: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.fraction_eq_card_filter`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+JSP539/FiniteProbability.lean:33:0: warning: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.fraction_eq_sum`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+JSP539/FiniteProbability.lean:38:0: warning: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.fraction_nonneg`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+JSP539/FiniteProbability.lean:42:0: warning: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.fraction_le_one`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+JSP539/FiniteProbability.lean:49:8: warning: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.fraction_false`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+JSP539/FiniteProbability.lean:52:8: warning: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.fraction_true`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+JSP539/FiniteProbability.lean:58:0: warning: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.fraction_mono`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+JSP539/FiniteProbability.lean:125:0: warning: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.average_nonneg`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+JSP539/FiniteProbability.lean:130:0: warning: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.average_mono`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+JSP539/FiniteProbability.lean:134:0: warning: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.fraction_eq_average_indicator`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+JSP539/FiniteProbability.lean:141:50: error: unsolved goals
+A : Type u_1
+inst✝¹ : Fintype A
+inst✝ : DecidableEq A
+f : A → ℝ
+t : ℝ
+⊢ (∑ x, f x * t) * (↑(Fintype.card A))⁻¹ = t * (↑(Fintype.card A))⁻¹ * ∑ a, f a
+JSP539/FiniteProbability.lean:142:22: warning: This simp argument is unused:
+  Finset.sum_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [average]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+JSP539/FiniteProbability.lean:145:0: warning: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.average_const`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+JSP539/FiniteProbability.lean:151:0: warning: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.average_add`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+JSP539/FiniteProbability.lean:155:0: warning: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.average_equiv`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+JSP539/FiniteProbability.lean:173:11: error: `simp` made no progress
+JSP539/FiniteProbability.lean:197:4: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  average fun a => if ?P a then 1 else 0
+in the target expression
+  1 = fraction P + average fun a => if ¬P a then 1 else 0
+
+A : Type u_1
+inst✝² : Fintype A
+inst✝¹ : DecidableEq A
+inst✝ : Nonempty A
+P : A → Prop
+hind : ∀ (a : A), ((if P a then 1 else 0) + if ¬P a then 1 else 0) = 1
+h : 1 = fraction P + average fun a => if ¬P a then 1 else 0
+⊢ (fraction fun a => ¬P a) = 1 - fraction P
+JSP539/FiniteProbability.lean:232:12: warning: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+JSP539/FiniteProbability.lean:226:18: warning: This simp argument is unused:
+  Fintype.card_fun
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hf, div_eq_mul_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`

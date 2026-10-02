@@ -1,0 +1,125 @@
+/-
+Copyright 2026 The JSP539 Formalization Authors.
+Licensed under the Apache License, Version 2.0; see LICENSE.
+
+Original incidence and packing estimates for deterministic containers.
+This proves the finite geometric input to independent short-trace sampling.
+-/
+import JSP539.AffinePlane
+import JSP539.DisjointPacking
+
+open scoped BigOperators
+
+namespace JSP539.Affine
+
+variable {q : ℕ} [Fact q.Prime]
+
+/-- A container's trace on an ambient affine line. -/
+def shortTrace (C : Finset (Point q)) (l : Line q) : Finset (Point q) :=
+  C ∩ points l
+
+/-- The strict cutoff is convenient for incidence counting; the probability
+argument uses only the consequent weak bound of 4k. -/
+def shortLines (C : Finset (Point q)) (k : ℕ) : Finset (Line q) :=
+  Finset.univ.filter (fun l => (shortTrace C l).card < 4 * k)
+
+@[simp] theorem mem_shortLines (C : Finset (Point q)) (k : ℕ) (l : Line q) :
+    l ∈ shortLines C k ↔ (shortTrace C l).card < 4 * k := by
+  simp [shortLines]
+
+theorem sum_shortTrace_card (C : Finset (Point q)) :
+    ∑ l : Line q, (shortTrace C l).card = (q + 1) * C.card := by
+  simpa only [shortTrace, Finset.inter_comm] using sum_trace_card C
+
+/-- At least half the affine lines are short for a container of size at most
+2kq. The result q²≤2|T| is deliberately integral, avoiding rounding losses. -/
+theorem shortLines_card_lower (C : Finset (Point q)) (k : ℕ)
+    (hk : 2 ≤ k) (hC : C.card ≤ 2 * k * q) :
+    q ^ 2 ≤ 2 * (shortLines C k).card := by
+  classical
+  let T := shortLines C k
+  let U := (Finset.univ : Finset (Line q)) \ T
+  have hlong : ∀ l ∈ U, 4 * k ≤ (shortTrace C l).card := by
+    intro l hl
+    have hnot : l ∉ T := (Finset.mem_sdiff.mp hl).2
+    have hnotlt : ¬ (shortTrace C l).card < 4 * k := by
+      intro hlt
+      exact hnot ((mem_shortLines C k l).mpr hlt)
+    omega
+  have hlow : (4 * k) * U.card ≤ (q + 1) * C.card := by
+    calc
+      (4 * k) * U.card = ∑ _l ∈ U, (4 * k) := by simp [Nat.mul_comm]
+      _ ≤ ∑ l ∈ U, (shortTrace C l).card :=
+        Finset.sum_le_sum (fun l hl => hlong l hl)
+      _ ≤ ∑ l : Line q, (shortTrace C l).card :=
+        Finset.sum_le_sum_of_subset_of_nonneg (Finset.subset_univ U)
+          (fun _ _ _ => Nat.zero_le _)
+      _ = (q + 1) * C.card := sum_shortTrace_card C
+  have hhigh : (q + 1) * C.card ≤ (q + 1) * (2 * k * q) :=
+    Nat.mul_le_mul_left _ hC
+  have hscaled : (2 * k) * (2 * U.card) ≤ (2 * k) * (q * (q + 1)) := by
+    nlinarith
+  have hpositive : 0 < 2 * k := by omega
+  have hlongcount : 2 * U.card ≤ q * (q + 1) :=
+    Nat.le_of_mul_le_mul_left hscaled hpositive
+  have hpartition : U.card + T.card = q * (q + 1) := by
+    dsimp [U]
+    rw [Finset.card_sdiff_of_subset (Finset.subset_univ T)]
+    have hT : T.card ≤ Fintype.card (Line q) := Finset.card_le_univ T
+    simp only [Finset.card_univ, line_card] at hT ⊢
+    omega
+  change q ^ 2 ≤ 2 * T.card
+  nlinarith
+
+/-- Every point belongs to at most q+1 traces, even after selecting any family
+of lines. This bound concerns points of the actual traces, not entire lines. -/
+theorem shortTrace_point_multiplicity (C : Finset (Point q)) (T : Finset (Line q))
+    (p : Point q) : (T.filter (fun l => p ∈ shortTrace C l)).card ≤ q + 1 := by
+  have hsub : T.filter (fun l => p ∈ shortTrace C l) ⊆ linesThrough p := by
+    intro l hl
+    apply (mem_linesThrough p l).mpr
+    exact (Finset.mem_inter.mp (Finset.mem_filter.mp hl).2).2
+  have hcard := Finset.card_le_card hsub
+  simpa only [linesThrough_card] using hcard
+
+/-- The exact finite dichotomy needed by the probability argument: either a
+container misses a line outright, or it has at least q/(16k) pairwise disjoint,
+nonempty traces, each of size at most 4k. No maximal family is postulated. -/
+theorem short_traces_or_packing (C : Finset (Point q)) (k : ℕ)
+    (hk : 2 ≤ k) (hC : C.card ≤ 2 * k * q) :
+    (∃ l : Line q, shortTrace C l = ∅) ∨
+      ∃ I : Finset (Line q),
+        DisjointPacking.PairwiseDisjoint (shortTrace C) I ∧
+        (∀ l ∈ I, (shortTrace C l).Nonempty ∧ (shortTrace C l).card ≤ 4 * k) ∧
+        q ≤ 16 * k * I.card := by
+  classical
+  by_cases hempty : ∃ l : Line q, shortTrace C l = ∅
+  · exact Or.inl hempty
+  · apply Or.inr
+    have hne : ∀ l ∈ shortLines C k, (shortTrace C l).Nonempty := by
+      intro l _
+      apply Finset.nonempty_iff_ne_empty.mpr
+      intro h
+      exact hempty ⟨l, h⟩
+    have hsize : ∀ l ∈ shortLines C k, (shortTrace C l).card ≤ 4 * k := by
+      intro l hl
+      exact ((mem_shortLines C k l).mp hl).le
+    obtain ⟨I, hIT, hdis, hpack⟩ :=
+      DisjointPacking.exists_disjoint_packing (shortTrace C) (shortLines C k)
+        (4 * k) (q + 1) hne hsize
+        (fun p => shortTrace_point_multiplicity C (shortLines C k) p)
+    refine ⟨I, hdis, (fun l hl => ⟨hne l (hIT hl), hsize l (hIT hl)⟩), ?_⟩
+    have hq : 0 < q := (Fact.out : q.Prime).pos
+    have hqbound : q + 1 ≤ 2 * q := by omega
+    have hscaled : q * q ≤ q * (16 * k * I.card) := by
+      calc
+        q * q = q ^ 2 := by ring
+        _ ≤ 2 * (shortLines C k).card := shortLines_card_lower C k hk hC
+        _ ≤ 2 * (I.card * (4 * k * (q + 1))) := Nat.mul_le_mul_left 2 hpack
+        _ ≤ 2 * (I.card * (4 * k * (2 * q))) :=
+          Nat.mul_le_mul_left 2 (Nat.mul_le_mul_left I.card
+            (Nat.mul_le_mul_left (4 * k) hqbound))
+        _ = q * (16 * k * I.card) := by ring
+    exact Nat.le_of_mul_le_mul_left hscaled hq
+
+end JSP539.Affine

@@ -1,0 +1,129 @@
+{
+  "status": "PASSED",
+  "scope": "NINE_ASSIGNED_MODULES_ONLY",
+  "recorded_utc": "2026-10-02T09:08:06.433605+00:00",
+  "modules": [
+    {
+      "module": "LicensedContainers.ContainerInvariants",
+      "accepted_run": "licensed_invariants_02",
+      "natural_exit_code": 0,
+      "metadata": "verification/build/licensed_invariants_02-meta.json",
+      "original_sha256": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+      "candidate_sha256": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+      "changed": false,
+      "only_imports_changed": true,
+      "output_sha256": "aa9a9a5807947a10855b30373505986e37016be831f6744ce6ff19efdef8f1a5",
+      "active_dependency_sources_current_and_unchanged": true
+    },
+    {
+      "module": "LicensedContainers.ContainerWeight",
+      "accepted_run": "licensed_weight_03",
+      "natural_exit_code": 0,
+      "metadata": "verification/build/licensed_weight_03-meta.json",
+      "original_sha256": "e281197a67f0dbae3cd484c2f03a474c1e10412242a0d3ddc150b66917454a32",
+      "candidate_sha256": "d77b5840107c112c0246699e7253893c029fff99f041e6ff63fc9dfc9167bdee",
+      "changed": true,
+      "only_imports_changed": true,
+      "output_sha256": "2c9c2d439351c6f46baab00fb699f9c69895e9876c152e568dd8a7a0f5ca72ac",
+      "active_dependency_sources_current_and_unchanged": true
+    },
+    {
+      "module": "LicensedContainers.ContainerSelector",
+      "accepted_run": "licensed_selector_02",
+      "natural_exit_code": 0,
+      "metadata": "verification/build/licensed_selector_02-meta.json",
+      "original_sha256": "e115359961aa28988b332fd63e88c93d54992814368475865a65ec459929eafc",
+      "candidate_sha256": "c7b7bfcb6fa923f47b00303534375c51b2487c841b2968baa52e53e06037ee98",
+      "changed": true,
+      "only_imports_changed": true,
+      "output_sha256": "a57b6d2652f06a04c480d0e1c83c92e39fbe54a9d8a0fa7092e87d80f163a12f",
+      "active_dependency_sources_current_and_unchanged": true
+    },
+    {
+      "module": "LicensedContainers.ContainerFuel",
+      "accepted_run": "licensed_fuel_02",
+      "natural_exit_code": 0,
+      "metadata": "verification/build/licensed_fuel_02-meta.json",
+      "original_sha256": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+      "candidate_sha256": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+      "changed": false,
+      "only_imports_changed": true,
+      "output_sha256": "c1e8b95a20764fabbb8c3dea7dff857603bca2af4243cb35770c1ba498b98f46",
+      "active_dependency_sources_current_and_unchanged": true
+    },
+    {
+      "module": "LicensedContainers",
+      "accepted_run": "licensed_root_01",
+      "natural_exit_code": 0,
+      "metadata": "verification/build/licensed_root_01-meta.json",
+      "original_sha256": "442c8da78a081a2fb718a8a3cea578a6c6363412d070089484438b4c935ff781",
+      "candidate_sha256": "442c8da78a081a2fb718a8a3cea578a6c6363412d070089484438b4c935ff781",
+      "changed": false,
+      "only_imports_changed": true,
+      "output_sha256": "5c08f8115538330ec687cea279c1883c973a752a7a6e320df01521c4478356a9",
+      "active_dependency_sources_current_and_unchanged": true
+    },
+    {
+      "module": "JSP539.FiniteDesignTransport",
+      "accepted_run": "licensed_transport_01",
+      "natural_exit_code": 0,
+      "metadata": "verification/build/licensed_transport_01-meta.json",
+      "original_sha256": "c8708b5efa3c3a4f3768ddc52584e2437d445dbeb3935284810ef2e44a063b11",
+      "candidate_sha256": "c8708b5efa3c3a4f3768ddc52584e2437d445dbeb3935284810ef2e44a063b11",
+      "changed": false,
+      "only_nat_cancellation_api_changed": false,
+      "output_sha256": "c9973304b27be6a2d31ff233a8ccb87080787ca42413059a2759f180c30f3e15",
+      "active_dependency_sources_current_and_unchanged": true
+    },
+    {
+      "module": "JSP539.ShortTraces",
+      "accepted_run": "licensed_shorttraces_02",
+      "natural_exit_code": 0,
+      "metadata": "verification/build/licensed_shorttraces_02-meta.json",
+      "original_sha256": "867cc04761ece172de91ef721a250326c0e1858dc02799cd8c5b9565d644df5f",
+      "candidate_sha256": "a23ca9c50c62241cbc0caeacea44ce8dd0f75b49cbf04556a1bb42b78312de3c",
+      "changed": true,
+      "only_nat_cancellation_api_changed": true,
+      "output_sha256": "4c037611b8d0161b17d3bc8a3842592482ebc7da01f168f5d2603f6e726b462f",
+      "active_dependency_sources_current_and_unchanged": true
+    },
+    {
+      "module": "JSP539.ContainerProbability",
+      "accepted_run": "licensed_probability_02",
+      "natural_exit_code": 0,
+      "metadata": "verification/build/licensed_probability_02-meta.json",
+      "original_sha256": "6061bae9dc3f1597c25f2f632ae4cf19befe37a5234f1a2bc5b17e8a0b458a91",
+      "candidate_sha256": "17d6e05c1ea28c80db26b08827c3164413dd94dcdf446f715f76acdfa9ae7458",
+      "changed": true,
+      "output_sha256": "c727d0d210ec7295540542e748b09dc32e101a3d6e88d8d7cc935e06894deb5b",
+      "active_dependency_sources_current_and_unchanged": true
+    },
+    {
+      "module": "JSP539.ProbabilityBudget",
+      "accepted_run": "licensed_budget_02",
+      "natural_exit_code": 0,
+      "metadata": "verification/build/licensed_budget_02-meta.json",
+      "original_sha256": "6a181f53a2837cee67bc91820f032c38bc311c844931240369e6bd8977ab1386",
+      "candidate_sha256": "6bc07e4165d39074e7170408b2de101995951f1031f1eff95cb4ebfdfd8d9759",
+      "changed": true,
+      "output_sha256": "c24e8d972a40061c158e47741037fb817ea370d140aee309162d08f810926791",
+      "active_dependency_sources_current_and_unchanged": true
+    }
+  ],
+  "modules_natural_exit_zero": 9,
+  "modified_files": 5,
+  "added_lines": 14,
+  "removed_lines": 5,
+  "theorem_statements_hypotheses_events_constants_and_bounds_changed": false,
+  "version_adjustments": [],
+  "ownership_released_to": "build539",
+  "active_compiler_sessions": [],
+  "repair_records": [
+    "verification/repairs/licensed_budget_function_eta_01/record.json",
+    "verification/repairs/licensed_probability_product_api_01/record.json",
+    "verification/repairs/licensed_selector_interval_import_01/record.json",
+    "verification/repairs/licensed_shorttraces_nat_cancel_01/record.json",
+    "verification/repairs/licensed_weight_resource_imports_01/record.json",
+    "verification/repairs/licensed_weight_resource_imports_02/record.json"
+  ]
+}

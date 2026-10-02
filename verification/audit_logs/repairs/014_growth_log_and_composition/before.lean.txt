@@ -1,0 +1,170 @@
+/-
+Copyright 2026 The JSP539 Formalization Authors.
+Licensed under the Apache License, Version 2.0; see LICENSE.
+
+Original quantitative asymptotic completion of the fixed-k container family.
+Sources: Jiaxi Nie, arXiv:2609.07736; Campos--Samotij, arXiv:2408.06617.
+Every largeness condition is discharged by standard logarithmic limits.
+Status: UNCOMPILED. No Lean, Lake, or compiler was run for this source.
+-/
+import JSP539.ArcContainerIteration
+
+open Filter
+open scoped Topology
+
+namespace JSP539.Affine
+
+/-- Explicit logarithm of the final family-size bound. -/
+noncomputable def arcGrowthBudget (k q : ℕ) : ℝ :=
+  3 * (40 * (k : ℝ) + 2) *
+    (24 * (k : ℝ) ^ 2 * q / Real.log (q : ℝ) + (Real.log (q : ℝ)) ^ 2)
+
+lemma arcDepth_upper (k q : ℕ) (hlog : 1 ≤ Real.log (q : ℝ)) :
+    (arcDepth k q : ℝ) ≤ (40 * (k : ℝ) + 2) * Real.log (q : ℝ) := by
+  have hnonneg : 0 ≤ 40 * (k : ℝ) * Real.log (q : ℝ) := by positivity
+  have hceil := Nat.ceil_lt_add_one hnonneg
+  dsimp [arcDepth]
+  push_cast
+  nlinarith
+
+lemma arcFingerprintBound_upper (k q : ℕ) (hlog : 1 ≤ Real.log (q : ℝ)) :
+    (arcFingerprintBound k q : ℝ) ≤
+      24 * (k : ℝ) ^ 2 * q / (Real.log (q : ℝ)) ^ 3 := by
+  exact Nat.floor_le (by positivity)
+
+lemma log_point_count_upper (q : ℕ) (hq : 2 ≤ q) :
+    Real.log ((q : ℝ) ^ 2 + 1) ≤ 3 * Real.log (q : ℝ) := by
+  have hqr : (2 : ℝ) ≤ q := by exact_mod_cast hq
+  have hpow : (q : ℝ) ^ 2 + 1 ≤ (q : ℝ) ^ 3 := by
+    have hmul := mul_le_mul_of_nonneg_right hqr (sq_nonneg (q : ℝ))
+    have hsq := pow_le_pow_left₀ (by norm_num : (0 : ℝ) ≤ 2) hqr 2
+    nlinarith
+  calc
+    Real.log ((q : ℝ) ^ 2 + 1) ≤ Real.log ((q : ℝ) ^ 3) :=
+      Real.log_le_log (by positivity) hpow
+    _ = 3 * Real.log (q : ℝ) := by rw [Real.log_pow]; norm_num
+
+/-- The exact integer family bound is subexponential with the displayed budget. -/
+theorem arcBranchDepth_le_exp (k q : ℕ) (hq : 2 ≤ q)
+    (hlog : 1 ≤ Real.log (q : ℝ)) :
+    ((arcBranchBound k q ^ arcDepth k q : ℕ) : ℝ) ≤ Real.exp (arcGrowthBudget k q) := by
+  let l := Real.log (q : ℝ)
+  have hlp : 0 < l := lt_of_lt_of_le zero_lt_one hlog
+  have hD := arcDepth_upper k q hlog
+  have hM := arcFingerprintBound_upper k q hlog
+  have hb := log_point_count_upper q hq
+  have hlogbase : 0 ≤ Real.log ((q : ℝ) ^ 2 + 1) :=
+    Real.log_nonneg (by nlinarith [sq_nonneg (q : ℝ)])
+  have hpowpos : (0 : ℝ) < ((arcBranchBound k q ^ arcDepth k q : ℕ) : ℝ) := by
+    simp only [arcBranchBound, Nat.cast_pow, Nat.cast_add, Nat.cast_one]
+    positivity
+  rw [← Real.exp_log hpowpos]
+  apply Real.exp_le_exp.mpr
+  calc
+    Real.log ((arcBranchBound k q ^ arcDepth k q : ℕ) : ℝ) =
+        (arcDepth k q : ℝ) * ((arcFingerprintBound k q : ℝ) + 1) *
+          Real.log ((q : ℝ) ^ 2 + 1) := by
+      simp only [arcBranchBound, Nat.cast_pow, Real.log_pow, Nat.cast_add, Nat.cast_one]
+      ring
+    _ ≤ ((40 * (k : ℝ) + 2) * l) *
+          (24 * (k : ℝ) ^ 2 * q / l ^ 3 + 1) * (3 * l) := by
+      apply mul_le_mul
+      · apply mul_le_mul hD (add_le_add_right hM 1) (by positivity) (by positivity)
+      · exact hb
+      · exact hlogbase
+      · positivity
+    _ = arcGrowthBudget k q := by
+      dsimp [arcGrowthBudget]
+      change ((40 * (k : ℝ) + 2) * l) *
+        (24 * (k : ℝ) ^ 2 * q / l ^ 3 + 1) * (3 * l) =
+        3 * (40 * (k : ℝ) + 2) * (24 * (k : ℝ) ^ 2 * q / l + l ^ 2)
+      field_simp [hlp.ne'] <;> ring
+
+/-- All local finite degree conditions hold eventually for each fixed k. -/
+theorem eventually_ArcStepLarge (k : ℕ) :
+    ∀ᶠ q : ℕ in atTop, ArcStepLarge k q := by
+  have hlog : Tendsto (fun q : ℕ => Real.log (q : ℝ)) atTop atTop :=
+    Real.tendsto_log_atTop.comp tendsto_natCast_atTop_atTop
+  have hratio : Tendsto
+      (fun q : ℕ => 12 * (k : ℝ) ^ k *
+        ((Real.log (q : ℝ)) ^ (3 * (k - 1)) / (q : ℝ))) atTop (𝓝 0) := by
+    have h := (Real.tendsto_pow_log_div_mul_add_atTop 1 0 (3 * (k - 1)) one_ne_zero).comp
+      (tendsto_natCast_atTop_atTop : Tendsto (fun q : ℕ => (q : ℝ)) atTop atTop)
+    simpa using h.const_mul (12 * (k : ℝ) ^ k)
+  filter_upwards [hlog.eventually_ge_atTop 1,
+    hlog.eventually_ge_atTop (8 * (k : ℝ)),
+    hratio.eventually (gt_mem_nhds (by norm_num : (0 : ℝ) < 1)),
+    eventually_ge_atTop (1 : ℕ)] with q hl hklog hratio hq
+  have hqp : (0 : ℝ) < q := by exact_mod_cast (show 0 < q by omega)
+  have hlp : 0 < Real.log (q : ℝ) := lt_of_lt_of_le zero_lt_one hl
+  refine ⟨hl, ?_, ?_⟩
+  · calc
+      8 * (k : ℝ) ≤ Real.log (q : ℝ) := hklog
+      _ = Real.log (q : ℝ) * 1 := by ring
+      _ ≤ Real.log (q : ℝ) * (Real.log (q : ℝ)) ^ 2 :=
+        mul_le_mul_of_nonneg_left (one_le_pow₀ hl) hlp.le
+      _ = arcSlack q := by dsimp [arcSlack]; ring
+  · have hfrac : (12 * (k : ℝ) ^ k * (Real.log (q : ℝ)) ^ (3 * (k - 1))) /
+        (q : ℝ) < 1 := by simpa only [mul_div_assoc] using hratio
+    have hnum := (div_lt_iff₀ hqp).mp hfrac
+    simpa only [arcSlack, ← pow_mul, one_mul] using hnum.le
+
+/-- The displayed logarithmic budget divided by q tends to zero. -/
+theorem tendsto_arcGrowthBudget_div (k : ℕ) :
+    Tendsto (fun q : ℕ => arcGrowthBudget k q / (q : ℝ)) atTop (𝓝 0) := by
+  have hlog : Tendsto (fun q : ℕ => Real.log (q : ℝ)) atTop atTop :=
+    Real.tendsto_log_atTop.comp tendsto_natCast_atTop_atTop
+  have hinv : Tendsto (fun q : ℕ => (1 : ℝ) / Real.log (q : ℝ)) atTop (𝓝 0) :=
+    tendsto_const_nhds.div_atTop hlog
+  have hsquare : Tendsto (fun q : ℕ => (Real.log (q : ℝ)) ^ 2 / (q : ℝ))
+      atTop (𝓝 0) := by
+    simpa using (Real.tendsto_pow_log_div_mul_add_atTop 1 0 2 one_ne_zero).comp
+      (tendsto_natCast_atTop_atTop : Tendsto (fun q : ℕ => (q : ℝ)) atTop atTop)
+  have hsum := ((hinv.const_mul (24 * (k : ℝ) ^ 2)).add hsquare).const_mul
+    (3 * (40 * (k : ℝ) + 2))
+  simp only [mul_zero, zero_add] at hsum
+  apply hsum.congr'
+  filter_upwards [eventually_ge_atTop (2 : ℕ)] with q hq
+  have hqp : (0 : ℝ) < q := by exact_mod_cast (show 0 < q by omega)
+  have hlp : 0 < Real.log (q : ℝ) := Real.log_pos (by exact_mod_cast (show 1 < q by omega))
+  dsimp [arcGrowthBudget]
+  field_simp [hqp.ne', hlp.ne'] <;> ring
+
+/-- Public asymptotic theorem. The only user parameters are k and ε; the prime
+field size eventually satisfies every numerical condition needed above. -/
+theorem eventually_arc_container_family (k : ℕ) (hk : 2 ≤ k)
+    (ε : ℝ) (hε : 0 < ε) :
+    ∀ᶠ q : ℕ in atTop, ∀ hprime : q.Prime,
+      letI : Fact q.Prime := ⟨hprime⟩
+      ∃ Cs : Finset (Finset (Point q)),
+        (∀ Y : Finset (Point q), IsArc k Y → ∃ C ∈ Cs, Y ⊆ C) ∧
+        (∀ C ∈ Cs, C.card ≤ 2 * k * q) ∧
+        (Cs.card : ℝ) ≤ Real.exp (ε * q) := by
+  filter_upwards [eventually_ArcStepLarge k,
+    (tendsto_arcGrowthBudget_div k).eventually (gt_mem_nhds hε),
+    eventually_ge_atTop (2 : ℕ)] with q hlarge hbudget hq
+  intro hprime
+  letI : Fact q.Prime := ⟨hprime⟩
+  obtain ⟨Cs, hcover, hsize, hcount⟩ := arc_container_family k hk hlarge
+  refine ⟨Cs, hcover, hsize, ?_⟩
+  have hqp : (0 : ℝ) < q := by exact_mod_cast hprime.pos
+  have hbudget' : arcGrowthBudget k q ≤ ε * q :=
+    ((div_lt_iff₀ hqp).mp hbudget).le
+  calc
+    (Cs.card : ℝ) ≤ ((arcBranchBound k q ^ arcDepth k q : ℕ) : ℝ) := by
+      exact_mod_cast hcount
+    _ ≤ Real.exp (arcGrowthBudget k q) := arcBranchDepth_le_exp k q hq hlarge.1
+    _ ≤ Real.exp (ε * q) := Real.exp_le_exp.mpr hbudget'
+
+/-- Equivalent threshold interface convenient for choosing a sufficiently large prime. -/
+theorem exists_arc_container_threshold (k : ℕ) (hk : 2 ≤ k)
+    (ε : ℝ) (hε : 0 < ε) :
+    ∃ q₀ : ℕ, ∀ q ≥ q₀, ∀ hprime : q.Prime,
+      letI : Fact q.Prime := ⟨hprime⟩
+      ∃ Cs : Finset (Finset (Point q)),
+        (∀ Y : Finset (Point q), IsArc k Y → ∃ C ∈ Cs, Y ⊆ C) ∧
+        (∀ C ∈ Cs, C.card ≤ 2 * k * q) ∧
+        (Cs.card : ℝ) ≤ Real.exp (ε * q) := by
+  exact eventually_atTop.1 (eventually_arc_container_family k hk ε hε)
+
+end JSP539.Affine

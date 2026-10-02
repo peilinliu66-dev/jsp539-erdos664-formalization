@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.FiniteProbability",
+  "label": "prob_finite_normalization_03",
+  "recorded_utc": "2026-10-02T08:47:49.305432+00:00",
+  "reason": "Actual Lean diagnostics require factoring finite sums before ring normalization, explicit complement indicator instantiation, and finite Cartesian-product cardinality for the product rule. All theorem statements and mathematics unchanged.",
+  "diagnostic_log": "verification/build/prob_finite_02.log",
+  "before_sha256": "01d6f1525cd3c1a3caf60f78d901d48c72174b8eb1338f2e196b115d80c90d3f",
+  "after_sha256": "c7532f3db4c438f03e1b9901817eb99a5297d9167d82c34108fd00aa461850bb",
+  "statement_changed": false
+}

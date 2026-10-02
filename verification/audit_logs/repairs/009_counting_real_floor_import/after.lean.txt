@@ -1,0 +1,112 @@
+/-
+Copyright 2026 JSP539 formalization contributors.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy at http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software distributed
+under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+CONDITIONS OF ANY KIND, either express or implied.
+-/
+import JSP539.ContainerCore
+import Mathlib.Data.Real.Archimedean
+
+/-!
+# Counting fingerprints by finite insertion
+
+This elementary counting adaptation accompanies the fingerprint formulation of
+Campos--Samotij Theorem A (https://arxiv.org/abs/2408.06617). It uses an explicit
+finite insertion recursion, so neither an asymptotic entropy estimate nor an
+assumed bound on the number of containers is required. Status: UNCOMPILED.
+-/
+
+open scoped BigOperators
+
+namespace JSP539.ContainerCore
+
+open Erdos565 Erdos565.Hypergraph
+
+variable {V : Type*} [Fintype V] [DecidableEq V]
+
+lemma card_biUnion_le_sum {A B : Type*} [DecidableEq B]
+    (T : Finset A) (F : A → Finset B) :
+    (T.biUnion F).card ≤ ∑ a ∈ T, (F a).card := by
+  classical
+  induction T using Finset.induction_on with
+  | empty => simp
+  | @insert a T ha ih =>
+    rw [Finset.biUnion_insert, Finset.sum_insert ha]
+    exact (Finset.card_union_le (F a) (T.biUnion F)).trans
+      (Nat.add_le_add_left ih _)
+
+/-- All sets obtainable by at most `m` successive vertex insertions. -/
+def fingerprintBall : ℕ → Finset (Finset V)
+  | 0 => {∅}
+  | m + 1 => insert ∅ ((Finset.univ : Finset V).biUnion
+      (fun v => (fingerprintBall m).image (insert v)))
+
+lemma mem_fingerprintBall_of_card_le {s : Finset V} {m : ℕ} (h : s.card ≤ m) :
+    s ∈ fingerprintBall (V := V) m := by
+  induction m generalizing s with
+  | zero =>
+    have hs : s = ∅ := Finset.card_eq_zero.mp (Nat.eq_zero_of_le_zero h)
+    subst s
+    simp [fingerprintBall]
+  | succ m ih =>
+    by_cases hs : s = ∅
+    · simp [hs, fingerprintBall]
+    · obtain ⟨v, hv⟩ := Finset.nonempty_iff_ne_empty.mpr hs
+      have hErase : (s.erase v).card ≤ m := by
+        rw [Finset.card_erase_of_mem hv]
+        omega
+      exact Finset.mem_insert.mpr (Or.inr (Finset.mem_biUnion.mpr
+        ⟨v, Finset.mem_univ v, Finset.mem_image.mpr
+          ⟨s.erase v, ih hErase, Finset.insert_erase hv⟩⟩))
+
+lemma card_fingerprintBall_le (m : ℕ) :
+    (fingerprintBall (V := V) m).card ≤ (Fintype.card V + 1) ^ (m + 1) := by
+  induction m with
+  | zero => simp [fingerprintBall]
+  | succ m ih =>
+    let A := fingerprintBall (V := V) m
+    have hUnion : ((Finset.univ : Finset V).biUnion
+        (fun v => A.image (insert v))).card ≤ Fintype.card V * A.card := by
+      apply le_trans (card_biUnion_le_sum _ _)
+      calc
+        ∑ v : V, (A.image (insert v)).card ≤ ∑ _v : V, A.card :=
+          Finset.sum_le_sum (fun _ _ => Finset.card_image_le)
+        _ = Fintype.card V * A.card := by simp
+    have hOne : 1 ≤ (Fintype.card V + 1) ^ (m + 1) := by
+      have hpos : 0 < (Fintype.card V + 1) ^ (m + 1) := by positivity
+      omega
+    calc
+      (fingerprintBall (V := V) (m + 1)).card ≤
+          1 + ((Finset.univ : Finset V).biUnion
+            (fun v => A.image (insert v))).card := by
+        simpa only [fingerprintBall, A, Nat.add_comm] using
+          (Finset.card_insert_le (∅ : Finset V)
+            ((Finset.univ : Finset V).biUnion (fun v => A.image (insert v))))
+      _ ≤ 1 + Fintype.card V * A.card := Nat.add_le_add_left hUnion 1
+      _ ≤ 1 + Fintype.card V * (Fintype.card V + 1) ^ (m + 1) :=
+        Nat.add_le_add_left (Nat.mul_le_mul_left _ ih) 1
+      _ ≤ (Fintype.card V + 1) ^ (m + 1) +
+          Fintype.card V * (Fintype.card V + 1) ^ (m + 1) :=
+        Nat.add_le_add_right hOne _
+      _ = (Fintype.card V + 1) ^ ((m + 1) + 1) := by
+        rw [pow_succ]
+        ring
+
+lemma family_card_le_of_fingerprint_bound (S : Finset (Finset V)) (B : ℝ)
+    (hS : ∀ s ∈ S, (s.card : ℝ) ≤ B) :
+    S.card ≤ (Fintype.card V + 1) ^ (⌊B⌋₊ + 1) := by
+  have hsub : S ⊆ fingerprintBall (V := V) ⌊B⌋₊ := by
+    intro s hs
+    exact mem_fingerprintBall_of_card_le (Nat.le_floor (hS s hs))
+  exact (Finset.card_le_card hsub).trans (card_fingerprintBall_le _)
+
+lemma image_family_card_le_of_fingerprint_bound
+    (S : Finset (Finset V)) (C : Finset V → Finset V) (B : ℝ)
+    (hS : ∀ s ∈ S, (s.card : ℝ) ≤ B) :
+    (S.image C).card ≤ (Fintype.card V + 1) ^ (⌊B⌋₊ + 1) :=
+  Finset.card_image_le.trans (family_card_le_of_fingerprint_bound S B hS)
+
+end JSP539.ContainerCore

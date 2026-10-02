@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.UniformBits",
+  "label": "prob_uniform_explicit_events_03",
+  "recorded_utc": "2026-10-02T08:58:00.871079+00:00",
+  "reason": "Actual bounded retry still timed out at inference of fraction_equiv event placeholder. Supply each concrete event explicitly to avoid higher-order unification through the coordinate equivalence, and restore default finite heartbeats; remove misplaced local-option commands after doc comments.",
+  "diagnostic_log": "verification/build/prob_uniform_02.log",
+  "before_sha256": "a83fd3091dc32f83b1b5837d3bf76449e38453bc734e1d73463f68747c3438b4",
+  "after_sha256": "4f4c61ba02b0369c7756927797fc30a983ea9d1b66692461479e4d22bd280c95",
+  "statement_changed": false
+}

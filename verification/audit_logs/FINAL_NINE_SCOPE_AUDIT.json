@@ -1,0 +1,181 @@
+{
+  "schema": "jsp539-final-nine-compiled-repair-scope-audit-v1",
+  "generated_utc": "2026-10-02T09:28:42.168609+00:00",
+  "status": "PASS_FINAL_NINE_SCOPE_REPAIR_AUDIT",
+  "auditor": "scope_repair539",
+  "original_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\revisions\\FULL_SOURCE_JSP539_REAL_BOUNDS_AUDITED_UNCOMPILED_20261002T0730\\original",
+  "candidate_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\candidate",
+  "source_revision": "REAL_BOUNDS_0730",
+  "source_input_sha256": "168c87fc14b7c0511e12cf79f35163190c0e342a875d006117e62478daadaaf9",
+  "audited_file_count": 9,
+  "files": [
+    {
+      "path": "JSP539/ArcContainerGrowth.lean",
+      "original_sha256": "d5582449587334c875c50d3c59b4ec5c9276b05021c6686f6488f498a17551f1",
+      "candidate_sha256": "31d637bf644b155162268873cf303c480b4ddef3b4412220b8ee893a40ffcc23",
+      "bytes_original": 8179,
+      "bytes_candidate": 8354,
+      "byte_identical": false,
+      "declaration_headers_identical": true,
+      "declaration_count": 9,
+      "scope_result": "PASS",
+      "repair_note": "Three proof repairs only: infer log positivity from existing hlog and unfold floor bound; unfold local log abbreviation for linarith; simplify composed limit explicitly. All declarations, assumptions, growth constants and threshold conclusions unchanged.",
+      "prohibited_uncommented_tokens": []
+    },
+    {
+      "path": "JSP539/FairBitTail.lean",
+      "original_sha256": "9e3278122e4df09afe5fccf56b82c7fd1e076d602840e41ca3c2a208320098c4",
+      "candidate_sha256": "9e3278122e4df09afe5fccf56b82c7fd1e076d602840e41ca3c2a208320098c4",
+      "bytes_original": 6314,
+      "bytes_candidate": 6314,
+      "byte_identical": true,
+      "declaration_headers_identical": true,
+      "declaration_count": 6,
+      "scope_result": "PASS",
+      "repair_note": "Byte-identical. Full fair-bit sample space, all real tilt parameters, empty-set case, 2/5 cutoff and exp(-card/200) retained.",
+      "prohibited_uncommented_tokens": []
+    },
+    {
+      "path": "JSP539/ContainerProbability.lean",
+      "original_sha256": "6061bae9dc3f1597c25f2f632ae4cf19befe37a5234f1a2bc5b17e8a0b458a91",
+      "candidate_sha256": "17d6e05c1ea28c80db26b08827c3164413dd94dcdf446f715f76acdfa9ae7458",
+      "bytes_original": 5609,
+      "bytes_candidate": 5675,
+      "byte_identical": false,
+      "declaration_headers_identical": true,
+      "declaration_count": 10,
+      "scope_result": "PASS",
+      "repair_note": "Required ordered-product import and Finset.prod_le_prod0 API. Existing nonnegative-factor and pointwise inequalities retained, no independent-lines assumption added.",
+      "prohibited_uncommented_tokens": []
+    },
+    {
+      "path": "JSP539/ProbabilityBudget.lean",
+      "original_sha256": "6a181f53a2837cee67bc91820f032c38bc311c844931240369e6bd8977ab1386",
+      "candidate_sha256": "6bc07e4165d39074e7170408b2de101995951f1031f1eff95cb4ebfdfd8d9759",
+      "bytes_original": 2278,
+      "bytes_candidate": 2369,
+      "byte_identical": false,
+      "declaration_headers_identical": true,
+      "declaration_count": 5,
+      "scope_result": "PASS",
+      "repair_note": "Definitional change expansion of existing totalFailureBudget before adding limits; definitions, hk >= 2, exponential constants, and eventual budget < 1 unchanged.",
+      "prohibited_uncommented_tokens": []
+    },
+    {
+      "path": "JSP539/RandomRestriction.lean",
+      "original_sha256": "b2ff2a9ee1141adb45b9d7f225c75f45bee531557df049f1a71ee6cf1170b0c2",
+      "candidate_sha256": "b26411d46664404714bbbfe34b01ca729e091caaba6d6f8ce0d75ef40b20cc1b",
+      "bytes_original": 5731,
+      "bytes_candidate": 5741,
+      "byte_identical": false,
+      "declaration_headers_identical": true,
+      "declaration_count": 7,
+      "scope_result": "PASS",
+      "repair_note": "Added mul_comm to existing finite sum simplification only; retention, unconditioned construction, arbitrary K/n0 and all-Q obstruction unchanged.",
+      "prohibited_uncommented_tokens": []
+    },
+    {
+      "path": "JSP539/OriginalScope.lean",
+      "original_sha256": "cd9ff576d37811413d9741956fc7f67b665cf13eea5a088ec4b32b6e93cee923",
+      "candidate_sha256": "cd9ff576d37811413d9741956fc7f67b665cf13eea5a088ec4b32b6e93cee923",
+      "bytes_original": 5049,
+      "bytes_candidate": 5049,
+      "byte_identical": true,
+      "declaration_headers_identical": true,
+      "declaration_count": 5,
+      "scope_result": "PASS",
+      "repair_note": "Byte-identical. Natural K/n0 existence and both exact original negated quantifier formulations retained.",
+      "prohibited_uncommented_tokens": []
+    },
+    {
+      "path": "JSP539/RealScope.lean",
+      "original_sha256": "190c2a915a8743a5c88e3e23e8fe43988ce5c4a325506c6f2ede8e9f57151ce9",
+      "candidate_sha256": "190c2a915a8743a5c88e3e23e8fe43988ce5c4a325506c6f2ede8e9f57151ce9",
+      "bytes_original": 2719,
+      "bytes_candidate": 2719,
+      "byte_identical": true,
+      "declaration_headers_identical": true,
+      "declaration_count": 3,
+      "scope_result": "PASS",
+      "repair_note": "Byte-identical. Arbitrary K : Real and n0 : Nat; ceiling adapter proves real strict threshold without sign assumption; full original quantifier boundaries retained.",
+      "prohibited_uncommented_tokens": []
+    },
+    {
+      "path": "JSP539.lean",
+      "original_sha256": "b2e28e1e6cd80d436d6b9314452b9058b87ac91eae2735d84ce238545c41e84b",
+      "candidate_sha256": "b2e28e1e6cd80d436d6b9314452b9058b87ac91eae2735d84ce238545c41e84b",
+      "bytes_original": 24,
+      "bytes_candidate": 24,
+      "byte_identical": true,
+      "declaration_headers_identical": true,
+      "declaration_count": 0,
+      "scope_result": "PASS",
+      "repair_note": "Byte-identical; imports RealScope as public root.",
+      "prohibited_uncommented_tokens": []
+    },
+    {
+      "path": "Verify.lean",
+      "original_sha256": "836916ec58479bf9e164049bf800d9b41eb3719bafa22dcd6eace4a18eb7f503",
+      "candidate_sha256": "836916ec58479bf9e164049bf800d9b41eb3719bafa22dcd6eace4a18eb7f503",
+      "bytes_original": 870,
+      "bytes_candidate": 870,
+      "byte_identical": true,
+      "declaration_headers_identical": true,
+      "declaration_count": 0,
+      "scope_result": "PASS",
+      "repair_note": "Byte-identical; same natural/real statement and axiom-print entrypoints.",
+      "prohibited_uncommented_tokens": []
+    }
+  ],
+  "claims": {
+    "all_nine_declaration_types_and_existing_assumptions_preserved": true,
+    "all_changed_definitions_or_constructed_data": "NONE; edits are imports or local proof implementations",
+    "arbitrary_real_K_without_sign_condition": true,
+    "arbitrary_natural_n0_and_n0_le_n": true,
+    "actual_family_type": "exists n m : Nat, A : Fin m -> Finset (Fin n)",
+    "exact_pair_index_uniqueness": "forall x y : Fin n, x != y -> exists unique i : Fin m, x in A i and y in A i",
+    "strict_block_size": "forall i, (2/5 : Real) * sqrt(n : Real) < (card(A i) : Real)",
+    "linearity": "forall i j, i != j -> card(A i intersect A j) <= 1",
+    "transversal_obstruction": "forall Q : Finset (Fin n), (forall i, (Q intersect A i).Nonempty) -> exists i, K < (card(Q intersect A i) : Real)",
+    "real_bound_adapter": "exists_bad_fin_design ceil_nat(K) n0 plus K <= (ceil_nat(K) : Real) and strict natural bound cast to Real",
+    "original_at_most_once_question_quantifiers": "neg (forall c : Real, 0 < c -> c < 1 -> exists K : Real, forall n m A, strict_size -> linearity -> exists hitting B with all intersections <= K)",
+    "original_exact_pair_question_quantifiers": "neg (forall c : Real, 0 < c -> exists K : Real, forall n m A, strict_size -> exact_pair_exists_unique -> exists hitting B with all intersections <= K)",
+    "fixed_constant_claim_boundary": "The witness c = 2/5 refutes the forall-c question; no claim of counterexamples for every c.",
+    "no_new_assumption_interface_or_placeholder_proof": true,
+    "all_nine_prohibited_uncommented_tokens_absent": true
+  },
+  "prior_batch": {
+    "report_path": "C:\\Users\\28983\\Documents\\ChatGPT\\孙宇晨奖\\THREE_LEAN_AUDITS_20261002\\JSP000539\\verification\\COMPILED_REPAIR_SCOPE_AUDIT.json",
+    "report_sha256": "169e69af9d1e6124e82fe940f0be62c7231f685548d9f1b097c4e28f2f627cb0",
+    "audited_file_count": 22,
+    "all_previous_original_candidate_bindings_rechecked_current": true
+  },
+  "combined_coverage": {
+    "audited_original_proof_and_verification_lean_files": 31,
+    "statement": "All 31 package proof/helper/public-entrypoint/Verify Lean files are covered by the two hash-bound scope reports; lakefile.lean is build configuration and outside mathematical scope.",
+    "separate_VerifyOriginalStatement_lean": "NOT_READ_OR_AUDITED; root will add separately for verification."
+  },
+  "method": {
+    "read_only_source_audit": true,
+    "full_original_candidate_bytes_read": true,
+    "diff_and_affected_context_mathematical_review": true,
+    "independent_helper_review": "scope_helpers read-only review of final four probability/growth files",
+    "header_comparison": "Whitespace-normalized source declaration headers, supplemented by manual diff review; not Lean elaboration.",
+    "lean_run": false,
+    "lake_run": false,
+    "compiler_logs_rechecked": false,
+    "candidate_modified_by_auditor": false,
+    "attachment_instructions_treated_as_data": true
+  },
+  "source_hash_stability": {
+    "before_report_utc": "2026-10-02T09:28:42.168609+00:00",
+    "after_report_utc": "2026-10-02T09:28:42.179635+00:00",
+    "original_candidate_hashes_equal_before_after": true,
+    "prior_22_bindings_equal_before_after": true
+  },
+  "limitations": [
+    "This certifies mathematical scope preservation under the listed source diffs, not an independent rerun of compilation or an axiom-kernel check.",
+    "Existing UNCOMPILED comments are byte-preserved historical package text, not evidence of current build status.",
+    "A future source change invalidates its corresponding hash-bound conclusion."
+  ]
+}

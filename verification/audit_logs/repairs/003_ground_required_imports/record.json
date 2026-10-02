@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.GroundHypergraph",
+  "label": "003_ground_required_imports",
+  "recorded_utc": "2026-10-02T08:45:11.919744+00:00",
+  "reason": "Resource compatibility: simultaneous broad Mathlib imports naturally failed at a readable artifact; isolated broad import committed 8 GB. Root authorized replacing remaining same broad imports with needed exact-pinned modules so the full/public rebuild remains reproducible. No mathematical declaration or proof body changes.",
+  "diagnostic_log": "verification/build/initial_02_affineplane.log; verification/build/isolated_02_affineplane.log; verification/build/narrow_pell_read_probe_01.log",
+  "before_sha256": "553a853185ffef65239024ccba2d89b3c812ab67520cc27eac2152d45be40a1a",
+  "after_sha256": "c63aa2be77559855df77b6c0963c369d8a6e346adcd76184c50fb93ec6a5d4df",
+  "statement_changed": false
+}

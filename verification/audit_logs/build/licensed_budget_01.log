@@ -1,0 +1,6 @@
+JSP539/ProbabilityBudget.lean:50:2: error: Type mismatch: After simplification, term
+  Tendsto.add he tendsto_lineFailureBudget_zero
+ has type
+  @Tendsto ℕ ℝ (fun x => Real.exp (-(hittingRate k / 2) * ↑x) + lineFailureBudget x) atTop (𝓝 0)
+but is expected to have type
+  @Tendsto ℕ ℝ (totalFailureBudget k) atTop (𝓝 0)

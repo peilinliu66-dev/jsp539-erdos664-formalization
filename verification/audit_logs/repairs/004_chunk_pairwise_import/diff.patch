@@ -1,0 +1,10 @@
+--- before/JSP539.ChunkPartition
++++ after/JSP539.ChunkPartition
+@@ -7,6 +7,7 @@
+ recipient.
+ -/
+ import Mathlib.Data.Finset.Card
++import Mathlib.Data.Finset.Pairwise
+ import Mathlib.Data.Finset.Union
+ import Mathlib.Tactic
+ 

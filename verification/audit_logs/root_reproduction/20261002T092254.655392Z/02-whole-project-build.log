@@ -1,0 +1,336 @@
+⚠ [3139/3172] Replayed LicensedContainers.Hypergraph
+warning: LicensedContainers/Hypergraph.lean:20:0: 'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+⚠ [3140/3172] Replayed JSP539.AffinePlane
+warning: JSP539\AffinePlane.lean: imports `Mathlib.Algebra.Field.ZMod` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: JSP539\AffinePlane.lean: imports `Mathlib.Data.Fintype.Option` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: JSP539\AffinePlane.lean: imports `Mathlib.Data.Fintype.Prod` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: JSP539\AffinePlane.lean: imports `Mathlib.Tactic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [3142/3172] Replayed JSP539.ChunkPartition
+warning: JSP539\ChunkPartition.lean: imports `Mathlib.Data.Finset.Card` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: JSP539\ChunkPartition.lean: imports `Mathlib.Data.Finset.Pairwise` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: JSP539\ChunkPartition.lean: imports `Mathlib.Data.Finset.Union` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: JSP539\ChunkPartition.lean: imports `Mathlib.Tactic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [3143/3172] Replayed JSP539.GroundHypergraph
+warning: JSP539\GroundHypergraph.lean: imports `Mathlib.Data.Fintype.Powerset` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: JSP539\GroundHypergraph.lean: imports `Mathlib.Tactic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: JSP539/GroundHypergraph.lean:20:8: automatically included section variable(s) unused in theorem `JSP539.ground_card`:
+  [DecidableEq V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [3144/3172] Replayed JSP539.LineChunks
+warning: JSP539/LineChunks.lean:247:29: This simp argument is unused:
+  Nat.mul_assoc
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Finset.mul_sum, Finset.sum_add_distrib, Nat.mul_add, Nat.mul_comm, Nat.mul_left_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: JSP539/LineChunks.lean:361:0: automatically included section variable(s) unused in theorem `JSP539.Affine.chunkSize_mul_le`:
+  [Fact (Nat.Prime q)]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fact (Nat.Prime q)] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [3146/3172] Replayed LicensedContainers.ContainerWeight
+warning: LicensedContainers\ContainerWeight.lean: imports `Mathlib.Algebra.BigOperators.Ring.Finset` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: LicensedContainers\ContainerWeight.lean: imports `Mathlib.Data.Fintype.Powerset` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: LicensedContainers\ContainerWeight.lean: imports `Mathlib.Tactic.NormNum` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: LicensedContainers\ContainerWeight.lean: imports `Mathlib.Tactic.Ring` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: LicensedContainers\ContainerWeight.lean: imports `Mathlib.Tactic.Linarith` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: LicensedContainers\ContainerWeight.lean: imports `Mathlib.Tactic.Positivity` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [3147/3172] Replayed LicensedContainers.ContainerSelector
+warning: LicensedContainers\ContainerSelector.lean: imports `Mathlib.Order.Interval.Finset.Nat` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [3149/3172] Replayed JSP539.ContainerPotential
+warning: JSP539/ContainerPotential.lean:48:0: automatically included section variable(s) unused in theorem `JSP539.ContainerCore.strictLink_layer_empty_of_card_le`:
+  [Fintype V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/ContainerPotential.lean:159:0: automatically included section variable(s) unused in theorem `JSP539.ContainerCore.potential_nonneg`:
+  [Fintype V]
+  [DecidableEq V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] [DecidableEq V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [3150/3172] Replayed JSP539.ContainerAlgorithm
+warning: JSP539\ContainerAlgorithm.lean: imports `Mathlib.Tactic.FieldSimp` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: JSP539/ContainerAlgorithm.lean:93:27: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: JSP539/ContainerAlgorithm.lean:93:27: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+⚠ [3153/3172] Replayed JSP539.ContainerCounting
+warning: JSP539\ContainerCounting.lean: imports `Mathlib.Data.Real.Archimedean` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: JSP539/ContainerCounting.lean:11:0: 'Mathlib.Data.Real.Archimedean' has been deprecated: please replace this import by
+
+import Mathlib.Algebra.Order.Archimedean.Real.Basic
+⚠ [3154/3172] Replayed JSP539.ContainerShrink
+warning: JSP539/ContainerShrink.lean:30:0: automatically included section variable(s) unused in theorem `JSP539.ContainerCore.degree_eq_zero_of_uniform_card_lt`:
+  [Fintype V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/ContainerShrink.lean:41:0: automatically included section variable(s) unused in theorem `JSP539.ContainerCore.card_restrict_le_sum_degrees`:
+  [Fintype V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/ContainerShrink.lean:71:0: automatically included section variable(s) unused in theorem `JSP539.ContainerCore.vertex_count_pos_of_uniform_nonempty`:
+  [DecidableEq V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/ContainerShrink.lean:121:33: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: JSP539/ContainerShrink.lean:121:33: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: JSP539/ContainerShrink.lean:156:43: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: JSP539/ContainerShrink.lean:156:43: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+⚠ [3156/3172] Replayed JSP539.ArcContainerIteration
+warning: JSP539/ArcContainerIteration.lean:38:28: `dif_pos` has been deprecated: Use `dite_eq_left` instead
+
+Hint: Replace the deprecated name:
+  d̵i̵f̵_̵p̵o̵s̵d̲i̲t̲e̲_̲e̲q̲_̲l̲e̲f̲t̲
+warning: JSP539/ArcContainerIteration.lean:50:28: `dif_neg` has been deprecated: Use `dite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  d̵i̵f̵_̵n̵e̵g̵d̲i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: JSP539/ArcContainerIteration.lean:85:12: This simp argument is unused:
+  point_card
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [pow_two]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: JSP539/ArcContainerIteration.lean:133:31: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: JSP539/ArcContainerIteration.lean:148:17: Unused tactic linter: `linarith` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: JSP539/ArcContainerIteration.lean:151:21: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: JSP539/ArcContainerIteration.lean:133:31: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: JSP539/ArcContainerIteration.lean:148:17: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: JSP539/ArcContainerIteration.lean:151:21: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: JSP539/ArcContainerIteration.lean:146:14: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3157/3172] Replayed JSP539.ArcContainerGrowth
+warning: JSP539/ArcContainerGrowth.lean:85:31: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: JSP539/ArcContainerGrowth.lean:85:31: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: JSP539/ArcContainerGrowth.lean:136:36: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: JSP539/ArcContainerGrowth.lean:136:36: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: JSP539/ArcContainerGrowth.lean:152:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3158/3172] Replayed JSP539.FiniteProbability
+warning: JSP539\FiniteProbability.lean: imports `Mathlib.Basic.Real.Basic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: JSP539\FiniteProbability.lean: imports `Mathlib.Algebra.BigOperators.Ring.Finset` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: JSP539\FiniteProbability.lean: imports `Mathlib.Data.Fintype.BigOperators` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: JSP539\FiniteProbability.lean: imports `Mathlib.Tactic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: JSP539/FiniteProbability.lean:26:0: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.fraction_eq_card_filter`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/FiniteProbability.lean:33:0: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.fraction_eq_sum`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/FiniteProbability.lean:38:0: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.fraction_nonneg`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/FiniteProbability.lean:42:0: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.fraction_le_one`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/FiniteProbability.lean:49:8: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.fraction_false`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/FiniteProbability.lean:52:8: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.fraction_true`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/FiniteProbability.lean:58:0: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.fraction_mono`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/FiniteProbability.lean:125:0: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.average_nonneg`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/FiniteProbability.lean:130:0: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.average_mono`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/FiniteProbability.lean:134:0: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.fraction_eq_average_indicator`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/FiniteProbability.lean:140:0: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.average_mul_const`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/FiniteProbability.lean:146:0: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.average_const`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/FiniteProbability.lean:152:0: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.average_add`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/FiniteProbability.lean:156:0: automatically included section variable(s) unused in theorem `JSP539.FiniteProbability.average_equiv`:
+  [DecidableEq A]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq A] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/FiniteProbability.lean:233:12: `if_neg` has been deprecated: Use `ite_eq_right` instead
+
+Hint: Replace the deprecated name:
+  i̵f̵_̵n̵e̵g̵i̲t̲e̲_̲e̲q̲_̲r̲i̲g̲h̲t̲
+warning: JSP539/FiniteProbability.lean:227:18: This simp argument is unused:
+  Fintype.card_fun
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hf, div_eq_mul_inv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3159/3172] Replayed JSP539.DisjointPacking
+warning: JSP539\DisjointPacking.lean: imports `Mathlib.Algebra.Order.BigOperators.Group.Finset` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: JSP539\DisjointPacking.lean: imports `Mathlib.Data.Finset.Max` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: JSP539\DisjointPacking.lean: imports `Mathlib.Data.Fintype.Powerset` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: JSP539\DisjointPacking.lean: imports `Mathlib.Tactic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [3160/3172] Replayed JSP539.UniformBits
+warning: JSP539/UniformBits.lean:44:10: This simp argument is unused:
+  P'
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [insideExtension, e, hv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: JSP539/UniformBits.lean:49:10: This simp argument is unused:
+  Q'
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [outsideExtension, e, hvS]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: JSP539/UniformBits.lean:79:0: automatically included section variable(s) unused in theorem `JSP539.UniformBits.dependsOn_forall`:
+  [Fintype V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/UniformBits.lean:132:0: automatically included section variable(s) unused in theorem `JSP539.UniformBits.hits_dependsOn`:
+  [Fintype V]
+  [DecidableEq V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] [DecidableEq V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: JSP539/UniformBits.lean:165:0: automatically included section variable(s) unused in theorem `JSP539.UniformBits.hits_iff_not_avoids`:
+  [Fintype V]
+  [DecidableEq V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype V] [DecidableEq V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [3163/3172] Replayed JSP539.ContainerProbability
+warning: JSP539\ContainerProbability.lean: imports `Mathlib.Algebra.Order.BigOperators.GroupWithZero.Finset` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: JSP539/ContainerProbability.lean:62:8: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp [hits, hl] at h
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+⚠ [3165/3172] Replayed JSP539.RandomRestriction
+warning: JSP539/RandomRestriction.lean:42:31: This simp argument is unused:
+  line_card
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [lineFailureBudget, Nat.cast_mul, Nat.cast_add, mul_comm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: JSP539/RandomRestriction.lean:111:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3167/3172] Replayed JSP539.OriginalScope
+warning: JSP539/OriginalScope.lean:27:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+Build completed successfully (3172 jobs).

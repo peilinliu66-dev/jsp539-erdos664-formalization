@@ -1,0 +1,77 @@
+--- original/LicensedContainers/ContainerWeight.lean
++++ candidate/LicensedContainers/ContainerWeight.lean
+@@ -13,7 +13,12 @@
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -/
+-import Mathlib
++import Mathlib.Algebra.BigOperators.Ring.Finset
++import Mathlib.Data.Fintype.Powerset
++import Mathlib.Tactic.NormNum
++import Mathlib.Tactic.Ring
++import Mathlib.Tactic.Linarith
++import Mathlib.Tactic.Positivity
+ import LicensedContainers.Hypergraph
+ 
+ /-!
+--- original/LicensedContainers/ContainerSelector.lean
++++ candidate/LicensedContainers/ContainerSelector.lean
+@@ -13,6 +13,7 @@
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -/
++import Mathlib.Order.Interval.Finset.Nat
+ import LicensedContainers.ContainerInvariants
+ import LicensedContainers.ContainerWeight
+ 
+--- original/JSP539/ShortTraces.lean
++++ candidate/JSP539/ShortTraces.lean
+@@ -61,7 +61,7 @@
+     nlinarith
+   have hpositive : 0 < 2 * k := by omega
+   have hlongcount : 2 * U.card ≤ q * (q + 1) :=
+-    (mul_le_mul_left hpositive).mp hscaled
++    Nat.le_of_mul_le_mul_left hscaled hpositive
+   have hpartition : U.card + T.card = q * (q + 1) := by
+     dsimp [U]
+     rw [Finset.card_sdiff_of_subset (Finset.subset_univ T)]
+@@ -120,6 +120,6 @@
+           Nat.mul_le_mul_left 2 (Nat.mul_le_mul_left I.card
+             (Nat.mul_le_mul_left (4 * k) hqbound))
+         _ = q * (16 * k * I.card) := by ring
+-    exact (mul_le_mul_left hq).mp hscaled
++    exact Nat.le_of_mul_le_mul_left hscaled hq
+ 
+ end JSP539.Affine
+--- original/JSP539/ContainerProbability.lean
++++ candidate/JSP539/ContainerProbability.lean
+@@ -6,6 +6,7 @@
+ exponential bound is obtained from actual disjoint traces, not an independence
+ assumption about arbitrary lines. UNCOMPILED source.
+ -/
++import Mathlib.Algebra.Order.BigOperators.GroupWithZero.Finset
+ import JSP539.ShortTraces
+ import JSP539.UniformBits
+ 
+@@ -93,7 +94,7 @@
+       _ = ∏ l ∈ I, (1 - (1 / 2 : ℝ) ^ (shortTrace C l).card) :=
+         fraction_hits_all (shortTrace C) I hsep
+       _ ≤ ∏ _l ∈ I, Real.exp (-a) :=
+-        Finset.prod_le_prod hfactor_nonneg hfactor
++        Finset.prod_le_prod₀ hfactor_nonneg hfactor
+       _ = Real.exp (-(a * I.card)) := by
+         simp only [Finset.prod_const]
+         rw [← Real.exp_nat_mul]
+--- original/JSP539/ProbabilityBudget.lean
++++ candidate/JSP539/ProbabilityBudget.lean
+@@ -47,7 +47,9 @@
+       atTop (𝓝 0) := by
+     simpa only [Function.comp_def, neg_mul] using
+       Real.tendsto_exp_neg_atTop_nhds_zero.comp ht
+-  simpa only [totalFailureBudget, zero_add] using
++  change Tendsto (fun q : ℕ =>
++    Real.exp (-(hittingRate k / 2) * q) + lineFailureBudget q) atTop (𝓝 0)
++  simpa only [zero_add] using
+     he.add tendsto_lineFailureBudget_zero
+ 
+ theorem eventually_totalFailureBudget_lt_one (k : ℕ) (hk : 2 ≤ k) :

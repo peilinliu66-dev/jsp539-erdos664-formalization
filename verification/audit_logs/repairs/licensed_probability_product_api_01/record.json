@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.ContainerProbability",
+  "label": "licensed_probability_product_api_01",
+  "recorded_utc": "2026-10-02T09:03:21.805014+00:00",
+  "reason": "The compiler found the one-argument monotone-group prod_le_prod. For real products use prod_le_prod₀ from its direct declaration module with the already-proved nonnegative factors and factor inequalities. No event, constant, statement, or hypothesis changes.",
+  "diagnostic_log": "verification/build/licensed_probability_01.log",
+  "before_sha256": "6061bae9dc3f1597c25f2f632ae4cf19befe37a5234f1a2bc5b17e8a0b458a91",
+  "after_sha256": "17d6e05c1ea28c80db26b08827c3164413dd94dcdf446f715f76acdfa9ae7458",
+  "statement_changed": false
+}

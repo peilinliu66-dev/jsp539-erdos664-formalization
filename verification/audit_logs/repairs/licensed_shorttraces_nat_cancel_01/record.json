@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.ShortTraces",
+  "label": "licensed_shorttraces_nat_cancel_01",
+  "recorded_utc": "2026-10-02T08:54:28.024627+00:00",
+  "reason": "The compiler resolved mul_le_mul_left as a monotonicity function, not an iff. Use the supplied Lean Init.Data.Nat.Basic cancellation theorem Nat.le_of_mul_le_mul_left with the existing positivity proofs and exact same scaled inequalities. No statement, hypothesis, or bound changes.",
+  "diagnostic_log": "verification/build/licensed_shorttraces_01.log",
+  "before_sha256": "867cc04761ece172de91ef721a250326c0e1858dc02799cd8c5b9565d644df5f",
+  "after_sha256": "a23ca9c50c62241cbc0caeacea44ce8dd0f75b49cbf04556a1bb42b78312de3c",
+  "statement_changed": false
+}

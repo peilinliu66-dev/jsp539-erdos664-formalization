@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.ArcContainerIteration",
+  "label": "013_iteration_closed_gcongr_goal",
+  "recorded_utc": "2026-10-02T09:00:13.022660+00:00",
+  "reason": "Actual residual No goals to be solved is the linarith line after gcongr. Sequence only on residual goals, because monotonicity already closes the inequality from available depth bounds. The earlier congr/ring style edit is semantically harmless but was not this remaining error.",
+  "diagnostic_log": "verification/build/eighth_main_1_JSP539_ArcContainerIteration.log",
+  "before_sha256": "4fb8abd931ca8ccabd1bba40175b533043f0feaf15f64286f1b3b6cb7a4eac9c",
+  "after_sha256": "223e950020e181a2633d1ac2b77a7c115826e5f19bd8f931723bea722c389c41",
+  "statement_changed": false
+}

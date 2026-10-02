@@ -1,0 +1,12 @@
+--- before/JSP539.GroundHypergraph
++++ after/JSP539.GroundHypergraph
+@@ -5,7 +5,8 @@
+ Finite ground-set transport. All cardinalities and degrees are preserved;
+ the new ambient type has exactly the prescribed ground-set cardinality.
+ -/
+-import Mathlib
++import Mathlib.Data.Fintype.Powerset
++import Mathlib.Tactic
+ import LicensedContainers.Hypergraph
+ 
+ open Erdos565

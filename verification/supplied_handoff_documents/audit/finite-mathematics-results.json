@@ -1,0 +1,33 @@
+{
+  "status": "FINITE_SANITY_AND_STATIC_SOURCE_ONLY",
+  "compiled": false,
+  "kernel_verified": false,
+  "seed": 539664,
+  "counts": {
+    "line_count": 5,
+    "line_sizes": 5,
+    "point_degree": 208,
+    "pair_coverage": 8778,
+    "line_intersections": 10702,
+    "trace_injectivity": 300,
+    "retained_exact_pairs": 563059,
+    "short_line_count": 600,
+    "disjoint_packing_rate": 246,
+    "packing_short_size": 246,
+    "chunk_distinct": 240,
+    "chunk_edge_lower": 240,
+    "chunk_degree_one": 15486,
+    "chunk_higher_degree": 4000,
+    "binomial_scaled": 12341,
+    "line_tail": 101,
+    "exact_pgf": 101,
+    "no_missing_local_imports": 1,
+    "no_forbidden_source_tokens": 1
+  },
+  "total_assertions": 616660,
+  "lean_files_including_lakefile_and_verify": 32,
+  "lean_lines": 6600,
+  "missing_local_imports": [],
+  "forbidden_tokens": [],
+  "local_import_cycles": false
+}

@@ -1,0 +1,302 @@
+/-
+Copyright 2026 JSP539 formalization contributors.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy at http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software distributed
+under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+CONDITIONS OF ANY KIND, either express or implied.
+-/
+import JSP539.ContainerPotential
+import Mathlib.Tactic.FieldSimp
+
+/-!
+# A finite, deterministic Campos--Samotij machine
+
+Independent source implementing the algorithm of Section 3 of
+Campos--Samotij, https://arxiv.org/abs/2408.06617 .
+Termination uses strict growth of the generated upset. The state stores the
+proved charging invariant, rather than a history of accepting steps.
+Status: UNCOMPILED. No executable compiler was invoked in producing this file.
+-/
+
+namespace JSP539.ContainerCore
+
+open Erdos565 Erdos565.Hypergraph Erdos565.ContainerSelector
+
+variable {V : Type*} [Fintype V] [DecidableEq V]
+
+structure Parameters where
+  rank : ℕ
+  density : ℝ
+  rank_pos : 0 < rank
+  density_pos : 0 < density
+  density_small : density ≤ 1 / (8 * (rank : ℝ) ^ 2)
+
+/-- Every field following the two finite sets is an invariant with a proof. -/
+structure State (q : Parameters) (V : Type*) [Fintype V] [DecidableEq V] where
+  family : Hypergraph V
+  fingerprint : Finset V
+  antichain : family.IsAntichain
+  bounded : family.IsBounded q.rank
+  nonempty_edges : family.HasNonemptyEdges
+  low_links : LowLinks family q.density q.rank
+  budget : (fingerprint.card : ℝ) ≤
+    8 * (q.rank : ℝ) ^ 2 * potential family q.density q.rank
+
+noncomputable def initial (q : Parameters) (H : Hypergraph V)
+    (hH : H.IsUniform q.rank) : State q V where
+  family := H
+  fingerprint := ∅
+  antichain := hH.isAntichain
+  bounded := hH.isBounded
+  nonempty_edges := by
+    intro E hE
+    apply Finset.card_pos.mp
+    rw [hH E hE]
+    exact q.rank_pos
+  low_links := by
+    intro a ha L hL hLa
+    rw [linkWeight_layer_eq_zero_of_uniform_of_ne hH (Nat.ne_of_lt ha)]
+    positivity
+  budget := by
+    simp only [Finset.card_empty, Nat.cast_zero]
+    exact mul_nonneg (by positivity)
+      (potential_nonneg H q.density_pos.le q.rank)
+
+noncomputable def accept {q : Parameters} (s : State q V)
+    (c : Choice s.family q.density q.rank) : State q V where
+  family := s.family.update ((s.family.layer c.layerIndex).link c.seed)
+  fingerprint := s.fingerprint ∪ c.seed
+  antichain := s.antichain.update (acceptReplacement_isUniform c).isAntichain
+    (s.antichain.link_layer_outside_upClosure c.seed_nonempty)
+  bounded := s.bounded.update (by
+    intro E hE
+    have hc := acceptReplacement_isUniform c E hE
+    have hle := c.layer_le_rank
+    omega)
+  nonempty_edges := s.nonempty_edges.update
+    (link_layer_hasNonemptyEdges c.seed_not_edge)
+  low_links := lowLinks_update_accept q.rank_pos q.density_pos.le s.antichain s.low_links c
+  budget := by
+    have hcard := Finset.card_union_le s.fingerprint c.seed
+    have hcardR : ((s.fingerprint ∪ c.seed).card : ℝ) ≤
+        s.fingerprint.card + c.seed.card := by exact_mod_cast hcard
+    have hseed : (c.seed.card : ℝ) ≤ q.rank := by
+      exact_mod_cast (seed_card_lt_layer c.extension c.seed_not_edge).le.trans c.layer_le_rank
+    have hgain := accept_potential_gain q.rank_pos q.density_pos.le s.antichain s.low_links c
+    have hbudget := s.budget
+    have hfactor : (0 : ℝ) ≤ 8 * (q.rank : ℝ) ^ 2 := by positivity
+    have hscaled := mul_le_mul_of_nonneg_left hgain hfactor
+    have hr0 : (q.rank : ℝ) ≠ 0 := by exact_mod_cast q.rank_pos.ne'
+    have hcharge : 8 * (q.rank : ℝ) ^ 2 * (1 / (8 * (q.rank : ℝ))) = q.rank := by
+      field_simp [hr0] <;> ring
+    rw [mul_add, hcharge] at hscaled
+    linarith
+
+noncomputable def reject {q : Parameters} (s : State q V)
+    (c : Choice s.family q.density q.rank) : State q V where
+  family := s.family.update {c.seed}
+  fingerprint := s.fingerprint
+  antichain := s.antichain.update (singleton_isUniform c.seed).isAntichain (by
+    intro E hE
+    have he := Finset.mem_singleton.mp hE
+    subst E
+    exact s.antichain.seed_outside_upClosure c.seed_not_edge c.extension)
+  bounded := s.bounded.update (by
+    intro E hE
+    have he := Finset.mem_singleton.mp hE
+    subst E
+    exact (seed_card_lt_layer c.extension c.seed_not_edge).le.trans c.layer_le_rank)
+  nonempty_edges := s.nonempty_edges.update (by
+    intro E hE
+    have he := Finset.mem_singleton.mp hE
+    subst E
+    exact c.seed_nonempty)
+  low_links := lowLinks_update_reject q.rank_pos q.density_pos.le
+    (parameter_bounds q.rank_pos q.density_small).1
+    (parameter_bounds q.rank_pos q.density_small).2 s.antichain s.low_links c
+  budget := s.budget.trans (mul_le_mul_of_nonneg_left
+    (reject_potential_mono q.rank_pos q.density_pos.le s.antichain s.low_links c)
+    (by positivity))
+
+/-- The selector depends on the current family, and never on the input set. -/
+noncomputable def choice {q : Parameters} (s : State q V)
+    (h : ¬ Stop q.density s.family) : Choice s.family q.density q.rank :=
+  Classical.choice (exists_choice_of_not_stop q.rank_pos q.density_pos
+    s.antichain s.bounded h)
+
+noncomputable def next {q : Parameters} (I : Finset V) (s : State q V) : State q V := by
+  classical
+  exact if h : Stop q.density s.family then s
+    else if (choice s h).seed ⊆ I then accept s (choice s h) else reject s (choice s h)
+
+lemma next_of_stop {q : Parameters} (I : Finset V) (s : State q V)
+    (h : Stop q.density s.family) : next I s = s := by
+  classical
+  simp [next, h]
+
+lemma next_of_accept {q : Parameters} (I : Finset V) (s : State q V)
+    (h : ¬ Stop q.density s.family) (hI : (choice s h).seed ⊆ I) :
+    next I s = accept s (choice s h) := by
+  classical
+  simp [next, h, hI]
+
+lemma next_of_reject {q : Parameters} (I : Finset V) (s : State q V)
+    (h : ¬ Stop q.density s.family) (hI : ¬ (choice s h).seed ⊆ I) :
+    next I s = reject s (choice s h) := by
+  classical
+  simp [next, h, hI]
+
+lemma accept_rank_increases {q : Parameters} (s : State q V)
+    (c : Choice s.family q.density q.rank) :
+    s.family.upClosure.card < (accept s c).family.upClosure.card := by
+  apply upRank_lt_update
+  have hnon : ((s.family.layer c.layerIndex).link c.seed).Nonempty := by
+    by_contra h
+    have he := Finset.not_nonempty_iff_eq_empty.mp h
+    have hheavy := c.heavy
+    have hpositive : 0 < threshold q.rank := by
+      have hr : (0 : ℝ) < q.rank := by exact_mod_cast q.rank_pos
+      rw [threshold]
+      positivity
+    simp only [linkWeight, he, pWeight_empty] at hheavy
+    linarith
+  obtain ⟨E, hE⟩ := hnon
+  exact ⟨E, hE, s.antichain.link_layer_outside_upClosure c.seed_nonempty hE⟩
+
+lemma reject_rank_increases {q : Parameters} (s : State q V)
+    (c : Choice s.family q.density q.rank) :
+    s.family.upClosure.card < (reject s c).family.upClosure.card := by
+  apply upRank_lt_update
+  exact ⟨c.seed, by simp,
+    s.antichain.seed_outside_upClosure c.seed_not_edge c.extension⟩
+
+lemma next_rank_increases {q : Parameters} (I : Finset V) (s : State q V)
+    (h : ¬ Stop q.density s.family) :
+    s.family.upClosure.card < (next I s).family.upClosure.card := by
+  classical
+  by_cases hI : (choice s h).seed ⊆ I
+  · rw [next_of_accept I s h hI]
+    exact accept_rank_increases s (choice s h)
+  · rw [next_of_reject I s h hI]
+    exact reject_rank_increases s (choice s h)
+
+lemma next_upClosure_mono {q : Parameters} (I : Finset V) (s : State q V) :
+    s.family.upClosure ⊆ (next I s).family.upClosure := by
+  classical
+  by_cases h : Stop q.density s.family
+  · simpa only [next_of_stop I s h] using
+      (Finset.Subset.rfl : s.family.upClosure ⊆ s.family.upClosure)
+  · by_cases hI : (choice s h).seed ⊆ I
+    · rw [next_of_accept I s h hI]
+      exact upClosure_subset_update _ _
+    · rw [next_of_reject I s h hI]
+      exact upClosure_subset_update _ _
+
+lemma next_fingerprint_mono {q : Parameters} (I : Finset V) (s : State q V) :
+    s.fingerprint ⊆ (next I s).fingerprint := by
+  classical
+  by_cases h : Stop q.density s.family
+  · simpa only [next_of_stop I s h] using
+      (Finset.Subset.rfl : s.fingerprint ⊆ s.fingerprint)
+  · by_cases hI : (choice s h).seed ⊆ I
+    · rw [next_of_accept I s h hI]
+      exact Finset.subset_union_left
+    · simpa only [next_of_reject I s h hI, reject] using
+        (Finset.Subset.rfl : s.fingerprint ⊆ s.fingerprint)
+
+lemma next_fingerprint_subset {q : Parameters} (I : Finset V) (s : State q V)
+    (hS : s.fingerprint ⊆ I) : (next I s).fingerprint ⊆ I := by
+  classical
+  by_cases h : Stop q.density s.family
+  · simpa [next_of_stop I s h] using hS
+  · by_cases hI : (choice s h).seed ⊆ I
+    · rw [next_of_accept I s h hI]
+      exact Finset.union_subset hS hI
+    · rw [next_of_reject I s h hI]
+      exact hS
+
+lemma next_independent {q : Parameters} (I : Finset V) (s : State q V)
+    (hI : s.family.IsIndependent I) : (next I s).family.IsIndependent I := by
+  classical
+  by_cases h : Stop q.density s.family
+  · simpa [next_of_stop I s h] using hI
+  · by_cases hseed : (choice s h).seed ⊆ I
+    · rw [next_of_accept I s h hseed]
+      exact hI.update ((hI.anti_hypergraph (layer_subset _ _)).link_of_subset hseed)
+    · rw [next_of_reject I s h hseed]
+      exact hI.update (isIndependent_singleton hseed)
+
+/-- Bounded-fuel recursion is definitional, with an absorbing terminal state. -/
+noncomputable def run {q : Parameters} (I : Finset V) : ℕ → State q V → State q V := by
+  classical
+  exact ContainerFuel.run (fun s => Stop q.density s.family) (next I)
+
+lemma run_zero {q : Parameters} (I : Finset V) (s : State q V) : run I 0 s = s := rfl
+
+lemma run_succ_stop {q : Parameters} (I : Finset V) (n : ℕ) (s : State q V)
+    (h : Stop q.density s.family) : run I (n + 1) s = s := by
+  classical
+  exact ContainerFuel.run_succ_of_terminal _ _ h
+
+lemma run_succ_active {q : Parameters} (I : Finset V) (n : ℕ) (s : State q V)
+    (h : ¬ Stop q.density s.family) : run I (n + 1) s = run I n (next I s) := by
+  classical
+  exact ContainerFuel.run_succ_of_not_terminal _ _ h
+
+/-- The entire algorithm terminates on every input, including non-independent ones. -/
+lemma run_terminal {q : Parameters} (I : Finset V) (s : State q V) :
+    Stop q.density (run I (2 ^ Fintype.card V + 1) s).family := by
+  classical
+  exact ContainerFuel.terminal_run_upClosure
+    (fun s : State q V => Stop q.density s.family) (next I) State.family
+    (next_rank_increases I) s
+
+lemma run_upClosure_mono {q : Parameters} (I : Finset V) (n : ℕ) (s : State q V) :
+    s.family.upClosure ⊆ (run I n s).family.upClosure := by
+  classical
+  induction n generalizing s with
+  | zero => exact Finset.Subset.rfl
+  | succ n ih =>
+    by_cases h : Stop q.density s.family
+    · simpa only [run_succ_stop I n s h] using
+        (Finset.Subset.rfl : s.family.upClosure ⊆ s.family.upClosure)
+    · rw [run_succ_active I n s h]
+      exact (next_upClosure_mono I s).trans (ih (next I s))
+
+lemma run_fingerprint_mono {q : Parameters} (I : Finset V) (n : ℕ) (s : State q V) :
+    s.fingerprint ⊆ (run I n s).fingerprint := by
+  classical
+  induction n generalizing s with
+  | zero => exact Finset.Subset.rfl
+  | succ n ih =>
+    by_cases h : Stop q.density s.family
+    · simpa only [run_succ_stop I n s h] using
+        (Finset.Subset.rfl : s.fingerprint ⊆ s.fingerprint)
+    · rw [run_succ_active I n s h]
+      exact (next_fingerprint_mono I s).trans (ih (next I s))
+
+lemma run_fingerprint_subset {q : Parameters} (I : Finset V) (n : ℕ) (s : State q V)
+    (hS : s.fingerprint ⊆ I) : (run I n s).fingerprint ⊆ I := by
+  classical
+  induction n generalizing s with
+  | zero => exact hS
+  | succ n ih =>
+    by_cases h : Stop q.density s.family
+    · simpa [run_succ_stop I n s h] using hS
+    · rw [run_succ_active I n s h]
+      exact ih (next I s) (next_fingerprint_subset I s hS)
+
+lemma run_independent {q : Parameters} (I : Finset V) (n : ℕ) (s : State q V)
+    (hI : s.family.IsIndependent I) : (run I n s).family.IsIndependent I := by
+  classical
+  induction n generalizing s with
+  | zero => exact hI
+  | succ n ih =>
+    by_cases h : Stop q.density s.family
+    · simpa [run_succ_stop I n s h] using hI
+    · rw [run_succ_active I n s h]
+      exact ih (next I s) (next_independent I s hI)
+
+end JSP539.ContainerCore

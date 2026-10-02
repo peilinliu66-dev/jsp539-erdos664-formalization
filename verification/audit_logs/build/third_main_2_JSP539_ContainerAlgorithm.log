@@ -1,0 +1,43 @@
+JSP539/ContainerAlgorithm.lean:92:7: error: unknown tactic
+JSP539/ContainerAlgorithm.lean:91:79: error: unsolved goals
+V : Type u_1
+inst✝¹ : Fintype V
+inst✝ : DecidableEq V
+q : Parameters
+s : State q V
+c : Choice s.family q.density q.rank
+hcard : (s.fingerprint ∪ c.seed).card ≤ s.fingerprint.card + c.seed.card
+hcardR : ↑(s.fingerprint ∪ c.seed).card ≤ ↑s.fingerprint.card + ↑c.seed.card
+hseed : ↑c.seed.card ≤ ↑q.rank
+hgain :
+  potential s.family q.density q.rank + 1 / (8 * ↑q.rank) ≤
+    potential (s.family.update ((s.family.layer c.layerIndex).link c.seed)) q.density q.rank
+hbudget : ↑s.fingerprint.card ≤ 8 * ↑q.rank ^ 2 * potential s.family q.density q.rank
+hfactor : 0 ≤ 8 * ↑q.rank ^ 2
+hscaled :
+  8 * ↑q.rank ^ 2 * (potential s.family q.density q.rank + 1 / (8 * ↑q.rank)) ≤
+    8 * ↑q.rank ^ 2 * potential (s.family.update ((s.family.layer c.layerIndex).link c.seed)) q.density q.rank
+hr0 : ↑q.rank ≠ 0
+⊢ 8 * ↑q.rank ^ 2 * (1 / (8 * ↑q.rank)) = ↑q.rank
+JSP539/ContainerAlgorithm.lean:80:12: error: unsolved goals
+V : Type u_1
+inst✝¹ : Fintype V
+inst✝ : DecidableEq V
+q : Parameters
+s : State q V
+c : Choice s.family q.density q.rank
+hcard : (s.fingerprint ∪ c.seed).card ≤ s.fingerprint.card + c.seed.card
+hcardR : ↑(s.fingerprint ∪ c.seed).card ≤ ↑s.fingerprint.card + ↑c.seed.card
+hseed : ↑c.seed.card ≤ ↑q.rank
+hgain :
+  potential s.family q.density q.rank + 1 / (8 * ↑q.rank) ≤
+    potential (s.family.update ((s.family.layer c.layerIndex).link c.seed)) q.density q.rank
+hbudget : ↑s.fingerprint.card ≤ 8 * ↑q.rank ^ 2 * potential s.family q.density q.rank
+hfactor : 0 ≤ 8 * ↑q.rank ^ 2
+hscaled :
+  8 * ↑q.rank ^ 2 * (potential s.family q.density q.rank + 1 / (8 * ↑q.rank)) ≤
+    8 * ↑q.rank ^ 2 * potential (s.family.update ((s.family.layer c.layerIndex).link c.seed)) q.density q.rank
+hr0 : ↑q.rank ≠ 0
+hcharge : 8 * ↑q.rank ^ 2 * (1 / (8 * ↑q.rank)) = ↑q.rank
+⊢ ↑(s.fingerprint ∪ c.seed).card ≤
+    8 * ↑q.rank ^ 2 * potential (s.family.update ((s.family.layer c.layerIndex).link c.seed)) q.density q.rank

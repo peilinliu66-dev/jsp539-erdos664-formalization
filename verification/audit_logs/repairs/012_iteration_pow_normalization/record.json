@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.ArcContainerIteration",
+  "label": "012_iteration_pow_normalization",
+  "recorded_utc": "2026-10-02T08:59:17.150026+00:00",
+  "reason": "Actual diagnostics: normalize q squared in the zero-level cardinality inequality, and use tactic sequencing so ring is applied only to residual congruence goals (congr may close them). Inductive construction/bounds unchanged.",
+  "diagnostic_log": "verification/build/seventh_main_2_JSP539_ArcContainerIteration.log",
+  "before_sha256": "51ef44b381027a02e2561f292690ccbc3628dad8467efb8657724d43089b170a",
+  "after_sha256": "4fb8abd931ca8ccabd1bba40175b533043f0feaf15f64286f1b3b6cb7a4eac9c",
+  "statement_changed": false
+}

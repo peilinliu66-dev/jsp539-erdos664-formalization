@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.ContainerShrink",
+  "label": "010_shrink_positive_cancel_api",
+  "recorded_utc": "2026-10-02T08:54:59.906023+00:00",
+  "reason": "Actual errors use obsolete multiplicative-cancellation call. Apply current positive-left-factor cancellation to the same existing inequalities and positivity proofs.",
+  "diagnostic_log": "verification/build/fifth_main_2_JSP539_ContainerShrink.log",
+  "before_sha256": "773cffd0b5884e79b900230575bc30a8ffe4e97728ab36df37c9350835e21ed7",
+  "after_sha256": "e06dd4153c04d43a2fadc8aa24a0dc4ce3606910647f74e3be31a0a1ce64756f",
+  "statement_changed": false
+}

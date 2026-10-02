@@ -1,0 +1,27 @@
+--- before/JSP539.UniformBits
++++ after/JSP539.UniformBits
+@@ -141,6 +141,8 @@
+     fraction (avoids S) = (1 / 2 : ℝ) ^ S.card := by
+   let e : Sample V ≃ ((S → Bool) × ({v : V // v ∉ S} → Bool)) :=
+     Equiv.piEquivPiSubtypeProd (fun v : V => v ∈ S) (fun _ => Bool)
++  have hbit : fraction (fun b : Bool => b = false) = (1 / 2 : ℝ) := by
++    norm_num [fraction]
+   have hform (f : Sample V) : avoids S f ↔ ∀ v : S, (e f).1 v = false := by
+     simp [avoids, e]
+   calc
+@@ -151,10 +153,13 @@
+     _ = fraction (fun ab : (S → Bool) × ({v : V // v ∉ S} → Bool) =>
+       ∀ v : S, ab.1 v = false) :=
+       fraction_equiv e (fun ab => ∀ v : S, ab.1 v = false)
+-    _ = fraction (fun f : S → Bool => ∀ v, f v = false) := fraction_fst _
++    _ = fraction (fun f : S → Bool => ∀ v, f v = false) :=
++      fraction_fst (fun f : S → Bool => ∀ v, f v = false)
+     _ = ∏ _v : S, fraction (fun b : Bool => b = false) :=
+       fraction_forall_eq_prod (fun _v : S => fun b : Bool => b = false)
+-    _ = (1 / 2 : ℝ) ^ S.card := by norm_num [fraction]
++    _ = (1 / 2 : ℝ) ^ S.card := by
++      simp_rw [hbit]
++      simp
+ 
+ theorem hits_iff_not_avoids (S : Finset V) (f : Sample V) :
+     hits S f ↔ ¬ avoids S f := by

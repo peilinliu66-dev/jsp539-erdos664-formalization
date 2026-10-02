@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.DisjointPacking",
+  "label": "prob_packing_precise_imports",
+  "recorded_utc": "2026-10-02T08:46:06.263767+00:00",
+  "reason": "Replace full Mathlib import by required finite ordered sums, maxima, powersets, and tactic modules after actual shared full-import private-read failure; statements unchanged.",
+  "diagnostic_log": "verification/build/prob_packing_01.log",
+  "before_sha256": "23a582dea5ce601312c2a343042b69cb889fe0c7697f0c0ce50f6a61e9ecfaef",
+  "after_sha256": "b9cca27c94ca115aab05c787afbcf82fac175c26bdcf70f6becb057ba4575566",
+  "statement_changed": false
+}

@@ -1,0 +1,10 @@
+{
+  "module": "JSP539.UniformBits",
+  "label": "prob_uniform_equivalence_types_02",
+  "recorded_utc": "2026-10-02T08:53:41.997439+00:00",
+  "reason": "Actual whnf heartbeat timeouts in equivalence/fraction elaboration. Give both function-space sides explicit types and a finite local heartbeat budget; all theorem statements and proofs remain mathematical equivalents without assumptions.",
+  "diagnostic_log": "verification/build/prob_uniform_01.log",
+  "before_sha256": "bc12630ad953b00251befcf84d3df043d29770f2c8e6f2326daa150f8ba2922e",
+  "after_sha256": "a83fd3091dc32f83b1b5837d3bf76449e38453bc734e1d73463f68747c3438b4",
+  "statement_changed": false
+}

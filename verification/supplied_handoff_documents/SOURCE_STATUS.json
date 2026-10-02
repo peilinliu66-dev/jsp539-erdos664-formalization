@@ -1,0 +1,40 @@
+{
+  "status": "FULL_SOURCE_ASSEMBLED_UNCOMPILED",
+  "frozen_at_utc": "2026-10-02T07:30:00Z",
+  "selected_at_utc": "2026-10-02T04:34:00Z",
+  "problem": "JSP539 / Erdos664, both original formulations including exact pair coverage",
+  "fixed_size_constant": "2/5",
+  "scope": [
+    "arbitrary natural K",
+    "arbitrarily large n",
+    "strict block size > (2/5)*sqrt(n)",
+    "every distinct point pair in exactly one indexed block",
+    "pairwise block intersections at most one",
+    "every transversal has some intersection > K"
+  ],
+  "root_entrypoint": "JSP539.lean",
+  "final_theorems": [
+    "JSP539.exists_bad_fin_design",
+    "JSP539.OriginalScope.erdos_664",
+    "JSP539.OriginalScope.two_fifths",
+    "JSP539.OriginalScope.two_fifths_exact_pairs",
+    "JSP539.OriginalScope.block_design",
+    "JSP539.exists_bad_fin_design_real",
+    "JSP539.OriginalScope.erdos_664_real",
+    "JSP539.OriginalScope.block_design_real"
+  ],
+  "final_proof_bodies_present": true,
+  "compiled": false,
+  "kernel_verified": false,
+  "axioms_print_executed": false,
+  "no_public_submission": true,
+  "known_remaining_mathematical_gap": "None identified in the written route; this is not independent verification or a successful Lean build.",
+  "remaining_work": "User compilation, API/elaboration repair if needed, and actual expanded statement/axiom outputs.",
+  "priority_evidence_library": "libfile_7ba6ece24ad88191a1f35eb8690adaad",
+  "priority_limit": "Bounded all-state public-source check only; earlier partial-design result is already formalized. Exact-pair original clause is the intended additional scope.",
+  "official_catalog_eligible_to_claim": "No",
+  "organizer_acceptance_of_additional_scope": false,
+  "revision": "real_bound_adapter_and_independent_math_audit",
+  "core_math_sources_unchanged_from_0519": true,
+  "audit": "audit/INDEPENDENT_REVIEW.md"
+}

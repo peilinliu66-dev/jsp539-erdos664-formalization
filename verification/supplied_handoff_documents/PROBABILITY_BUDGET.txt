@@ -1,0 +1,137 @@
+JSP539 / Erdős 664: complete probability budget for the fixed-K route
+2026-10-02. Mathematical plan, not a Lean-verified theorem.
+
+Scope. For every proposed natural bound K, set k = K + 2. We construct an
+exact pairwise-balanced design with every block larger than (2/5)sqrt(n),
+but every transversal meeting some block in more than K points. Thus k is
+fixed while the prime q tends to infinity, and K itself remains arbitrary.
+
+Sources: Jiaxi Nie, arXiv:2609.07736v1, for the random restriction route;
+Campos–Samotij, arXiv:2408.06617, Theorem A and its finite algorithm in §3,
+for the fingerprint/cover theorem. The estimates below specialize and modify
+those arguments. No unproved container interface will be accepted in Lean.
+
+1. Ambient geometry and a deterministic container family
+
+Use AG(2,q): q^2 points, q(q+1) lines, q points per line, q+1 lines through
+each point, unique line through every distinct pair. All containers are
+constructed before, and independently of, the random restriction R.
+
+Write l = log q, L = l^3, and take q sufficiently large depending on k.
+At a node X with |X| > 2kq, put gamma = floor(|X|/(2q)). Then gamma >= k,
+2 gamma q <= |X| <= 2(gamma+1)q <= 3 gamma q. Partition each line's points
+in X into gamma-element chunks and a remainder of size < gamma. Let H be
+the k-uniform hypergraph consisting of every k-subset of every chunk.
+Distinct chunks cannot share a k-edge because k >= 2 and two lines meet
+in at most one point. Incidence counting gives:
+
+  e(H) >= q^2 binom(gamma,k)
+  Delta_1(H) <= (q+1) binom(gamma-1,k-1)
+  Delta_t(H) <= binom(gamma-t,k-t), 2 <= t <= k
+
+Consequently Delta_1(H)|X|/e(H) <= 6k <= 10k. The falling-factorial ratio
+binom(gamma-t,k-t)/binom(gamma,k) <= (k/gamma)^t gives
+
+  Delta_t(H)|X|/e(H) <= 3 k^t/(gamma^(t-1) q).
+
+Choose p = 1/(gamma L). The finite large-q conditions
+
+  l >= 1, L >= 8k, q >= 12 k^k L^(k-1)
+
+imply 0 < p <= 1/(8k^2) and, for every 2 <= t <= k,
+
+  Delta_t(H) <= [e(H)/(4|X|)] p^(t-1).
+
+Theorem A produces a container C and a cover F of H[C] with all cover
+edges of size >= 2, sum_{E in F} p^|E| <= p|C|, and a fingerprint of
+size <= 8k^2 p|X| <= 24k^2 q/L. An edge of F larger than k covers no
+edge of H and contributes degree zero. Thus the codegree bounds yield
+
+  e(H[C]) <= sum_{E in F} deg_H(E) <= e(H)|C|/(4|X|) <= e(H)/4.
+
+Deleting |X minus C| vertices removes at most |X minus C| Delta_1(H)
+edges. Therefore |X minus C| >= 3|X|/(40k). Set delta = 3/(40k).
+Every child has size <= (1-delta)|X|.
+
+Set M = floor(24k^2 q/L). Every node has at most
+
+  B = (q^2+1)^(M+1)
+
+children: each output is determined by a fingerprint of size <= M, and
+the number of such fingerprints is at most sum_{i<=M} binom(q^2,i),
+which is at most (q^2+1)^(M+1). Stop at size <= 2kq. A depth bound is
+D = ceil(40k log q) + 1 (a relaxed sufficient depth). Pad terminal nodes by a single self-child
+to count all leaves at common depth D. Hence the final family C satisfies
+
+  log |C| <= D (M+1) log(q^2+1)
+           <= 3(40k+2) [24k^2 q/log q + (log q)^2]
+
+for log q >= 1. In particular log |C|/q tends to zero for each fixed k.
+Every k-arc is covered at each step because it is independent in H.
+This includes all k-arcs contained in the later random subset R.
+
+2. Probability that one container contains a transversal of R
+
+Fix C with |C| <= 2kq. At least q^2/2 lines have |C intersect line| < 4k,
+by counting point-line incidences. If any such trace is empty, C intersect R
+cannot be a transversal, so its success probability is zero.
+Otherwise greedily select pairwise disjoint nonempty short traces. Each
+selected trace intersects at most 4k(q+1) traces. A maximal selection has
+
+  m >= q^2/[8k(q+1)] >= q/(16k)
+
+members. Choose every ambient point independently with probability 1/2.
+The selected traces depend on disjoint coordinate sets. Each is hit by R
+with probability at most 1-2^(-4k). Therefore, with
+
+  c_k = 1/(16k * 2^(4k)) > 0,
+
+  Pr[C intersect R is a transversal] <= (1-2^(-4k))^m
+                                     <= exp(-c_k q).
+
+The union bound is over the complete deterministic family, not over one
+representative container. From part 1, eventually log |C| <= c_k q/2.
+It follows that
+
+  Pr[some C intersect R is a transversal] <= exp(-c_k q/2) -> 0.
+
+3. All line traces are large simultaneously
+
+For each q-point line, finite exponential Markov with t=log(11/10) gives
+
+  Pr[|R intersect line| <= 2q/5] <= exp(-q/200).
+
+Indeed E[exp(-t X)]=(21/22)^q, log(21/22)<=-1/22, and
+log(11/10)<=1/10. The exponent is at most (1/25-1/22)q
+=-3q/550<=-q/200. This is proved directly by finite products.
+
+There are q(q+1) lines, so the total line-size failure probability is at
+most q(q+1) exp(-q/200), which tends to zero. Take q large enough so this
+quantity and exp(-c_k q/2) are each < 1/4. Total failure is then < 1/2;
+there exists one R satisfying BOTH conclusions. There is no conditioning
+on an auxiliary good event and no independence assumption between the
+container events and the line-size events.
+
+4. Extracting the full original counterexample
+
+Let the ground set be R and blocks be the traces of all affine lines.
+Every pair of different retained points remains in exactly one block.
+For q >= 5 the trace lower bound also rules out duplicate blocks: two
+distinct ambient lines cannot share two retained points. With n=|R|<=q^2,
+every block has size > 2q/5 >= (2/5)sqrt(n). In particular R is nonempty.
+
+If Q is a transversal and every block meets Q in at most K points, then
+Q is a k-arc since k=K+2. Some deterministic container C contains Q.
+Then C intersect R is a transversal, contradicting the chosen R.
+Thus every transversal has some block intersection >K.
+
+Primes q can exceed every finite threshold, so this works for every K.
+If arbitrary ground-set size is also desired, q>=3n0 implies |R|>=n0
+using one line trace. A real proposed intersection bound is handled by
+choosing a natural K above it. Exactly-once designs also satisfy the
+partial-design at-most-one condition, so both original formulations fail.
+
+Status at 05:19 UTC: all named mathematical stages and the final Fin n / Fin m
+quantifier adapters have source proof bodies. The complete project remains
+UNCOMPILED and has no kernel verification receipt. No container, sampling,
+isomorphism, or final counterexample premise was added to the final theorem.

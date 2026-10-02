@@ -1,0 +1,164 @@
+{
+  "status": "ALL_FOUR_MODULES_PASSED",
+  "recorded_utc": "2026-10-02T09:04:09.130283+00:00",
+  "source_ownership_released": true,
+  "modules": [
+    {
+      "module": "JSP539.FiniteProbability",
+      "log": "verification/build/prob_finite_04.log",
+      "metadata": "verification/build/prob_finite_04-meta.json",
+      "natural_exit_code": 0,
+      "active_import_closure_unchanged_during_run": true,
+      "original_sha256": "16207cc761497895b500a6f48fa4257e6ad514f221007c6c85a273de2a68a9f7",
+      "final_sha256": "3fed40e1cbae40de50e6e095e3b62df90f5e49254db40fdf92052e6e6f26240c",
+      "declarations_unchanged": true,
+      "declaration_count": 28,
+      "added_lines": 23,
+      "removed_lines": 19,
+      "changed": true,
+      "output_olean_sha256": "6cc9388433ea12173db5ce3e139e887bb1c74fafc3e941566bc3d2a9c1bc2fa7"
+    },
+    {
+      "module": "JSP539.DisjointPacking",
+      "log": "verification/build/prob_packing_03.log",
+      "metadata": "verification/build/prob_packing_03-meta.json",
+      "natural_exit_code": 0,
+      "active_import_closure_unchanged_during_run": true,
+      "original_sha256": "23a582dea5ce601312c2a343042b69cb889fe0c7697f0c0ce50f6a61e9ecfaef",
+      "final_sha256": "26440ab4e46f87e54498ce742f80bd410e41afbc2e0772d9dc6b17927ba6d3d1",
+      "declarations_unchanged": true,
+      "declaration_count": 5,
+      "added_lines": 8,
+      "removed_lines": 5,
+      "changed": true,
+      "output_olean_sha256": "e19605783e096de01352828d7c2f90defc54d90b0e50943acfe535db7d927601"
+    },
+    {
+      "module": "JSP539.UniformBits",
+      "log": "verification/build/prob_uniform_05.log",
+      "metadata": "verification/build/prob_uniform_05-meta.json",
+      "natural_exit_code": 0,
+      "active_import_closure_unchanged_during_run": true,
+      "original_sha256": "bc12630ad953b00251befcf84d3df043d29770f2c8e6f2326daa150f8ba2922e",
+      "final_sha256": "c9784bd277437cce86e745d31344c9de49f1a22f8dca17cd71a1d1b4b550e4fd",
+      "declarations_unchanged": true,
+      "declaration_count": 14,
+      "added_lines": 21,
+      "removed_lines": 8,
+      "changed": true,
+      "output_olean_sha256": "61d26b0546763b6509a2cc0e07dd0ecf40c1ea904712ccb9ed7ae7d4df71be70"
+    },
+    {
+      "module": "JSP539.FairBitTail",
+      "log": "verification/build/prob_tail_01.log",
+      "metadata": "verification/build/prob_tail_01-meta.json",
+      "natural_exit_code": 0,
+      "active_import_closure_unchanged_during_run": true,
+      "original_sha256": "9e3278122e4df09afe5fccf56b82c7fd1e076d602840e41ca3c2a208320098c4",
+      "final_sha256": "9e3278122e4df09afe5fccf56b82c7fd1e076d602840e41ca3c2a208320098c4",
+      "declarations_unchanged": true,
+      "declaration_count": 5,
+      "added_lines": 0,
+      "removed_lines": 0,
+      "changed": false,
+      "output_olean_sha256": "56f1974fa5d1a9c52cbe8713ab0d176fe78eff1d9a311497e81a551baa91f52d"
+    }
+  ],
+  "repair_record_count": 9,
+  "repair_records": [
+    {
+      "module": "JSP539.FiniteProbability",
+      "label": "prob_finite_decidable_instances_04",
+      "recorded_utc": "2026-10-02T08:49:31.772761+00:00",
+      "reason": "Actual rewrites failed because definitional equality retained distinct Decidable instances. Normalize through the existing fraction_eq_card_filter bridge and prove complements directly by finite partition cardinality; no statement or assumption change.",
+      "diagnostic_log": "verification/build/prob_finite_03.log",
+      "before_sha256": "c7532f3db4c438f03e1b9901817eb99a5297d9167d82c34108fd00aa461850bb",
+      "after_sha256": "3fed40e1cbae40de50e6e095e3b62df90f5e49254db40fdf92052e6e6f26240c",
+      "statement_changed": false
+    },
+    {
+      "module": "JSP539.FiniteProbability",
+      "label": "prob_finite_normalization_03",
+      "recorded_utc": "2026-10-02T08:47:49.305432+00:00",
+      "reason": "Actual Lean diagnostics require factoring finite sums before ring normalization, explicit complement indicator instantiation, and finite Cartesian-product cardinality for the product rule. All theorem statements and mathematics unchanged.",
+      "diagnostic_log": "verification/build/prob_finite_02.log",
+      "before_sha256": "01d6f1525cd3c1a3caf60f78d901d48c72174b8eb1338f2e196b115d80c90d3f",
+      "after_sha256": "c7532f3db4c438f03e1b9901817eb99a5297d9167d82c34108fd00aa461850bb",
+      "statement_changed": false
+    },
+    {
+      "module": "JSP539.FiniteProbability",
+      "label": "prob_finite_precise_imports",
+      "recorded_utc": "2026-10-02T08:46:06.260525+00:00",
+      "reason": "Replace full Mathlib import by required real, finite sums, distributivity, and tactic modules after actual shared full-import private-read failure; statements unchanged.",
+      "diagnostic_log": "verification/build/prob_finite_01.log",
+      "before_sha256": "16207cc761497895b500a6f48fa4257e6ad514f221007c6c85a273de2a68a9f7",
+      "after_sha256": "01d6f1525cd3c1a3caf60f78d901d48c72174b8eb1338f2e196b115d80c90d3f",
+      "statement_changed": false
+    },
+    {
+      "module": "JSP539.DisjointPacking",
+      "label": "prob_packing_membership_names_03",
+      "recorded_utc": "2026-10-02T08:51:09.669112+00:00",
+      "reason": "Actual Lean diagnostic: membership hypothesis shadowing after rcases/rfl selected insert-membership rather than original-family membership. Give retained membership hypotheses distinct names; proof and statement unchanged.",
+      "diagnostic_log": "verification/build/prob_packing_02.log",
+      "before_sha256": "b9cca27c94ca115aab05c787afbcf82fac175c26bdcf70f6becb057ba4575566",
+      "after_sha256": "26440ab4e46f87e54498ce742f80bd410e41afbc2e0772d9dc6b17927ba6d3d1",
+      "statement_changed": false
+    },
+    {
+      "module": "JSP539.DisjointPacking",
+      "label": "prob_packing_precise_imports",
+      "recorded_utc": "2026-10-02T08:46:06.263767+00:00",
+      "reason": "Replace full Mathlib import by required finite ordered sums, maxima, powersets, and tactic modules after actual shared full-import private-read failure; statements unchanged.",
+      "diagnostic_log": "verification/build/prob_packing_01.log",
+      "before_sha256": "23a582dea5ce601312c2a343042b69cb889fe0c7697f0c0ce50f6a61e9ecfaef",
+      "after_sha256": "b9cca27c94ca115aab05c787afbcf82fac175c26bdcf70f6becb057ba4575566",
+      "statement_changed": false
+    },
+    {
+      "module": "JSP539.UniformBits",
+      "label": "prob_uniform_avoid_factorization_04",
+      "recorded_utc": "2026-10-02T08:59:58.149362+00:00",
+      "reason": "After explicit equivalence events solved independence at default heartbeats, the avoids theorem still timed out. Make its marginal event explicit and compute the one-bit probability separately before simplifying the finite constant product.",
+      "diagnostic_log": "verification/build/prob_uniform_03.log",
+      "before_sha256": "4f4c61ba02b0369c7756927797fc30a983ea9d1b66692461479e4d22bd280c95",
+      "after_sha256": "e0ec5e4d46b84b6276c580ca3a56757d64e42e0f43f5b1f3f3ef14139b02deb3",
+      "statement_changed": false
+    },
+    {
+      "module": "JSP539.UniformBits",
+      "label": "prob_uniform_bool_filter_05",
+      "recorded_utc": "2026-10-02T09:01:05.011576+00:00",
+      "reason": "Actual remaining goal is the filter cardinality of Bool false over {true,false}. Bridge Decidable instances through fraction_eq_card_filter and explicitly simplify insert/singleton filters.",
+      "diagnostic_log": "verification/build/prob_uniform_04.log",
+      "before_sha256": "e0ec5e4d46b84b6276c580ca3a56757d64e42e0f43f5b1f3f3ef14139b02deb3",
+      "after_sha256": "c9784bd277437cce86e745d31344c9de49f1a22f8dca17cd71a1d1b4b550e4fd",
+      "statement_changed": false
+    },
+    {
+      "module": "JSP539.UniformBits",
+      "label": "prob_uniform_equivalence_types_02",
+      "recorded_utc": "2026-10-02T08:53:41.997439+00:00",
+      "reason": "Actual whnf heartbeat timeouts in equivalence/fraction elaboration. Give both function-space sides explicit types and a finite local heartbeat budget; all theorem statements and proofs remain mathematical equivalents without assumptions.",
+      "diagnostic_log": "verification/build/prob_uniform_01.log",
+      "before_sha256": "bc12630ad953b00251befcf84d3df043d29770f2c8e6f2326daa150f8ba2922e",
+      "after_sha256": "a83fd3091dc32f83b1b5837d3bf76449e38453bc734e1d73463f68747c3438b4",
+      "statement_changed": false
+    },
+    {
+      "module": "JSP539.UniformBits",
+      "label": "prob_uniform_explicit_events_03",
+      "recorded_utc": "2026-10-02T08:58:00.871079+00:00",
+      "reason": "Actual bounded retry still timed out at inference of fraction_equiv event placeholder. Supply each concrete event explicitly to avoid higher-order unification through the coordinate equivalence, and restore default finite heartbeats; remove misplaced local-option commands after doc comments.",
+      "diagnostic_log": "verification/build/prob_uniform_02.log",
+      "before_sha256": "a83fd3091dc32f83b1b5837d3bf76449e38453bc734e1d73463f68747c3438b4",
+      "after_sha256": "4f4c61ba02b0369c7756927797fc30a983ea9d1b66692461479e4d22bd280c95",
+      "statement_changed": false
+    }
+  ],
+  "toolchain": "leanprover/lean4:v4.35.0-rc3",
+  "version_adjustments": [],
+  "final_heartbeat_overrides": [],
+  "no_sorry_admit_axiom_native_decide": true
+}

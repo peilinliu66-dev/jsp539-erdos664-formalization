@@ -1,0 +1,10 @@
+--- before/JSP539.ContainerCounting
++++ after/JSP539.ContainerCounting
+@@ -8,6 +8,7 @@
+ CONDITIONS OF ANY KIND, either express or implied.
+ -/
+ import JSP539.ContainerCore
++import Mathlib.Data.Real.Archimedean
+ 
+ /-!
+ # Counting fingerprints by finite insertion

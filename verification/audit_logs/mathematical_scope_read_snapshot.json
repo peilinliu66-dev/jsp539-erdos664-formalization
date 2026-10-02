@@ -1,0 +1,341 @@
+{
+  "status": "READ_ONLY_SOURCE_SNAPSHOT_NOT_A_LEAN_BUILD",
+  "revision": "REAL_BOUNDS_0730",
+  "input_sha256": "168c87fc14b7c0511e12cf79f35163190c0e342a875d006117e62478daadaaf9",
+  "created_utc": "2026-10-02T07:48:40.918607+00:00",
+  "lean_file_count": 32,
+  "source_sha256": {
+    "JSP539/AffinePlane.lean": {
+      "sha256": "b767d1de66f92f1c714aeb396e4e742696c7a9ac5bf1239edca9e06a1a6c7e38",
+      "lines": 338,
+      "bytes": 12109,
+      "matches_selected_original": true
+    },
+    "JSP539/ArcContainerGrowth.lean": {
+      "sha256": "d5582449587334c875c50d3c59b4ec5c9276b05021c6686f6488f498a17551f1",
+      "lines": 170,
+      "bytes": 8179,
+      "matches_selected_original": true
+    },
+    "JSP539/ArcContainerIteration.lean": {
+      "sha256": "51ef44b381027a02e2561f292690ccbc3628dad8467efb8657724d43089b170a",
+      "lines": 173,
+      "bytes": 7586,
+      "matches_selected_original": true
+    },
+    "JSP539/ArcContainerStep.lean": {
+      "sha256": "951b175593c4ac83ac46ce8f11df8e97f2b09cb610f0d8595a306d8eb354bf22",
+      "lines": 266,
+      "bytes": 12950,
+      "matches_selected_original": true
+    },
+    "JSP539/ChunkPartition.lean": {
+      "sha256": "f7984b1d6f04191eb6d44a9016f90f1f012c10e26d179548d01df807938c0cef",
+      "lines": 209,
+      "bytes": 8243,
+      "matches_selected_original": true
+    },
+    "JSP539/ContainerAlgorithm.lean": {
+      "sha256": "aa4789f0e8efbb724f918dd243b38937d4e3031190e78ba7812d69e19cfb180f",
+      "lines": 301,
+      "bytes": 12392,
+      "matches_selected_original": true
+    },
+    "JSP539/ContainerCore.lean": {
+      "sha256": "21872ac245f9cac6b59910f688c877a13cc2e6fa3e1d67ca457751b066d29d82",
+      "lines": 177,
+      "bytes": 8124,
+      "matches_selected_original": true
+    },
+    "JSP539/ContainerCounting.lean": {
+      "sha256": "9d5f2f8bf6ad5152b85fbf7603177418b8a3af26b926b5974161e4d6cdfe01a6",
+      "lines": 111,
+      "bytes": 4610,
+      "matches_selected_original": true
+    },
+    "JSP539/ContainerPotential.lean": {
+      "sha256": "35db27cf0ffdd7e3576db1958bc32fb6140f86f6298d90004cb6052a867b4957",
+      "lines": 169,
+      "bytes": 6968,
+      "matches_selected_original": true
+    },
+    "JSP539/ContainerProbability.lean": {
+      "sha256": "6061bae9dc3f1597c25f2f632ae4cf19befe37a5234f1a2bc5b17e8a0b458a91",
+      "lines": 135,
+      "bytes": 5609,
+      "matches_selected_original": true
+    },
+    "JSP539/ContainerShrink.lean": {
+      "sha256": "773cffd0b5884e79b900230575bc30a8ffe4e97728ab36df37c9350835e21ed7",
+      "lines": 204,
+      "bytes": 9850,
+      "matches_selected_original": true
+    },
+    "JSP539/DisjointPacking.lean": {
+      "sha256": "23a582dea5ce601312c2a343042b69cb889fe0c7697f0c0ce50f6a61e9ecfaef",
+      "lines": 113,
+      "bytes": 4893,
+      "matches_selected_original": true
+    },
+    "JSP539/FairBitTail.lean": {
+      "sha256": "9e3278122e4df09afe5fccf56b82c7fd1e076d602840e41ca3c2a208320098c4",
+      "lines": 147,
+      "bytes": 6314,
+      "matches_selected_original": true
+    },
+    "JSP539/FiniteDesignTransport.lean": {
+      "sha256": "c8708b5efa3c3a4f3768ddc52584e2437d445dbeb3935284810ef2e44a063b11",
+      "lines": 191,
+      "bytes": 7776,
+      "matches_selected_original": true
+    },
+    "JSP539/FiniteProbability.lean": {
+      "sha256": "16207cc761497895b500a6f48fa4257e6ad514f221007c6c85a273de2a68a9f7",
+      "lines": 236,
+      "bytes": 9744,
+      "matches_selected_original": true
+    },
+    "JSP539/GroundHypergraph.lean": {
+      "sha256": "553a853185ffef65239024ccba2d89b3c812ab67520cc27eac2152d45be40a1a",
+      "lines": 119,
+      "bytes": 4478,
+      "matches_selected_original": true
+    },
+    "JSP539/LineChunks.lean": {
+      "sha256": "7b578d29e5e11ec08386ce20b239271576a20a2735daaea6fddd65582d769960",
+      "lines": 423,
+      "bytes": 18580,
+      "matches_selected_original": true
+    },
+    "JSP539/OriginalScope.lean": {
+      "sha256": "cd9ff576d37811413d9741956fc7f67b665cf13eea5a088ec4b32b6e93cee923",
+      "lines": 110,
+      "bytes": 5049,
+      "matches_selected_original": true
+    },
+    "JSP539/ProbabilityBudget.lean": {
+      "sha256": "6a181f53a2837cee67bc91820f032c38bc311c844931240369e6bd8977ab1386",
+      "lines": 58,
+      "bytes": 2278,
+      "matches_selected_original": true
+    },
+    "JSP539/RandomRestriction.lean": {
+      "sha256": "b2ff2a9ee1141adb45b9d7f225c75f45bee531557df049f1a71ee6cf1170b0c2",
+      "lines": 127,
+      "bytes": 5731,
+      "matches_selected_original": true
+    },
+    "JSP539/RealScope.lean": {
+      "sha256": "190c2a915a8743a5c88e3e23e8fe43988ce5c4a325506c6f2ede8e9f57151ce9",
+      "lines": 63,
+      "bytes": 2719,
+      "matches_selected_original": true
+    },
+    "JSP539/ShortTraces.lean": {
+      "sha256": "867cc04761ece172de91ef721a250326c0e1858dc02799cd8c5b9565d644df5f",
+      "lines": 125,
+      "bytes": 5489,
+      "matches_selected_original": true
+    },
+    "JSP539/UniformBits.lean": {
+      "sha256": "bc12630ad953b00251befcf84d3df043d29770f2c8e6f2326daa150f8ba2922e",
+      "lines": 172,
+      "bytes": 6729,
+      "matches_selected_original": true
+    },
+    "JSP539.lean": {
+      "sha256": "b2e28e1e6cd80d436d6b9314452b9058b87ac91eae2735d84ce238545c41e84b",
+      "lines": 1,
+      "bytes": 24,
+      "matches_selected_original": true
+    },
+    "lakefile.lean": {
+      "sha256": "98abf0f3418cbbf54cbe58acf66077db61724aafa98f106e2710054786f0f8c1",
+      "lines": 7,
+      "bytes": 241,
+      "matches_selected_original": true
+    },
+    "LicensedContainers/ContainerFuel.lean": {
+      "sha256": "c390bbd8cfbec2b9ed8dec2fb5cd896b1adc95da9bcdd741abbeffd5f7afb05c",
+      "lines": 138,
+      "bytes": 5999,
+      "matches_selected_original": true
+    },
+    "LicensedContainers/ContainerInvariants.lean": {
+      "sha256": "ac99333ba0a496c6712ef4d5711c885bf7bc8856001125c040bc4dca14b86ac4",
+      "lines": 380,
+      "bytes": 14360,
+      "matches_selected_original": true
+    },
+    "LicensedContainers/ContainerSelector.lean": {
+      "sha256": "e115359961aa28988b332fd63e88c93d54992814368475865a65ec459929eafc",
+      "lines": 635,
+      "bytes": 27048,
+      "matches_selected_original": true
+    },
+    "LicensedContainers/ContainerWeight.lean": {
+      "sha256": "e281197a67f0dbae3cd484c2f03a474c1e10412242a0d3ddc150b66917454a32",
+      "lines": 678,
+      "bytes": 27149,
+      "matches_selected_original": true
+    },
+    "LicensedContainers/Hypergraph.lean": {
+      "sha256": "aa2636ec7aa7b6e31264bb7fedc7a9823952223088693eae983031d07e7b5afb",
+      "lines": 595,
+      "bytes": 19451,
+      "matches_selected_original": true
+    },
+    "LicensedContainers.lean": {
+      "sha256": "442c8da78a081a2fb718a8a3cea578a6c6363412d070089484438b4c935ff781",
+      "lines": 5,
+      "bytes": 209,
+      "matches_selected_original": true
+    },
+    "Verify.lean": {
+      "sha256": "836916ec58479bf9e164049bf800d9b41eb3719bafa22dcd6eace4a18eb7f503",
+      "lines": 24,
+      "bytes": 870,
+      "matches_selected_original": true
+    }
+  },
+  "all_sources_match_original": true,
+  "code_token_findings": [],
+  "delimiter_scan_findings": [],
+  "local_import_graph": {
+    "JSP539/AffinePlane.lean": [
+      "LicensedContainers/Hypergraph.lean"
+    ],
+    "JSP539/ArcContainerGrowth.lean": [
+      "JSP539/ArcContainerIteration.lean"
+    ],
+    "JSP539/ArcContainerIteration.lean": [
+      "JSP539/ArcContainerStep.lean"
+    ],
+    "JSP539/ArcContainerStep.lean": [
+      "JSP539/LineChunks.lean",
+      "JSP539/ContainerShrink.lean"
+    ],
+    "JSP539/ChunkPartition.lean": [],
+    "JSP539/ContainerAlgorithm.lean": [
+      "JSP539/ContainerPotential.lean"
+    ],
+    "JSP539/ContainerCore.lean": [
+      "JSP539/ContainerAlgorithm.lean"
+    ],
+    "JSP539/ContainerCounting.lean": [
+      "JSP539/ContainerCore.lean"
+    ],
+    "JSP539/ContainerPotential.lean": [
+      "LicensedContainers/ContainerSelector.lean",
+      "LicensedContainers/ContainerFuel.lean"
+    ],
+    "JSP539/ContainerProbability.lean": [
+      "JSP539/ShortTraces.lean",
+      "JSP539/UniformBits.lean"
+    ],
+    "JSP539/ContainerShrink.lean": [
+      "JSP539/ContainerCounting.lean"
+    ],
+    "JSP539/DisjointPacking.lean": [],
+    "JSP539/FairBitTail.lean": [
+      "JSP539/UniformBits.lean"
+    ],
+    "JSP539/FiniteDesignTransport.lean": [
+      "JSP539/AffinePlane.lean"
+    ],
+    "JSP539/FiniteProbability.lean": [],
+    "JSP539/GroundHypergraph.lean": [
+      "LicensedContainers/Hypergraph.lean"
+    ],
+    "JSP539/LineChunks.lean": [
+      "JSP539/AffinePlane.lean",
+      "JSP539/ChunkPartition.lean",
+      "JSP539/GroundHypergraph.lean"
+    ],
+    "JSP539/OriginalScope.lean": [
+      "JSP539/RandomRestriction.lean",
+      "JSP539/FiniteDesignTransport.lean"
+    ],
+    "JSP539/ProbabilityBudget.lean": [
+      "JSP539/ContainerProbability.lean"
+    ],
+    "JSP539/RandomRestriction.lean": [
+      "JSP539/ArcContainerGrowth.lean",
+      "JSP539/FairBitTail.lean",
+      "JSP539/ProbabilityBudget.lean"
+    ],
+    "JSP539/RealScope.lean": [
+      "JSP539/OriginalScope.lean"
+    ],
+    "JSP539/ShortTraces.lean": [
+      "JSP539/AffinePlane.lean",
+      "JSP539/DisjointPacking.lean"
+    ],
+    "JSP539/UniformBits.lean": [
+      "JSP539/FiniteProbability.lean",
+      "JSP539/DisjointPacking.lean"
+    ],
+    "JSP539.lean": [
+      "JSP539/RealScope.lean"
+    ],
+    "lakefile.lean": [],
+    "LicensedContainers/ContainerFuel.lean": [
+      "LicensedContainers/Hypergraph.lean"
+    ],
+    "LicensedContainers/ContainerInvariants.lean": [
+      "LicensedContainers/Hypergraph.lean"
+    ],
+    "LicensedContainers/ContainerSelector.lean": [
+      "LicensedContainers/ContainerInvariants.lean",
+      "LicensedContainers/ContainerWeight.lean"
+    ],
+    "LicensedContainers/ContainerWeight.lean": [
+      "LicensedContainers/Hypergraph.lean"
+    ],
+    "LicensedContainers/Hypergraph.lean": [],
+    "LicensedContainers.lean": [
+      "LicensedContainers/Hypergraph.lean",
+      "LicensedContainers/ContainerFuel.lean",
+      "LicensedContainers/ContainerInvariants.lean",
+      "LicensedContainers/ContainerWeight.lean",
+      "LicensedContainers/ContainerSelector.lean"
+    ],
+    "Verify.lean": [
+      "JSP539.lean"
+    ]
+  },
+  "unresolved_imports": [],
+  "import_cycles": [],
+  "final_endpoint_local_source_closure": [
+    "JSP539.lean",
+    "JSP539/AffinePlane.lean",
+    "JSP539/ArcContainerGrowth.lean",
+    "JSP539/ArcContainerIteration.lean",
+    "JSP539/ArcContainerStep.lean",
+    "JSP539/ChunkPartition.lean",
+    "JSP539/ContainerAlgorithm.lean",
+    "JSP539/ContainerCore.lean",
+    "JSP539/ContainerCounting.lean",
+    "JSP539/ContainerPotential.lean",
+    "JSP539/ContainerProbability.lean",
+    "JSP539/ContainerShrink.lean",
+    "JSP539/DisjointPacking.lean",
+    "JSP539/FairBitTail.lean",
+    "JSP539/FiniteDesignTransport.lean",
+    "JSP539/FiniteProbability.lean",
+    "JSP539/GroundHypergraph.lean",
+    "JSP539/LineChunks.lean",
+    "JSP539/OriginalScope.lean",
+    "JSP539/ProbabilityBudget.lean",
+    "JSP539/RandomRestriction.lean",
+    "JSP539/RealScope.lean",
+    "JSP539/ShortTraces.lean",
+    "JSP539/UniformBits.lean",
+    "LicensedContainers/ContainerFuel.lean",
+    "LicensedContainers/ContainerInvariants.lean",
+    "LicensedContainers/ContainerSelector.lean",
+    "LicensedContainers/ContainerWeight.lean",
+    "LicensedContainers/Hypergraph.lean"
+  ],
+  "scanner_limit": "Lexical source checks do not establish Lean parsing, elaboration, kernel verification, source licensing, or mathematical correctness."
+}

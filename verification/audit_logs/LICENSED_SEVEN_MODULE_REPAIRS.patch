@@ -1,0 +1,45 @@
+--- original/LicensedContainers/ContainerWeight.lean
++++ candidate/LicensedContainers/ContainerWeight.lean
+@@ -13,7 +13,12 @@
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -/
+-import Mathlib
++import Mathlib.Algebra.BigOperators.Ring.Finset
++import Mathlib.Data.Fintype.Powerset
++import Mathlib.Tactic.NormNum
++import Mathlib.Tactic.Ring
++import Mathlib.Tactic.Linarith
++import Mathlib.Tactic.Positivity
+ import LicensedContainers.Hypergraph
+ 
+ /-!
+--- original/LicensedContainers/ContainerSelector.lean
++++ candidate/LicensedContainers/ContainerSelector.lean
+@@ -13,6 +13,7 @@
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -/
++import Mathlib.Order.Interval.Finset.Nat
+ import LicensedContainers.ContainerInvariants
+ import LicensedContainers.ContainerWeight
+ 
+--- original/JSP539/ShortTraces.lean
++++ candidate/JSP539/ShortTraces.lean
+@@ -61,7 +61,7 @@
+     nlinarith
+   have hpositive : 0 < 2 * k := by omega
+   have hlongcount : 2 * U.card ≤ q * (q + 1) :=
+-    (mul_le_mul_left hpositive).mp hscaled
++    Nat.le_of_mul_le_mul_left hscaled hpositive
+   have hpartition : U.card + T.card = q * (q + 1) := by
+     dsimp [U]
+     rw [Finset.card_sdiff_of_subset (Finset.subset_univ T)]
+@@ -120,6 +120,6 @@
+           Nat.mul_le_mul_left 2 (Nat.mul_le_mul_left I.card
+             (Nat.mul_le_mul_left (4 * k) hqbound))
+         _ = q * (16 * k * I.card) := by ring
+-    exact (mul_le_mul_left hq).mp hscaled
++    exact Nat.le_of_mul_le_mul_left hscaled hq
+ 
+ end JSP539.Affine

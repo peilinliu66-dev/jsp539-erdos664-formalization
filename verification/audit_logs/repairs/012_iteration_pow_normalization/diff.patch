@@ -1,0 +1,21 @@
+--- before/JSP539.ArcContainerIteration
++++ after/JSP539.ArcContainerIteration
+@@ -82,7 +82,7 @@
+       have hC' : C = Finset.univ := by simpa [arcLevel] using hC
+       subst C
+       right
+-      simp [point_card]
++      simp [point_card, pow_two]
+   | succ n ih =>
+     refine ⟨?_, ?_, ?_⟩
+     · calc
+@@ -143,8 +143,7 @@
+       exact pow_le_pow_left₀ (arc_contraction_nonneg hk) hbase _
+     _ = Real.exp (-(d * (arcDepth k q : ℝ))) * (q : ℝ) ^ 2 := by
+       rw [← Real.exp_nat_mul]
+-      congr 2
+-      ring
++      congr 2 <;> ring
+     _ ≤ Real.exp (-Real.log (q : ℝ)) * (q : ℝ) ^ 2 := by
+       gcongr
+       linarith
